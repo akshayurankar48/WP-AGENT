@@ -1,13 +1,33 @@
 import { Container, Title, Badge, Text } from '@bsf/force-ui';
 import { Activity } from 'lucide-react';
 
-const STATUS_ITEMS = [
-	{ label: 'API Connection', value: 'Not configured', variant: 'yellow' },
-	{ label: 'Current Model', value: 'GPT-4o Mini', variant: 'neutral' },
-	{ label: 'Rate Limit', value: '200 req/min', variant: 'green' },
-];
+const MODEL_LABELS = {
+	'google/gemini-2.0-flash-001': 'Gemini Flash',
+	'openai/gpt-4o-mini': 'GPT-4o Mini',
+	'anthropic/claude-sonnet-4': 'Claude Sonnet 4',
+};
 
-export default function StatusCard() {
+export default function StatusCard( { hasApiKey = false, defaultModel = '', rateLimit = 0 } ) {
+	const modelLabel = MODEL_LABELS[ defaultModel ] || defaultModel || 'Not set';
+
+	const items = [
+		{
+			label: 'API Connection',
+			value: hasApiKey ? 'Connected' : 'Not configured',
+			variant: hasApiKey ? 'green' : 'yellow',
+		},
+		{
+			label: 'Current Model',
+			value: modelLabel,
+			variant: 'neutral',
+		},
+		{
+			label: 'Rate Limit',
+			value: rateLimit ? `${ rateLimit } req/min` : 'Default',
+			variant: 'green',
+		},
+	];
+
 	return (
 		<div className="rounded-lg border border-border-subtle bg-background-primary p-6">
 			<Container direction="column" gap="md">
@@ -17,7 +37,7 @@ export default function StatusCard() {
 				</Container>
 
 				<Container direction="column" gap="sm">
-					{ STATUS_ITEMS.map( ( item ) => (
+					{ items.map( ( item ) => (
 						<Container
 							key={ item.label }
 							direction="row"

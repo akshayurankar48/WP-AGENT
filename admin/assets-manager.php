@@ -101,7 +101,7 @@ class Assets_Manager {
 			[
 				'restUrl'   => rest_url( 'wp-agent/v1/' ),
 				'nonce'     => wp_create_nonce( 'wp_rest' ),
-				'hasApiKey' => ! empty( get_option( 'wp_agent_api_key' ) ),
+				'hasApiKey' => ! empty( get_option( \WPAgent\AI\Open_Router_Client::API_KEY_OPTION ) ),
 				'userId'    => get_current_user_id(),
 				'userName'  => wp_get_current_user()->display_name,
 				'version'   => WP_AGENT_VER,

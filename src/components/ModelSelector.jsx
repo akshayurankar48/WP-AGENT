@@ -1,11 +1,11 @@
-import { useState } from '@wordpress/element';
 import { Container, Title, Select, Text } from '@bsf/force-ui';
 import { Cpu } from 'lucide-react';
 
+// Must match model IDs in ai/model-router.php.
 const MODELS = [
 	{
-		value: 'google/gemini-flash-1.5',
-		label: 'Gemini Flash — Fast',
+		value: 'google/gemini-2.0-flash-001',
+		label: 'Gemini 2.0 Flash — Fast',
 		description: 'Quick responses for simple tasks.',
 	},
 	{
@@ -14,15 +14,13 @@ const MODELS = [
 		description: 'Great balance of speed and quality. Recommended.',
 	},
 	{
-		value: 'anthropic/claude-sonnet',
-		label: 'Claude Sonnet — Powerful',
+		value: 'anthropic/claude-sonnet-4',
+		label: 'Claude Sonnet 4 — Powerful',
 		description: 'Best quality for complex tasks.',
 	},
 ];
 
-export default function ModelSelector() {
-	const [ model, setModel ] = useState( 'openai/gpt-4o-mini' );
-
+export default function ModelSelector( { model = '', onModelChange } ) {
 	const selectedModel = MODELS.find( ( m ) => m.value === model );
 
 	return (
@@ -40,7 +38,7 @@ export default function ModelSelector() {
 				<Select
 					size="md"
 					value={ model }
-					onChange={ ( value ) => setModel( value ) }
+					onChange={ ( value ) => onModelChange?.( value ) }
 				>
 					<Select.Button placeholder="Select a model" />
 					<Select.Options>

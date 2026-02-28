@@ -79,7 +79,22 @@ class Plugin_Loader {
 		add_action( 'plugins_loaded', [ $this, 'load_textdomain' ] );
 		add_action( 'plugins_loaded', [ $this, 'load_admin' ] );
 		add_action( 'admin_init', [ 'WPAgent\Core\Database', 'maybe_upgrade' ] );
+		add_action( 'rest_api_init', [ $this, 'register_rest_routes' ] );
 		add_action( 'wp_agent_register_actions', [ $this, 'register_core_actions' ] );
+	}
+
+	/**
+	 * Register REST API routes.
+	 *
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public function register_rest_routes() {
+		( new REST\Settings_Controller() )->register_routes();
+		( new REST\Chat_Controller() )->register_routes();
+		( new REST\Stream_Controller() )->register_routes();
+		( new REST\History_Controller() )->register_routes();
+		( new REST\Action_Controller() )->register_routes();
 	}
 
 	/**

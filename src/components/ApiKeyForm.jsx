@@ -2,13 +2,12 @@ import { useState } from '@wordpress/element';
 import { Container, Title, Input, Button, Text, toast } from '@bsf/force-ui';
 import { KeyRound, CheckCircle } from 'lucide-react';
 
-export default function ApiKeyForm() {
-	const [ apiKey, setApiKey ] = useState( '' );
+const { restUrl, nonce } = window.wpAgentData || {};
+
+export default function ApiKeyForm( { apiKey = '', onApiKeyChange, hasApiKey = false } ) {
 	const [ isValidating, setIsValidating ] = useState( false );
 
-	const hasApiKey = window.wpAgentData?.hasApiKey || false;
-
-	const handleValidate = () => {
+	const handleValidate = async () => {
 		if ( ! apiKey.trim() ) {
 			toast.error( 'Please enter an API key.' );
 			return;
@@ -16,14 +15,36 @@ export default function ApiKeyForm() {
 
 		setIsValidating( true );
 
-		// Placeholder — no REST call yet.
-		setTimeout( () => {
-			setIsValidating( false );
-			toast.success( 'API key validated!', {
-				description:
-					'Your OpenRouter key looks good. Save settings to persist.',
+		try {
+			// Validate by attempting a save — the REST endpoint validates with OpenRouter.
+			const response = await fetch( `${ restUrl }settings`, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					'X-WP-Nonce': nonce,
+				},
+				body: JSON.stringify( { api_key: apiKey } ),
 			} );
-		}, 1200 );
+
+			const data = await response.json();
+
+			if ( ! response.ok ) {
+				throw new Error( data.message || 'Validation failed.' );
+			}
+
+			toast.success( 'API key validated and saved!', {
+				description: 'Your OpenRouter key is securely stored.',
+			} );
+
+			// Clear input and update parent state.
+			onApiKeyChange?.( '' );
+		} catch ( error ) {
+			toast.error( 'API key validation failed.', {
+				description: error.message,
+			} );
+		} finally {
+			setIsValidating( false );
+		}
 	};
 
 	return (
@@ -49,7 +70,7 @@ export default function ApiKeyForm() {
 									: 'sk-or-v1-…'
 							}
 							value={ apiKey }
-							onChange={ ( value ) => setApiKey( value ) }
+							onChange={ ( value ) => onApiKeyChange?.( value ) }
 						/>
 					</div>
 					<Button
