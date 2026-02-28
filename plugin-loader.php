@@ -78,6 +78,7 @@ class Plugin_Loader {
 
 		add_action( 'plugins_loaded', [ $this, 'load_textdomain' ] );
 		add_action( 'plugins_loaded', [ $this, 'load_admin' ] );
+		add_action( 'admin_init', [ 'WPAgent\Core\Database', 'maybe_upgrade' ] );
 	}
 
 	/**
