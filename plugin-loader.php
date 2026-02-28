@@ -83,7 +83,7 @@ class Plugin_Loader {
 	}
 
 	/**
-	 * Register core content actions.
+	 * Register core actions.
 	 *
 	 * @since 1.0.0
 	 *
@@ -91,11 +91,18 @@ class Plugin_Loader {
 	 * @return void
 	 */
 	public function register_core_actions( $registry ) {
+		// Content actions.
 		$registry->register( new Actions\Create_Post() );
 		$registry->register( new Actions\Edit_Post() );
 		$registry->register( new Actions\Delete_Post() );
 		$registry->register( new Actions\Read_Blocks() );
 		$registry->register( new Actions\Insert_Blocks() );
+
+		// Settings & plugin management actions.
+		$registry->register( new Actions\Update_Settings() );
+		$registry->register( new Actions\Manage_Permalinks() );
+		$registry->register( new Actions\Install_Plugin() );
+		$registry->register( new Actions\Activate_Plugin() );
 	}
 
 	/**
