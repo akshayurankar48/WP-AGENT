@@ -103,6 +103,11 @@ class Plugin_Loader {
 		$registry->register( new Actions\Manage_Permalinks() );
 		$registry->register( new Actions\Install_Plugin() );
 		$registry->register( new Actions\Activate_Plugin() );
+
+		// User & system actions.
+		$registry->register( new Actions\Deactivate_Plugin() );
+		$registry->register( new Actions\Create_User() );
+		$registry->register( new Actions\Site_Health() );
 	}
 
 	/**
