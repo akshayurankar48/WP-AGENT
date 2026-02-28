@@ -79,6 +79,23 @@ class Plugin_Loader {
 		add_action( 'plugins_loaded', [ $this, 'load_textdomain' ] );
 		add_action( 'plugins_loaded', [ $this, 'load_admin' ] );
 		add_action( 'admin_init', [ 'WPAgent\Core\Database', 'maybe_upgrade' ] );
+		add_action( 'wp_agent_register_actions', [ $this, 'register_core_actions' ] );
+	}
+
+	/**
+	 * Register core content actions.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param \WPAgent\Actions\Action_Registry $registry The action registry.
+	 * @return void
+	 */
+	public function register_core_actions( $registry ) {
+		$registry->register( new Actions\Create_Post() );
+		$registry->register( new Actions\Edit_Post() );
+		$registry->register( new Actions\Delete_Post() );
+		$registry->register( new Actions\Read_Blocks() );
+		$registry->register( new Actions\Insert_Blocks() );
 	}
 
 	/**
