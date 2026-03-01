@@ -24,38 +24,36 @@ export default function ModelSelector( { model = '', onModelChange } ) {
 	const selectedModel = MODELS.find( ( m ) => m.value === model );
 
 	return (
-		<div className="rounded-lg border border-border-subtle bg-background-primary p-6">
-			<Container direction="column" gap="md">
-				<Container direction="row" align="center" gap="sm">
-					<Cpu size={ 20 } className="text-icon-secondary" />
-					<Title
-						title="AI Model"
-						description="Choose which model the agent uses. You can always change this later."
-						size="sm"
-					/>
-				</Container>
-
-				<Select
-					size="md"
-					value={ model }
-					onChange={ ( value ) => onModelChange?.( value ) }
-				>
-					<Select.Button placeholder="Select a model" />
-					<Select.Options>
-						{ MODELS.map( ( m ) => (
-							<Select.Option key={ m.value } value={ m.value }>
-								{ m.label }
-							</Select.Option>
-						) ) }
-					</Select.Options>
-				</Select>
-
-				{ selectedModel && (
-					<Text size="sm" color="secondary">
-						{ selectedModel.description }
-					</Text>
-				) }
+		<Container direction="column" gap="md">
+			<Container direction="row" align="center" gap="sm">
+				<Cpu size={ 20 } className="text-icon-secondary" />
+				<Title
+					title="AI Model"
+					description="Choose which model the agent uses. You can always change this later."
+					size="sm"
+				/>
 			</Container>
-		</div>
+
+			<Select
+				size="md"
+				value={ model }
+				onChange={ ( value ) => onModelChange?.( value ) }
+			>
+				<Select.Button placeholder="Select a model" />
+				<Select.Options>
+					{ MODELS.map( ( m ) => (
+						<Select.Option key={ m.value } value={ m.value }>
+							{ m.label }
+						</Select.Option>
+					) ) }
+				</Select.Options>
+			</Select>
+
+			{ selectedModel && (
+				<Text size="sm" color="secondary">
+					{ selectedModel.description }
+				</Text>
+			) }
+		</Container>
 	);
 }

@@ -85,20 +85,20 @@ class Admin_Menu {
 
 		add_submenu_page(
 			'wp-agent',
-			__( 'History', 'wp-agent' ),
-			__( 'History', 'wp-agent' ),
+			__( 'Capabilities', 'wp-agent' ),
+			__( 'Capabilities', 'wp-agent' ),
 			'manage_options',
-			'wp-agent-history',
-			[ $this, 'render_history' ]
+			'wp-agent-capabilities',
+			[ $this, 'render_capabilities' ]
 		);
 
 		add_submenu_page(
 			'wp-agent',
-			__( 'Usage', 'wp-agent' ),
-			__( 'Usage', 'wp-agent' ),
+			__( 'Help', 'wp-agent' ),
+			__( 'Help', 'wp-agent' ),
 			'manage_options',
-			'wp-agent-usage',
-			[ $this, 'render_usage' ]
+			'wp-agent-help',
+			[ $this, 'render_help' ]
 		);
 	}
 
@@ -127,26 +127,26 @@ class Admin_Menu {
 	}
 
 	/**
-	 * Render the History page.
+	 * Render the Capabilities page.
 	 *
 	 * @since 1.0.0
 	 * @return void
 	 */
-	public function render_history() {
+	public function render_capabilities() {
 		?>
-		<div id="wp-agent-history" class="wp-agent-wrap"></div>
+		<div id="wp-agent-capabilities" class="wp-agent-wrap"></div>
 		<?php
 	}
 
 	/**
-	 * Render the Usage page.
+	 * Render the Help page.
 	 *
 	 * @since 1.0.0
 	 * @return void
 	 */
-	public function render_usage() {
+	public function render_help() {
 		?>
-		<div id="wp-agent-usage" class="wp-agent-wrap"></div>
+		<div id="wp-agent-help" class="wp-agent-wrap"></div>
 		<?php
 	}
 }
