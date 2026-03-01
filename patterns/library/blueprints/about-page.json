@@ -1,0 +1,6 @@
+{
+  "id": "about-page",
+  "name": "About Page",
+  "description": "About page: minimal hero + two-column story + stats + testimonials + CTA banner",
+  "sections": ["hero-minimal", "content-two-col", "stats-counters", "testimonials-cards", "cta-banner"]
+}

@@ -1,0 +1,52 @@
+{
+  "id": "content-two-col",
+  "name": "Two-Column Story with Image",
+  "category": "content",
+  "description": "Two-column layout with heading and body text on the left, image on the right",
+  "variables": {
+    "heading": "Our Story",
+    "paragraph_1": "What started in a small Portland garage in 2018 has grown into a movement. We believed craft coffee shouldn't be a luxury — it should be an everyday ritual.",
+    "paragraph_2": "Today we source from 12 countries, roast in small batches, and ship within 48 hours of roasting. Over 50,000 customers trust us to start their morning right.",
+    "image_url": "https://placehold.co/600x500/2d1810/f5e6d3",
+    "image_alt": "Our workspace",
+    "bg_color": "#faf5f0",
+    "text_color": "#4b5563"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "{{bg_color}}" },
+          "spacing": { "padding": { "top": "100px", "bottom": "100px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/columns",
+          "attrs": { "style": { "spacing": { "blockGap": { "left": "60px" } } }, "verticalAlignment": "center" },
+          "innerBlocks": [
+            {
+              "blockName": "core/column",
+              "attrs": { "width": "55%" },
+              "innerBlocks": [
+                { "blockName": "core/heading", "attrs": { "level": 2, "style": { "typography": { "fontSize": "38px", "fontWeight": "700", "letterSpacing": "-0.02em" }, "spacing": { "margin": { "bottom": "24px" } } } }, "innerHTML": "{{heading}}" },
+                { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "17px", "lineHeight": "1.8" }, "color": { "text": "{{text_color}}" }, "spacing": { "margin": { "bottom": "16px" } } } }, "innerHTML": "{{paragraph_1}}" },
+                { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "17px", "lineHeight": "1.8" }, "color": { "text": "{{text_color}}" } } }, "innerHTML": "{{paragraph_2}}" }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "attrs": { "width": "45%" },
+              "innerBlocks": [
+                { "blockName": "core/image", "attrs": { "url": "{{image_url}}", "alt": "{{image_alt}}", "style": { "border": { "radius": "12px" } } } }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

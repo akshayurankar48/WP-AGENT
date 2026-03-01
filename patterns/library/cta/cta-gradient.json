@@ -1,0 +1,50 @@
+{
+  "id": "cta-gradient",
+  "name": "CTA with Gradient Overlay",
+  "category": "cta",
+  "description": "Call-to-action section using a cover block with gradient overlay, headline, subtitle, and two CTA buttons",
+  "variables": {
+    "heading": "Ready to Transform Your Workflow?",
+    "subheading": "Join 10,000+ teams who shipped faster this quarter. Start your free trial — no credit card needed.",
+    "cta_primary": "Start Free Trial",
+    "cta_secondary": "Talk to Sales",
+    "gradient_from": "{{primary}}",
+    "gradient_to": "{{secondary}}"
+  },
+  "blocks": [
+    {
+      "blockName": "core/cover",
+      "attrs": {
+        "dimRatio": 80,
+        "minHeight": "400px",
+        "isDark": true,
+        "align": "full",
+        "style": {
+          "color": { "gradient": "linear-gradient(135deg, {{gradient_from}} 0%, {{gradient_to}} 100%)" },
+          "spacing": { "padding": { "top": "100px", "bottom": "100px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/heading",
+          "attrs": { "textAlign": "center", "level": 2, "style": { "typography": { "fontSize": "42px", "fontWeight": "700" }, "color": { "text": "#ffffff" } } },
+          "innerHTML": "{{heading}}"
+        },
+        {
+          "blockName": "core/paragraph",
+          "attrs": { "align": "center", "style": { "typography": { "fontSize": "20px" }, "color": { "text": "#e0e7ff" }, "spacing": { "margin": { "top": "16px", "bottom": "40px" } } } },
+          "innerHTML": "{{subheading}}"
+        },
+        {
+          "blockName": "core/buttons",
+          "attrs": { "layout": { "type": "flex", "justifyContent": "center" } },
+          "innerBlocks": [
+            { "blockName": "core/button", "attrs": { "style": { "color": { "background": "#ffffff", "text": "{{gradient_from}}" }, "typography": { "fontSize": "16px", "fontWeight": "700", "textTransform": "uppercase", "letterSpacing": "0.03em" }, "border": { "radius": "100px" }, "spacing": { "padding": { "top": "18px", "bottom": "18px", "left": "48px", "right": "48px" } } } }, "innerHTML": "{{cta_primary}}" },
+            { "blockName": "core/button", "attrs": { "style": { "color": { "background": "transparent", "text": "#ffffff" }, "typography": { "fontSize": "16px", "fontWeight": "600" }, "border": { "radius": "100px", "width": "2px", "color": "#ffffff" }, "spacing": { "padding": { "top": "18px", "bottom": "18px", "left": "48px", "right": "48px" } } } }, "innerHTML": "{{cta_secondary}}" }
+          ]
+        }
+      ]
+    }
+  ]
+}

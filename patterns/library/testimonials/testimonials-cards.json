@@ -1,0 +1,126 @@
+{
+  "id": "testimonials-cards",
+  "name": "Testimonial Cards",
+  "category": "testimonials",
+  "description": "Two-column testimonial cards with quotes and attribution on light background",
+  "variables": {
+    "heading": "What Our Customers Say",
+    "quote_1": "Completely transformed how we manage content. We shipped our new site in half the time.",
+    "author_1": "Sarah Chen, Head of Marketing at Acme",
+    "quote_2": "The best investment we made this year. Our conversion rate jumped 34% in the first month.",
+    "author_2": "Marcus Rivera, Founder of Brightpath",
+    "bg_color": "{{bg_light}}",
+    "card_bg": "{{bg_white}}",
+    "text_color": "#374151",
+    "author_color": "{{text_dark}}"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "{{bg_color}}" },
+          "spacing": { "padding": { "top": "100px", "bottom": "100px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/heading",
+          "attrs": {
+            "textAlign": "center",
+            "level": 2,
+            "style": {
+              "typography": { "fontSize": "42px", "fontWeight": "700" },
+              "spacing": { "margin": { "bottom": "64px" } }
+            }
+          },
+          "innerHTML": "{{heading}}"
+        },
+        {
+          "blockName": "core/columns",
+          "attrs": { "style": { "spacing": { "blockGap": { "left": "32px" } } } },
+          "innerBlocks": [
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/group",
+                  "attrs": {
+                    "style": {
+                      "color": { "background": "{{card_bg}}" },
+                      "spacing": { "padding": { "top": "40px", "bottom": "40px", "left": "32px", "right": "32px" } },
+                      "border": { "radius": "12px" }
+                    }
+                  },
+                  "innerBlocks": [
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "17px", "lineHeight": "1.7", "fontStyle": "italic" },
+                          "color": { "text": "{{text_color}}" }
+                        }
+                      },
+                      "innerHTML": "\"{{quote_1}}\""
+                    },
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "15px", "fontWeight": "600" },
+                          "color": { "text": "{{author_color}}" },
+                          "spacing": { "margin": { "top": "20px" } }
+                        }
+                      },
+                      "innerHTML": "{{author_1}}"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/group",
+                  "attrs": {
+                    "style": {
+                      "color": { "background": "{{card_bg}}" },
+                      "spacing": { "padding": { "top": "40px", "bottom": "40px", "left": "32px", "right": "32px" } },
+                      "border": { "radius": "12px" }
+                    }
+                  },
+                  "innerBlocks": [
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "17px", "lineHeight": "1.7", "fontStyle": "italic" },
+                          "color": { "text": "{{text_color}}" }
+                        }
+                      },
+                      "innerHTML": "\"{{quote_2}}\""
+                    },
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "15px", "fontWeight": "600" },
+                          "color": { "text": "{{author_color}}" },
+                          "spacing": { "margin": { "top": "20px" } }
+                        }
+                      },
+                      "innerHTML": "{{author_2}}"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

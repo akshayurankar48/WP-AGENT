@@ -1,0 +1,47 @@
+{
+  "id": "content-media-text",
+  "name": "Media and Text Story Section",
+  "category": "content",
+  "description": "Side-by-side media and text layout with image on right, heading and paragraphs on left",
+  "variables": {
+    "heading": "Data That Drives Decisions",
+    "paragraph_1": "Stop guessing and start knowing. Our real-time analytics dashboard gives you instant visibility into what matters — user engagement, conversion funnels, and revenue trends.",
+    "paragraph_2": "Trusted by product teams at companies like Airbnb, Notion, and Linear to make data-driven decisions 10x faster.",
+    "image_url": "https://placehold.co/700x500/1e293b/f8fafc",
+    "image_alt": "Product dashboard showing real-time analytics",
+    "media_position": "right",
+    "bg_color": "{{bg_white}}",
+    "text_color": "#4b5563"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "{{bg_color}}" },
+          "spacing": { "padding": { "top": "100px", "bottom": "100px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/media-text",
+          "attrs": {
+            "mediaUrl": "{{image_url}}",
+            "mediaAlt": "{{image_alt}}",
+            "mediaType": "image",
+            "mediaPosition": "{{media_position}}",
+            "isStackedOnMobile": true,
+            "style": { "spacing": { "blockGap": "60px" } }
+          },
+          "innerBlocks": [
+            { "blockName": "core/heading", "attrs": { "level": 2, "style": { "typography": { "fontSize": "38px", "fontWeight": "700", "letterSpacing": "-0.02em" }, "spacing": { "margin": { "bottom": "24px" } } } }, "innerHTML": "{{heading}}" },
+            { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "17px", "lineHeight": "1.8" }, "color": { "text": "{{text_color}}" }, "spacing": { "margin": { "bottom": "16px" } } } }, "innerHTML": "{{paragraph_1}}" },
+            { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "17px", "lineHeight": "1.8" }, "color": { "text": "{{text_color}}" } } }, "innerHTML": "{{paragraph_2}}" }
+          ]
+        }
+      ]
+    }
+  ]
+}

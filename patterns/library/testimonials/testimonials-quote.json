@@ -1,0 +1,52 @@
+{
+  "id": "testimonials-quote",
+  "name": "Large Pullquote Testimonial",
+  "category": "testimonials",
+  "description": "Single large centered pullquote testimonial with attribution on dark background",
+  "variables": {
+    "quote": "This product didn't just meet our expectations — it redefined them. We 10x'd our output in the first quarter.",
+    "author": "Elena Vasquez, CTO at Streamline",
+    "bg_color": "{{bg_dark}}",
+    "quote_color": "#ffffff",
+    "author_color": "{{accent}}"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "{{bg_color}}" },
+          "spacing": { "padding": { "top": "100px", "bottom": "100px", "left": "60px", "right": "60px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/pullquote",
+          "attrs": {
+            "textAlign": "center",
+            "style": {
+              "typography": { "fontSize": "32px", "fontWeight": "500", "lineHeight": "1.5", "fontStyle": "italic" },
+              "color": { "text": "{{quote_color}}" },
+              "border": { "top": { "width": "0px" }, "bottom": { "width": "0px" } }
+            }
+          },
+          "innerHTML": "{{quote}}"
+        },
+        {
+          "blockName": "core/paragraph",
+          "attrs": {
+            "align": "center",
+            "style": {
+              "typography": { "fontSize": "16px", "fontWeight": "600", "letterSpacing": "0.02em" },
+              "color": { "text": "{{author_color}}" },
+              "spacing": { "margin": { "top": "24px" } }
+            }
+          },
+          "innerHTML": "{{author}}"
+        }
+      ]
+    }
+  ]
+}

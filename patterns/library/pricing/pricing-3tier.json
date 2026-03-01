@@ -1,0 +1,145 @@
+{
+  "id": "pricing-3tier",
+  "name": "3-Tier Pricing Table",
+  "category": "pricing",
+  "description": "Three-column pricing table with starter, pro (highlighted), and enterprise tiers",
+  "variables": {
+    "heading": "Simple, Transparent Pricing",
+    "subheading": "No hidden fees. No surprises. Cancel anytime.",
+    "t1_name": "Starter",
+    "t1_price": "$19",
+    "t1_period": "/month",
+    "t1_desc": "Perfect for individuals and small projects.",
+    "t1_features": "5 projects\n10 GB storage\nEmail support\nBasic analytics",
+    "t1_cta": "Get Started",
+    "t2_name": "Pro",
+    "t2_price": "$49",
+    "t2_period": "/month",
+    "t2_desc": "Best for growing teams who need more power.",
+    "t2_features": "Unlimited projects\n100 GB storage\nPriority support\nAdvanced analytics\nCustom domains\nTeam collaboration",
+    "t2_cta": "Start Free Trial",
+    "t3_name": "Enterprise",
+    "t3_price": "Custom",
+    "t3_period": "",
+    "t3_desc": "For organizations that need full control.",
+    "t3_features": "Everything in Pro\nUnlimited storage\nDedicated manager\nCustom SLA\nSSO & SAML\nOn-prem option",
+    "t3_cta": "Contact Sales",
+    "bg_color": "{{bg_white}}",
+    "card_bg": "{{bg_light}}",
+    "accent_color": "{{primary}}",
+    "text_color": "{{text_dark}}",
+    "muted_color": "{{text_muted}}"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "{{bg_color}}" },
+          "spacing": { "padding": { "top": "100px", "bottom": "100px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/heading",
+          "attrs": {
+            "textAlign": "center",
+            "level": 2,
+            "style": {
+              "typography": { "fontSize": "42px", "fontWeight": "700", "letterSpacing": "-0.02em" },
+              "color": { "text": "{{text_color}}" },
+              "spacing": { "margin": { "bottom": "16px" } }
+            }
+          },
+          "innerHTML": "{{heading}}"
+        },
+        {
+          "blockName": "core/paragraph",
+          "attrs": {
+            "align": "center",
+            "style": {
+              "typography": { "fontSize": "18px" },
+              "color": { "text": "{{muted_color}}" },
+              "spacing": { "margin": { "bottom": "64px" } }
+            }
+          },
+          "innerHTML": "{{subheading}}"
+        },
+        {
+          "blockName": "core/columns",
+          "attrs": { "style": { "spacing": { "blockGap": { "left": "24px" } } }, "verticalAlignment": "top" },
+          "innerBlocks": [
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/group",
+                  "attrs": {
+                    "style": {
+                      "color": { "background": "{{card_bg}}" },
+                      "spacing": { "padding": { "top": "40px", "bottom": "40px", "left": "32px", "right": "32px" } },
+                      "border": { "radius": "16px" }
+                    }
+                  },
+                  "innerBlocks": [
+                    { "blockName": "core/heading", "attrs": { "level": 3, "style": { "typography": { "fontSize": "20px", "fontWeight": "600" }, "spacing": { "margin": { "bottom": "8px" } } } }, "innerHTML": "{{t1_name}}" },
+                    { "blockName": "core/paragraph", "attrs": { "style": { "color": { "text": "{{muted_color}}" }, "typography": { "fontSize": "15px" }, "spacing": { "margin": { "bottom": "24px" } } } }, "innerHTML": "{{t1_desc}}" },
+                    { "blockName": "core/heading", "attrs": { "level": 4, "style": { "typography": { "fontSize": "48px", "fontWeight": "800" }, "spacing": { "margin": { "bottom": "32px" } } } }, "innerHTML": "{{t1_price}}<span style=\"font-size:18px;font-weight:400;color:{{muted_color}}\">{{t1_period}}</span>" },
+                    { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "15px", "lineHeight": "2.0" }, "color": { "text": "{{muted_color}}" }, "spacing": { "margin": { "bottom": "32px" } } } }, "innerHTML": "{{t1_features}}" },
+                    { "blockName": "core/buttons", "innerBlocks": [ { "blockName": "core/button", "attrs": { "width": 100, "style": { "color": { "background": "transparent", "text": "{{accent_color}}" }, "typography": { "fontSize": "15px", "fontWeight": "600" }, "border": { "radius": "100px", "width": "2px", "color": "{{accent_color}}" }, "spacing": { "padding": { "top": "14px", "bottom": "14px" } } } }, "innerHTML": "{{t1_cta}}" } ] }
+                  ]
+                }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/group",
+                  "attrs": {
+                    "style": {
+                      "color": { "background": "{{accent_color}}", "text": "#ffffff" },
+                      "spacing": { "padding": { "top": "40px", "bottom": "40px", "left": "32px", "right": "32px" } },
+                      "border": { "radius": "16px" }
+                    }
+                  },
+                  "innerBlocks": [
+                    { "blockName": "core/heading", "attrs": { "level": 3, "style": { "typography": { "fontSize": "20px", "fontWeight": "600" }, "color": { "text": "#ffffff" }, "spacing": { "margin": { "bottom": "8px" } } } }, "innerHTML": "{{t2_name}}" },
+                    { "blockName": "core/paragraph", "attrs": { "style": { "color": { "text": "rgba(255,255,255,0.8)" }, "typography": { "fontSize": "15px" }, "spacing": { "margin": { "bottom": "24px" } } } }, "innerHTML": "{{t2_desc}}" },
+                    { "blockName": "core/heading", "attrs": { "level": 4, "style": { "typography": { "fontSize": "48px", "fontWeight": "800" }, "color": { "text": "#ffffff" }, "spacing": { "margin": { "bottom": "32px" } } } }, "innerHTML": "{{t2_price}}<span style=\"font-size:18px;font-weight:400;opacity:0.8\">{{t2_period}}</span>" },
+                    { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "15px", "lineHeight": "2.0" }, "color": { "text": "rgba(255,255,255,0.85)" }, "spacing": { "margin": { "bottom": "32px" } } } }, "innerHTML": "{{t2_features}}" },
+                    { "blockName": "core/buttons", "innerBlocks": [ { "blockName": "core/button", "attrs": { "width": 100, "style": { "color": { "background": "#ffffff", "text": "{{accent_color}}" }, "typography": { "fontSize": "15px", "fontWeight": "700" }, "border": { "radius": "100px" }, "spacing": { "padding": { "top": "14px", "bottom": "14px" } } } }, "innerHTML": "{{t2_cta}}" } ] }
+                  ]
+                }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/group",
+                  "attrs": {
+                    "style": {
+                      "color": { "background": "{{card_bg}}" },
+                      "spacing": { "padding": { "top": "40px", "bottom": "40px", "left": "32px", "right": "32px" } },
+                      "border": { "radius": "16px" }
+                    }
+                  },
+                  "innerBlocks": [
+                    { "blockName": "core/heading", "attrs": { "level": 3, "style": { "typography": { "fontSize": "20px", "fontWeight": "600" }, "spacing": { "margin": { "bottom": "8px" } } } }, "innerHTML": "{{t3_name}}" },
+                    { "blockName": "core/paragraph", "attrs": { "style": { "color": { "text": "{{muted_color}}" }, "typography": { "fontSize": "15px" }, "spacing": { "margin": { "bottom": "24px" } } } }, "innerHTML": "{{t3_desc}}" },
+                    { "blockName": "core/heading", "attrs": { "level": 4, "style": { "typography": { "fontSize": "48px", "fontWeight": "800" }, "spacing": { "margin": { "bottom": "32px" } } } }, "innerHTML": "{{t3_price}}" },
+                    { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "15px", "lineHeight": "2.0" }, "color": { "text": "{{muted_color}}" }, "spacing": { "margin": { "bottom": "32px" } } } }, "innerHTML": "{{t3_features}}" },
+                    { "blockName": "core/buttons", "innerBlocks": [ { "blockName": "core/button", "attrs": { "width": 100, "style": { "color": { "background": "transparent", "text": "{{accent_color}}" }, "typography": { "fontSize": "15px", "fontWeight": "600" }, "border": { "radius": "100px", "width": "2px", "color": "{{accent_color}}" }, "spacing": { "padding": { "top": "14px", "bottom": "14px" } } } }, "innerHTML": "{{t3_cta}}" } ] }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

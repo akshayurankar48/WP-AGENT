@@ -1,0 +1,127 @@
+{
+  "id": "features-icons",
+  "name": "Feature Grid with Emoji Icons",
+  "category": "features",
+  "description": "Three-column feature grid with large emoji icons, dark background, and feature cards",
+  "variables": {
+    "heading": "Everything You Need",
+    "subheading": "Powerful features that help you work smarter, not harder.",
+    "f1_icon": "&#9889;",
+    "f1_title": "Instant Setup",
+    "f1_desc": "Go from zero to production in under 5 minutes with our guided onboarding.",
+    "f2_icon": "&#128274;",
+    "f2_title": "Enterprise Security",
+    "f2_desc": "Bank-level encryption, SSO, and compliance certifications you can trust.",
+    "f3_icon": "&#128640;",
+    "f3_title": "Scale Effortlessly",
+    "f3_desc": "Auto-scaling infrastructure that grows with your business. No limits.",
+    "bg_color": "{{bg_dark}}",
+    "card_bg": "rgba(255,255,255,0.05)",
+    "accent_color": "{{accent}}"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "{{bg_color}}", "text": "#ffffff" },
+          "spacing": { "padding": { "top": "100px", "bottom": "100px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/heading",
+          "attrs": {
+            "textAlign": "center",
+            "level": 2,
+            "style": {
+              "typography": { "fontSize": "42px", "fontWeight": "700", "letterSpacing": "-0.02em" },
+              "spacing": { "margin": { "bottom": "16px" } }
+            }
+          },
+          "innerHTML": "{{heading}}"
+        },
+        {
+          "blockName": "core/paragraph",
+          "attrs": {
+            "align": "center",
+            "style": {
+              "typography": { "fontSize": "18px" },
+              "color": { "text": "{{text_light}}" },
+              "spacing": { "margin": { "bottom": "64px" } }
+            }
+          },
+          "innerHTML": "{{subheading}}"
+        },
+        {
+          "blockName": "core/columns",
+          "attrs": { "style": { "spacing": { "blockGap": { "left": "32px" } } } },
+          "innerBlocks": [
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/group",
+                  "attrs": {
+                    "style": {
+                      "color": { "background": "{{card_bg}}" },
+                      "spacing": { "padding": { "top": "40px", "bottom": "40px", "left": "32px", "right": "32px" } },
+                      "border": { "radius": "16px" }
+                    }
+                  },
+                  "innerBlocks": [
+                    { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "40px" }, "spacing": { "margin": { "bottom": "16px" } } } }, "innerHTML": "{{f1_icon}}" },
+                    { "blockName": "core/heading", "attrs": { "level": 3, "style": { "typography": { "fontSize": "22px", "fontWeight": "600" }, "spacing": { "margin": { "bottom": "12px" } } } }, "innerHTML": "{{f1_title}}" },
+                    { "blockName": "core/paragraph", "attrs": { "style": { "color": { "text": "{{text_light}}" }, "typography": { "fontSize": "16px", "lineHeight": "1.7" } } }, "innerHTML": "{{f1_desc}}" }
+                  ]
+                }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/group",
+                  "attrs": {
+                    "style": {
+                      "color": { "background": "{{card_bg}}" },
+                      "spacing": { "padding": { "top": "40px", "bottom": "40px", "left": "32px", "right": "32px" } },
+                      "border": { "radius": "16px" }
+                    }
+                  },
+                  "innerBlocks": [
+                    { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "40px" }, "spacing": { "margin": { "bottom": "16px" } } } }, "innerHTML": "{{f2_icon}}" },
+                    { "blockName": "core/heading", "attrs": { "level": 3, "style": { "typography": { "fontSize": "22px", "fontWeight": "600" }, "spacing": { "margin": { "bottom": "12px" } } } }, "innerHTML": "{{f2_title}}" },
+                    { "blockName": "core/paragraph", "attrs": { "style": { "color": { "text": "{{text_light}}" }, "typography": { "fontSize": "16px", "lineHeight": "1.7" } } }, "innerHTML": "{{f2_desc}}" }
+                  ]
+                }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/group",
+                  "attrs": {
+                    "style": {
+                      "color": { "background": "{{card_bg}}" },
+                      "spacing": { "padding": { "top": "40px", "bottom": "40px", "left": "32px", "right": "32px" } },
+                      "border": { "radius": "16px" }
+                    }
+                  },
+                  "innerBlocks": [
+                    { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "40px" }, "spacing": { "margin": { "bottom": "16px" } } } }, "innerHTML": "{{f3_icon}}" },
+                    { "blockName": "core/heading", "attrs": { "level": 3, "style": { "typography": { "fontSize": "22px", "fontWeight": "600" }, "spacing": { "margin": { "bottom": "12px" } } } }, "innerHTML": "{{f3_title}}" },
+                    { "blockName": "core/paragraph", "attrs": { "style": { "color": { "text": "{{text_light}}" }, "typography": { "fontSize": "16px", "lineHeight": "1.7" } } }, "innerHTML": "{{f3_desc}}" }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

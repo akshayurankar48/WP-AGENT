@@ -1,0 +1,6 @@
+{
+  "id": "saas-landing",
+  "name": "SaaS Landing Page",
+  "description": "SaaS product landing page: cover hero + features with icons + media-text story + pricing + FAQ + CTA",
+  "sections": ["hero-cover", "features-icons", "content-media-text", "pricing-3tier", "faq-accordion", "cta-banner"]
+}

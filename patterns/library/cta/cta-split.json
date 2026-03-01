@@ -1,0 +1,57 @@
+{
+  "id": "cta-split",
+  "name": "Split CTA with Text and Button",
+  "category": "cta",
+  "description": "Two-column CTA section with headline and description on the left, button on the right",
+  "variables": {
+    "heading": "Start Your Free Trial Today",
+    "description": "No credit card required. Get full access for 14 days and see the difference for yourself.",
+    "cta_text": "Get Started",
+    "bg_color": "{{bg_light}}",
+    "text_color": "{{text_dark}}",
+    "muted_color": "{{text_muted}}",
+    "accent_color": "{{primary}}"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "{{bg_color}}" },
+          "spacing": { "padding": { "top": "80px", "bottom": "80px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/columns",
+          "attrs": { "verticalAlignment": "center", "style": { "spacing": { "blockGap": { "left": "60px" } } } },
+          "innerBlocks": [
+            {
+              "blockName": "core/column",
+              "attrs": { "width": "65%" },
+              "innerBlocks": [
+                { "blockName": "core/heading", "attrs": { "level": 2, "style": { "typography": { "fontSize": "36px", "fontWeight": "700" }, "color": { "text": "{{text_color}}" } } }, "innerHTML": "{{heading}}" },
+                { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "18px", "lineHeight": "1.6" }, "color": { "text": "{{muted_color}}" }, "spacing": { "margin": { "top": "12px" } } } }, "innerHTML": "{{description}}" }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "attrs": { "width": "35%" },
+              "innerBlocks": [
+                {
+                  "blockName": "core/buttons",
+                  "attrs": { "layout": { "type": "flex", "justifyContent": "center" } },
+                  "innerBlocks": [
+                    { "blockName": "core/button", "attrs": { "style": { "color": { "background": "{{accent_color}}", "text": "#ffffff" }, "typography": { "fontSize": "16px", "fontWeight": "600" }, "border": { "radius": "100px" }, "spacing": { "padding": { "top": "18px", "bottom": "18px", "left": "48px", "right": "48px" } } } }, "innerHTML": "{{cta_text}}" }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

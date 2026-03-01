@@ -1,0 +1,72 @@
+{
+  "id": "hero-minimal",
+  "name": "Minimal Hero with Single CTA",
+  "category": "heroes",
+  "description": "Clean, minimal hero section with centered headline, subtitle, and a single CTA button on white background",
+  "variables": {
+    "heading": "Simplicity Meets Power",
+    "subheading": "One tool to manage your entire digital workflow. No complexity, no clutter, just results.",
+    "cta_primary": "Try It Free",
+    "accent_color": "{{primary}}",
+    "bg_color": "{{bg_white}}",
+    "text_color": "{{text_dark}}",
+    "subtitle_color": "{{text_muted}}"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "{{bg_color}}" },
+          "spacing": { "padding": { "top": "120px", "bottom": "120px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/heading",
+          "attrs": {
+            "textAlign": "center",
+            "level": 1,
+            "style": {
+              "typography": { "fontSize": "56px", "fontWeight": "800", "letterSpacing": "-0.03em", "lineHeight": "1.15" },
+              "color": { "text": "{{text_color}}" }
+            }
+          },
+          "innerHTML": "{{heading}}"
+        },
+        {
+          "blockName": "core/paragraph",
+          "attrs": {
+            "align": "center",
+            "style": {
+              "typography": { "fontSize": "20px", "lineHeight": "1.6" },
+              "color": { "text": "{{subtitle_color}}" },
+              "spacing": { "margin": { "top": "24px", "bottom": "48px" } }
+            }
+          },
+          "innerHTML": "{{subheading}}"
+        },
+        {
+          "blockName": "core/buttons",
+          "attrs": { "layout": { "type": "flex", "justifyContent": "center" } },
+          "innerBlocks": [
+            {
+              "blockName": "core/button",
+              "attrs": {
+                "style": {
+                  "color": { "background": "{{accent_color}}", "text": "#ffffff" },
+                  "typography": { "fontSize": "16px", "fontWeight": "600" },
+                  "border": { "radius": "100px" },
+                  "spacing": { "padding": { "top": "18px", "bottom": "18px", "left": "52px", "right": "52px" } }
+                }
+              },
+              "innerHTML": "{{cta_primary}}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

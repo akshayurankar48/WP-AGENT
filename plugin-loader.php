@@ -110,20 +110,46 @@ class Plugin_Loader {
 		$registry->register( new Actions\Create_Post() );
 		$registry->register( new Actions\Edit_Post() );
 		$registry->register( new Actions\Delete_Post() );
+		$registry->register( new Actions\Clone_Post() );
 		$registry->register( new Actions\Read_Blocks() );
 		$registry->register( new Actions\Insert_Blocks() );
+		$registry->register( new Actions\Search_Posts() );
+		$registry->register( new Actions\Bulk_Edit() );
+		$registry->register( new Actions\Get_Page_Templates() );
+		$registry->register( new Actions\Set_Page_Template() );
 		$registry->register( new Actions\Search_Media() );
 		$registry->register( new Actions\Import_Media() );
+		$registry->register( new Actions\Generate_Image() );
+		$registry->register( new Actions\Set_Featured_Image() );
+
+		// Pattern library actions.
+		$registry->register( new Actions\List_Patterns() );
+		$registry->register( new Actions\Get_Pattern() );
+		$registry->register( new Actions\Create_Pattern() );
+
+		// Navigation menu actions.
+		$registry->register( new Actions\Manage_Menus() );
+
+		// Taxonomy actions.
+		$registry->register( new Actions\Manage_Taxonomies() );
+
+		// Design control actions.
+		$registry->register( new Actions\Edit_Global_Styles() );
+		$registry->register( new Actions\Add_Custom_Css() );
+		$registry->register( new Actions\Screenshot_Page() );
 
 		// Settings & plugin management actions.
 		$registry->register( new Actions\Update_Settings() );
 		$registry->register( new Actions\Manage_Permalinks() );
 		$registry->register( new Actions\Install_Plugin() );
 		$registry->register( new Actions\Activate_Plugin() );
+		$registry->register( new Actions\List_Plugins() );
 
 		// User & system actions.
 		$registry->register( new Actions\Deactivate_Plugin() );
 		$registry->register( new Actions\Create_User() );
+		$registry->register( new Actions\Manage_Users() );
+		$registry->register( new Actions\List_Users() );
 		$registry->register( new Actions\Site_Health() );
 	}
 

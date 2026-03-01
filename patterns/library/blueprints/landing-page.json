@@ -1,0 +1,6 @@
+{
+  "id": "landing-page",
+  "name": "Landing Page",
+  "description": "Complete landing page: hero + features + testimonials + stats + CTA",
+  "sections": ["hero-dark", "features-3col", "testimonials-cards", "stats-counters", "cta-gradient"]
+}

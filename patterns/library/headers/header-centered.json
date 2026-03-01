@@ -1,0 +1,45 @@
+{
+  "id": "header-centered",
+  "name": "Centered Section Header",
+  "category": "headers",
+  "description": "Centered section header with eyebrow text, heading, and subtitle — use as a section opener before other blocks",
+  "variables": {
+    "eyebrow": "WHY US",
+    "heading": "Built for Modern Teams",
+    "subheading": "We combine cutting-edge technology with thoughtful design to help teams move faster.",
+    "bg_color": "{{bg_white}}",
+    "eyebrow_color": "{{primary}}",
+    "text_color": "{{text_dark}}",
+    "muted_color": "{{text_muted}}"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "{{bg_color}}" },
+          "spacing": { "padding": { "top": "100px", "bottom": "40px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/paragraph",
+          "attrs": { "align": "center", "style": { "typography": { "fontSize": "14px", "fontWeight": "600", "textTransform": "uppercase", "letterSpacing": "0.08em" }, "color": { "text": "{{eyebrow_color}}" }, "spacing": { "margin": { "bottom": "16px" } } } },
+          "innerHTML": "{{eyebrow}}"
+        },
+        {
+          "blockName": "core/heading",
+          "attrs": { "textAlign": "center", "level": 2, "style": { "typography": { "fontSize": "42px", "fontWeight": "700", "letterSpacing": "-0.02em" }, "color": { "text": "{{text_color}}" }, "spacing": { "margin": { "bottom": "16px" } } } },
+          "innerHTML": "{{heading}}"
+        },
+        {
+          "blockName": "core/paragraph",
+          "attrs": { "align": "center", "style": { "typography": { "fontSize": "18px", "lineHeight": "1.6" }, "color": { "text": "{{muted_color}}" } } },
+          "innerHTML": "{{subheading}}"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "id": "startup-page",
+  "name": "Startup Page",
+  "description": "Startup landing page: gradient hero + feature grid + two-column story + testimonial quote + stats + CTA",
+  "sections": ["hero-gradient", "features-4col", "content-two-col", "testimonials-quote", "stats-cards", "cta-split"]
+}

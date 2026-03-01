@@ -1,0 +1,146 @@
+{
+  "id": "features-3col",
+  "name": "3-Column Feature Grid",
+  "category": "features",
+  "description": "Three-column feature grid with section heading, subtitle, and feature cards with title and description",
+  "variables": {
+    "heading": "Why Choose Us",
+    "subheading": "Everything you need to build something extraordinary.",
+    "feature_1_title": "Lightning Fast",
+    "feature_1_desc": "Optimized for speed at every level. Your users will feel the difference from the first click.",
+    "feature_2_title": "Rock Solid",
+    "feature_2_desc": "Built on a foundation of reliability and trust. 99.99% uptime guaranteed.",
+    "feature_3_title": "Beautifully Crafted",
+    "feature_3_desc": "Every detail is considered. Every pixel is intentional. Design that speaks for itself.",
+    "bg_color": "{{bg_light}}",
+    "text_color": "{{text_dark}}",
+    "muted_color": "{{text_muted}}"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "{{bg_color}}" },
+          "spacing": { "padding": { "top": "100px", "bottom": "100px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/heading",
+          "attrs": {
+            "textAlign": "center",
+            "level": 2,
+            "style": {
+              "typography": { "fontSize": "42px", "fontWeight": "700", "letterSpacing": "-0.02em" },
+              "color": { "text": "{{text_color}}" },
+              "spacing": { "margin": { "bottom": "16px" } }
+            }
+          },
+          "innerHTML": "{{heading}}"
+        },
+        {
+          "blockName": "core/paragraph",
+          "attrs": {
+            "align": "center",
+            "style": {
+              "typography": { "fontSize": "18px" },
+              "color": { "text": "{{muted_color}}" },
+              "spacing": { "margin": { "bottom": "64px" } }
+            }
+          },
+          "innerHTML": "{{subheading}}"
+        },
+        {
+          "blockName": "core/columns",
+          "attrs": { "style": { "spacing": { "blockGap": { "left": "40px" } } } },
+          "innerBlocks": [
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/heading",
+                  "attrs": {
+                    "level": 3,
+                    "style": {
+                      "typography": { "fontSize": "24px", "fontWeight": "600" },
+                      "color": { "text": "{{text_color}}" },
+                      "spacing": { "margin": { "bottom": "12px" } }
+                    }
+                  },
+                  "innerHTML": "{{feature_1_title}}"
+                },
+                {
+                  "blockName": "core/paragraph",
+                  "attrs": {
+                    "style": {
+                      "color": { "text": "{{muted_color}}" },
+                      "typography": { "fontSize": "16px", "lineHeight": "1.7" }
+                    }
+                  },
+                  "innerHTML": "{{feature_1_desc}}"
+                }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/heading",
+                  "attrs": {
+                    "level": 3,
+                    "style": {
+                      "typography": { "fontSize": "24px", "fontWeight": "600" },
+                      "color": { "text": "{{text_color}}" },
+                      "spacing": { "margin": { "bottom": "12px" } }
+                    }
+                  },
+                  "innerHTML": "{{feature_2_title}}"
+                },
+                {
+                  "blockName": "core/paragraph",
+                  "attrs": {
+                    "style": {
+                      "color": { "text": "{{muted_color}}" },
+                      "typography": { "fontSize": "16px", "lineHeight": "1.7" }
+                    }
+                  },
+                  "innerHTML": "{{feature_2_desc}}"
+                }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/heading",
+                  "attrs": {
+                    "level": 3,
+                    "style": {
+                      "typography": { "fontSize": "24px", "fontWeight": "600" },
+                      "color": { "text": "{{text_color}}" },
+                      "spacing": { "margin": { "bottom": "12px" } }
+                    }
+                  },
+                  "innerHTML": "{{feature_3_title}}"
+                },
+                {
+                  "blockName": "core/paragraph",
+                  "attrs": {
+                    "style": {
+                      "color": { "text": "{{muted_color}}" },
+                      "typography": { "fontSize": "16px", "lineHeight": "1.7" }
+                    }
+                  },
+                  "innerHTML": "{{feature_3_desc}}"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

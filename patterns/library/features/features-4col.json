@@ -1,0 +1,144 @@
+{
+  "id": "features-4col",
+  "name": "4-Column Feature Grid",
+  "category": "features",
+  "description": "Four-column feature grid with heading, subtitle, and feature cards on white background",
+  "variables": {
+    "heading": "Built for Scale",
+    "subheading": "Four pillars that set us apart from the rest.",
+    "f1_title": "Performance",
+    "f1_desc": "Sub-100ms response times globally with edge caching.",
+    "f2_title": "Security",
+    "f2_desc": "Enterprise-grade encryption and SOC 2 compliance built in.",
+    "f3_title": "Scalability",
+    "f3_desc": "From 10 to 10 million users without changing a line of code.",
+    "f4_title": "Support",
+    "f4_desc": "24/7 dedicated support with an average 4-minute response time.",
+    "bg_color": "{{bg_white}}",
+    "card_bg": "{{bg_light}}",
+    "text_color": "{{text_dark}}",
+    "muted_color": "{{text_muted}}"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "{{bg_color}}" },
+          "spacing": { "padding": { "top": "100px", "bottom": "100px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/heading",
+          "attrs": {
+            "textAlign": "center",
+            "level": 2,
+            "style": {
+              "typography": { "fontSize": "42px", "fontWeight": "700", "letterSpacing": "-0.02em" },
+              "color": { "text": "{{text_color}}" },
+              "spacing": { "margin": { "bottom": "16px" } }
+            }
+          },
+          "innerHTML": "{{heading}}"
+        },
+        {
+          "blockName": "core/paragraph",
+          "attrs": {
+            "align": "center",
+            "style": {
+              "typography": { "fontSize": "18px" },
+              "color": { "text": "{{muted_color}}" },
+              "spacing": { "margin": { "bottom": "64px" } }
+            }
+          },
+          "innerHTML": "{{subheading}}"
+        },
+        {
+          "blockName": "core/columns",
+          "attrs": { "style": { "spacing": { "blockGap": { "left": "24px" } } } },
+          "innerBlocks": [
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/group",
+                  "attrs": {
+                    "style": {
+                      "color": { "background": "{{card_bg}}" },
+                      "spacing": { "padding": { "top": "32px", "bottom": "32px", "left": "24px", "right": "24px" } },
+                      "border": { "radius": "12px" }
+                    }
+                  },
+                  "innerBlocks": [
+                    { "blockName": "core/heading", "attrs": { "level": 3, "style": { "typography": { "fontSize": "20px", "fontWeight": "600" }, "spacing": { "margin": { "bottom": "8px" } } } }, "innerHTML": "{{f1_title}}" },
+                    { "blockName": "core/paragraph", "attrs": { "style": { "color": { "text": "{{muted_color}}" }, "typography": { "fontSize": "15px", "lineHeight": "1.7" } } }, "innerHTML": "{{f1_desc}}" }
+                  ]
+                }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/group",
+                  "attrs": {
+                    "style": {
+                      "color": { "background": "{{card_bg}}" },
+                      "spacing": { "padding": { "top": "32px", "bottom": "32px", "left": "24px", "right": "24px" } },
+                      "border": { "radius": "12px" }
+                    }
+                  },
+                  "innerBlocks": [
+                    { "blockName": "core/heading", "attrs": { "level": 3, "style": { "typography": { "fontSize": "20px", "fontWeight": "600" }, "spacing": { "margin": { "bottom": "8px" } } } }, "innerHTML": "{{f2_title}}" },
+                    { "blockName": "core/paragraph", "attrs": { "style": { "color": { "text": "{{muted_color}}" }, "typography": { "fontSize": "15px", "lineHeight": "1.7" } } }, "innerHTML": "{{f2_desc}}" }
+                  ]
+                }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/group",
+                  "attrs": {
+                    "style": {
+                      "color": { "background": "{{card_bg}}" },
+                      "spacing": { "padding": { "top": "32px", "bottom": "32px", "left": "24px", "right": "24px" } },
+                      "border": { "radius": "12px" }
+                    }
+                  },
+                  "innerBlocks": [
+                    { "blockName": "core/heading", "attrs": { "level": 3, "style": { "typography": { "fontSize": "20px", "fontWeight": "600" }, "spacing": { "margin": { "bottom": "8px" } } } }, "innerHTML": "{{f3_title}}" },
+                    { "blockName": "core/paragraph", "attrs": { "style": { "color": { "text": "{{muted_color}}" }, "typography": { "fontSize": "15px", "lineHeight": "1.7" } } }, "innerHTML": "{{f3_desc}}" }
+                  ]
+                }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/group",
+                  "attrs": {
+                    "style": {
+                      "color": { "background": "{{card_bg}}" },
+                      "spacing": { "padding": { "top": "32px", "bottom": "32px", "left": "24px", "right": "24px" } },
+                      "border": { "radius": "12px" }
+                    }
+                  },
+                  "innerBlocks": [
+                    { "blockName": "core/heading", "attrs": { "level": 3, "style": { "typography": { "fontSize": "20px", "fontWeight": "600" }, "spacing": { "margin": { "bottom": "8px" } } } }, "innerHTML": "{{f4_title}}" },
+                    { "blockName": "core/paragraph", "attrs": { "style": { "color": { "text": "{{muted_color}}" }, "typography": { "fontSize": "15px", "lineHeight": "1.7" } } }, "innerHTML": "{{f4_desc}}" }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

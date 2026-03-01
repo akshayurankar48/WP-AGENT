@@ -1,0 +1,82 @@
+{
+  "id": "hero-gradient",
+  "name": "Gradient Hero with CTA",
+  "category": "heroes",
+  "description": "Full-width hero section with a bold gradient background, headline, subtitle, and CTA",
+  "variables": {
+    "heading": "Transform Your Digital Presence",
+    "subheading": "From concept to launch in days, not months. Join 25,000+ creators who chose speed without compromise.",
+    "cta_primary": "Start Building",
+    "cta_secondary": "See Examples",
+    "gradient_from": "{{primary}}",
+    "gradient_to": "{{secondary}}"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "gradient": "linear-gradient(135deg, {{gradient_from}} 0%, {{gradient_to}} 100%)", "text": "#ffffff" },
+          "spacing": { "padding": { "top": "120px", "bottom": "120px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/heading",
+          "attrs": {
+            "textAlign": "center",
+            "level": 1,
+            "style": {
+              "typography": { "fontSize": "60px", "fontWeight": "800", "letterSpacing": "-0.03em", "lineHeight": "1.1" }
+            }
+          },
+          "innerHTML": "{{heading}}"
+        },
+        {
+          "blockName": "core/paragraph",
+          "attrs": {
+            "align": "center",
+            "style": {
+              "typography": { "fontSize": "20px", "lineHeight": "1.6" },
+              "color": { "text": "rgba(255,255,255,0.85)" },
+              "spacing": { "margin": { "top": "24px", "bottom": "48px" } }
+            }
+          },
+          "innerHTML": "{{subheading}}"
+        },
+        {
+          "blockName": "core/buttons",
+          "attrs": { "layout": { "type": "flex", "justifyContent": "center" } },
+          "innerBlocks": [
+            {
+              "blockName": "core/button",
+              "attrs": {
+                "style": {
+                  "color": { "background": "#ffffff", "text": "{{gradient_from}}" },
+                  "typography": { "fontSize": "16px", "fontWeight": "700", "textTransform": "uppercase", "letterSpacing": "0.03em" },
+                  "border": { "radius": "100px" },
+                  "spacing": { "padding": { "top": "18px", "bottom": "18px", "left": "48px", "right": "48px" } }
+                }
+              },
+              "innerHTML": "{{cta_primary}}"
+            },
+            {
+              "blockName": "core/button",
+              "attrs": {
+                "style": {
+                  "color": { "background": "rgba(255,255,255,0.15)", "text": "#ffffff" },
+                  "typography": { "fontSize": "16px", "fontWeight": "600" },
+                  "border": { "radius": "100px" },
+                  "spacing": { "padding": { "top": "18px", "bottom": "18px", "left": "48px", "right": "48px" } }
+                }
+              },
+              "innerHTML": "{{cta_secondary}}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

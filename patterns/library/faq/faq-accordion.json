@@ -1,0 +1,66 @@
+{
+  "id": "faq-accordion",
+  "name": "FAQ Accordion Section",
+  "category": "faq",
+  "description": "Frequently Asked Questions section with expandable accordion items using core/details blocks",
+  "variables": {
+    "heading": "Frequently Asked Questions",
+    "subheading": "Everything you need to know to get started.",
+    "q1": "How does the 14-day free trial work?",
+    "a1": "Sign up with just your email — no credit card required. You get full access to every feature for 14 days. When the trial ends, choose a plan or your account pauses automatically.",
+    "q2": "Can I cancel my subscription anytime?",
+    "a2": "Absolutely. There are no long-term contracts. Cancel in two clicks from your dashboard and you won't be billed again. Your data stays accessible for 30 days after cancellation.",
+    "q3": "Do you offer dedicated support for teams?",
+    "a3": "Yes — every Business plan includes a dedicated success manager, priority Slack channel, and 99.9% SLA. Enterprise customers get custom onboarding and 24/7 phone support.",
+    "bg_color": "{{bg_light}}",
+    "text_color": "{{text_dark}}",
+    "muted_color": "{{text_muted}}",
+    "border_color": "{{border_light}}"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "{{bg_color}}" },
+          "spacing": { "padding": { "top": "100px", "bottom": "100px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/heading",
+          "attrs": { "textAlign": "center", "level": 2, "style": { "typography": { "fontSize": "42px", "fontWeight": "700", "letterSpacing": "-0.02em" }, "spacing": { "margin": { "bottom": "16px" } } } },
+          "innerHTML": "{{heading}}"
+        },
+        {
+          "blockName": "core/paragraph",
+          "attrs": { "align": "center", "style": { "typography": { "fontSize": "18px" }, "color": { "text": "{{muted_color}}" }, "spacing": { "margin": { "bottom": "64px" } } } },
+          "innerHTML": "{{subheading}}"
+        },
+        {
+          "blockName": "core/details",
+          "attrs": { "summary": "{{q1}}", "style": { "spacing": { "padding": { "top": "20px", "bottom": "20px" } }, "border": { "bottom": { "width": "1px", "color": "{{border_color}}" } }, "typography": { "fontSize": "18px", "fontWeight": "600" } } },
+          "innerBlocks": [
+            { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "16px", "lineHeight": "1.7" }, "color": { "text": "{{muted_color}}" } } }, "innerHTML": "{{a1}}" }
+          ]
+        },
+        {
+          "blockName": "core/details",
+          "attrs": { "summary": "{{q2}}", "style": { "spacing": { "padding": { "top": "20px", "bottom": "20px" } }, "border": { "bottom": { "width": "1px", "color": "{{border_color}}" } }, "typography": { "fontSize": "18px", "fontWeight": "600" } } },
+          "innerBlocks": [
+            { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "16px", "lineHeight": "1.7" }, "color": { "text": "{{muted_color}}" } } }, "innerHTML": "{{a2}}" }
+          ]
+        },
+        {
+          "blockName": "core/details",
+          "attrs": { "summary": "{{q3}}", "style": { "spacing": { "padding": { "top": "20px", "bottom": "20px" } }, "border": { "bottom": { "width": "1px", "color": "{{border_color}}" } }, "typography": { "fontSize": "18px", "fontWeight": "600" } } },
+          "innerBlocks": [
+            { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "16px", "lineHeight": "1.7" }, "color": { "text": "{{muted_color}}" } } }, "innerHTML": "{{a3}}" }
+          ]
+        }
+      ]
+    }
+  ]
+}

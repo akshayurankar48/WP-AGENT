@@ -1,0 +1,83 @@
+{
+  "id": "pricing-comparison",
+  "name": "Two-Tier Pricing Comparison",
+  "category": "pricing",
+  "description": "Side-by-side pricing comparison with free and premium tiers",
+  "variables": {
+    "heading": "Choose Your Plan",
+    "subheading": "Start free and upgrade when you're ready.",
+    "free_name": "Free",
+    "free_price": "$0",
+    "free_desc": "For personal use and exploration.",
+    "free_features": "3 projects\n1 GB storage\nCommunity support\nBasic templates",
+    "free_cta": "Sign Up Free",
+    "pro_name": "Pro",
+    "pro_price": "$29",
+    "pro_period": "/month",
+    "pro_desc": "For teams shipping real products.",
+    "pro_features": "Unlimited projects\n50 GB storage\nPriority support\nAll templates\nCustom branding\nAPI access",
+    "pro_cta": "Start Free Trial",
+    "bg_color": "{{bg_light}}",
+    "card_bg": "{{bg_white}}",
+    "accent_color": "{{primary}}"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "{{bg_color}}" },
+          "spacing": { "padding": { "top": "100px", "bottom": "100px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/heading",
+          "attrs": { "textAlign": "center", "level": 2, "style": { "typography": { "fontSize": "42px", "fontWeight": "700" }, "spacing": { "margin": { "bottom": "16px" } } } },
+          "innerHTML": "{{heading}}"
+        },
+        {
+          "blockName": "core/paragraph",
+          "attrs": { "align": "center", "style": { "typography": { "fontSize": "18px" }, "color": { "text": "{{text_muted}}" }, "spacing": { "margin": { "bottom": "64px" } } } },
+          "innerHTML": "{{subheading}}"
+        },
+        {
+          "blockName": "core/columns",
+          "attrs": { "style": { "spacing": { "blockGap": { "left": "32px" } } } },
+          "innerBlocks": [
+            {
+              "blockName": "core/column",
+              "innerBlocks": [{
+                "blockName": "core/group",
+                "attrs": { "style": { "color": { "background": "{{card_bg}}" }, "spacing": { "padding": { "top": "40px", "bottom": "40px", "left": "32px", "right": "32px" } }, "border": { "radius": "16px" } } },
+                "innerBlocks": [
+                  { "blockName": "core/heading", "attrs": { "level": 3, "style": { "typography": { "fontSize": "20px", "fontWeight": "600" }, "spacing": { "margin": { "bottom": "8px" } } } }, "innerHTML": "{{free_name}}" },
+                  { "blockName": "core/paragraph", "attrs": { "style": { "color": { "text": "{{text_muted}}" }, "typography": { "fontSize": "15px" }, "spacing": { "margin": { "bottom": "24px" } } } }, "innerHTML": "{{free_desc}}" },
+                  { "blockName": "core/heading", "attrs": { "level": 4, "style": { "typography": { "fontSize": "48px", "fontWeight": "800" }, "spacing": { "margin": { "bottom": "32px" } } } }, "innerHTML": "{{free_price}}" },
+                  { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "15px", "lineHeight": "2.0" }, "color": { "text": "{{text_muted}}" }, "spacing": { "margin": { "bottom": "32px" } } } }, "innerHTML": "{{free_features}}" },
+                  { "blockName": "core/buttons", "innerBlocks": [{ "blockName": "core/button", "attrs": { "width": 100, "style": { "color": { "background": "transparent", "text": "{{accent_color}}" }, "border": { "radius": "100px", "width": "2px", "color": "{{accent_color}}" }, "typography": { "fontWeight": "600" }, "spacing": { "padding": { "top": "14px", "bottom": "14px" } } } }, "innerHTML": "{{free_cta}}" }] }
+                ]
+              }]
+            },
+            {
+              "blockName": "core/column",
+              "innerBlocks": [{
+                "blockName": "core/group",
+                "attrs": { "style": { "color": { "background": "{{accent_color}}", "text": "#ffffff" }, "spacing": { "padding": { "top": "40px", "bottom": "40px", "left": "32px", "right": "32px" } }, "border": { "radius": "16px" } } },
+                "innerBlocks": [
+                  { "blockName": "core/heading", "attrs": { "level": 3, "style": { "typography": { "fontSize": "20px", "fontWeight": "600" }, "color": { "text": "#ffffff" }, "spacing": { "margin": { "bottom": "8px" } } } }, "innerHTML": "{{pro_name}}" },
+                  { "blockName": "core/paragraph", "attrs": { "style": { "color": { "text": "rgba(255,255,255,0.8)" }, "typography": { "fontSize": "15px" }, "spacing": { "margin": { "bottom": "24px" } } } }, "innerHTML": "{{pro_desc}}" },
+                  { "blockName": "core/heading", "attrs": { "level": 4, "style": { "typography": { "fontSize": "48px", "fontWeight": "800" }, "color": { "text": "#ffffff" }, "spacing": { "margin": { "bottom": "32px" } } } }, "innerHTML": "{{pro_price}}<span style=\"font-size:18px;font-weight:400;opacity:0.8\">{{pro_period}}</span>" },
+                  { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "15px", "lineHeight": "2.0" }, "color": { "text": "rgba(255,255,255,0.85)" }, "spacing": { "margin": { "bottom": "32px" } } } }, "innerHTML": "{{pro_features}}" },
+                  { "blockName": "core/buttons", "innerBlocks": [{ "blockName": "core/button", "attrs": { "width": 100, "style": { "color": { "background": "#ffffff", "text": "{{accent_color}}" }, "typography": { "fontWeight": "700" }, "border": { "radius": "100px" }, "spacing": { "padding": { "top": "14px", "bottom": "14px" } } } }, "innerHTML": "{{pro_cta}}" }] }
+                ]
+              }]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

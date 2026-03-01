@@ -1,0 +1,87 @@
+{
+  "id": "hero-cover",
+  "name": "Cover Hero with Background Image",
+  "category": "heroes",
+  "description": "Full-width hero with background image, dark overlay, headline, subtitle, and CTA buttons",
+  "variables": {
+    "heading": "Build Something Extraordinary",
+    "subheading": "The all-in-one platform trusted by 50,000+ teams to ship faster and scale smarter.",
+    "cta_primary": "Get Started Free",
+    "cta_secondary": "Watch Demo",
+    "image_url": "https://placehold.co/1920x800/0a0a1a/ffffff",
+    "overlay_opacity": 70,
+    "accent_color": "{{primary}}"
+  },
+  "blocks": [
+    {
+      "blockName": "core/cover",
+      "attrs": {
+        "url": "{{image_url}}",
+        "dimRatio": "{{overlay_opacity}}",
+        "minHeight": "600px",
+        "isDark": true,
+        "align": "full",
+        "style": {
+          "spacing": { "padding": { "top": "160px", "bottom": "160px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/heading",
+          "attrs": {
+            "textAlign": "center",
+            "level": 1,
+            "style": {
+              "typography": { "fontSize": "64px", "fontWeight": "800", "letterSpacing": "-0.03em", "lineHeight": "1.1" },
+              "color": { "text": "#ffffff" }
+            }
+          },
+          "innerHTML": "{{heading}}"
+        },
+        {
+          "blockName": "core/paragraph",
+          "attrs": {
+            "align": "center",
+            "style": {
+              "typography": { "fontSize": "20px", "lineHeight": "1.6" },
+              "color": { "text": "#d1d5db" },
+              "spacing": { "margin": { "top": "24px", "bottom": "48px" } }
+            }
+          },
+          "innerHTML": "{{subheading}}"
+        },
+        {
+          "blockName": "core/buttons",
+          "attrs": { "layout": { "type": "flex", "justifyContent": "center" } },
+          "innerBlocks": [
+            {
+              "blockName": "core/button",
+              "attrs": {
+                "style": {
+                  "color": { "background": "{{accent_color}}", "text": "#ffffff" },
+                  "typography": { "fontSize": "16px", "fontWeight": "600" },
+                  "border": { "radius": "100px" },
+                  "spacing": { "padding": { "top": "18px", "bottom": "18px", "left": "48px", "right": "48px" } }
+                }
+              },
+              "innerHTML": "{{cta_primary}}"
+            },
+            {
+              "blockName": "core/button",
+              "attrs": {
+                "style": {
+                  "color": { "background": "transparent", "text": "#ffffff" },
+                  "typography": { "fontSize": "16px", "fontWeight": "600" },
+                  "border": { "radius": "100px", "width": "2px", "color": "#ffffff" },
+                  "spacing": { "padding": { "top": "18px", "bottom": "18px", "left": "48px", "right": "48px" } }
+                }
+              },
+              "innerHTML": "{{cta_secondary}}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

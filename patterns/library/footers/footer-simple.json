@@ -1,0 +1,32 @@
+{
+  "id": "footer-simple",
+  "name": "Simple Footer",
+  "category": "footers",
+  "description": "Simple centered footer with company name and copyright text on dark background",
+  "variables": {
+    "company": "Acme Inc.",
+    "tagline": "Building the future, one product at a time.",
+    "copyright": "2024 Acme Inc. All rights reserved.",
+    "bg_color": "{{primary_dark}}",
+    "text_color": "{{text_light}}"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "{{bg_color}}", "text": "{{text_color}}" },
+          "spacing": { "padding": { "top": "60px", "bottom": "60px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        { "blockName": "core/heading", "attrs": { "textAlign": "center", "level": 3, "style": { "typography": { "fontSize": "24px", "fontWeight": "700" }, "color": { "text": "#ffffff" }, "spacing": { "margin": { "bottom": "8px" } } } }, "innerHTML": "{{company}}" },
+        { "blockName": "core/paragraph", "attrs": { "align": "center", "style": { "typography": { "fontSize": "16px" }, "color": { "text": "{{text_color}}" }, "spacing": { "margin": { "bottom": "24px" } } } }, "innerHTML": "{{tagline}}" },
+        { "blockName": "core/separator", "attrs": { "style": { "color": { "background": "rgba(255,255,255,0.1)" }, "spacing": { "margin": { "bottom": "24px" } } } } },
+        { "blockName": "core/paragraph", "attrs": { "align": "center", "style": { "typography": { "fontSize": "14px" }, "color": { "text": "rgba(255,255,255,0.5)" } } }, "innerHTML": "{{copyright}}" }
+      ]
+    }
+  ]
+}
