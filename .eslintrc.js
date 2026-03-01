@@ -9,7 +9,7 @@ module.exports = {
 		'@wordpress/i18n-text-domain': [
 			'error',
 			{
-				allowedTextDomain: 'wp-plugin-base',
+				allowedTextDomain: 'wp-agent',
 			},
 		],
 	},

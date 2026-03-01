@@ -1,30 +1,31 @@
 <?xml version="1.0"?>
-<ruleset name="WordPress Coding Standards for Plugins">
-	<description>Generally-applicable sniffs for WordPress plugins</description>
+<ruleset name="WordPress Coding Standards for WP Agent">
+	<description>Coding standards for WP Agent plugin</description>
 
 	<!-- Check all PHP files in directory tree by default. -->
 	<file>.</file>
 
-	<!-- Exclude lib -->
+	<!-- Exclude directories. -->
 	<exclude-pattern>*/node_modules/*</exclude-pattern>
 	<exclude-pattern>*/vendor/*</exclude-pattern>
 	<exclude-pattern>*/lib/*</exclude-pattern>
 	<exclude-pattern>*/tests/*</exclude-pattern>
+	<exclude-pattern>*/build/*</exclude-pattern>
 
-  <!--
-  Prevent errors caused by WordPress Coding Standards not supporting PHP 8.0+.
-  See https://github.com/WordPress/WordPress-Coding-Standards/issues/2035
-  -->
-  <ini name="error_reporting" value="E_ALL &#38; ~E_DEPRECATED" />
+	<!--
+	Prevent errors caused by WordPress Coding Standards not supporting PHP 8.0+.
+	See https://github.com/WordPress/WordPress-Coding-Standards/issues/2035
+	-->
+	<ini name="error_reporting" value="E_ALL &#38; ~E_DEPRECATED" />
 
-	<!-- PHP 5.6 and higher. -->
-    <config name="testVersion" value="5.6-"/>
+	<!-- PHP 7.4 and higher. -->
+	<config name="testVersion" value="7.4-"/>
 
-	<!-- Arguments - extension, parallel, colors, show porgress, Show sniff codes in all reports -->
+	<!-- Arguments - extension, parallel, colors, show progress, Show sniff codes in all reports -->
 	<arg name="extensions" value="php"/>
 	<arg name="parallel" value="20"/>
 	<arg name="colors"/>
-    <arg value="sp"/>
+	<arg value="sp"/>
 	<arg value="s"/>
 
 	<!-- Rules -->
@@ -35,7 +36,7 @@
 	<rule ref="WordPress.WP.I18n">
 		<properties>
 			<property name="text_domain" type="array">
-				<element value="wp-plugin-base"/>
+				<element value="wp-agent"/>
 			</property>
 		</properties>
 	</rule>

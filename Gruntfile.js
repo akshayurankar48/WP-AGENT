@@ -32,25 +32,33 @@ module.exports = function ( grunt ) {
 					'!config/**',
 					'!tests/**',
 					'!bin/**',
+					'!src/**',
+					'!postcss.config.js',
+					'!tailwind.config.js',
+					'!webpack.config.js',
+					'!phpstan.neon',
+					'!phpstan-baseline.neon',
+					'!WP-AGENT-PRD.md',
+					'!WP-Agent-PR.md',
 				],
-				dest: 'wp-plugin-base/',
+				dest: 'wp-agent/',
 			},
 		},
 		compress: {
 			main: {
 				options: {
-					archive: 'wp-plugin-base-<%= pkg.version %>.zip',
+					archive: 'wp-agent-<%= pkg.version %>.zip',
 					mode: 'zip',
 				},
 				files: [
 					{
-						src: [ './wp-plugin-base/**' ],
+						src: [ './wp-agent/**' ],
 					},
 				],
 			},
 		},
 		clean: {
-			main: [ 'wp-plugin-base' ],
+			main: [ 'wp-agent' ],
 			zip: [ '*.zip' ],
 		},
 	} );
