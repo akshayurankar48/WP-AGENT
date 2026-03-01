@@ -25,50 +25,48 @@ export default function RolePermissions( { allowedRoles = [], onRolesChange } ) 
 	};
 
 	return (
-		<div className="rounded-lg border border-border-subtle bg-background-primary p-6">
-			<Container direction="column" gap="md">
-				<Container direction="row" align="center" gap="sm">
-					<Shield size={ 20 } className="text-icon-secondary" />
-					<Title
-						title="Role Permissions"
-						description="Choose which WordPress roles can interact with the AI agent."
-						size="sm"
-					/>
-				</Container>
-
-				<Container direction="column" gap="xs">
-					{ ALL_ROLES.map( ( role ) => {
-						const isEnabled = allowedRoles.includes( role.slug );
-
-						return (
-							<Container
-								key={ role.slug }
-								direction="row"
-								justify="between"
-								align="center"
-								className="rounded-md border border-border-subtle px-4 py-3"
-							>
-								<Container direction="column" gap="xs">
-									<Text size="sm" weight="medium">
-										{ role.label }
-									</Text>
-									{ role.locked && (
-										<Text size="xs" color="secondary">
-											Always enabled
-										</Text>
-									) }
-								</Container>
-								<Switch
-									size="sm"
-									value={ isEnabled }
-									onChange={ () => toggleRole( role.slug ) }
-									disabled={ role.locked }
-								/>
-							</Container>
-						);
-					} ) }
-				</Container>
+		<Container direction="column" gap="md">
+			<Container direction="row" align="center" gap="sm">
+				<Shield size={ 20 } className="text-icon-secondary" />
+				<Title
+					title="Role Permissions"
+					description="Choose which WordPress roles can interact with the AI agent."
+					size="sm"
+				/>
 			</Container>
-		</div>
+
+			<Container direction="column" gap="xs">
+				{ ALL_ROLES.map( ( role ) => {
+					const isEnabled = allowedRoles.includes( role.slug );
+
+					return (
+						<Container
+							key={ role.slug }
+							direction="row"
+							justify="between"
+							align="center"
+							className="rounded-md border border-border-subtle px-4 py-3"
+						>
+							<Container direction="column" gap="xs">
+								<Text size="sm" weight="medium">
+									{ role.label }
+								</Text>
+								{ role.locked && (
+									<Text size="xs" color="secondary">
+										Always enabled
+									</Text>
+								) }
+							</Container>
+							<Switch
+								size="sm"
+								value={ isEnabled }
+								onChange={ () => toggleRole( role.slug ) }
+								disabled={ role.locked }
+							/>
+						</Container>
+					);
+				} ) }
+			</Container>
+		</Container>
 	);
 }

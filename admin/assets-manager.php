@@ -34,8 +34,8 @@ class Assets_Manager {
 	private const PAGE_HOOKS = [
 		'toplevel_page_wp-agent',
 		'wp-agent_page_wp-agent-settings',
-		'wp-agent_page_wp-agent-history',
-		'wp-agent_page_wp-agent-usage',
+		'wp-agent_page_wp-agent-capabilities',
+		'wp-agent_page_wp-agent-help',
 	];
 
 	/**
@@ -99,13 +99,14 @@ class Assets_Manager {
 			'wp-agent-admin',
 			'wpAgentData',
 			[
-				'restUrl'   => rest_url( 'wp-agent/v1/' ),
-				'nonce'     => wp_create_nonce( 'wp_rest' ),
-				'hasApiKey' => ! empty( get_option( \WPAgent\AI\Open_Router_Client::API_KEY_OPTION ) ),
-				'userId'    => get_current_user_id(),
-				'userName'  => wp_get_current_user()->display_name,
-				'version'   => WP_AGENT_VER,
-				'adminUrl'  => admin_url(),
+				'restUrl'     => rest_url( 'wp-agent/v1/' ),
+				'nonce'       => wp_create_nonce( 'wp_rest' ),
+				'hasApiKey'   => ! empty( get_option( \WPAgent\AI\Open_Router_Client::API_KEY_OPTION ) ),
+				'userId'      => get_current_user_id(),
+				'userName'    => wp_get_current_user()->display_name,
+				'version'     => WP_AGENT_VER,
+				'adminUrl'    => admin_url(),
+				'currentPage' => isset( $_GET['page'] ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : 'wp-agent',
 			]
 		);
 

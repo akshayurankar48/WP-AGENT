@@ -1,25 +1,23 @@
 import { useState, useEffect, useCallback } from '@wordpress/element';
-import { Container, Title, Badge, Button, Toaster, toast } from '@bsf/force-ui';
-import { Save, Loader2 } from 'lucide-react';
+import { Container, Button, Tabs, toast } from '@bsf/force-ui';
+import { Save, Loader2, Check } from 'lucide-react';
 import ApiKeyForm from '../components/ApiKeyForm';
 import ModelSelector from '../components/ModelSelector';
 import RolePermissions from '../components/RolePermissions';
-import StatusCard from '../components/StatusCard';
-import QuickStats from '../components/QuickStats';
+import PageLayout from '../components/PageLayout';
 
-const { version, restUrl, nonce } = window.wpAgentData || {};
+const { restUrl, nonce } = window.wpAgentData || {};
 
 export default function Settings() {
 	const [ isLoading, setIsLoading ] = useState( true );
-	const [ isSaving, setIsSaving ] = useState( false );
+	const [ saveState, setSaveState ] = useState( 'idle' ); // idle | saving | saved
+	const [ activeTab, setActiveTab ] = useState( 'general' );
 
-	// Settings state — populated from REST API.
+	// Settings state.
 	const [ hasApiKey, setHasApiKey ] = useState( false );
 	const [ apiKey, setApiKey ] = useState( '' );
 	const [ defaultModel, setDefaultModel ] = useState( '' );
 	const [ allowedRoles, setAllowedRoles ] = useState( [ 'administrator' ] );
-	const [ rateLimit, setRateLimit ] = useState( 0 );
-	const [ dailyLimit, setDailyLimit ] = useState( 0 );
 
 	// Fetch settings on mount.
 	const fetchSettings = useCallback( async () => {
@@ -37,8 +35,6 @@ export default function Settings() {
 			setHasApiKey( data.has_api_key || false );
 			setDefaultModel( data.default_model || '' );
 			setAllowedRoles( data.allowed_roles || [ 'administrator' ] );
-			setRateLimit( data.rate_limit || 0 );
-			setDailyLimit( data.daily_limit || 0 );
 		} catch ( error ) {
 			toast.error( 'Failed to load settings.', {
 				description: error.message,
@@ -54,11 +50,10 @@ export default function Settings() {
 
 	// Save all settings.
 	const handleSave = async () => {
-		setIsSaving( true );
+		setSaveState( 'saving' );
 
 		const payload = {};
 
-		// Only send API key if the user typed a new one.
 		if ( apiKey.trim() ) {
 			payload.api_key = apiKey;
 		}
@@ -89,99 +84,119 @@ export default function Settings() {
 				description: 'Your WP Agent configuration has been updated.',
 			} );
 
-			// If API key was saved, clear the input and update status.
 			if ( data.updated?.api_key ) {
 				setApiKey( '' );
 				setHasApiKey( true );
 			}
+
+			setSaveState( 'saved' );
+			setTimeout( () => setSaveState( 'idle' ), 2000 );
 		} catch ( error ) {
 			toast.error( 'Failed to save settings.', {
 				description: error.message,
 			} );
-		} finally {
-			setIsSaving( false );
+			setSaveState( 'idle' );
 		}
+	};
+
+	const saveButtonProps = {
+		idle: {
+			icon: <Save className="size-4" />,
+			children: 'Save Settings',
+		},
+		saving: {
+			icon: <Loader2 className="size-4 animate-spin" />,
+			children: 'Saving...',
+		},
+		saved: {
+			icon: <Check className="size-4" />,
+			children: 'Saved',
+		},
 	};
 
 	if ( isLoading ) {
 		return (
-			<div className="min-h-screen bg-background-primary p-6 md:p-8 flex items-center justify-center">
-				<Container direction="row" align="center" gap="sm">
-					<Loader2 size={ 20 } className="animate-spin text-icon-secondary" />
-					<span className="text-text-secondary text-sm">Loading settings...</span>
-				</Container>
-			</div>
+			<PageLayout>
+				<div className="flex items-center justify-center min-h-[60vh]">
+					<Container direction="row" align="center" gap="sm">
+						<Loader2
+							className="size-5 animate-spin text-icon-secondary"
+						/>
+						<span className="text-text-secondary text-sm">
+							Loading settings...
+						</span>
+					</Container>
+				</div>
+			</PageLayout>
 		);
 	}
 
 	return (
-		<>
-			<Toaster position="top-right" />
-			<div className="min-h-screen bg-background-primary p-6 md:p-8">
-				{ /* Header */ }
-				<Container
-					direction="row"
-					justify="between"
-					align="center"
-					className="mb-8"
-				>
-					<Container direction="row" align="center" gap="sm">
-						<Title
-							title="Settings"
-							description="Configure your WP Agent preferences"
-							size="md"
-							tag="h1"
-						/>
-						{ version && (
-							<Badge
-								label={ `v${ version }` }
-								variant="neutral"
-								size="xs"
-							/>
-						) }
-					</Container>
+		<PageLayout>
+			<div className="max-w-[768px] mx-auto">
+				{ /* Header row */ }
+				<div className="flex items-center justify-between mb-6">
+					<div>
+						<h1 className="text-xl font-semibold text-text-primary">
+							Settings
+						</h1>
+						<p className="text-sm text-text-secondary mt-0.5">
+							Configure your WP Agent preferences
+						</p>
+					</div>
 					<Button
 						variant="primary"
 						size="md"
-						icon={ <Save size={ 16 } /> }
+						icon={ saveButtonProps[ saveState ].icon }
 						onClick={ handleSave }
-						loading={ isSaving }
-						disabled={ isSaving }
+						disabled={ saveState !== 'idle' }
 					>
-						Save Settings
+						{ saveButtonProps[ saveState ].children }
 					</Button>
-				</Container>
+				</div>
 
-				{ /* Two-column layout */ }
-				<div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-					{ /* Left column — settings */ }
-					<div className="lg:col-span-2 flex flex-col gap-6">
-						<ApiKeyForm
-							apiKey={ apiKey }
-							onApiKeyChange={ setApiKey }
-							hasApiKey={ hasApiKey }
-						/>
-						<ModelSelector
-							model={ defaultModel }
-							onModelChange={ setDefaultModel }
-						/>
-						<RolePermissions
-							allowedRoles={ allowedRoles }
-							onRolesChange={ setAllowedRoles }
-						/>
-					</div>
+				{ /* Tab card */ }
+				<div className="bg-background-primary border-0.5 border-solid border-border-subtle rounded-xl shadow-sm">
+					<Tabs activeItem={ activeTab }>
+						<Tabs.Group
+							activeItem={ activeTab }
+							onChange={ ( { value } ) =>
+								setActiveTab( value )
+							}
+							className="border-b border-solid border-border-subtle px-6 pt-2"
+							size="md"
+						>
+							<Tabs.Tab slug="general">General</Tabs.Tab>
+							<Tabs.Tab slug="model">AI Model</Tabs.Tab>
+							<Tabs.Tab slug="permissions">
+								Permissions
+							</Tabs.Tab>
+						</Tabs.Group>
 
-					{ /* Right column — status */ }
-					<div className="flex flex-col gap-6">
-						<StatusCard
-							hasApiKey={ hasApiKey }
-							defaultModel={ defaultModel }
-							rateLimit={ rateLimit }
-						/>
-						<QuickStats />
-					</div>
+						<div className="p-6">
+							<Tabs.Panel slug="general">
+								<ApiKeyForm
+									apiKey={ apiKey }
+									onApiKeyChange={ setApiKey }
+									hasApiKey={ hasApiKey }
+								/>
+							</Tabs.Panel>
+							<Tabs.Panel slug="model">
+								<ModelSelector
+									model={ defaultModel }
+									onModelChange={ setDefaultModel }
+								/>
+							</Tabs.Panel>
+							<Tabs.Panel slug="permissions">
+								<RolePermissions
+									allowedRoles={ allowedRoles }
+									onRolesChange={ setAllowedRoles }
+								/>
+							</Tabs.Panel>
+						</div>
+					</Tabs>
 				</div>
 			</div>
-		</>
+		</PageLayout>
 	);
 }

@@ -48,50 +48,48 @@ export default function ApiKeyForm( { apiKey = '', onApiKeyChange, hasApiKey = f
 	};
 
 	return (
-		<div className="rounded-lg border border-border-subtle bg-background-primary p-6">
-			<Container direction="column" gap="md">
-				<Container direction="row" align="center" gap="sm">
-					<KeyRound size={ 20 } className="text-icon-secondary" />
-					<Title
-						title="OpenRouter API Key"
-						description="Connect to AI models via OpenRouter. Your key is stored securely in the database."
-						size="sm"
-					/>
-				</Container>
-
-				<Container direction="row" gap="sm" align="end">
-					<div className="flex-1">
-						<Input
-							type="password"
-							size="md"
-							placeholder={
-								hasApiKey
-									? '••••••••••••••••'
-									: 'sk-or-v1-…'
-							}
-							value={ apiKey }
-							onChange={ ( value ) => onApiKeyChange?.( value ) }
-						/>
-					</div>
-					<Button
-						variant="outline"
-						size="md"
-						icon={ <CheckCircle size={ 16 } /> }
-						onClick={ handleValidate }
-						loading={ isValidating }
-						disabled={ isValidating }
-					>
-						Validate Key
-					</Button>
-				</Container>
-
-				{ hasApiKey && (
-					<Text size="sm" color="success">
-						An API key is already saved. Enter a new one to replace
-						it.
-					</Text>
-				) }
+		<Container direction="column" gap="md">
+			<Container direction="row" align="center" gap="sm">
+				<KeyRound size={ 20 } className="text-icon-secondary" />
+				<Title
+					title="OpenRouter API Key"
+					description="Connect to AI models via OpenRouter. Your key is stored securely in the database."
+					size="sm"
+				/>
 			</Container>
-		</div>
+
+			<Container direction="row" gap="sm" align="end">
+				<div className="flex-1">
+					<Input
+						type="password"
+						size="md"
+						placeholder={
+							hasApiKey
+								? '••••••••••••••••'
+								: 'sk-or-v1-…'
+						}
+						value={ apiKey }
+						onChange={ ( value ) => onApiKeyChange?.( value ) }
+					/>
+				</div>
+				<Button
+					variant="outline"
+					size="md"
+					icon={ <CheckCircle size={ 16 } /> }
+					onClick={ handleValidate }
+					loading={ isValidating }
+					disabled={ isValidating }
+				>
+					Validate Key
+				</Button>
+			</Container>
+
+			{ hasApiKey && (
+				<Text size="sm" color="success">
+					An API key is already saved. Enter a new one to replace
+					it.
+				</Text>
+			) }
+		</Container>
 	);
 }
