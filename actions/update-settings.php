@@ -91,8 +91,8 @@ class Update_Settings implements Action_Interface {
 					'enum'        => self::ALLOWED_OPTIONS,
 				],
 				'option_value' => [
-					'type'        => [ 'string', 'integer', 'boolean' ],
-					'description' => 'The new value for the option.',
+					'type'        => 'string',
+					'description' => 'The new value for the option. Pass numbers and booleans as strings (e.g. "1", "true").',
 				],
 			],
 			'required'   => [ 'option_name', 'option_value' ],
