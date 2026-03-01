@@ -1,6 +1,6 @@
 import { useState } from '@wordpress/element';
-import { Container, Title, Input, Button, Text, toast } from '@bsf/force-ui';
-import { KeyRound, CheckCircle, Search } from 'lucide-react';
+import { Container, Input, Button, Text, toast } from '@bsf/force-ui';
+import { KeyRound, CheckCircle, Search, ExternalLink, ShieldCheck } from 'lucide-react';
 
 const { restUrl, nonce } = window.wpAgentData || {};
 
@@ -23,7 +23,6 @@ export default function ApiKeyForm( {
 		setIsValidating( true );
 
 		try {
-			// Validate by attempting a save — the REST endpoint validates with OpenRouter.
 			const response = await fetch( `${ restUrl }settings`, {
 				method: 'POST',
 				headers: {
@@ -43,7 +42,6 @@ export default function ApiKeyForm( {
 				description: 'Your OpenRouter key is securely stored.',
 			} );
 
-			// Clear input and update parent state.
 			onApiKeyChange?.( '' );
 		} catch ( error ) {
 			toast.error( 'API key validation failed.', {
@@ -55,27 +53,32 @@ export default function ApiKeyForm( {
 	};
 
 	return (
-		<Container direction="column" gap="lg">
+		<div className="flex flex-col gap-8">
 			{ /* OpenRouter API Key */ }
-			<Container direction="column" gap="md">
-				<Container direction="row" align="center" gap="sm">
-					<KeyRound size={ 20 } className="text-icon-secondary" />
-					<Title
-						title="OpenRouter API Key"
-						description="Connect to AI models via OpenRouter. Your key is stored securely in the database."
-						size="sm"
-					/>
-				</Container>
+			<div className="flex flex-col gap-4">
+				<div className="flex items-center gap-3">
+					<div className="flex items-center justify-center size-9 rounded-lg bg-violet-50 shrink-0">
+						<KeyRound className="size-4 text-violet-600" />
+					</div>
+					<div>
+						<h3 className="text-sm font-semibold text-text-primary">
+							OpenRouter API Key
+						</h3>
+						<p className="text-xs text-text-tertiary mt-0.5">
+							Connect to AI models via OpenRouter. Your key is stored securely.
+						</p>
+					</div>
+				</div>
 
-				<Container direction="row" gap="sm" align="end">
+				<div className="flex items-end gap-3">
 					<div className="flex-1">
 						<Input
 							type="password"
 							size="md"
 							placeholder={
 								hasApiKey
-									? '••••••••••••••••'
-									: 'sk-or-v1-…'
+									? '\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022'
+									: 'sk-or-v1-...'
 							}
 							value={ apiKey }
 							onChange={ ( value ) =>
@@ -91,28 +94,38 @@ export default function ApiKeyForm( {
 						loading={ isValidating }
 						disabled={ isValidating }
 					>
-						Validate Key
+						Validate
 					</Button>
-				</Container>
+				</div>
 
 				{ hasApiKey && (
-					<Text size="sm" color="success">
-						An API key is already saved. Enter a new one to
-						replace it.
-					</Text>
+					<div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-emerald-50 border border-solid border-emerald-200">
+						<ShieldCheck className="size-3.5 text-emerald-600 shrink-0" />
+						<Text size="sm" className="text-emerald-700">
+							API key saved and active. Enter a new one to replace it.
+						</Text>
+					</div>
 				) }
-			</Container>
+			</div>
+
+			{ /* Divider */ }
+			<div className="border-t border-solid border-border-subtle" />
 
 			{ /* Tavily API Key */ }
-			<Container direction="column" gap="md">
-				<Container direction="row" align="center" gap="sm">
-					<Search size={ 20 } className="text-icon-secondary" />
-					<Title
-						title="Tavily API Key"
-						description="Enable web search for research-driven page building. Free tier includes 1,000 searches/month."
-						size="sm"
-					/>
-				</Container>
+			<div className="flex flex-col gap-4">
+				<div className="flex items-center gap-3">
+					<div className="flex items-center justify-center size-9 rounded-lg bg-blue-50 shrink-0">
+						<Search className="size-4 text-blue-600" />
+					</div>
+					<div>
+						<h3 className="text-sm font-semibold text-text-primary">
+							Tavily API Key
+						</h3>
+						<p className="text-xs text-text-tertiary mt-0.5">
+							Enable web search for research-driven content. Free tier: 1,000 searches/month.
+						</p>
+					</div>
+				</div>
 
 				<div className="flex-1">
 					<Input
@@ -120,8 +133,8 @@ export default function ApiKeyForm( {
 						size="md"
 						placeholder={
 							hasTavilyKey
-								? '••••••••••••••••'
-								: 'tvly-…'
+								? '\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022'
+								: 'tvly-...'
 						}
 						value={ tavilyKey }
 						onChange={ ( value ) =>
@@ -131,24 +144,27 @@ export default function ApiKeyForm( {
 				</div>
 
 				{ hasTavilyKey ? (
-					<Text size="sm" color="success">
-						Tavily key saved. Web search is enabled. Enter a new
-						key to replace it.
-					</Text>
+					<div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-emerald-50 border border-solid border-emerald-200">
+						<ShieldCheck className="size-3.5 text-emerald-600 shrink-0" />
+						<Text size="sm" className="text-emerald-700">
+							Tavily key saved. Web search is enabled.
+						</Text>
+					</div>
 				) : (
-					<Text size="sm" className="text-text-tertiary">
+					<p className="text-xs text-text-tertiary">
 						Get your free API key at{ ' ' }
 						<a
 							href="https://app.tavily.com"
 							target="_blank"
 							rel="noopener noreferrer"
-							className="text-text-primary underline"
+							className="text-brand-800 font-medium hover:underline inline-flex items-center gap-1"
 						>
 							app.tavily.com
+							<ExternalLink className="size-3" />
 						</a>
-					</Text>
+					</p>
 				) }
-			</Container>
-		</Container>
+			</div>
+		</div>
 	);
 }

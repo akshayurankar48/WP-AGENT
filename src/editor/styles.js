@@ -16,7 +16,7 @@ export const colors = {
 	primaryLighter: '#e0e7ff',
 
 	userBubble: '#4f46e5',
-	userBubbleGradient: 'linear-gradient(135deg, #4f46e5 0%, #6366f1 100%)',
+	userBubbleGradient: 'linear-gradient(135deg, #4f46e5 0%, #6366f1 50%, #818cf8 100%)',
 	assistantBg: '#ffffff',
 	assistantBorder: '#e5e7eb',
 
@@ -30,6 +30,9 @@ export const colors = {
 	textMuted: '#9ca3af',
 	textInverse: '#ffffff',
 
+	success: '#10b981',
+	successBg: '#ecfdf5',
+
 	error: '#ef4444',
 	errorHover: '#dc2626',
 	errorBg: '#fef2f2',
@@ -38,6 +41,9 @@ export const colors = {
 
 	shadow: 'rgba(0, 0, 0, 0.04)',
 	shadowMd: 'rgba(0, 0, 0, 0.06)',
+	shadowLg: 'rgba(0, 0, 0, 0.08)',
+
+	headerGradient: 'linear-gradient(135deg, #ffffff 0%, #f9fafb 100%)',
 };
 
 export const spacing = {

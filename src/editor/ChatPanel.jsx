@@ -12,7 +12,7 @@ import { useEditorContext } from '../hooks/use-editor-context';
 import MessageList from './MessageList';
 import InputArea from './InputArea';
 import WelcomeScreen from './WelcomeScreen';
-import { SquarePen, AlertCircle, X } from 'lucide-react';
+import { SquarePen, AlertCircle, X, Bot } from 'lucide-react';
 import {
 	colors,
 	spacing,
@@ -40,17 +40,35 @@ const header = css`
 	align-items: center;
 	justify-content: space-between;
 	padding: ${ spacing.md } ${ spacing.lg };
-	background: ${ colors.bg };
+	background: ${ colors.headerGradient };
+	border-bottom: 1px solid ${ colors.borderLight };
 	box-shadow: 0 1px 3px ${ colors.shadow };
 	position: relative;
 	z-index: 2;
 `;
 
+const headerLeft = css`
+	display: flex;
+	align-items: center;
+	gap: 8px;
+`;
+
+const headerIcon = css`
+	width: 28px;
+	height: 28px;
+	border-radius: 8px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: ${ colors.primaryLight };
+	color: ${ colors.primary };
+`;
+
 const headerTitle = css`
 	font-size: ${ fontSizes.sm };
-	font-weight: 600;
+	font-weight: 700;
 	color: ${ colors.text };
-	letter-spacing: -0.01em;
+	letter-spacing: -0.02em;
 `;
 
 const newChatBtn = css`
@@ -145,7 +163,12 @@ const ChatPanel = () => {
 		<div id="wp-agent-sidebar" className={ panel }>
 			{ /* Header */ }
 			<div className={ header }>
-				<h2 className={ headerTitle }>JARVIS</h2>
+				<div className={ headerLeft }>
+					<div className={ headerIcon }>
+						<Bot size={ 14 } />
+					</div>
+					<h2 className={ headerTitle }>JARVIS</h2>
+				</div>
 				{ hasApiKey && (
 					<button
 						type="button"

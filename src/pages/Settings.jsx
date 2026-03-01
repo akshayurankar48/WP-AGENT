@@ -1,6 +1,15 @@
 import { useState, useEffect, useCallback } from '@wordpress/element';
-import { Container, Button, Tabs, toast } from '@bsf/force-ui';
-import { Save, Loader2, Check } from 'lucide-react';
+import { Button, Sidebar, toast } from '@bsf/force-ui';
+import {
+	Save,
+	Loader2,
+	Check,
+	KeyRound,
+	Palette,
+	Cpu,
+	Shield,
+	Settings as SettingsIcon,
+} from 'lucide-react';
 import ApiKeyForm from '../components/ApiKeyForm';
 import ModelSelector from '../components/ModelSelector';
 import RolePermissions from '../components/RolePermissions';
@@ -9,12 +18,18 @@ import PageLayout from '../components/PageLayout';
 
 const { restUrl, nonce } = window.wpAgentData || {};
 
+const NAV_ITEMS = [
+	{ slug: 'general', label: 'API Keys', icon: KeyRound },
+	{ slug: 'brand', label: 'Brand', icon: Palette },
+	{ slug: 'model', label: 'AI Model', icon: Cpu },
+	{ slug: 'permissions', label: 'Permissions', icon: Shield },
+];
+
 export default function Settings() {
 	const [ isLoading, setIsLoading ] = useState( true );
-	const [ saveState, setSaveState ] = useState( 'idle' ); // idle | saving | saved
+	const [ saveState, setSaveState ] = useState( 'idle' );
 	const [ activeTab, setActiveTab ] = useState( 'general' );
 
-	// Settings state.
 	const [ hasApiKey, setHasApiKey ] = useState( false );
 	const [ apiKey, setApiKey ] = useState( '' );
 	const [ hasTavilyKey, setHasTavilyKey ] = useState( false );
@@ -23,7 +38,6 @@ export default function Settings() {
 	const [ allowedRoles, setAllowedRoles ] = useState( [ 'administrator' ] );
 	const [ brand, setBrand ] = useState( {} );
 
-	// Fetch settings on mount.
 	const fetchSettings = useCallback( async () => {
 		try {
 			const response = await fetch( `${ restUrl }settings`, {
@@ -54,7 +68,6 @@ export default function Settings() {
 		fetchSettings();
 	}, [ fetchSettings ] );
 
-	// Save all settings.
 	const handleSave = async () => {
 		setSaveState( 'saving' );
 
@@ -133,15 +146,11 @@ export default function Settings() {
 	if ( isLoading ) {
 		return (
 			<PageLayout>
-				<div className="flex items-center justify-center min-h-[60vh]">
-					<Container direction="row" align="center" gap="sm">
-						<Loader2
-							className="size-5 animate-spin text-icon-secondary"
-						/>
-						<span className="text-text-secondary text-sm">
-							Loading settings...
-						</span>
-					</Container>
+				<div className="flex flex-col items-center justify-center min-h-[60vh]">
+					<Loader2 className="size-7 animate-spin text-brand-800 mb-3" />
+					<p className="text-sm text-text-secondary">
+						Loading settings...
+					</p>
 				</div>
 			</PageLayout>
 		);
@@ -149,79 +158,97 @@ export default function Settings() {
 
 	return (
 		<PageLayout>
-			<div className="max-w-[768px] mx-auto">
-				{ /* Header row */ }
-				<div className="flex items-center justify-between mb-6">
+			{ /* Header */ }
+			<div className="flex items-center justify-between mb-6">
+				<div className="flex items-center gap-3">
+					<div className="flex items-center justify-center size-9 rounded-xl bg-violet-50">
+						<SettingsIcon className="size-4.5 text-violet-600" />
+					</div>
 					<div>
-						<h1 className="text-xl font-semibold text-text-primary">
+						<h1 className="text-xl font-bold text-text-primary">
 							Settings
 						</h1>
-						<p className="text-sm text-text-secondary mt-0.5">
+						<p className="text-xs text-text-tertiary mt-0.5">
 							Configure your WP Agent preferences
 						</p>
 					</div>
-					<Button
-						variant="primary"
-						size="md"
-						icon={ saveButtonProps[ saveState ].icon }
-						onClick={ handleSave }
-						disabled={ saveState !== 'idle' }
-					>
-						{ saveButtonProps[ saveState ].children }
-					</Button>
 				</div>
+				<Button
+					variant="primary"
+					size="md"
+					icon={ saveButtonProps[ saveState ].icon }
+					onClick={ handleSave }
+					disabled={ saveState !== 'idle' }
+				>
+					{ saveButtonProps[ saveState ].children }
+				</Button>
+			</div>
 
-				{ /* Tab card */ }
-				<div className="bg-background-primary border-0.5 border-solid border-border-subtle rounded-xl shadow-sm">
-					<Tabs activeItem={ activeTab }>
-						<Tabs.Group
-							activeItem={ activeTab }
-							onChange={ ( { value } ) =>
-								setActiveTab( value?.slug || value )
-							}
-							className="border-b border-solid border-border-subtle px-6 pt-2"
-							size="md"
-						>
-							<Tabs.Tab slug="general" text="General" />
-							<Tabs.Tab slug="brand" text="Brand" />
-							<Tabs.Tab slug="model" text="AI Model" />
-							<Tabs.Tab
-								slug="permissions"
-								text="Permissions"
-							/>
-						</Tabs.Group>
+			{ /* Settings Layout: Sidebar + Content */ }
+			<div className="flex rounded-2xl border border-solid border-border-subtle bg-background-primary shadow-sm overflow-hidden min-h-[480px]">
+				<Sidebar
+					collapsible={ false }
+					borderOn={ true }
+					className="!w-56 !py-3 !px-3 !bg-background-secondary/50"
+				>
+					<Sidebar.Body>
+						{ NAV_ITEMS.map( ( item ) => {
+							const Icon = item.icon;
+							const isActive = activeTab === item.slug;
+							return (
+								<Sidebar.Item key={ item.slug }>
+									<button
+										type="button"
+										onClick={ () => setActiveTab( item.slug ) }
+										className={ `flex items-center gap-3 w-full px-3 py-2.5 rounded-lg text-left border-0 cursor-pointer transition-all duration-150 ${
+											isActive
+												? 'bg-background-primary shadow-sm text-text-primary font-medium'
+												: 'bg-transparent text-text-secondary hover:bg-background-primary hover:text-text-primary'
+										}` }
+									>
+										<Icon className={ `size-4 shrink-0 ${
+											isActive ? 'text-brand-800' : 'text-icon-secondary'
+										}` } />
+										<span className="text-sm">
+											{ item.label }
+										</span>
+									</button>
+								</Sidebar.Item>
+							);
+						} ) }
+					</Sidebar.Body>
+				</Sidebar>
 
-						<div className="p-6">
-							<Tabs.Panel slug="general">
-								<ApiKeyForm
-									apiKey={ apiKey }
-									onApiKeyChange={ setApiKey }
-									hasApiKey={ hasApiKey }
-									tavilyKey={ tavilyKey }
-									onTavilyKeyChange={ setTavilyKey }
-									hasTavilyKey={ hasTavilyKey }
-								/>
-							</Tabs.Panel>
-							<Tabs.Panel slug="brand">
-								<BrandPresets
-									brand={ brand }
-									onBrandChange={ setBrand }
-								/>
-							</Tabs.Panel>
-							<Tabs.Panel slug="model">
-								<ModelSelector
-									model={ defaultModel }
-									onModelChange={ setDefaultModel }
-								/>
-							</Tabs.Panel>
-							<Tabs.Panel slug="permissions">
-								<RolePermissions
-									allowedRoles={ allowedRoles }
-									onRolesChange={ setAllowedRoles }
-								/>
-							</Tabs.Panel>
-						</div>
-					</Tabs>
+				{ /* Content Panel */ }
+				<div className="flex-1 p-6 overflow-y-auto">
+					{ activeTab === 'general' && (
+						<ApiKeyForm
+							apiKey={ apiKey }
+							onApiKeyChange={ setApiKey }
+							hasApiKey={ hasApiKey }
+							tavilyKey={ tavilyKey }
+							onTavilyKeyChange={ setTavilyKey }
+							hasTavilyKey={ hasTavilyKey }
+						/>
+					) }
+					{ activeTab === 'brand' && (
+						<BrandPresets
+							brand={ brand }
+							onBrandChange={ setBrand }
+						/>
+					) }
+					{ activeTab === 'model' && (
+						<ModelSelector
+							model={ defaultModel }
+							onModelChange={ setDefaultModel }
+						/>
+					) }
+					{ activeTab === 'permissions' && (
+						<RolePermissions
+							allowedRoles={ allowedRoles }
+							onRolesChange={ setAllowedRoles }
+						/>
+					) }
 				</div>
 			</div>
 		</PageLayout>

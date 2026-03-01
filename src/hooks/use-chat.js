@@ -27,6 +27,7 @@ export function useChat() {
 		error,
 		isLoading,
 		hasApiKey,
+		actionProgress,
 	} = useSelect( ( select ) => {
 		const store = select( STORE_NAME );
 		return {

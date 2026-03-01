@@ -1,4 +1,4 @@
-import { Container, Title, Input, Select, Text } from '@bsf/force-ui';
+import { Input, Select, Text } from '@bsf/force-ui';
 import { Palette, Type, MessageSquare } from 'lucide-react';
 
 const TONE_OPTIONS = [
@@ -29,7 +29,7 @@ function ColorField( { label, value, onChange, placeholder = '#000000' } ) {
 					type="color"
 					value={ value || placeholder }
 					onChange={ ( e ) => onChange( e.target.value ) }
-					className="w-9 h-9 rounded-md border border-solid border-border-subtle cursor-pointer p-0.5 bg-background-primary"
+					className="w-9 h-9 rounded-lg border border-solid border-border-subtle cursor-pointer p-0.5 bg-background-primary hover:border-border-interactive transition-colors"
 				/>
 				<Input
 					size="sm"
@@ -43,23 +43,39 @@ function ColorField( { label, value, onChange, placeholder = '#000000' } ) {
 	);
 }
 
+function SectionHeader( { icon: Icon, title, description, color } ) {
+	return (
+		<div className="flex items-center gap-3">
+			<div className={ `flex items-center justify-center size-9 rounded-lg ${ color.bg } shrink-0` }>
+				<Icon className={ `size-4 ${ color.text }` } />
+			</div>
+			<div>
+				<h3 className="text-sm font-semibold text-text-primary">
+					{ title }
+				</h3>
+				<p className="text-xs text-text-tertiary mt-0.5">
+					{ description }
+				</p>
+			</div>
+		</div>
+	);
+}
+
 export default function BrandPresets( { brand = {}, onBrandChange } ) {
 	const update = ( key, value ) => {
 		onBrandChange?.( { ...brand, [ key ]: value } );
 	};
 
 	return (
-		<Container direction="column" gap="lg">
+		<div className="flex flex-col gap-8">
 			{ /* Brand Identity */ }
-			<Container direction="column" gap="md">
-				<Container direction="row" align="center" gap="sm">
-					<Type size={ 20 } className="text-icon-secondary" />
-					<Title
-						title="Brand Identity"
-						description="Your brand name and tagline are used by the AI when generating content and pages."
-						size="sm"
-					/>
-				</Container>
+			<div className="flex flex-col gap-4">
+				<SectionHeader
+					icon={ Type }
+					title="Brand Identity"
+					description="Your brand name and tagline are used by the AI when generating content."
+					color={ { bg: 'bg-violet-50', text: 'text-violet-600' } }
+				/>
 
 				<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
 					<div className="flex flex-col gap-1.5">
@@ -91,18 +107,19 @@ export default function BrandPresets( { brand = {}, onBrandChange } ) {
 						/>
 					</div>
 				</div>
-			</Container>
+			</div>
+
+			{ /* Divider */ }
+			<div className="border-t border-solid border-border-subtle" />
 
 			{ /* Brand Colors */ }
-			<Container direction="column" gap="md">
-				<Container direction="row" align="center" gap="sm">
-					<Palette size={ 20 } className="text-icon-secondary" />
-					<Title
-						title="Brand Colors"
-						description="The AI will use these colors when building pages and generating designs instead of random palettes."
-						size="sm"
-					/>
-				</Container>
+			<div className="flex flex-col gap-4">
+				<SectionHeader
+					icon={ Palette }
+					title="Brand Colors"
+					description="The AI will use these colors when building pages instead of random palettes."
+					color={ { bg: 'bg-amber-50', text: 'text-amber-600' } }
+				/>
 
 				<div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
 					<ColorField
@@ -136,44 +153,45 @@ export default function BrandPresets( { brand = {}, onBrandChange } ) {
 					brand.accent_color ||
 					brand.dark_color ||
 					brand.light_color ) && (
-					<div className="flex gap-2 items-center">
+					<div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-background-secondary border border-solid border-border-subtle">
 						<Text
 							size="sm"
-							className="text-text-tertiary mr-1"
+							className="text-text-tertiary font-medium"
 						>
-							Preview:
+							Preview
 						</Text>
-						{ [
-							brand.primary_color,
-							brand.accent_color,
-							brand.dark_color,
-							brand.light_color,
-						]
-							.filter( Boolean )
-							.map( ( color, i ) => (
-								<div
-									key={ i }
-									className="w-8 h-8 rounded-md border border-solid border-border-subtle"
-									style={ { backgroundColor: color } }
-								/>
-							) ) }
+						<div className="flex gap-2">
+							{ [
+								{ color: brand.primary_color, label: 'Primary' },
+								{ color: brand.accent_color, label: 'Accent' },
+								{ color: brand.dark_color, label: 'Dark' },
+								{ color: brand.light_color, label: 'Light' },
+							]
+								.filter( ( item ) => item.color )
+								.map( ( item, i ) => (
+									<div
+										key={ i }
+										className="w-10 h-10 rounded-lg border border-solid border-border-subtle shadow-sm"
+										style={ { backgroundColor: item.color } }
+										title={ `${ item.label }: ${ item.color }` }
+									/>
+								) ) }
+						</div>
 					</div>
 				) }
-			</Container>
+			</div>
+
+			{ /* Divider */ }
+			<div className="border-t border-solid border-border-subtle" />
 
 			{ /* Writing Tone & Font */ }
-			<Container direction="column" gap="md">
-				<Container direction="row" align="center" gap="sm">
-					<MessageSquare
-						size={ 20 }
-						className="text-icon-secondary"
-					/>
-					<Title
-						title="Writing Style"
-						description="Set the default tone and typography preference for AI-generated content."
-						size="sm"
-					/>
-				</Container>
+			<div className="flex flex-col gap-4">
+				<SectionHeader
+					icon={ MessageSquare }
+					title="Writing Style"
+					description="Set the default tone and typography for AI-generated content."
+					color={ { bg: 'bg-blue-50', text: 'text-blue-600' } }
+				/>
 
 				<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
 					<div className="flex flex-col gap-1.5">
@@ -229,12 +247,12 @@ export default function BrandPresets( { brand = {}, onBrandChange } ) {
 						</Select>
 					</div>
 				</div>
-			</Container>
+			</div>
 
-			<Text size="sm" className="text-text-tertiary">
-				All fields are optional. The AI will fall back to the active
+			<p className="text-xs text-text-tertiary px-1">
+				All fields are optional. The AI will fall back to active
 				theme defaults when brand settings are not configured.
-			</Text>
-		</Container>
+			</p>
+		</div>
 	);
 }
