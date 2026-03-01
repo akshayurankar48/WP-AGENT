@@ -416,7 +416,8 @@ class Orchestrator {
 					$tool_calls,
 					$conversation_id,
 					$user_id,
-					$messages
+					$messages,
+					$callback
 				);
 
 				// Emit SSE chunks for client-side actions (e.g. insert_blocks).
@@ -475,16 +476,20 @@ class Orchestrator {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param array $tool_calls      Array of tool call objects from the AI.
-	 * @param int   $conversation_id Conversation ID.
-	 * @param int   $user_id         WordPress user ID.
-	 * @param array &$messages       Messages array (modified in place).
+	 * @param array         $tool_calls      Array of tool call objects from the AI.
+	 * @param int           $conversation_id Conversation ID.
+	 * @param int           $user_id         WordPress user ID.
+	 * @param array         &$messages       Messages array (modified in place).
+	 * @param callable|null $callback        Optional SSE callback for progress events.
 	 * @return array Actions taken [{name, params, result}, ...].
 	 */
-	private function dispatch_tool_calls( array $tool_calls, $conversation_id, $user_id, array &$messages ) {
+	private function dispatch_tool_calls( array $tool_calls, $conversation_id, $user_id, array &$messages, $callback = null ) {
 		$actions_taken = [];
+		$total_calls   = count( $tool_calls );
+		$call_index    = 0;
 
 		foreach ( $tool_calls as $tool_call ) {
+			$call_index++;
 			$fn_name = isset( $tool_call['function']['name'] ) ? $tool_call['function']['name'] : '';
 			$fn_args = isset( $tool_call['function']['arguments'] ) ? $tool_call['function']['arguments'] : '{}';
 			$call_id = isset( $tool_call['id'] ) ? $tool_call['id'] : '';
@@ -553,6 +558,17 @@ class Orchestrator {
 				}
 			}
 
+			// Emit progress event before action execution.
+			if ( $callback ) {
+				call_user_func( $callback, [
+					'type'   => 'progress',
+					'stage'  => 'action_start',
+					'action' => $fn_name,
+					'index'  => $call_index,
+					'total'  => $total_calls,
+				] );
+			}
+
 			$result = Action_Registry::get_instance()->dispatch( $fn_name, $params );
 
 			if ( is_wp_error( $result ) ) {
@@ -576,6 +592,18 @@ class Orchestrator {
 				} else {
 					$checkpoint_mgr->delete_checkpoint( $checkpoint_id );
 				}
+			}
+
+			// Emit progress event after action execution.
+			if ( $callback ) {
+				call_user_func( $callback, [
+					'type'    => 'progress',
+					'stage'   => 'action_complete',
+					'action'  => $fn_name,
+					'index'   => $call_index,
+					'total'   => $total_calls,
+					'success' => ! empty( $tool_result['success'] ),
+				] );
 			}
 
 			$actions_taken[] = [

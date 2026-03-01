@@ -37,6 +37,7 @@ export function useChat() {
 			error: store.getError(),
 			isLoading: store.getIsLoading(),
 			hasApiKey: store.getHasApiKey(),
+			actionProgress: store.getActionProgress(),
 		};
 	}, [] );
 
@@ -80,6 +81,7 @@ export function useChat() {
 		error,
 		isLoading,
 		hasApiKey,
+		actionProgress,
 		postId,
 		sendMessage,
 		stopStreaming,

@@ -127,6 +127,7 @@ const ChatPanel = () => {
 		error,
 		isLoading,
 		hasApiKey,
+		actionProgress,
 		sendMessage,
 		stopStreaming,
 		startNewConversation,
@@ -188,6 +189,7 @@ const ChatPanel = () => {
 					isStreaming={ isStreaming }
 					streamingContent={ streamingContent }
 					isLoading={ isLoading }
+					actionProgress={ actionProgress }
 				/>
 			) }
 

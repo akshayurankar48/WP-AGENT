@@ -83,6 +83,15 @@ export const clearPendingActions = () => ( {
 	type: ACTION_TYPES.CLEAR_PENDING_ACTIONS,
 } );
 
+export const setActionProgress = ( progress ) => ( {
+	type: ACTION_TYPES.SET_ACTION_PROGRESS,
+	progress,
+} );
+
+export const clearActionProgress = () => ( {
+	type: ACTION_TYPES.CLEAR_ACTION_PROGRESS,
+} );
+
 // --- Thunks ---
 
 /**
@@ -158,6 +167,15 @@ export const sendMessage =
 						case 'action':
 							dispatch( addPendingAction( { action: chunk.action, data: chunk.data } ) );
 							break;
+						case 'progress':
+							dispatch( setActionProgress( {
+								stage: chunk.stage,
+								action: chunk.action,
+								index: chunk.index,
+								total: chunk.total,
+								success: chunk.success,
+							} ) );
+							break;
 						case 'done':
 							if ( chunk.conversation_id ) {
 								dispatch(
@@ -169,6 +187,7 @@ export const sendMessage =
 				} );
 
 				// Finalize: move streamingContent into a message.
+				dispatch( clearActionProgress() );
 				dispatch( finalizeStreaming() );
 			} catch ( error ) {
 				if ( error.name === 'AbortError' ) {
