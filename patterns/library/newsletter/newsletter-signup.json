@@ -1,0 +1,41 @@
+{
+  "id": "newsletter-signup",
+  "name": "Newsletter Signup Strip",
+  "category": "newsletter",
+  "description": "Compact newsletter signup section with heading, description, and prominent call-to-action button on an accent background",
+  "variables": {
+    "heading": "Stay in the Loop",
+    "description": "Get the latest updates, tips, and exclusive offers delivered straight to your inbox. No spam, unsubscribe anytime.",
+    "cta_label": "Subscribe Now",
+    "cta_url": "#subscribe",
+    "bg_color": "{{primary}}",
+    "text_color": "#ffffff",
+    "muted_color": "#e0e7ff",
+    "button_bg": "#ffffff",
+    "button_text": "{{primary}}"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "{{bg_color}}" },
+          "spacing": { "padding": { "top": "80px", "bottom": "80px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained", "contentSize": "680px" }
+      },
+      "innerBlocks": [
+        { "blockName": "core/heading", "attrs": { "textAlign": "center", "level": 2, "style": { "typography": { "fontSize": "36px", "fontWeight": "700", "letterSpacing": "-0.02em" }, "color": { "text": "{{text_color}}" }, "spacing": { "margin": { "bottom": "16px" } } } }, "innerHTML": "{{heading}}" },
+        { "blockName": "core/paragraph", "attrs": { "align": "center", "style": { "typography": { "fontSize": "17px", "lineHeight": "1.6" }, "color": { "text": "{{muted_color}}" }, "spacing": { "margin": { "bottom": "32px" } } } }, "innerHTML": "{{description}}" },
+        {
+          "blockName": "core/buttons",
+          "attrs": { "layout": { "type": "flex", "justifyContent": "center" } },
+          "innerBlocks": [
+            { "blockName": "core/button", "attrs": { "url": "{{cta_url}}", "style": { "color": { "background": "{{button_bg}}", "text": "{{button_text}}" }, "typography": { "fontSize": "16px", "fontWeight": "600" }, "spacing": { "padding": { "top": "16px", "bottom": "16px", "left": "40px", "right": "40px" } }, "border": { "radius": "100px" } } }, "innerHTML": "{{cta_label}}" }
+          ]
+        }
+      ]
+    }
+  ]
+}

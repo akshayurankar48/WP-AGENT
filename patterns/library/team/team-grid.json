@@ -1,0 +1,76 @@
+{
+  "id": "team-grid",
+  "name": "Team Member Grid",
+  "category": "team",
+  "description": "Three-column team grid with photo, name, role, and short bio on a light background",
+  "variables": {
+    "heading": "Meet Our Team",
+    "subheading": "The people behind the product who make the magic happen.",
+    "member_1_image": "https://placehold.co/400x400/e5e7eb/6b7280?text=Photo",
+    "member_1_name": "Sarah Chen",
+    "member_1_role": "CEO & Co-founder",
+    "member_1_bio": "Former VP of Product at a Fortune 500. Passionate about making technology accessible to everyone.",
+    "member_2_image": "https://placehold.co/400x400/e5e7eb/6b7280?text=Photo",
+    "member_2_name": "Marcus Rivera",
+    "member_2_role": "CTO",
+    "member_2_bio": "Full-stack engineer with 15 years of experience building scalable platforms from the ground up.",
+    "member_3_image": "https://placehold.co/400x400/e5e7eb/6b7280?text=Photo",
+    "member_3_name": "Aisha Patel",
+    "member_3_role": "Head of Design",
+    "member_3_bio": "Award-winning designer who believes every pixel should earn its place on the screen.",
+    "bg_color": "{{bg_light}}",
+    "text_color": "{{text_dark}}",
+    "muted_color": "{{text_muted}}",
+    "accent_color": "{{primary}}"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "{{bg_color}}" },
+          "spacing": { "padding": { "top": "100px", "bottom": "100px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        { "blockName": "core/heading", "attrs": { "textAlign": "center", "level": 2, "style": { "typography": { "fontSize": "42px", "fontWeight": "700", "letterSpacing": "-0.02em" }, "color": { "text": "{{text_color}}" }, "spacing": { "margin": { "bottom": "16px" } } } }, "innerHTML": "{{heading}}" },
+        { "blockName": "core/paragraph", "attrs": { "align": "center", "style": { "typography": { "fontSize": "18px" }, "color": { "text": "{{muted_color}}" }, "spacing": { "margin": { "bottom": "64px" } } } }, "innerHTML": "{{subheading}}" },
+        {
+          "blockName": "core/columns",
+          "attrs": { "style": { "spacing": { "blockGap": { "left": "40px" } } } },
+          "innerBlocks": [
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                { "blockName": "core/image", "attrs": { "url": "{{member_1_image}}", "alt": "{{member_1_name}}", "style": { "border": { "radius": "12px" } }, "sizeSlug": "full" } },
+                { "blockName": "core/heading", "attrs": { "level": 3, "style": { "typography": { "fontSize": "22px", "fontWeight": "600" }, "color": { "text": "{{text_color}}" }, "spacing": { "margin": { "top": "20px", "bottom": "4px" } } } }, "innerHTML": "{{member_1_name}}" },
+                { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "14px", "fontWeight": "600", "textTransform": "uppercase", "letterSpacing": "0.05em" }, "color": { "text": "{{accent_color}}" }, "spacing": { "margin": { "bottom": "12px" } } } }, "innerHTML": "{{member_1_role}}" },
+                { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "15px", "lineHeight": "1.7" }, "color": { "text": "{{muted_color}}" } } }, "innerHTML": "{{member_1_bio}}" }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                { "blockName": "core/image", "attrs": { "url": "{{member_2_image}}", "alt": "{{member_2_name}}", "style": { "border": { "radius": "12px" } }, "sizeSlug": "full" } },
+                { "blockName": "core/heading", "attrs": { "level": 3, "style": { "typography": { "fontSize": "22px", "fontWeight": "600" }, "color": { "text": "{{text_color}}" }, "spacing": { "margin": { "top": "20px", "bottom": "4px" } } } }, "innerHTML": "{{member_2_name}}" },
+                { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "14px", "fontWeight": "600", "textTransform": "uppercase", "letterSpacing": "0.05em" }, "color": { "text": "{{accent_color}}" }, "spacing": { "margin": { "bottom": "12px" } } } }, "innerHTML": "{{member_2_role}}" },
+                { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "15px", "lineHeight": "1.7" }, "color": { "text": "{{muted_color}}" } } }, "innerHTML": "{{member_2_bio}}" }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                { "blockName": "core/image", "attrs": { "url": "{{member_3_image}}", "alt": "{{member_3_name}}", "style": { "border": { "radius": "12px" } }, "sizeSlug": "full" } },
+                { "blockName": "core/heading", "attrs": { "level": 3, "style": { "typography": { "fontSize": "22px", "fontWeight": "600" }, "color": { "text": "{{text_color}}" }, "spacing": { "margin": { "top": "20px", "bottom": "4px" } } } }, "innerHTML": "{{member_3_name}}" },
+                { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "14px", "fontWeight": "600", "textTransform": "uppercase", "letterSpacing": "0.05em" }, "color": { "text": "{{accent_color}}" }, "spacing": { "margin": { "bottom": "12px" } } } }, "innerHTML": "{{member_3_role}}" },
+                { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "15px", "lineHeight": "1.7" }, "color": { "text": "{{muted_color}}" } } }, "innerHTML": "{{member_3_bio}}" }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

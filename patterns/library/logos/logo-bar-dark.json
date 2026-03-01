@@ -1,0 +1,57 @@
+{
+  "id": "logo-bar-dark",
+  "name": "Logo Bar Dark",
+  "category": "logos",
+  "description": "Row of partner or client logos on a dark background with muted white styling",
+  "variables": {
+    "heading": "Powering 10,000+ Companies Worldwide",
+    "logo_1_url": "https://placehold.co/160x48/1e293b/64748b?text=Acme+Co",
+    "logo_2_url": "https://placehold.co/160x48/1e293b/64748b?text=Globex",
+    "logo_3_url": "https://placehold.co/160x48/1e293b/64748b?text=Initech",
+    "logo_4_url": "https://placehold.co/160x48/1e293b/64748b?text=Umbrella",
+    "logo_5_url": "https://placehold.co/160x48/1e293b/64748b?text=Wayne+Inc",
+    "bg_color": "{{bg_dark}}",
+    "text_color": "#64748b"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "{{bg_color}}" },
+          "spacing": { "padding": { "top": "60px", "bottom": "60px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/paragraph",
+          "attrs": {
+            "align": "center",
+            "style": {
+              "typography": { "fontSize": "14px", "textTransform": "uppercase", "letterSpacing": "0.1em", "fontWeight": "600" },
+              "color": { "text": "{{text_color}}" },
+              "spacing": { "margin": { "bottom": "40px" } }
+            }
+          },
+          "innerHTML": "{{heading}}"
+        },
+        {
+          "blockName": "core/columns",
+          "attrs": {
+            "verticalAlignment": "center",
+            "style": { "spacing": { "blockGap": { "left": "48px" } } }
+          },
+          "innerBlocks": [
+            { "blockName": "core/column", "attrs": { "verticalAlignment": "center" }, "innerBlocks": [{ "blockName": "core/image", "attrs": { "url": "{{logo_1_url}}", "alt": "Partner logo", "align": "center" } }] },
+            { "blockName": "core/column", "attrs": { "verticalAlignment": "center" }, "innerBlocks": [{ "blockName": "core/image", "attrs": { "url": "{{logo_2_url}}", "alt": "Partner logo", "align": "center" } }] },
+            { "blockName": "core/column", "attrs": { "verticalAlignment": "center" }, "innerBlocks": [{ "blockName": "core/image", "attrs": { "url": "{{logo_3_url}}", "alt": "Partner logo", "align": "center" } }] },
+            { "blockName": "core/column", "attrs": { "verticalAlignment": "center" }, "innerBlocks": [{ "blockName": "core/image", "attrs": { "url": "{{logo_4_url}}", "alt": "Partner logo", "align": "center" } }] },
+            { "blockName": "core/column", "attrs": { "verticalAlignment": "center" }, "innerBlocks": [{ "blockName": "core/image", "attrs": { "url": "{{logo_5_url}}", "alt": "Partner logo", "align": "center" } }] }
+          ]
+        }
+      ]
+    }
+  ]
+}

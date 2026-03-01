@@ -596,7 +596,7 @@ class Prompt_Builder {
 	 */
 	private function get_pattern_library_section() {
 		return "<pattern_library>\n"
-			. "You have access to a curated library of 22+ professionally designed patterns across 10 categories, "
+			. "You have access to a curated library of 30+ professionally designed patterns across 15 categories, "
 			. "plus 4 full-page blueprints (landing-page, saas-landing, startup-page, about-page).\n\n"
 			. "PATTERN-FIRST RULE: For standard page sections, ALWAYS use get_pattern instead of building raw blocks. "
 			. "Patterns are pre-designed, responsive, and visually polished. Use them for:\n"

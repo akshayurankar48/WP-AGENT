@@ -1,0 +1,95 @@
+{
+  "id": "timeline-vertical",
+  "name": "Vertical Timeline",
+  "category": "process",
+  "description": "Alternating left-right timeline with four milestones, each with a title and description on a dark background",
+  "variables": {
+    "heading": "Our Journey",
+    "subheading": "Key milestones that shaped who we are today.",
+    "milestone_1_year": "2020",
+    "milestone_1_title": "The Beginning",
+    "milestone_1_desc": "Started with a simple idea and a two-person team working from a garage. Built our first prototype in 90 days.",
+    "milestone_2_year": "2021",
+    "milestone_2_title": "First 1,000 Users",
+    "milestone_2_desc": "Launched publicly and hit our first milestone. Raised seed funding and expanded the team to 12 people.",
+    "milestone_3_year": "2023",
+    "milestone_3_title": "Series A",
+    "milestone_3_desc": "Secured $15M in funding to scale operations. Opened offices in three new cities and tripled our customer base.",
+    "milestone_4_year": "2025",
+    "milestone_4_title": "Going Global",
+    "milestone_4_desc": "Now serving customers in 40+ countries with a team of 150. Recognized as an industry leader by Gartner.",
+    "bg_color": "{{bg_dark}}",
+    "text_color": "#ffffff",
+    "muted_color": "#94a3b8",
+    "accent_color": "{{primary}}"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "{{bg_color}}" },
+          "spacing": { "padding": { "top": "100px", "bottom": "100px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        { "blockName": "core/heading", "attrs": { "textAlign": "center", "level": 2, "style": { "typography": { "fontSize": "42px", "fontWeight": "700", "letterSpacing": "-0.02em" }, "color": { "text": "{{text_color}}" }, "spacing": { "margin": { "bottom": "16px" } } } }, "innerHTML": "{{heading}}" },
+        { "blockName": "core/paragraph", "attrs": { "align": "center", "style": { "typography": { "fontSize": "18px" }, "color": { "text": "{{muted_color}}" }, "spacing": { "margin": { "bottom": "64px" } } } }, "innerHTML": "{{subheading}}" },
+        {
+          "blockName": "core/columns",
+          "attrs": { "style": { "spacing": { "blockGap": { "left": "60px" }, "margin": { "bottom": "48px" } } } },
+          "innerBlocks": [
+            { "blockName": "core/column", "attrs": { "width": "20%" }, "innerBlocks": [
+              { "blockName": "core/paragraph", "attrs": { "align": "right", "style": { "typography": { "fontSize": "36px", "fontWeight": "800" }, "color": { "text": "{{accent_color}}" } } }, "innerHTML": "{{milestone_1_year}}" }
+            ] },
+            { "blockName": "core/column", "attrs": { "width": "80%" }, "innerBlocks": [
+              { "blockName": "core/heading", "attrs": { "level": 3, "style": { "typography": { "fontSize": "24px", "fontWeight": "600" }, "color": { "text": "{{text_color}}" }, "spacing": { "margin": { "bottom": "8px" } } } }, "innerHTML": "{{milestone_1_title}}" },
+              { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "16px", "lineHeight": "1.7" }, "color": { "text": "{{muted_color}}" } } }, "innerHTML": "{{milestone_1_desc}}" }
+            ] }
+          ]
+        },
+        {
+          "blockName": "core/columns",
+          "attrs": { "style": { "spacing": { "blockGap": { "left": "60px" }, "margin": { "bottom": "48px" } } } },
+          "innerBlocks": [
+            { "blockName": "core/column", "attrs": { "width": "20%" }, "innerBlocks": [
+              { "blockName": "core/paragraph", "attrs": { "align": "right", "style": { "typography": { "fontSize": "36px", "fontWeight": "800" }, "color": { "text": "{{accent_color}}" } } }, "innerHTML": "{{milestone_2_year}}" }
+            ] },
+            { "blockName": "core/column", "attrs": { "width": "80%" }, "innerBlocks": [
+              { "blockName": "core/heading", "attrs": { "level": 3, "style": { "typography": { "fontSize": "24px", "fontWeight": "600" }, "color": { "text": "{{text_color}}" }, "spacing": { "margin": { "bottom": "8px" } } } }, "innerHTML": "{{milestone_2_title}}" },
+              { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "16px", "lineHeight": "1.7" }, "color": { "text": "{{muted_color}}" } } }, "innerHTML": "{{milestone_2_desc}}" }
+            ] }
+          ]
+        },
+        {
+          "blockName": "core/columns",
+          "attrs": { "style": { "spacing": { "blockGap": { "left": "60px" }, "margin": { "bottom": "48px" } } } },
+          "innerBlocks": [
+            { "blockName": "core/column", "attrs": { "width": "20%" }, "innerBlocks": [
+              { "blockName": "core/paragraph", "attrs": { "align": "right", "style": { "typography": { "fontSize": "36px", "fontWeight": "800" }, "color": { "text": "{{accent_color}}" } } }, "innerHTML": "{{milestone_3_year}}" }
+            ] },
+            { "blockName": "core/column", "attrs": { "width": "80%" }, "innerBlocks": [
+              { "blockName": "core/heading", "attrs": { "level": 3, "style": { "typography": { "fontSize": "24px", "fontWeight": "600" }, "color": { "text": "{{text_color}}" }, "spacing": { "margin": { "bottom": "8px" } } } }, "innerHTML": "{{milestone_3_title}}" },
+              { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "16px", "lineHeight": "1.7" }, "color": { "text": "{{muted_color}}" } } }, "innerHTML": "{{milestone_3_desc}}" }
+            ] }
+          ]
+        },
+        {
+          "blockName": "core/columns",
+          "attrs": { "style": { "spacing": { "blockGap": { "left": "60px" } } } },
+          "innerBlocks": [
+            { "blockName": "core/column", "attrs": { "width": "20%" }, "innerBlocks": [
+              { "blockName": "core/paragraph", "attrs": { "align": "right", "style": { "typography": { "fontSize": "36px", "fontWeight": "800" }, "color": { "text": "{{accent_color}}" } } }, "innerHTML": "{{milestone_4_year}}" }
+            ] },
+            { "blockName": "core/column", "attrs": { "width": "80%" }, "innerBlocks": [
+              { "blockName": "core/heading", "attrs": { "level": 3, "style": { "typography": { "fontSize": "24px", "fontWeight": "600" }, "color": { "text": "{{text_color}}" }, "spacing": { "margin": { "bottom": "8px" } } } }, "innerHTML": "{{milestone_4_title}}" },
+              { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "16px", "lineHeight": "1.7" }, "color": { "text": "{{muted_color}}" } } }, "innerHTML": "{{milestone_4_desc}}" }
+            ] }
+          ]
+        }
+      ]
+    }
+  ]
+}

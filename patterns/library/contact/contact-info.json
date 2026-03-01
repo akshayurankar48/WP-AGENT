@@ -1,0 +1,66 @@
+{
+  "id": "contact-info",
+  "name": "Contact Information",
+  "category": "contact",
+  "description": "Two-column contact section with heading, description, and contact details (email, phone, address) alongside a call-to-action",
+  "variables": {
+    "heading": "Get in Touch",
+    "description": "Have a question or want to work together? We'd love to hear from you. Reach out and we'll get back to you within 24 hours.",
+    "email": "hello@example.com",
+    "phone": "+1 (555) 123-4567",
+    "address": "123 Innovation Drive, San Francisco, CA 94107",
+    "cta_label": "Send Us a Message",
+    "cta_url": "#contact-form",
+    "bg_color": "{{bg_dark}}",
+    "text_color": "#ffffff",
+    "muted_color": "#94a3b8",
+    "accent_color": "{{primary}}"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "{{bg_color}}", "text": "{{text_color}}" },
+          "spacing": { "padding": { "top": "100px", "bottom": "100px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/columns",
+          "attrs": { "style": { "spacing": { "blockGap": { "left": "80px" } } } },
+          "innerBlocks": [
+            {
+              "blockName": "core/column",
+              "attrs": { "width": "55%" },
+              "innerBlocks": [
+                { "blockName": "core/heading", "attrs": { "level": 2, "style": { "typography": { "fontSize": "42px", "fontWeight": "700", "letterSpacing": "-0.02em" }, "color": { "text": "{{text_color}}" }, "spacing": { "margin": { "bottom": "20px" } } } }, "innerHTML": "{{heading}}" },
+                { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "18px", "lineHeight": "1.7" }, "color": { "text": "{{muted_color}}" }, "spacing": { "margin": { "bottom": "40px" } } } }, "innerHTML": "{{description}}" },
+                {
+                  "blockName": "core/buttons",
+                  "innerBlocks": [
+                    { "blockName": "core/button", "attrs": { "url": "{{cta_url}}", "style": { "color": { "background": "{{accent_color}}", "text": "#ffffff" }, "typography": { "fontSize": "16px", "fontWeight": "600" }, "spacing": { "padding": { "top": "16px", "bottom": "16px", "left": "40px", "right": "40px" } }, "border": { "radius": "100px" } } }, "innerHTML": "{{cta_label}}" }
+                  ]
+                }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "attrs": { "width": "45%" },
+              "innerBlocks": [
+                { "blockName": "core/heading", "attrs": { "level": 4, "style": { "typography": { "fontSize": "13px", "textTransform": "uppercase", "letterSpacing": "0.1em", "fontWeight": "600" }, "color": { "text": "{{muted_color}}" }, "spacing": { "margin": { "bottom": "16px" } } } }, "innerHTML": "Email" },
+                { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "18px" }, "color": { "text": "{{text_color}}" }, "spacing": { "margin": { "bottom": "32px" } } } }, "innerHTML": "{{email}}" },
+                { "blockName": "core/heading", "attrs": { "level": 4, "style": { "typography": { "fontSize": "13px", "textTransform": "uppercase", "letterSpacing": "0.1em", "fontWeight": "600" }, "color": { "text": "{{muted_color}}" }, "spacing": { "margin": { "bottom": "16px" } } } }, "innerHTML": "Phone" },
+                { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "18px" }, "color": { "text": "{{text_color}}" }, "spacing": { "margin": { "bottom": "32px" } } } }, "innerHTML": "{{phone}}" },
+                { "blockName": "core/heading", "attrs": { "level": 4, "style": { "typography": { "fontSize": "13px", "textTransform": "uppercase", "letterSpacing": "0.1em", "fontWeight": "600" }, "color": { "text": "{{muted_color}}" }, "spacing": { "margin": { "bottom": "16px" } } } }, "innerHTML": "Address" },
+                { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "18px", "lineHeight": "1.6" }, "color": { "text": "{{text_color}}" } } }, "innerHTML": "{{address}}" }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
