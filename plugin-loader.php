@@ -113,6 +113,7 @@ class Plugin_Loader {
 		$registry->register( new Actions\Read_Blocks() );
 		$registry->register( new Actions\Insert_Blocks() );
 		$registry->register( new Actions\Search_Media() );
+		$registry->register( new Actions\Import_Media() );
 
 		// Settings & plugin management actions.
 		$registry->register( new Actions\Update_Settings() );
