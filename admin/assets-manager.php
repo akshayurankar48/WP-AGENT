@@ -59,6 +59,7 @@ class Assets_Manager {
 	public function __construct() {
 		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_assets' ] );
 		add_action( 'enqueue_block_editor_assets', [ $this, 'enqueue_editor_assets' ] );
+		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_frontend_animations' ] );
 	}
 
 	/**
@@ -115,6 +116,46 @@ class Assets_Manager {
 		wp_add_inline_style(
 			'wp-agent-admin',
 			'.wp-agent-wrap ~ .notice, .wp-agent-wrap ~ .updated, .wp-agent-wrap ~ .error, .wp-agent-wrap .notice, div.notice:not(.wp-agent-notice) { display: none !important; } #wpcontent { padding-left: 0; } #wpbody-content { padding-bottom: 0; }'
+		);
+	}
+
+	/**
+	 * Enqueue animation assets on the frontend when content uses wpa- classes.
+	 *
+	 * Checks the current post content for animation class names and only
+	 * enqueues the CSS/JS when at least one is found.
+	 *
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public function enqueue_frontend_animations() {
+		if ( is_admin() ) {
+			return;
+		}
+
+		$post = get_post();
+		if ( ! $post || empty( $post->post_content ) ) {
+			return;
+		}
+
+		// Only enqueue when the content actually contains animation classes.
+		if ( false === strpos( $post->post_content, 'wpa-' ) ) {
+			return;
+		}
+
+		wp_enqueue_style(
+			'wp-agent-animations',
+			WP_AGENT_URL . 'assets/css/animations.css',
+			[],
+			WP_AGENT_VER
+		);
+
+		wp_enqueue_script(
+			'wp-agent-animations',
+			WP_AGENT_URL . 'assets/js/animations.js',
+			[],
+			WP_AGENT_VER,
+			true
 		);
 	}
 

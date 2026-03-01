@@ -81,7 +81,9 @@ class Prompt_Builder {
 		if ( ! empty( $context['current_post'] ) ) {
 			$prompt .= $this->get_block_editor_section( $context );
 			$prompt .= $this->get_pattern_library_section();
+			$prompt .= $this->get_reference_design_section();
 			$prompt .= $this->get_page_building_recipe_section();
+			$prompt .= $this->get_animations_section();
 			$prompt .= $this->get_self_critique_section();
 		}
 
@@ -417,17 +419,50 @@ class Prompt_Builder {
 			. "- Create visual contrast: alternate between dark and light background sections.\n"
 			. "- Typography hierarchy: hero headings 48-72px bold, section headings 32-42px semibold, body text 16-18px regular.\n"
 			. "- Whitespace is a feature: use core/spacer (40-80px) between sections, generous padding within.\n"
-			. "- Limit colors: 2-3 brand colors + neutrals. Use the theme colors when available.\n"
 			. "- Buttons: bold background color, generous padding (16px 40px), rounded corners (8-100px), uppercase or semibold text.\n"
 			. "- For hero sections: dark background (#0a0a0a to #1a1a2e), large heading, lighter subtitle, prominent CTA button.\n"
 			. "- For feature grids: use core/columns with 2-4 columns, each with icon/heading/description pattern.\n"
-			. "- Always apply consistent spacing — never leave blocks without padding/margin styling.\n"
-			. "- COLOR HARMONY: Before building, choose a palette: 1 primary (#hex), 1 accent (#hex), 1 dark (#hex), 1 light (#hex). Use primary for CTAs and key elements, accent for highlights, dark for hero/footer backgrounds, light for alternating sections. Stay consistent across ALL sections.\n"
-			. "- COPYWRITING: Write real, compelling copy — not placeholder text. Use specific numbers (\"50,000+ customers\"), power verbs (\"Transform\", \"Unleash\", \"Accelerate\"), and benefit-driven language. Headlines: punchy (3-8 words). Subheadings: one-sentence value proposition. Body: concrete and persuasive.\n"
-			. "- IMAGES: ALWAYS call search_media first to find real images from the media library. Use the returned URLs and alt text in core/image, core/cover, and core/media-text blocks. "
-			. "If the user provides a specific image URL, use import_media to download it into the library first. "
-			. "Only fall back to placeholder URLs if the media library has no suitable images and no URLs are provided. Placeholder syntax: \"https://placehold.co/WIDTHxHEIGHT/BGHEX/TEXTHEX\" (no # in hex).\n"
-			. "- BLOCK VARIETY: Use the right block for the job. core/cover for hero banners with background images, core/media-text for side-by-side image+text, core/quote for testimonials, core/details for FAQ accordions. Don't default to core/columns for everything.\n\n";
+			. "- Always apply consistent spacing — never leave blocks without padding/margin styling.\n\n"
+
+			. "COLOR PALETTES (choose ONE based on site type, or derive from reference URL):\n"
+			. "- SaaS/Tech: primary #6366f1, accent #06b6d4, dark #0f172a, light #f8fafc\n"
+			. "- Corporate: primary #2563eb, accent #f59e0b, dark #111827, light #ffffff\n"
+			. "- Creative: primary #ec4899, accent #8b5cf6, dark #1e1b4b, light #fdf4ff\n"
+			. "- Luxury: primary #d4af37, accent #1a1a2e, dark #0a0a0a, light #faf9f6\n"
+			. "- Health/Wellness: primary #10b981, accent #f97316, dark #064e3b, light #ecfdf5\n"
+			. "- Minimal/Agency: primary #171717, accent #a3a3a3, dark #000000, light #fafafa\n"
+			. "Use primary for CTAs and key elements, accent for highlights, dark for hero/footer backgrounds, "
+			. "light for alternating sections. Stay consistent across ALL sections. "
+			. "When theme colors are available, prefer those over presets.\n\n"
+
+			. "SECTION COMPOSITION (pair sections for maximum impact):\n"
+			. "- Landing page: hero > features > social-proof > benefits > pricing > FAQ > CTA\n"
+			. "- SaaS: hero > logo-bar > features > stats > testimonials > pricing > FAQ > CTA\n"
+			. "- About/Story: hero > mission > team/media-text > timeline > values > CTA\n"
+			. "- Portfolio: hero > project-grid > process > testimonials > CTA\n"
+			. "RULES: Never put two similar sections back-to-back (e.g. two feature grids). "
+			. "Alternate background colors: dark > light > dark > light. Every page ends with a strong CTA section.\n\n"
+
+			. "ANTI-PATTERNS (never do these):\n"
+			. "- Bare unstyled blocks without section wrappers\n"
+			. "- All sections with the same background color (creates a wall of text)\n"
+			. "- Inconsistent heading sizes across sections\n"
+			. "- Tiny buttons with no padding\n"
+			. "- Feature grids without icons or visual anchors (just text columns)\n"
+			. "- More than 4 columns (2-3 is optimal for readability)\n\n"
+
+			. "COPYWRITING: Write real, compelling copy — not placeholder text. Use specific numbers (\"50,000+ customers\"), "
+			. "power verbs (\"Transform\", \"Unleash\", \"Accelerate\"), and benefit-driven language. "
+			. "Headlines: punchy (3-8 words). Subheadings: one-sentence value proposition. Body: concrete and persuasive.\n\n"
+
+			. "IMAGES: ALWAYS call search_media first to find real images from the media library. "
+			. "If the user provides a specific image URL, use import_media to download it first. "
+			. "Only fall back to placeholder URLs if no suitable images exist. "
+			. "Placeholder syntax: \"https://placehold.co/WIDTHxHEIGHT/BGHEX/TEXTHEX\" (no # in hex).\n\n"
+
+			. "BLOCK VARIETY: Use the right block for the job. core/cover for hero banners, "
+			. "core/media-text for side-by-side, core/quote for testimonials, core/details for FAQ. "
+			. "Don't default to core/columns for everything.\n\n";
 
 		// Few-shot examples.
 		$section .= $this->get_block_examples();
@@ -521,13 +556,14 @@ class Prompt_Builder {
 	 */
 	private function get_reasoning_section() {
 		return "<reasoning>\n"
-			. "FULL PAGE BUILDS: set_page_template \"blank\" -> search_media for images -> list_patterns to find sections -> "
-			. "get_pattern + insert_blocks per section (replace first, append rest). Use patterns for standard sections; raw blocks only for unique/custom layouts.\n"
-			. "SINGLE SECTION EDITS: read_blocks to see current content -> get_pattern or build raw blocks -> insert_blocks with \"append\" or specific position.\n"
-			. "DESIGN CHANGES: edit_global_styles for theme-wide changes, add_custom_css for page-specific effects/animations.\n"
-			. "SITE ADMIN: read current state first, identify what to change, propose fix, confirm with user, execute.\n"
-			. "BULK OPERATIONS: confirm scope with user, execute in steps, report progress.\n"
-			. "SEO: After building a page, offer to set SEO meta (title, description) via manage_seo.\n"
+			. "REFERENCE BUILD: read_url (analyze reference) -> pick palette -> set_page_template \"blank\" -> search_media -> "
+			. "list_patterns -> get_pattern + insert_blocks per section -> screenshot_page mid-build -> finish + final screenshot.\n"
+			. "FULL PAGE BUILDS: set_page_template \"blank\" -> pick palette -> search_media -> list_patterns -> "
+			. "get_pattern + insert_blocks per section (replace first, append rest). screenshot_page after first 2-3 sections.\n"
+			. "SINGLE SECTION EDITS: read_blocks -> get_pattern or raw blocks -> insert_blocks with \"append\" or specific position.\n"
+			. "DESIGN CHANGES: edit_global_styles for theme-wide changes, add_custom_css for page-specific effects.\n"
+			. "SITE ADMIN: read current state first, propose fix, confirm with user, execute.\n"
+			. "SEO: After building a page, offer to set SEO meta via manage_seo.\n"
 			. "Do NOT explain your reasoning aloud. Just execute and summarize results.\n"
 			. "</reasoning>\n\n";
 	}
@@ -578,6 +614,38 @@ class Prompt_Builder {
 	}
 
 	/**
+	 * Get the reference design section.
+	 *
+	 * Teaches the AI to analyze a reference URL and use it as design
+	 * inspiration for building pages.
+	 *
+	 * @since 1.0.0
+	 * @return string
+	 */
+	private function get_reference_design_section() {
+		return "<reference_design>\n"
+			. "When the user provides a reference URL or says \"build something like [site]\", \"copy this design\", or \"make it look like\":\n\n"
+			. "1. ANALYZE: Call read_url on the reference. Extract:\n"
+			. "   - Color palette (identify primary, accent, dark, light colors from the page).\n"
+			. "   - Section structure (what sections appear and in what order).\n"
+			. "   - Typography vibe (modern/clean, bold/editorial, minimal/elegant).\n"
+			. "   - Content strategy (what kind of copy, headlines, CTAs they use).\n\n"
+			. "2. MAP: Match each reference section to your pattern library:\n"
+			. "   - list_patterns to find matching categories.\n"
+			. "   - Choose the closest pattern for each section.\n"
+			. "   - Note which sections need raw blocks (no pattern match).\n\n"
+			. "3. ADAPT: Use the reference as INSPIRATION, not a pixel-perfect copy:\n"
+			. "   - Apply the extracted color palette as variable overrides on patterns.\n"
+			. "   - Follow the same section ordering and flow.\n"
+			. "   - Write ORIGINAL copy that matches the tone and style.\n"
+			. "   - Use search_media / import_media for images — never hotlink from the reference.\n\n"
+			. "4. BUILD: Follow the page building recipe with the reference palette and structure.\n\n"
+			. "Even WITHOUT a reference URL, you can apply this thinking: when a user says \"build a SaaS landing page\", "
+			. "mentally reference sites like Stripe, Linear, or Vercel for structure and quality.\n"
+			. "</reference_design>\n\n";
+	}
+
+	/**
 	 * Get the page building recipe section.
 	 *
 	 * Numbered checklist for building complete, professional pages.
@@ -588,15 +656,54 @@ class Prompt_Builder {
 	private function get_page_building_recipe_section() {
 		return "<page_building_recipe>\n"
 			. "When building a FULL PAGE (3+ sections), follow this recipe:\n"
-			. "1. TEMPLATE: set_page_template to \"blank\" for a clean canvas (no theme header/footer clutter).\n"
-			. "2. MEDIA: search_media to find real site images for use in sections.\n"
-			. "3. PLAN: Check if a blueprint matches (list_patterns category \"blueprints\"). "
-			. "Otherwise compose a section sequence: hero > features/benefits > social proof > details > CTA.\n"
-			. "4. BUILD: For each section, call get_pattern with variable overrides, then insert_blocks. "
+			. "1. REFERENCE (if URL provided): Call read_url to analyze the reference site. Extract its palette, section flow, and vibe. Use these to guide your build.\n"
+			. "2. TEMPLATE: set_page_template to \"blank\" for a clean canvas.\n"
+			. "3. PALETTE: Pick a color palette — from the reference site, theme tokens, user request, or the presets above. Commit to 4 colors (primary, accent, dark, light) and use them everywhere.\n"
+			. "4. MEDIA: search_media to find real site images.\n"
+			. "5. PLAN: Check if a blueprint matches (list_patterns category \"blueprints\"). "
+			. "Otherwise compose a section sequence using the composition rules above.\n"
+			. "6. BUILD: For each section, call get_pattern with variable overrides, then insert_blocks. "
 			. "First section uses position \"replace\", all subsequent use \"append\". One section per tool call.\n"
-			. "5. POLISH: Use add_custom_css for animations, hover effects, or spacing tweaks if needed.\n"
-			. "6. REVIEW: For full pages (5+ sections), use screenshot_page to visually evaluate the result.\n"
+			. "7. MID-BUILD CHECK: After the first 2-3 sections, screenshot_page to verify colors and spacing are consistent. Fix issues before continuing.\n"
+			. "8. POLISH: Apply wpa- animation classes to 3-5 below-the-fold sections. Add custom CSS only if needed.\n"
+			. "9. FINAL REVIEW: screenshot_page to evaluate the complete page. Check the self-critique checklist.\n"
 			. "</page_building_recipe>\n\n";
+	}
+
+	/**
+	 * Get the scroll animations section.
+	 *
+	 * Teaches the AI about the available CSS animation classes that can
+	 * be applied via the className attribute on any block.
+	 *
+	 * @since 1.0.0
+	 * @return string
+	 */
+	private function get_animations_section() {
+		return "<animations>\n"
+			. "You have scroll-triggered animations available. Apply them via the className attribute on any block. "
+			. "The animations fire once as the element scrolls into view.\n\n"
+			. "ANIMATION CLASSES (set in attrs.className):\n"
+			. "- wpa-fade-up: Fades in while sliding up (best for most sections).\n"
+			. "- wpa-fade-down: Fades in while sliding down (headers, top elements).\n"
+			. "- wpa-slide-left: Slides in from the left (left-side content, images).\n"
+			. "- wpa-slide-right: Slides in from the right (right-side content, images).\n"
+			. "- wpa-zoom-in: Scales up from 92% (cards, images, CTA blocks).\n"
+			. "- wpa-stagger-children: Animates child elements one by one (feature grids, card rows).\n\n"
+			. "MODIFIERS (combine with an animation class):\n"
+			. "- Delay: wpa-delay-100, wpa-delay-200, wpa-delay-300, wpa-delay-400, wpa-delay-500\n"
+			. "- Duration: wpa-duration-300 (fast), wpa-duration-500, wpa-duration-700, wpa-duration-1000 (slow)\n\n"
+			. "USAGE RULES:\n"
+			. "- Apply animations to section-level groups, NOT individual paragraphs or headings inside a section.\n"
+			. "- Use wpa-stagger-children on core/columns to animate each column sequentially.\n"
+			. "- Use wpa-fade-up for most sections — it's the safest default.\n"
+			. "- Use wpa-slide-left / wpa-slide-right on core/media-text for directional entrance.\n"
+			. "- Combine: className: \"wpa-fade-up wpa-delay-200\" for delayed entrance.\n"
+			. "- Do NOT animate hero sections (they're above the fold and visible immediately).\n"
+			. "- Apply to 3-5 sections max per page. Overuse feels chaotic.\n\n"
+			. "Example: {\"blockName\":\"core/group\",\"attrs\":{\"className\":\"wpa-fade-up\",\"align\":\"full\",...},\"innerBlocks\":[...]}\n"
+			. "Example stagger: {\"blockName\":\"core/columns\",\"attrs\":{\"className\":\"wpa-stagger-children\",...},\"innerBlocks\":[...]}\n"
+			. "</animations>\n\n";
 	}
 
 	/**
@@ -609,12 +716,15 @@ class Prompt_Builder {
 	 */
 	private function get_self_critique_section() {
 		return "<self_critique>\n"
-			. "After building a full page (5+ sections), use screenshot_page to evaluate your work. Check:\n"
-			. "- Color consistency: Do all sections use the same palette?\n"
-			. "- Typography hierarchy: Are heading sizes consistent across sections?\n"
-			. "- Spacing: Is vertical rhythm consistent (same padding between sections)?\n"
-			. "- CTA prominence: Is the primary call-to-action visually dominant?\n"
-			. "- Contrast: Is text readable against all backgrounds?\n"
+			. "After building a full page (5+ sections), use screenshot_page and evaluate:\n"
+			. "- PALETTE: Do all sections use the same 4 colors? If a section drifts, fix it with insert_blocks at that position.\n"
+			. "- TYPOGRAPHY: Are heading sizes consistent (same level = same size)? Hero H1 should be biggest, section H2s all equal.\n"
+			. "- RHYTHM: Is vertical spacing consistent? Every section should have the same top/bottom padding.\n"
+			. "- CONTRAST: Can you read every line of text against its background? Light text on dark, dark text on light.\n"
+			. "- CTA: Is the primary call-to-action the most visually dominant element? Bold color, large size, clear label.\n"
+			. "- FLOW: Does the page tell a story? Hook (hero) > Intrigue (features) > Trust (proof) > Action (CTA).\n\n"
+			. "If issues are found: call insert_blocks with the specific position to fix just the broken section. "
+			. "Do NOT rebuild the entire page — surgical fixes only.\n"
 			. "Skip self-critique for single-section edits or non-page tasks.\n"
 			. "</self_critique>\n\n";
 	}
