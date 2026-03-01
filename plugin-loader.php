@@ -151,6 +151,17 @@ class Plugin_Loader {
 		$registry->register( new Actions\Manage_Users() );
 		$registry->register( new Actions\List_Users() );
 		$registry->register( new Actions\Site_Health() );
+
+		// Content intelligence actions.
+		$registry->register( new Actions\Read_Url() );
+		$registry->register( new Actions\Manage_Seo() );
+
+		// Site appearance actions.
+		$registry->register( new Actions\Manage_Theme() );
+		$registry->register( new Actions\Edit_Template_Parts() );
+
+		// Comment management actions.
+		$registry->register( new Actions\Manage_Comments() );
 	}
 
 	/**

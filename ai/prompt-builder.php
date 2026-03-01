@@ -80,6 +80,9 @@ class Prompt_Builder {
 
 		if ( ! empty( $context['current_post'] ) ) {
 			$prompt .= $this->get_block_editor_section( $context );
+			$prompt .= $this->get_pattern_library_section();
+			$prompt .= $this->get_page_building_recipe_section();
+			$prompt .= $this->get_self_critique_section();
 		}
 
 		return $prompt;
@@ -447,176 +450,13 @@ class Prompt_Builder {
 			. "[{ blockName: \"core/heading\", innerHTML: \"Title\" }, { blockName: \"core/paragraph\", innerHTML: \"Text.\" }]\n"
 			. "This produces ugly unstyled content. ALWAYS wrap content in a styled core/group with background color, padding, and typography.\n"
 			. "</example>\n\n"
-			. "<example name=\"Dark hero section with CTA\">\n"
-			. "insert_blocks with blocks: [{\n"
-			. "  blockName: \"core/group\",\n"
-			. "  attrs: { align: \"full\", style: { color: { background: \"#0a0a0a\", text: \"#ffffff\" }, spacing: { padding: { top: \"120px\", bottom: \"120px\", left: \"40px\", right: \"40px\" } } }, layout: { type: \"constrained\" } },\n"
-			. "  innerBlocks: [\n"
-			. "    { blockName: \"core/heading\", attrs: { textAlign: \"center\", level: 1, style: { typography: { fontSize: \"64px\", fontWeight: \"800\", letterSpacing: \"-0.03em\", lineHeight: \"1.1\" } } }, innerHTML: \"Just Do It\" },\n"
-			. "    { blockName: \"core/paragraph\", attrs: { align: \"center\", style: { typography: { fontSize: \"20px\", lineHeight: \"1.6\" }, color: { text: \"#9ca3af\" }, spacing: { margin: { top: \"24px\", bottom: \"48px\" } } } }, innerHTML: \"Unleash your potential with the latest innovation in athletic performance.\" },\n"
-			. "    { blockName: \"core/buttons\", attrs: { layout: { type: \"flex\", justifyContent: \"center\" } }, innerBlocks: [\n"
-			. "      { blockName: \"core/button\", attrs: { style: { color: { background: \"#ffffff\", text: \"#0a0a0a\" }, typography: { fontSize: \"16px\", fontWeight: \"600\", textTransform: \"uppercase\", letterSpacing: \"0.05em\" }, border: { radius: \"100px\" }, spacing: { padding: { top: \"18px\", bottom: \"18px\", left: \"48px\", right: \"48px\" } } } }, innerHTML: \"Shop Now\" },\n"
-			. "      { blockName: \"core/button\", attrs: { style: { color: { background: \"transparent\", text: \"#ffffff\" }, typography: { fontSize: \"16px\", fontWeight: \"600\" }, border: { radius: \"100px\", width: \"2px\", color: \"#ffffff\" }, spacing: { padding: { top: \"18px\", bottom: \"18px\", left: \"48px\", right: \"48px\" } } } }, innerHTML: \"Learn More\" }\n"
-			. "    ]}\n"
-			. "  ]\n"
-			. "}]\n"
-			. "</example>\n\n"
-
-			. "<example name=\"3-column feature grid\">\n"
-			. "insert_blocks with blocks: [{\n"
-			. "  blockName: \"core/group\",\n"
-			. "  attrs: { align: \"full\", style: { color: { background: \"#f8fafc\" }, spacing: { padding: { top: \"100px\", bottom: \"100px\", left: \"40px\", right: \"40px\" } } }, layout: { type: \"constrained\" } },\n"
-			. "  innerBlocks: [\n"
-			. "    { blockName: \"core/heading\", attrs: { textAlign: \"center\", level: 2, style: { typography: { fontSize: \"42px\", fontWeight: \"700\", letterSpacing: \"-0.02em\" }, spacing: { margin: { bottom: \"16px\" } } } }, innerHTML: \"Why Choose Us\" },\n"
-			. "    { blockName: \"core/paragraph\", attrs: { align: \"center\", style: { typography: { fontSize: \"18px\" }, color: { text: \"#6b7280\" }, spacing: { margin: { bottom: \"64px\" } } } }, innerHTML: \"Everything you need to build something extraordinary.\" },\n"
-			. "    { blockName: \"core/columns\", attrs: { style: { spacing: { blockGap: { left: \"40px\" } } } }, innerBlocks: [\n"
-			. "      { blockName: \"core/column\", innerBlocks: [\n"
-			. "        { blockName: \"core/heading\", attrs: { level: 3, style: { typography: { fontSize: \"24px\", fontWeight: \"600\" }, spacing: { margin: { bottom: \"12px\" } } } }, innerHTML: \"Lightning Fast\" },\n"
-			. "        { blockName: \"core/paragraph\", attrs: { style: { color: { text: \"#6b7280\" }, typography: { fontSize: \"16px\", lineHeight: \"1.7\" } } }, innerHTML: \"Optimized for speed at every level. Your users will feel the difference from the first click.\" }\n"
-			. "      ]},\n"
-			. "      { blockName: \"core/column\", innerBlocks: [\n"
-			. "        { blockName: \"core/heading\", attrs: { level: 3, style: { typography: { fontSize: \"24px\", fontWeight: \"600\" }, spacing: { margin: { bottom: \"12px\" } } } }, innerHTML: \"Rock Solid\" },\n"
-			. "        { blockName: \"core/paragraph\", attrs: { style: { color: { text: \"#6b7280\" }, typography: { fontSize: \"16px\", lineHeight: \"1.7\" } } }, innerHTML: \"Built on a foundation of reliability and trust. 99.99% uptime guaranteed.\" }\n"
-			. "      ]},\n"
-			. "      { blockName: \"core/column\", innerBlocks: [\n"
-			. "        { blockName: \"core/heading\", attrs: { level: 3, style: { typography: { fontSize: \"24px\", fontWeight: \"600\" }, spacing: { margin: { bottom: \"12px\" } } } }, innerHTML: \"Beautifully Crafted\" },\n"
-			. "        { blockName: \"core/paragraph\", attrs: { style: { color: { text: \"#6b7280\" }, typography: { fontSize: \"16px\", lineHeight: \"1.7\" } } }, innerHTML: \"Every detail is considered. Every pixel is intentional. Design that speaks for itself.\" }\n"
-			. "      ]}\n"
-			. "    ]}\n"
-			. "  ]\n"
-			. "}]\n"
-			. "</example>\n\n"
-
-			. "<example name=\"Testimonial cards\">\n"
-			. "insert_blocks with blocks: [{\n"
-			. "  blockName: \"core/group\",\n"
-			. "  attrs: { align: \"full\", style: { color: { background: \"#f8fafc\" }, spacing: { padding: { top: \"100px\", bottom: \"100px\", left: \"40px\", right: \"40px\" } } }, layout: { type: \"constrained\" } },\n"
-			. "  innerBlocks: [\n"
-			. "    { blockName: \"core/heading\", attrs: { textAlign: \"center\", level: 2, style: { typography: { fontSize: \"42px\", fontWeight: \"700\" }, spacing: { margin: { bottom: \"64px\" } } } }, innerHTML: \"What Our Customers Say\" },\n"
-			. "    { blockName: \"core/columns\", attrs: { style: { spacing: { blockGap: { left: \"32px\" } } } }, innerBlocks: [\n"
-			. "      { blockName: \"core/column\", innerBlocks: [\n"
-			. "        { blockName: \"core/group\", attrs: { style: { color: { background: \"#ffffff\" }, spacing: { padding: { top: \"40px\", bottom: \"40px\", left: \"32px\", right: \"32px\" } }, border: { radius: \"12px\" } } }, innerBlocks: [\n"
-			. "          { blockName: \"core/paragraph\", attrs: { style: { typography: { fontSize: \"17px\", lineHeight: \"1.7\", fontStyle: \"italic\" }, color: { text: \"#374151\" } } }, innerHTML: \"\\\"Completely transformed how we manage content. We shipped our new site in half the time.\\\"\" },\n"
-			. "          { blockName: \"core/paragraph\", attrs: { style: { typography: { fontSize: \"15px\", fontWeight: \"600\" }, color: { text: \"#111827\" }, spacing: { margin: { top: \"20px\" } } } }, innerHTML: \"Sarah Chen, Head of Marketing at Acme\" }\n"
-			. "        ]}\n"
-			. "      ]},\n"
-			. "      { blockName: \"core/column\", innerBlocks: [\n"
-			. "        { blockName: \"core/group\", attrs: { style: { color: { background: \"#ffffff\" }, spacing: { padding: { top: \"40px\", bottom: \"40px\", left: \"32px\", right: \"32px\" } }, border: { radius: \"12px\" } } }, innerBlocks: [\n"
-			. "          { blockName: \"core/paragraph\", attrs: { style: { typography: { fontSize: \"17px\", lineHeight: \"1.7\", fontStyle: \"italic\" }, color: { text: \"#374151\" } } }, innerHTML: \"\\\"The best investment we made this year. Our conversion rate jumped 34% in the first month.\\\"\" },\n"
-			. "          { blockName: \"core/paragraph\", attrs: { style: { typography: { fontSize: \"15px\", fontWeight: \"600\" }, color: { text: \"#111827\" }, spacing: { margin: { top: \"20px\" } } } }, innerHTML: \"Marcus Rivera, Founder of Brightpath\" }\n"
-			. "        ]}\n"
-			. "      ]}\n"
-			. "    ]}\n"
-			. "  ]\n"
-			. "}]\n"
-			. "</example>\n\n"
-
-			. "<example name=\"Two-column story with image\">\n"
-			. "insert_blocks with blocks: [{\n"
-			. "  blockName: \"core/group\",\n"
-			. "  attrs: { align: \"full\", style: { color: { background: \"#faf5f0\" }, spacing: { padding: { top: \"100px\", bottom: \"100px\", left: \"40px\", right: \"40px\" } } }, layout: { type: \"constrained\" } },\n"
-			. "  innerBlocks: [\n"
-			. "    { blockName: \"core/columns\", attrs: { style: { spacing: { blockGap: { left: \"60px\" } } }, verticalAlignment: \"center\" }, innerBlocks: [\n"
-			. "      { blockName: \"core/column\", attrs: { width: \"55%\" }, innerBlocks: [\n"
-			. "        { blockName: \"core/heading\", attrs: { level: 2, style: { typography: { fontSize: \"38px\", fontWeight: \"700\", letterSpacing: \"-0.02em\" }, spacing: { margin: { bottom: \"24px\" } } } }, innerHTML: \"Our Story\" },\n"
-			. "        { blockName: \"core/paragraph\", attrs: { style: { typography: { fontSize: \"17px\", lineHeight: \"1.8\" }, color: { text: \"#4b5563\" }, spacing: { margin: { bottom: \"16px\" } } } }, innerHTML: \"What started in a small Portland garage in 2018 has grown into a movement. We believed craft coffee shouldn't be a luxury — it should be an everyday ritual.\" },\n"
-			. "        { blockName: \"core/paragraph\", attrs: { style: { typography: { fontSize: \"17px\", lineHeight: \"1.8\" }, color: { text: \"#4b5563\" } } }, innerHTML: \"Today we source from 12 countries, roast in small batches, and ship within 48 hours of roasting. Over 50,000 customers trust us to start their morning right.\" }\n"
-			. "      ]},\n"
-			. "      { blockName: \"core/column\", attrs: { width: \"45%\" }, innerBlocks: [\n"
-			. "        { blockName: \"core/image\", attrs: { url: \"https://placehold.co/600x500/2d1810/f5e6d3\", alt: \"Coffee beans being roasted in small batches\", style: { border: { radius: \"12px\" } } } }\n"
-			. "      ]}\n"
-			. "    ]}\n"
-			. "  ]\n"
-			. "}]\n"
-			. "</example>\n\n"
-
-			. "<example name=\"Stats section with large numbers\">\n"
-			. "insert_blocks with blocks: [{\n"
-			. "  blockName: \"core/group\",\n"
-			. "  attrs: { align: \"full\", style: { color: { background: \"#0f172a\", text: \"#ffffff\" }, spacing: { padding: { top: \"80px\", bottom: \"80px\", left: \"40px\", right: \"40px\" } } }, layout: { type: \"constrained\" } },\n"
-			. "  innerBlocks: [\n"
-			. "    { blockName: \"core/columns\", attrs: { style: { spacing: { blockGap: { left: \"40px\" } } } }, innerBlocks: [\n"
-			. "      { blockName: \"core/column\", innerBlocks: [\n"
-			. "        { blockName: \"core/heading\", attrs: { textAlign: \"center\", level: 3, style: { typography: { fontSize: \"48px\", fontWeight: \"800\" }, color: { text: \"#818cf8\" } } }, innerHTML: \"50,000+\" },\n"
-			. "        { blockName: \"core/paragraph\", attrs: { align: \"center\", style: { typography: { fontSize: \"16px\", textTransform: \"uppercase\", letterSpacing: \"0.05em\" }, color: { text: \"#94a3b8\" } } }, innerHTML: \"Happy Customers\" }\n"
-			. "      ]},\n"
-			. "      { blockName: \"core/column\", innerBlocks: [\n"
-			. "        { blockName: \"core/heading\", attrs: { textAlign: \"center\", level: 3, style: { typography: { fontSize: \"48px\", fontWeight: \"800\" }, color: { text: \"#818cf8\" } } }, innerHTML: \"99.9%\" },\n"
-			. "        { blockName: \"core/paragraph\", attrs: { align: \"center\", style: { typography: { fontSize: \"16px\", textTransform: \"uppercase\", letterSpacing: \"0.05em\" }, color: { text: \"#94a3b8\" } } }, innerHTML: \"Uptime Guaranteed\" }\n"
-			. "      ]},\n"
-			. "      { blockName: \"core/column\", innerBlocks: [\n"
-			. "        { blockName: \"core/heading\", attrs: { textAlign: \"center\", level: 3, style: { typography: { fontSize: \"48px\", fontWeight: \"800\" }, color: { text: \"#818cf8\" } } }, innerHTML: \"4.9/5\" },\n"
-			. "        { blockName: \"core/paragraph\", attrs: { align: \"center\", style: { typography: { fontSize: \"16px\", textTransform: \"uppercase\", letterSpacing: \"0.05em\" }, color: { text: \"#94a3b8\" } } }, innerHTML: \"Average Rating\" }\n"
-			. "      ]}\n"
-			. "    ]}\n"
-			. "  ]\n"
-			. "}]\n"
-			. "</example>\n\n"
-
-			. "<example name=\"Cover hero with background image overlay\">\n"
-			. "insert_blocks with blocks: [{\n"
-			. "  blockName: \"core/cover\",\n"
-			. "  attrs: { url: \"https://placehold.co/1920x800/0a0a1a/ffffff\", dimRatio: 70, minHeight: \"600px\", isDark: true, align: \"full\", style: { spacing: { padding: { top: \"160px\", bottom: \"160px\", left: \"40px\", right: \"40px\" } } }, layout: { type: \"constrained\" } },\n"
-			. "  innerBlocks: [\n"
-			. "    { blockName: \"core/heading\", attrs: { textAlign: \"center\", level: 1, style: { typography: { fontSize: \"64px\", fontWeight: \"800\", letterSpacing: \"-0.03em\", lineHeight: \"1.1\" }, color: { text: \"#ffffff\" } } }, innerHTML: \"Build Something Extraordinary\" },\n"
-			. "    { blockName: \"core/paragraph\", attrs: { align: \"center\", style: { typography: { fontSize: \"20px\", lineHeight: \"1.6\" }, color: { text: \"#d1d5db\" }, spacing: { margin: { top: \"24px\", bottom: \"48px\" } } } }, innerHTML: \"The all-in-one platform trusted by 50,000+ teams to ship faster and scale smarter.\" },\n"
-			. "    { blockName: \"core/buttons\", attrs: { layout: { type: \"flex\", justifyContent: \"center\" } }, innerBlocks: [\n"
-			. "      { blockName: \"core/button\", attrs: { style: { color: { background: \"#6366f1\", text: \"#ffffff\" }, typography: { fontSize: \"16px\", fontWeight: \"600\" }, border: { radius: \"100px\" }, spacing: { padding: { top: \"18px\", bottom: \"18px\", left: \"48px\", right: \"48px\" } } } }, innerHTML: \"Get Started Free\" },\n"
-			. "      { blockName: \"core/button\", attrs: { style: { color: { background: \"transparent\", text: \"#ffffff\" }, typography: { fontSize: \"16px\", fontWeight: \"600\" }, border: { radius: \"100px\", width: \"2px\", color: \"#ffffff\" }, spacing: { padding: { top: \"18px\", bottom: \"18px\", left: \"48px\", right: \"48px\" } } } }, innerHTML: \"Watch Demo\" }\n"
-			. "    ]}\n"
-			. "  ]\n"
-			. "}]\n"
-			. "</example>\n\n"
-
-			. "<example name=\"Media and text story section\">\n"
-			. "insert_blocks with blocks: [{\n"
-			. "  blockName: \"core/group\",\n"
-			. "  attrs: { align: \"full\", style: { color: { background: \"#ffffff\" }, spacing: { padding: { top: \"100px\", bottom: \"100px\", left: \"40px\", right: \"40px\" } } }, layout: { type: \"constrained\" } },\n"
-			. "  innerBlocks: [{\n"
-			. "    blockName: \"core/media-text\",\n"
-			. "    attrs: { mediaUrl: \"https://placehold.co/700x500/1e293b/f8fafc\", mediaAlt: \"Product dashboard showing real-time analytics\", mediaType: \"image\", mediaPosition: \"right\", isStackedOnMobile: true, style: { spacing: { blockGap: \"60px\" } } },\n"
-			. "    innerBlocks: [\n"
-			. "      { blockName: \"core/heading\", attrs: { level: 2, style: { typography: { fontSize: \"38px\", fontWeight: \"700\", letterSpacing: \"-0.02em\" }, spacing: { margin: { bottom: \"24px\" } } } }, innerHTML: \"Data That Drives Decisions\" },\n"
-			. "      { blockName: \"core/paragraph\", attrs: { style: { typography: { fontSize: \"17px\", lineHeight: \"1.8\" }, color: { text: \"#4b5563\" }, spacing: { margin: { bottom: \"16px\" } } } }, innerHTML: \"Stop guessing and start knowing. Our real-time analytics dashboard gives you instant visibility into what matters — user engagement, conversion funnels, and revenue trends.\" },\n"
-			. "      { blockName: \"core/paragraph\", attrs: { style: { typography: { fontSize: \"17px\", lineHeight: \"1.8\" }, color: { text: \"#4b5563\" } } }, innerHTML: \"Trusted by product teams at companies like Airbnb, Notion, and Linear to make data-driven decisions 10x faster.\" }\n"
-			. "    ]\n"
-			. "  }]\n"
-			. "}]\n"
-			. "</example>\n\n"
-
-			. "<example name=\"FAQ accordion section\">\n"
-			. "insert_blocks with blocks: [{\n"
-			. "  blockName: \"core/group\",\n"
-			. "  attrs: { align: \"full\", style: { color: { background: \"#f8fafc\" }, spacing: { padding: { top: \"100px\", bottom: \"100px\", left: \"40px\", right: \"40px\" } } }, layout: { type: \"constrained\" } },\n"
-			. "  innerBlocks: [\n"
-			. "    { blockName: \"core/heading\", attrs: { textAlign: \"center\", level: 2, style: { typography: { fontSize: \"42px\", fontWeight: \"700\", letterSpacing: \"-0.02em\" }, spacing: { margin: { bottom: \"16px\" } } } }, innerHTML: \"Frequently Asked Questions\" },\n"
-			. "    { blockName: \"core/paragraph\", attrs: { align: \"center\", style: { typography: { fontSize: \"18px\" }, color: { text: \"#6b7280\" }, spacing: { margin: { bottom: \"64px\" } } } }, innerHTML: \"Everything you need to know to get started.\" },\n"
-			. "    { blockName: \"core/details\", attrs: { summary: \"How does the 14-day free trial work?\", style: { spacing: { padding: { top: \"20px\", bottom: \"20px\" } }, border: { bottom: { width: \"1px\", color: \"#e5e7eb\" } }, typography: { fontSize: \"18px\", fontWeight: \"600\" } } }, innerBlocks: [\n"
-			. "      { blockName: \"core/paragraph\", attrs: { style: { typography: { fontSize: \"16px\", lineHeight: \"1.7\" }, color: { text: \"#4b5563\" } } }, innerHTML: \"Sign up with just your email — no credit card required. You get full access to every feature for 14 days. When the trial ends, choose a plan or your account pauses automatically.\" }\n"
-			. "    ]},\n"
-			. "    { blockName: \"core/details\", attrs: { summary: \"Can I cancel my subscription anytime?\", style: { spacing: { padding: { top: \"20px\", bottom: \"20px\" } }, border: { bottom: { width: \"1px\", color: \"#e5e7eb\" } }, typography: { fontSize: \"18px\", fontWeight: \"600\" } } }, innerBlocks: [\n"
-			. "      { blockName: \"core/paragraph\", attrs: { style: { typography: { fontSize: \"16px\", lineHeight: \"1.7\" }, color: { text: \"#4b5563\" } } }, innerHTML: \"Absolutely. There are no long-term contracts. Cancel in two clicks from your dashboard and you won't be billed again. Your data stays accessible for 30 days after cancellation.\" }\n"
-			. "    ]},\n"
-			. "    { blockName: \"core/details\", attrs: { summary: \"Do you offer dedicated support for teams?\", style: { spacing: { padding: { top: \"20px\", bottom: \"20px\" } }, border: { bottom: { width: \"1px\", color: \"#e5e7eb\" } }, typography: { fontSize: \"18px\", fontWeight: \"600\" } } }, innerBlocks: [\n"
-			. "      { blockName: \"core/paragraph\", attrs: { style: { typography: { fontSize: \"16px\", lineHeight: \"1.7\" }, color: { text: \"#4b5563\" } } }, innerHTML: \"Yes — every Business plan includes a dedicated success manager, priority Slack channel, and 99.9% SLA. Enterprise customers get custom onboarding and 24/7 phone support.\" }\n"
-			. "    ]}\n"
-			. "  ]\n"
-			. "}]\n"
-			. "</example>\n\n"
-
-			. "<example name=\"CTA banner with gradient\">\n"
-			. "insert_blocks with blocks: [{\n"
-			. "  blockName: \"core/cover\",\n"
-			. "  attrs: { url: \"https://placehold.co/1920x600/1e1b4b/ffffff\", dimRatio: 80, minHeight: \"400px\", isDark: true, align: \"full\", style: { color: { gradient: \"linear-gradient(135deg, rgba(99,102,241,0.9) 0%, rgba(168,85,247,0.9) 100%)\" }, spacing: { padding: { top: \"100px\", bottom: \"100px\", left: \"40px\", right: \"40px\" } } }, layout: { type: \"constrained\" } },\n"
-			. "  innerBlocks: [\n"
-			. "    { blockName: \"core/heading\", attrs: { textAlign: \"center\", level: 2, style: { typography: { fontSize: \"42px\", fontWeight: \"700\" }, color: { text: \"#ffffff\" } } }, innerHTML: \"Ready to Transform Your Workflow?\" },\n"
-			. "    { blockName: \"core/paragraph\", attrs: { align: \"center\", style: { typography: { fontSize: \"20px\" }, color: { text: \"#e0e7ff\" }, spacing: { margin: { top: \"16px\", bottom: \"40px\" } } } }, innerHTML: \"Join 10,000+ teams who shipped faster this quarter. Start your free trial — no credit card needed.\" },\n"
-			. "    { blockName: \"core/buttons\", attrs: { layout: { type: \"flex\", justifyContent: \"center\" } }, innerBlocks: [\n"
-			. "      { blockName: \"core/button\", attrs: { style: { color: { background: \"#ffffff\", text: \"#4f46e5\" }, typography: { fontSize: \"16px\", fontWeight: \"700\", textTransform: \"uppercase\", letterSpacing: \"0.03em\" }, border: { radius: \"100px\" }, spacing: { padding: { top: \"18px\", bottom: \"18px\", left: \"48px\", right: \"48px\" } } } }, innerHTML: \"Start Free Trial\" },\n"
-			. "      { blockName: \"core/button\", attrs: { style: { color: { background: \"transparent\", text: \"#ffffff\" }, typography: { fontSize: \"16px\", fontWeight: \"600\" }, border: { radius: \"100px\", width: \"2px\", color: \"#ffffff\" }, spacing: { padding: { top: \"18px\", bottom: \"18px\", left: \"48px\", right: \"48px\" } } } }, innerHTML: \"Talk to Sales\" }\n"
-			. "    ]}\n"
-			. "  ]\n"
-			. "}]\n"
+			. "<example name=\"Styled section pattern\">\n"
+			. "Every section follows this structure: core/group (align:\"full\", background, padding 80-120px vertical) > constrained layout > heading + content + optional CTA.\n"
+			. "Dark sections: background #0a0a0a-#1a1a2e, text #ffffff, muted text #9ca3af.\n"
+			. "Light sections: background #f8fafc-#ffffff, text #111827, muted text #6b7280.\n"
+			. "Buttons: pill shape (radius 100px), generous padding (18px 48px), uppercase 600 weight.\n"
+			. "Use core/cover for image heroes, core/media-text for side-by-side, core/details for FAQ, core/columns for grids.\n"
+			. "PREFER patterns via get_pattern for standard sections — only build raw blocks for unique/custom layouts.\n"
 			. "</example>\n"
 			. "</examples>\n\n";
 	}
@@ -637,17 +477,33 @@ class Prompt_Builder {
 			. "CREATION TOOLS:\n"
 			. "- create_post: Creates a new post/page (defaults to draft). Returns post_id.\n"
 			. "- edit_post: Updates metadata only (title, status, excerpt). NOT for content — use insert_blocks.\n\n"
+			. "PATTERN TOOLS (execute immediately):\n"
+			. "- list_patterns: Browse all curated patterns by category. Returns names, categories, and descriptions.\n"
+			. "- get_pattern: Retrieve a pattern's block structure with variable overrides (colors, text, images). "
+			. "Returns ready-to-use blocks for insert_blocks.\n"
+			. "- create_pattern: Save a new reusable pattern to the library.\n\n"
+			. "DESIGN TOOLS (execute immediately):\n"
+			. "- set_page_template: Set a page template (use \"blank\" for full-page builds).\n"
+			. "- edit_global_styles: Modify theme-level typography, colors, and spacing.\n"
+			. "- add_custom_css: Add custom CSS for animations, effects, and fine-tuning.\n"
+			. "- screenshot_page: Capture a screenshot for visual review after full-page builds.\n\n"
+			. "CONTENT INTELLIGENCE TOOLS (execute immediately):\n"
+			. "- read_url: Fetch and extract content from an external URL (text, headings, meta). "
+			. "Use for research, competitor analysis, or referencing external content.\n"
+			. "- manage_seo: Get or update SEO meta (title, description, Open Graph, robots). "
+			. "Auto-detects Yoast, AIOSEO, Rank Math, or uses native fallback.\n\n"
+			. "SITE APPEARANCE TOOLS (require confirmation for switch):\n"
+			. "- manage_theme: List themes, get active theme info, or switch themes.\n"
+			. "- edit_template_parts: List, get, or update template parts (header, footer) in block themes.\n\n"
+			. "MEDIA TOOLS (execute immediately, no confirmation):\n"
+			. "- search_media: Search the media library for real images. ALWAYS call this before building pages.\n"
+			. "- import_media: Download an image from any external URL into the media library.\n\n"
 			. "DESTRUCTIVE TOOLS (require Plan-Confirm-Execute):\n"
-			. "- delete_post: Moves to trash. Always confirm first.\n"
-			. "- deactivate_plugin: Confirm before deactivating.\n\n"
+			. "- delete_post, deactivate_plugin: Always confirm first.\n\n"
 			. "ADMIN TOOLS (require confirmation):\n"
 			. "- update_settings, manage_permalinks, install_plugin, activate_plugin, create_user.\n\n"
-			. "MEDIA TOOLS (execute immediately, no confirmation):\n"
-			. "- search_media: Search the media library for real images. Call with a keyword or leave empty for recent uploads. "
-			. "Returns image URLs, IDs, alt text, and dimensions. ALWAYS call this before building pages to use the site's real images.\n"
-			. "- import_media: Download an image from any external URL and import it into the media library. "
-			. "Use when the user provides an image URL, or when you need a specific image not in the library. "
-			. "Returns the new local URL and attachment ID. Always set descriptive alt_text when importing.\n\n"
+			. "MODERATION TOOLS:\n"
+			. "- manage_comments: List, approve, unapprove, spam, trash, reply to, or bulk-moderate comments.\n\n"
 			. "READ-ONLY TOOLS (respond directly):\n"
 			. "- site_health: Diagnostics. No confirmation needed.\n\n"
 			. "IMPORTANT: When asked to \"build a page\" while in the editor, call insert_blocks with position \"replace\". "
@@ -665,10 +521,13 @@ class Prompt_Builder {
 	 */
 	private function get_reasoning_section() {
 		return "<reasoning>\n"
-			. "For multi-section pages: first call search_media to find available images, then determine purpose/audience, plan section flow (hero > features > proof > CTA), "
-			. "pick a cohesive 2-3 color palette, then follow the CHUNKING RULE to split across multiple insert_blocks calls.\n"
-			. "For site diagnostics: read current state first, identify root cause, propose fix, execute after confirmation.\n"
-			. "For bulk operations: confirm scope with user, execute in steps, report progress.\n"
+			. "FULL PAGE BUILDS: set_page_template \"blank\" -> search_media for images -> list_patterns to find sections -> "
+			. "get_pattern + insert_blocks per section (replace first, append rest). Use patterns for standard sections; raw blocks only for unique/custom layouts.\n"
+			. "SINGLE SECTION EDITS: read_blocks to see current content -> get_pattern or build raw blocks -> insert_blocks with \"append\" or specific position.\n"
+			. "DESIGN CHANGES: edit_global_styles for theme-wide changes, add_custom_css for page-specific effects/animations.\n"
+			. "SITE ADMIN: read current state first, identify what to change, propose fix, confirm with user, execute.\n"
+			. "BULK OPERATIONS: confirm scope with user, execute in steps, report progress.\n"
+			. "SEO: After building a page, offer to set SEO meta (title, description) via manage_seo.\n"
 			. "Do NOT explain your reasoning aloud. Just execute and summarize results.\n"
 			. "</reasoning>\n\n";
 	}
@@ -688,6 +547,76 @@ class Prompt_Builder {
 			. "For informational queries: use clear, concise language with bullet points and specific details.\n"
 			. "On errors: explain what went wrong and suggest what to try next.\n"
 			. "</response_format>\n\n";
+	}
+
+	/**
+	 * Get the pattern library section.
+	 *
+	 * Teaches the AI about the curated pattern library and the
+	 * PATTERN-FIRST workflow for building professional pages.
+	 *
+	 * @since 1.0.0
+	 * @return string
+	 */
+	private function get_pattern_library_section() {
+		return "<pattern_library>\n"
+			. "You have access to a curated library of 22+ professionally designed patterns across 10 categories, "
+			. "plus 4 full-page blueprints (landing-page, saas-landing, startup-page, about-page).\n\n"
+			. "PATTERN-FIRST RULE: For standard page sections, ALWAYS use get_pattern instead of building raw blocks. "
+			. "Patterns are pre-designed, responsive, and visually polished. Use them for:\n"
+			. "- Heroes, features, testimonials, pricing, CTAs, stats, FAQ, footers, headers, content sections.\n\n"
+			. "Pattern workflow:\n"
+			. "1. list_patterns to see available patterns and their categories.\n"
+			. "2. get_pattern with the pattern slug and variable overrides to customize text, colors, and images.\n"
+			. "3. insert_blocks with the returned block structure.\n\n"
+			. "Variable overrides let you customize ANY pattern without editing raw blocks:\n"
+			. "- Text: {\"heading\": \"Your Title\", \"description\": \"Your text\"}\n"
+			. "- Colors: {\"primary_color\": \"#hex\", \"background_color\": \"#hex\"}\n"
+			. "- Images: {\"image_url\": \"https://...\"}\n\n"
+			. "Only build raw blocks for truly unique/custom sections that no pattern covers.\n"
+			. "</pattern_library>\n\n";
+	}
+
+	/**
+	 * Get the page building recipe section.
+	 *
+	 * Numbered checklist for building complete, professional pages.
+	 *
+	 * @since 1.0.0
+	 * @return string
+	 */
+	private function get_page_building_recipe_section() {
+		return "<page_building_recipe>\n"
+			. "When building a FULL PAGE (3+ sections), follow this recipe:\n"
+			. "1. TEMPLATE: set_page_template to \"blank\" for a clean canvas (no theme header/footer clutter).\n"
+			. "2. MEDIA: search_media to find real site images for use in sections.\n"
+			. "3. PLAN: Check if a blueprint matches (list_patterns category \"blueprints\"). "
+			. "Otherwise compose a section sequence: hero > features/benefits > social proof > details > CTA.\n"
+			. "4. BUILD: For each section, call get_pattern with variable overrides, then insert_blocks. "
+			. "First section uses position \"replace\", all subsequent use \"append\". One section per tool call.\n"
+			. "5. POLISH: Use add_custom_css for animations, hover effects, or spacing tweaks if needed.\n"
+			. "6. REVIEW: For full pages (5+ sections), use screenshot_page to visually evaluate the result.\n"
+			. "</page_building_recipe>\n\n";
+	}
+
+	/**
+	 * Get the self-critique section.
+	 *
+	 * Teaches the AI to evaluate its own work on full-page builds.
+	 *
+	 * @since 1.0.0
+	 * @return string
+	 */
+	private function get_self_critique_section() {
+		return "<self_critique>\n"
+			. "After building a full page (5+ sections), use screenshot_page to evaluate your work. Check:\n"
+			. "- Color consistency: Do all sections use the same palette?\n"
+			. "- Typography hierarchy: Are heading sizes consistent across sections?\n"
+			. "- Spacing: Is vertical rhythm consistent (same padding between sections)?\n"
+			. "- CTA prominence: Is the primary call-to-action visually dominant?\n"
+			. "- Contrast: Is text readable against all backgrounds?\n"
+			. "Skip self-critique for single-section edits or non-page tasks.\n"
+			. "</self_critique>\n\n";
 	}
 
 	/**

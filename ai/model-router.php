@@ -120,6 +120,21 @@ class Model_Router {
 		'columns',
 		'heading',
 		'button',
+		'seo',
+		'meta description',
+		'meta title',
+		'open graph',
+		'theme',
+		'switch theme',
+		'template part',
+		'header',
+		'footer',
+		'comments',
+		'spam',
+		'moderate',
+		'read url',
+		'fetch',
+		'research',
 	];
 
 	/**
