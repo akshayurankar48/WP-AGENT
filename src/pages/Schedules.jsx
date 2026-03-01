@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from '@wordpress/element';
 import apiFetch from '@wordpress/api-fetch';
-import { Badge, Button, Toaster, toast } from '@bsf/force-ui';
+import { Badge, Button, toast } from '@bsf/force-ui';
 import {
 	CalendarClock,
 	Play,

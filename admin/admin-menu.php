@@ -85,6 +85,15 @@ class Admin_Menu {
 
 		add_submenu_page(
 			'wp-agent',
+			__( 'History', 'wp-agent' ),
+			__( 'History', 'wp-agent' ),
+			'manage_options',
+			'wp-agent-history',
+			[ $this, 'render_history' ]
+		);
+
+		add_submenu_page(
+			'wp-agent',
 			__( 'Schedules', 'wp-agent' ),
 			__( 'Schedules', 'wp-agent' ),
 			'manage_options',
@@ -132,6 +141,18 @@ class Admin_Menu {
 	public function render_settings() {
 		?>
 		<div id="wp-agent-settings" class="wp-agent-wrap"></div>
+		<?php
+	}
+
+	/**
+	 * Render the History page.
+	 *
+	 * @since 1.1.0
+	 * @return void
+	 */
+	public function render_history() {
+		?>
+		<div id="wp-agent-history" class="wp-agent-wrap"></div>
 		<?php
 	}
 

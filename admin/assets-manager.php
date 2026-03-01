@@ -34,6 +34,7 @@ class Assets_Manager {
 	private const PAGE_HOOKS = [
 		'toplevel_page_wp-agent',
 		'wp-agent_page_wp-agent-settings',
+		'wp-agent_page_wp-agent-history',
 		'wp-agent_page_wp-agent-schedules',
 		'wp-agent_page_wp-agent-capabilities',
 		'wp-agent_page_wp-agent-help',
