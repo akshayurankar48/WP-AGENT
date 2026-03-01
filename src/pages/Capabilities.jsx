@@ -207,7 +207,7 @@ const CATEGORIES = [
 
 function ActionCard( { name, description } ) {
 	return (
-		<div className="bg-background-primary border-0.5 border-solid border-border-subtle rounded-lg p-4 flex flex-col gap-1.5">
+		<div className="bg-background-primary border border-solid border-border-subtle rounded-xl p-4 flex flex-col gap-1.5 hover:shadow-md hover:border-border-interactive transition-all duration-200">
 			<h3 className="text-sm font-semibold text-text-primary">
 				{ name }
 			</h3>
