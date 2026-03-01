@@ -29,6 +29,20 @@ class Search_Media implements Action_Interface {
 	const MAX_PER_PAGE = 20;
 
 	/**
+	 * Allowed MIME type filters.
+	 *
+	 * @var string[]
+	 */
+	const ALLOWED_MIME_TYPES = [
+		'image',
+		'image/jpeg',
+		'image/png',
+		'image/webp',
+		'image/gif',
+		'image/svg+xml',
+	];
+
+	/**
 	 * Get the action name.
 	 *
 	 * @since 1.0.0
@@ -67,7 +81,8 @@ class Search_Media implements Action_Interface {
 				],
 				'mime_type' => [
 					'type'        => 'string',
-					'description' => 'Filter by MIME type. Use "image" for all images, or "image/jpeg", "image/png", "image/webp" for specific formats. Defaults to "image".',
+					'enum'        => self::ALLOWED_MIME_TYPES,
+					'description' => 'Filter by MIME type. Defaults to "image" (all image formats).',
 				],
 				'per_page'  => [
 					'type'        => 'integer',
@@ -108,7 +123,8 @@ class Search_Media implements Action_Interface {
 	 */
 	public function execute( array $params ): array {
 		$search    = ! empty( $params['search'] ) ? sanitize_text_field( $params['search'] ) : '';
-		$mime_type = ! empty( $params['mime_type'] ) ? sanitize_mime_type( $params['mime_type'] ) : 'image';
+		$raw_mime  = ! empty( $params['mime_type'] ) ? sanitize_mime_type( $params['mime_type'] ) : 'image';
+		$mime_type = in_array( $raw_mime, self::ALLOWED_MIME_TYPES, true ) ? $raw_mime : 'image';
 		$per_page  = isset( $params['per_page'] ) ? absint( $params['per_page'] ) : 12;
 		$per_page  = max( 1, min( self::MAX_PER_PAGE, $per_page ) );
 
@@ -134,6 +150,8 @@ class Search_Media implements Action_Interface {
 				$results[] = $item;
 			}
 		}
+
+		wp_reset_postdata();
 
 		if ( empty( $results ) ) {
 			$message = $search
@@ -186,7 +204,13 @@ class Search_Media implements Action_Interface {
 	 * @return array|null Formatted attachment data, or null if URL is missing.
 	 */
 	private function format_attachment( $attachment ) {
-		$id  = $attachment->ID;
+		$id = $attachment->ID;
+
+		// Per-attachment permission check (mirrors read-blocks.php pattern).
+		if ( ! current_user_can( 'read_post', $id ) ) {
+			return null;
+		}
+
 		$url = wp_get_attachment_url( $id );
 
 		if ( ! $url ) {
@@ -194,7 +218,11 @@ class Search_Media implements Action_Interface {
 		}
 
 		$metadata = wp_get_attachment_metadata( $id );
-		$alt      = get_post_meta( $id, '_wp_attachment_image_alt', true );
+		if ( ! is_array( $metadata ) ) {
+			$metadata = [];
+		}
+
+		$alt = get_post_meta( $id, '_wp_attachment_image_alt', true );
 
 		$item = [
 			'id'    => $id,
@@ -212,12 +240,12 @@ class Search_Media implements Action_Interface {
 
 		// Include available sizes for images.
 		if ( ! empty( $metadata['sizes'] ) ) {
-			$sizes = [];
+			$base_url = trailingslashit( dirname( $url ) );
+			$sizes    = [];
 			foreach ( $metadata['sizes'] as $size_name => $size_data ) {
-				$size_url = wp_get_attachment_image_url( $id, $size_name );
-				if ( $size_url ) {
-					$sizes[ $size_name ] = [
-						'url'    => esc_url( $size_url ),
+				if ( ! empty( $size_data['file'] ) ) {
+					$sizes[ sanitize_key( $size_name ) ] = [
+						'url'    => esc_url( $base_url . $size_data['file'] ),
 						'width'  => absint( $size_data['width'] ),
 						'height' => absint( $size_data['height'] ),
 					];
