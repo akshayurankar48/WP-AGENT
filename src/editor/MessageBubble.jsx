@@ -1,7 +1,8 @@
 /**
  * Single chat message bubble.
  *
- * Supports lightweight markdown: **bold**, ## headings, `code`.
+ * Supports lightweight markdown: **bold**, `code`, ## headings,
+ * bullet lists, numbered lists, and [links](url).
  *
  * @package
  * @since 1.0.0
@@ -152,15 +153,91 @@ const markdownH3 = css`
 	line-height: 1.3;
 `;
 
+const markdownList = css`
+	margin: 4px 0;
+	padding-left: 18px;
+	line-height: 1.55;
+
+	li {
+		margin-bottom: 2px;
+	}
+`;
+
+const markdownLink = css`
+	color: ${ colors.primary };
+	text-decoration: none;
+	font-weight: 500;
+
+	&:hover {
+		text-decoration: underline;
+	}
+`;
+
 /* ── Helpers ────────────────────────────────────────────────────── */
+
+/**
+ * Parse inline markdown (bold, code, links) within a single line.
+ *
+ * @param {string} text      Raw text with inline markdown.
+ * @param {string} keyPrefix Prefix for React keys.
+ * @return {Array} Array of React elements and strings.
+ */
+const parseInline = ( text, keyPrefix = '' ) => {
+	const parts = [];
+	let remaining = text;
+	let idx = 0;
+
+	while ( remaining.length > 0 ) {
+		// Match: **bold**, `code`, or [link](url).
+		const match = remaining.match(
+			/(\*\*(.+?)\*\*|`([^`]+)`|\[([^\]]+)\]\(([^)]+)\))/
+		);
+		if ( ! match ) {
+			parts.push( remaining );
+			break;
+		}
+
+		const before = remaining.slice( 0, match.index );
+		if ( before ) {
+			parts.push( before );
+		}
+
+		if ( match[ 2 ] ) {
+			// **bold**
+			parts.push( <strong key={ `${ keyPrefix }b${ idx }` }>{ match[ 2 ] }</strong> );
+		} else if ( match[ 3 ] ) {
+			// `code`
+			parts.push( <code key={ `${ keyPrefix }c${ idx }` }>{ match[ 3 ] }</code> );
+		} else if ( match[ 4 ] && match[ 5 ] ) {
+			// [text](url)
+			parts.push(
+				<a
+					key={ `${ keyPrefix }a${ idx }` }
+					href={ match[ 5 ] }
+					target="_blank"
+					rel="noopener noreferrer"
+					className={ markdownLink }
+				>
+					{ match[ 4 ] }
+				</a>
+			);
+		}
+
+		remaining = remaining.slice( match.index + match[ 0 ].length );
+		idx++;
+	}
+
+	return parts;
+};
 
 /**
  * Parse lightweight markdown into React elements.
  *
  * Supports:
- * - **bold**
- * - `inline code`
- * - ## headings (line-level)
+ * - **bold**, `inline code`, [links](url)
+ * - ## and ### headings
+ * - Bullet lists (- item or * item)
+ * - Numbered lists (1. item)
  *
  * @param {string} text
  */
@@ -170,58 +247,74 @@ const parseMarkdown = ( text ) => {
 	}
 
 	const lines = text.split( '\n' );
+	const elements = [];
+	let i = 0;
 
-	return lines.map( ( line, lineIdx ) => {
+	while ( i < lines.length ) {
+		const line = lines[ i ];
+
 		// Heading (## or ###).
 		const headingMatch = line.match( /^(#{2,3})\s+(.+)$/ );
 		if ( headingMatch ) {
 			const level = headingMatch[ 1 ].length;
-			const headingContent = headingMatch[ 2 ];
 			const HeadingTag = level === 2 ? 'h4' : 'h5';
-			return (
+			elements.push(
 				<HeadingTag
-					key={ lineIdx }
+					key={ i }
 					className={ level === 2 ? markdownH2 : markdownH3 }
 				>
-					{ headingContent }
+					{ parseInline( headingMatch[ 2 ], `h${ i }-` ) }
 				</HeadingTag>
 			);
+			i++;
+			continue;
 		}
 
-		// Inline: **bold** and `code`.
-		const parts = [];
-		let remaining = line;
-		let partIdx = 0;
-
-		while ( remaining.length > 0 ) {
-			const match = remaining.match( /(\*\*(.+?)\*\*|`([^`]+)`)/ );
-			if ( ! match ) {
-				parts.push( remaining );
-				break;
+		// Bullet list (- item or * item): collect consecutive lines.
+		if ( /^[\-\*]\s+/.test( line ) ) {
+			const items = [];
+			while ( i < lines.length && /^[\-\*]\s+/.test( lines[ i ] ) ) {
+				items.push( lines[ i ].replace( /^[\-\*]\s+/, '' ) );
+				i++;
 			}
-
-			const before = remaining.slice( 0, match.index );
-			if ( before ) {
-				parts.push( before );
-			}
-
-			if ( match[ 2 ] ) {
-				parts.push( <strong key={ `b${ partIdx }` }>{ match[ 2 ] }</strong> );
-			} else if ( match[ 3 ] ) {
-				parts.push( <code key={ `c${ partIdx }` }>{ match[ 3 ] }</code> );
-			}
-
-			remaining = remaining.slice( match.index + match[ 0 ].length );
-			partIdx++;
+			elements.push(
+				<ul key={ `ul${ i }` } className={ markdownList }>
+					{ items.map( ( item, j ) => (
+						<li key={ j }>{ parseInline( item, `ul${ i }-${ j }-` ) }</li>
+					) ) }
+				</ul>
+			);
+			continue;
 		}
 
-		return (
-			<span key={ lineIdx }>
-				{ parts }
-				{ lineIdx < lines.length - 1 ? '\n' : '' }
+		// Numbered list (1. item): collect consecutive lines.
+		if ( /^\d+\.\s+/.test( line ) ) {
+			const items = [];
+			while ( i < lines.length && /^\d+\.\s+/.test( lines[ i ] ) ) {
+				items.push( lines[ i ].replace( /^\d+\.\s+/, '' ) );
+				i++;
+			}
+			elements.push(
+				<ol key={ `ol${ i }` } className={ markdownList }>
+					{ items.map( ( item, j ) => (
+						<li key={ j }>{ parseInline( item, `ol${ i }-${ j }-` ) }</li>
+					) ) }
+				</ol>
+			);
+			continue;
+		}
+
+		// Regular line with inline formatting.
+		elements.push(
+			<span key={ i }>
+				{ parseInline( line, `l${ i }-` ) }
+				{ i < lines.length - 1 ? '\n' : '' }
 			</span>
 		);
-	} );
+		i++;
+	}
+
+	return elements;
 };
 
 /* ── Component ──────────────────────────────────────────────────── */

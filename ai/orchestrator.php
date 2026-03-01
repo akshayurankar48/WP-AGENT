@@ -498,11 +498,10 @@ class Orchestrator {
 			if ( ! is_array( $params ) ) {
 				// Malformed JSON — likely the response was truncated.
 				$result = [
-					'success' => false,
-					'message' => 'Tool call arguments were malformed (possibly truncated). '
-						. 'For complex pages, split into 2-3 smaller insert_blocks calls instead of one large call. '
-						. 'First call: use position "replace" for hero + first 2-3 sections. '
-						. 'Subsequent calls: use position "append" for remaining sections.',
+					'success'    => false,
+					'error_code' => 'malformed_arguments',
+					'message'    => 'Tool call arguments were malformed or truncated by the model.',
+					'recovery'   => 'Split the operation into smaller parts. For insert_blocks: use 2-3 sections per call (first call with position "replace", subsequent with "append"). For other tools: simplify the parameters and try again.',
 				];
 
 				$actions_taken[] = [
@@ -572,9 +571,14 @@ class Orchestrator {
 			$result = Action_Registry::get_instance()->dispatch( $fn_name, $params );
 
 			if ( is_wp_error( $result ) ) {
+				$error_message = $result->get_error_message();
+				$error_code    = $result->get_error_code();
+
 				$tool_result = [
-					'success' => false,
-					'message' => $result->get_error_message(),
+					'success'    => false,
+					'message'    => $error_message,
+					'error_code' => $error_code,
+					'recovery'   => $this->get_recovery_hint( $fn_name, $error_code, $error_message ),
 				];
 			} else {
 				$tool_result = $result;
@@ -595,15 +599,20 @@ class Orchestrator {
 			}
 
 			// Emit progress event after action execution.
+			$action_success = ! empty( $tool_result['success'] );
 			if ( $callback ) {
-				call_user_func( $callback, [
+				$progress_event = [
 					'type'    => 'progress',
 					'stage'   => 'action_complete',
 					'action'  => $fn_name,
 					'index'   => $call_index,
 					'total'   => $total_calls,
-					'success' => ! empty( $tool_result['success'] ),
-				] );
+					'success' => $action_success,
+				];
+				if ( ! $action_success && ! empty( $tool_result['message'] ) ) {
+					$progress_event['error'] = $tool_result['message'];
+				}
+				call_user_func( $callback, $progress_event );
 			}
 
 			$actions_taken[] = [
@@ -925,6 +934,55 @@ class Orchestrator {
 		}
 
 		return Model_Router::get_instance()->select_model( $user_message, $history );
+	}
+
+	/**
+	 * Generate a recovery hint for a failed action.
+	 *
+	 * Returns an actionable suggestion the AI can use to explain the failure
+	 * and propose an alternative approach to the user.
+	 *
+	 * @since 1.1.0
+	 *
+	 * @param string $action_name  The action that failed.
+	 * @param string $error_code   WP_Error code.
+	 * @param string $error_message The error message.
+	 * @return string Recovery hint for the AI.
+	 */
+	private function get_recovery_hint( $action_name, $error_code, $error_message ) {
+		// Action-specific recovery hints.
+		$action_hints = [
+			'insert_blocks'    => 'If blocks were truncated, split into smaller chunks (2-3 sections per call). If JSON was malformed, simplify the block structure.',
+			'install_plugin'   => 'Verify the plugin slug is correct using list_plugins. The plugin may already be installed or the slug may be misspelled.',
+			'activate_plugin'  => 'Check if the plugin is installed first with list_plugins. It may need to be installed before activation.',
+			'deactivate_plugin' => 'Verify the plugin is currently active with list_plugins.',
+			'create_post'      => 'Check if the post type exists and the user has permission to create it.',
+			'edit_post'        => 'Verify the post ID exists by searching for it. The post may have been deleted.',
+			'delete_post'      => 'Confirm the post ID exists and the user has permission to delete it.',
+			'import_media'     => 'The URL may be inaccessible. Try a different image URL or use search_media to find existing images.',
+			'manage_menus'     => 'Check the menu exists first with operation "list". Menu names are case-sensitive.',
+			'update_settings'  => 'Verify the setting key is valid. Use site_health to check current configuration.',
+			'get_pattern'      => 'The pattern slug may be wrong. Call list_patterns first to see available patterns and their exact slugs.',
+			'screenshot_page'  => 'The page may not be published or accessible. Ensure the post is saved and has a permalink.',
+			'manage_seo'       => 'No SEO plugin detected. The native fallback handles basic meta. Suggest installing Yoast or Rank Math for full SEO features.',
+			'generate_image'   => 'Image generation may have failed due to API limits. Try using search_media or import_media as alternatives.',
+			'web_search'       => 'Search may have failed due to API key issues. Check WP Agent > Settings to verify the Tavily API key is configured.',
+		];
+
+		if ( isset( $action_hints[ $action_name ] ) ) {
+			return $action_hints[ $action_name ];
+		}
+
+		// Error-code-based hints.
+		if ( 'rest_forbidden' === $error_code || 'forbidden' === $error_code ) {
+			return 'The current user lacks permission for this action. Check the user role.';
+		}
+
+		if ( 'not_found' === $error_code || 'rest_post_invalid_id' === $error_code ) {
+			return 'The requested resource was not found. Verify the ID or slug exists.';
+		}
+
+		return 'Explain the error to the user in simple terms and suggest an alternative approach.';
 	}
 
 	/**
