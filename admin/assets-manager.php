@@ -58,6 +58,7 @@ class Assets_Manager {
 	 */
 	public function __construct() {
 		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_assets' ] );
+		add_action( 'enqueue_block_editor_assets', [ $this, 'enqueue_editor_assets' ] );
 	}
 
 	/**
@@ -114,6 +115,51 @@ class Assets_Manager {
 		wp_add_inline_style(
 			'wp-agent-admin',
 			'.wp-agent-wrap ~ .notice, .wp-agent-wrap ~ .updated, .wp-agent-wrap ~ .error, .wp-agent-wrap .notice, div.notice:not(.wp-agent-notice) { display: none !important; } #wpcontent { padding-left: 0; } #wpbody-content { padding-bottom: 0; }'
+		);
+	}
+
+	/**
+	 * Enqueue block editor assets for the Gutenberg sidebar.
+	 *
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public function enqueue_editor_assets() {
+		$asset_file = WP_AGENT_DIR . 'build/editor.asset.php';
+
+		if ( ! file_exists( $asset_file ) ) {
+			return;
+		}
+
+		$asset = require $asset_file;
+
+		wp_enqueue_script(
+			'wp-agent-editor',
+			WP_AGENT_URL . 'build/editor.js',
+			$asset['dependencies'],
+			$asset['version'],
+			true
+		);
+
+		wp_enqueue_style(
+			'wp-agent-editor',
+			WP_AGENT_URL . 'build/style-main.css',
+			[],
+			$asset['version']
+		);
+
+		wp_localize_script(
+			'wp-agent-editor',
+			'wpAgentData',
+			[
+				'restUrl'   => rest_url( 'wp-agent/v1/' ),
+				'nonce'     => wp_create_nonce( 'wp_rest' ),
+				'hasApiKey' => ! empty( get_option( \WPAgent\AI\Open_Router_Client::API_KEY_OPTION ) ),
+				'userId'    => get_current_user_id(),
+				'userName'  => wp_get_current_user()->display_name,
+				'version'   => WP_AGENT_VER,
+				'adminUrl'  => admin_url(),
+			]
 		);
 	}
 }

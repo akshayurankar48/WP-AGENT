@@ -5,6 +5,7 @@ module.exports = {
 	...defaultConfig,
 	entry: {
 		main: path.resolve( __dirname, 'src/index.js' ),
+		editor: path.resolve( __dirname, 'src/editor.js' ),
 	},
 	output: {
 		...defaultConfig.output,
