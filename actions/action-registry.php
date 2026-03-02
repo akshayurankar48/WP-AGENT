@@ -158,6 +158,18 @@ class Action_Registry {
 	}
 
 	/**
+	 * Get all registered actions.
+	 *
+	 * @since 1.0.0
+	 * @return array<string, Action_Interface> All registered actions keyed by name.
+	 */
+	public function get_all_actions() {
+		$this->maybe_init();
+
+		return $this->actions;
+	}
+
+	/**
 	 * Lazy initialization.
 	 *
 	 * Fires the 'wp_agent_register_actions' hook on first access so

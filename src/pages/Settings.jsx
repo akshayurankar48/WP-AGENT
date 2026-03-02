@@ -8,9 +8,11 @@ import {
 	Palette,
 	Cpu,
 	Shield,
+	Zap,
 	Settings as SettingsIcon,
 } from 'lucide-react';
 import ApiKeyForm from '../components/ApiKeyForm';
+import ProviderKeys from '../components/ProviderKeys';
 import ModelSelector from '../components/ModelSelector';
 import RolePermissions from '../components/RolePermissions';
 import BrandPresets from '../components/BrandPresets';
@@ -20,6 +22,7 @@ const { restUrl, nonce } = window.wpAgentData || {};
 
 const NAV_ITEMS = [
 	{ slug: 'general', label: 'API Keys', icon: KeyRound },
+	{ slug: 'providers', label: 'AI Backend', icon: Zap },
 	{ slug: 'brand', label: 'Brand', icon: Palette },
 	{ slug: 'model', label: 'AI Model', icon: Cpu },
 	{ slug: 'permissions', label: 'Permissions', icon: Shield },
@@ -37,6 +40,9 @@ export default function Settings() {
 	const [ defaultModel, setDefaultModel ] = useState( '' );
 	const [ allowedRoles, setAllowedRoles ] = useState( [ 'administrator' ] );
 	const [ brand, setBrand ] = useState( {} );
+	const [ aiBackend, setAiBackend ] = useState( 'openrouter' );
+	const [ configuredProviders, setConfiguredProviders ] = useState( {} );
+	const [ providerKeys, setProviderKeys ] = useState( {} );
 
 	const fetchSettings = useCallback( async () => {
 		try {
@@ -55,6 +61,8 @@ export default function Settings() {
 			setDefaultModel( data.default_model || '' );
 			setAllowedRoles( data.allowed_roles || [ 'administrator' ] );
 			setBrand( data.brand || {} );
+			setAiBackend( data.ai_backend || 'openrouter' );
+			setConfiguredProviders( data.configured_providers || {} );
 		} catch ( error ) {
 			toast.error( 'Failed to load settings.', {
 				description: error.message,
@@ -87,6 +95,14 @@ export default function Settings() {
 
 		payload.allowed_roles = allowedRoles;
 		payload.brand = brand;
+		payload.ai_backend = aiBackend;
+
+		// Provider keys.
+		for ( const [ provider, key ] of Object.entries( providerKeys ) ) {
+			if ( key.trim() ) {
+				payload[ `${ provider }_api_key` ] = key;
+			}
+		}
 
 		try {
 			const response = await fetch( `${ restUrl }settings`, {
@@ -116,6 +132,21 @@ export default function Settings() {
 			if ( data.updated?.tavily_api_key ) {
 				setTavilyKey( '' );
 				setHasTavilyKey( true );
+			}
+
+			// Clear saved provider keys from input fields.
+			const newProviderKeys = { ...providerKeys };
+			let providersChanged = false;
+			for ( const p of [ 'anthropic', 'openai', 'google' ] ) {
+				if ( data.updated?.[ `${ p }_api_key` ] ) {
+					delete newProviderKeys[ p ];
+					providersChanged = true;
+				}
+			}
+			if ( providersChanged ) {
+				setProviderKeys( newProviderKeys );
+				// Re-fetch to update configured_providers status.
+				fetchSettings();
 			}
 
 			setSaveState( 'saved' );
@@ -229,6 +260,17 @@ export default function Settings() {
 							tavilyKey={ tavilyKey }
 							onTavilyKeyChange={ setTavilyKey }
 							hasTavilyKey={ hasTavilyKey }
+						/>
+					) }
+					{ activeTab === 'providers' && (
+						<ProviderKeys
+							aiBackend={ aiBackend }
+							onBackendChange={ setAiBackend }
+							configuredProviders={ configuredProviders }
+							providerKeys={ providerKeys }
+							onProviderKeyChange={ ( provider, value ) =>
+								setProviderKeys( ( prev ) => ( { ...prev, [ provider ]: value } ) )
+							}
 						/>
 					) }
 					{ activeTab === 'brand' && (
