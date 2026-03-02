@@ -1,0 +1,104 @@
+{
+  "id": "faq-modern",
+  "name": "Modern FAQ with Glass Cards",
+  "category": "faq",
+  "description": "Dark background with each Q&A in a glassmorphic card using core/details, lift on hover",
+  "variables": {
+    "heading": "Frequently Asked Questions",
+    "subheading": "Everything you need to know. Can't find the answer? Contact our support team.",
+    "q1": "How do I get started?",
+    "a1": "Sign up for a free account, connect your tools, and you're ready to go. No credit card required. Our setup wizard guides you through the entire process in under 5 minutes.",
+    "q2": "Is there a free plan?",
+    "a2": "Yes! Our Starter plan is completely free and includes 5 projects, 1,000 API calls per month, and community support. Upgrade anytime as your needs grow.",
+    "q3": "Can I cancel at any time?",
+    "a3": "Absolutely. No contracts, no cancellation fees. You can upgrade, downgrade, or cancel your subscription at any time from your account settings.",
+    "q4": "Do you offer enterprise plans?",
+    "a4": "Yes. Our Enterprise plan includes unlimited usage, dedicated support, SLA guarantees, SSO, and custom contracts. Contact our sales team for a tailored quote.",
+    "q5": "What integrations do you support?",
+    "a5": "We integrate with 500+ tools including Slack, GitHub, Jira, Notion, Salesforce, HubSpot, and more. Custom integrations are available on Pro and Enterprise plans.",
+    "bg_color": "#0c0c14",
+    "text_color": "#ffffff",
+    "muted_color": "#a1a1aa"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "{{bg_color}}", "text": "{{text_color}}" },
+          "spacing": { "padding": { "top": "100px", "bottom": "100px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/heading",
+          "attrs": {
+            "textAlign": "center",
+            "level": 2,
+            "style": { "typography": { "fontSize": "42px", "fontWeight": "700", "letterSpacing": "-0.02em" } }
+          },
+          "innerHTML": "{{heading}}"
+        },
+        {
+          "blockName": "core/paragraph",
+          "attrs": {
+            "align": "center",
+            "style": {
+              "typography": { "fontSize": "18px", "lineHeight": "1.6" },
+              "color": { "text": "{{muted_color}}" },
+              "spacing": { "margin": { "top": "16px", "bottom": "48px" } }
+            }
+          },
+          "innerHTML": "{{subheading}}"
+        },
+        {
+          "blockName": "core/group",
+          "attrs": {
+            "className": "wpa-stagger-children",
+            "style": { "spacing": { "blockGap": "16px" } },
+            "layout": { "type": "constrained" }
+          },
+          "innerBlocks": [
+            {
+              "blockName": "core/group",
+              "attrs": { "className": "wpa-glass wpa-lift", "style": { "spacing": { "padding": { "top": "24px", "bottom": "24px", "left": "28px", "right": "28px" } } } },
+              "innerBlocks": [
+                { "blockName": "core/details", "attrs": { "summary": "{{q1}}", "style": { "typography": { "fontSize": "16px", "fontWeight": "600" } } }, "innerBlocks": [{ "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "15px", "lineHeight": "1.7" }, "color": { "text": "{{muted_color}}" } } }, "innerHTML": "{{a1}}" }] }
+              ]
+            },
+            {
+              "blockName": "core/group",
+              "attrs": { "className": "wpa-glass wpa-lift", "style": { "spacing": { "padding": { "top": "24px", "bottom": "24px", "left": "28px", "right": "28px" } } } },
+              "innerBlocks": [
+                { "blockName": "core/details", "attrs": { "summary": "{{q2}}", "style": { "typography": { "fontSize": "16px", "fontWeight": "600" } } }, "innerBlocks": [{ "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "15px", "lineHeight": "1.7" }, "color": { "text": "{{muted_color}}" } } }, "innerHTML": "{{a2}}" }] }
+              ]
+            },
+            {
+              "blockName": "core/group",
+              "attrs": { "className": "wpa-glass wpa-lift", "style": { "spacing": { "padding": { "top": "24px", "bottom": "24px", "left": "28px", "right": "28px" } } } },
+              "innerBlocks": [
+                { "blockName": "core/details", "attrs": { "summary": "{{q3}}", "style": { "typography": { "fontSize": "16px", "fontWeight": "600" } } }, "innerBlocks": [{ "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "15px", "lineHeight": "1.7" }, "color": { "text": "{{muted_color}}" } } }, "innerHTML": "{{a3}}" }] }
+              ]
+            },
+            {
+              "blockName": "core/group",
+              "attrs": { "className": "wpa-glass wpa-lift", "style": { "spacing": { "padding": { "top": "24px", "bottom": "24px", "left": "28px", "right": "28px" } } } },
+              "innerBlocks": [
+                { "blockName": "core/details", "attrs": { "summary": "{{q4}}", "style": { "typography": { "fontSize": "16px", "fontWeight": "600" } } }, "innerBlocks": [{ "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "15px", "lineHeight": "1.7" }, "color": { "text": "{{muted_color}}" } } }, "innerHTML": "{{a4}}" }] }
+              ]
+            },
+            {
+              "blockName": "core/group",
+              "attrs": { "className": "wpa-glass wpa-lift", "style": { "spacing": { "padding": { "top": "24px", "bottom": "24px", "left": "28px", "right": "28px" } } } },
+              "innerBlocks": [
+                { "blockName": "core/details", "attrs": { "summary": "{{q5}}", "style": { "typography": { "fontSize": "16px", "fontWeight": "600" } } }, "innerBlocks": [{ "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "15px", "lineHeight": "1.7" }, "color": { "text": "{{muted_color}}" } } }, "innerHTML": "{{a5}}" }] }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

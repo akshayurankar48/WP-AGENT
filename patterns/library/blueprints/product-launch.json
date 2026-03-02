@@ -1,0 +1,6 @@
+{
+  "id": "product-launch",
+  "name": "Product Launch Page",
+  "description": "Product launch page: aurora hero + glass logo bar + glass feature cards + gradient stats + glass pricing + modern FAQ + aurora CTA",
+  "sections": ["hero-aurora", "logo-bar-glass", "features-glass", "stats-gradient", "pricing-glass", "faq-modern", "cta-aurora"]
+}

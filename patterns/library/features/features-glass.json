@@ -1,0 +1,115 @@
+{
+  "id": "features-glass",
+  "name": "Glassmorphic Feature Cards",
+  "category": "features",
+  "description": "Dark background with 3 glassmorphic cards, emoji icons, stagger animation",
+  "variables": {
+    "heading": "Why Teams Choose Us",
+    "subheading": "Three pillars that make the difference between good and exceptional.",
+    "feature_1_icon": "⚡",
+    "feature_1_title": "Blazing Performance",
+    "feature_1_desc": "Optimized from the ground up with edge caching, smart bundling, and instant deploys that keep your users happy.",
+    "feature_2_icon": "🎨",
+    "feature_2_title": "Beautiful by Default",
+    "feature_2_desc": "Every component is carefully crafted with pixel-perfect design, smooth animations, and dark mode built in.",
+    "feature_3_icon": "🛡️",
+    "feature_3_title": "Enterprise Ready",
+    "feature_3_desc": "SOC 2 compliance, SSO, role-based access, and audit logs. Everything your security team demands.",
+    "bg_color": "#0c0c14",
+    "text_color": "#ffffff",
+    "muted_color": "#a1a1aa"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "{{bg_color}}", "text": "{{text_color}}" },
+          "spacing": { "padding": { "top": "100px", "bottom": "100px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/heading",
+          "attrs": {
+            "textAlign": "center",
+            "level": 2,
+            "style": { "typography": { "fontSize": "42px", "fontWeight": "700", "letterSpacing": "-0.02em" } }
+          },
+          "innerHTML": "{{heading}}"
+        },
+        {
+          "blockName": "core/paragraph",
+          "attrs": {
+            "align": "center",
+            "style": {
+              "typography": { "fontSize": "18px", "lineHeight": "1.6" },
+              "color": { "text": "{{muted_color}}" },
+              "spacing": { "margin": { "top": "16px", "bottom": "48px" } }
+            }
+          },
+          "innerHTML": "{{subheading}}"
+        },
+        {
+          "blockName": "core/columns",
+          "attrs": { "className": "wpa-stagger-children" },
+          "innerBlocks": [
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/group",
+                  "attrs": {
+                    "className": "wpa-glass wpa-lift",
+                    "style": { "spacing": { "padding": { "top": "36px", "bottom": "36px", "left": "28px", "right": "28px" } } }
+                  },
+                  "innerBlocks": [
+                    { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "36px" } } }, "innerHTML": "{{feature_1_icon}}" },
+                    { "blockName": "core/heading", "attrs": { "level": 3, "style": { "typography": { "fontSize": "20px", "fontWeight": "600" }, "spacing": { "margin": { "top": "16px" } } } }, "innerHTML": "{{feature_1_title}}" },
+                    { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "15px", "lineHeight": "1.7" }, "color": { "text": "{{muted_color}}" }, "spacing": { "margin": { "top": "8px" } } } }, "innerHTML": "{{feature_1_desc}}" }
+                  ]
+                }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/group",
+                  "attrs": {
+                    "className": "wpa-glass wpa-lift",
+                    "style": { "spacing": { "padding": { "top": "36px", "bottom": "36px", "left": "28px", "right": "28px" } } }
+                  },
+                  "innerBlocks": [
+                    { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "36px" } } }, "innerHTML": "{{feature_2_icon}}" },
+                    { "blockName": "core/heading", "attrs": { "level": 3, "style": { "typography": { "fontSize": "20px", "fontWeight": "600" }, "spacing": { "margin": { "top": "16px" } } } }, "innerHTML": "{{feature_2_title}}" },
+                    { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "15px", "lineHeight": "1.7" }, "color": { "text": "{{muted_color}}" }, "spacing": { "margin": { "top": "8px" } } } }, "innerHTML": "{{feature_2_desc}}" }
+                  ]
+                }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/group",
+                  "attrs": {
+                    "className": "wpa-glass wpa-lift",
+                    "style": { "spacing": { "padding": { "top": "36px", "bottom": "36px", "left": "28px", "right": "28px" } } }
+                  },
+                  "innerBlocks": [
+                    { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "36px" } } }, "innerHTML": "{{feature_3_icon}}" },
+                    { "blockName": "core/heading", "attrs": { "level": 3, "style": { "typography": { "fontSize": "20px", "fontWeight": "600" }, "spacing": { "margin": { "top": "16px" } } } }, "innerHTML": "{{feature_3_title}}" },
+                    { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "15px", "lineHeight": "1.7" }, "color": { "text": "{{muted_color}}" }, "spacing": { "margin": { "top": "8px" } } } }, "innerHTML": "{{feature_3_desc}}" }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

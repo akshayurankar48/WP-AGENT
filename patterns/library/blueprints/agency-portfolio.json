@@ -1,0 +1,6 @@
+{
+  "id": "agency-portfolio",
+  "name": "Agency Portfolio",
+  "description": "Creative agency portfolio page: glassmorphic hero + glass feature cards + glass content grid + modern testimonials + modern process steps + aurora CTA",
+  "sections": ["hero-glass", "features-glass", "content-glass-cards", "testimonials-modern", "process-modern", "cta-aurora"]
+}

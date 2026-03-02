@@ -1,0 +1,129 @@
+{
+  "id": "pricing-glass",
+  "name": "Glassmorphic Pricing",
+  "category": "pricing",
+  "description": "Dark background with 3 glassmorphic pricing tier cards, highlighted Popular tier with glow + border-glow, pill buttons",
+  "variables": {
+    "heading": "Simple, Transparent Pricing",
+    "subheading": "Start free. Scale when you're ready. No hidden fees, no surprises.",
+    "tier_1_name": "Starter",
+    "tier_1_price": "$0",
+    "tier_1_period": "/month",
+    "tier_1_desc": "Perfect for side projects and experimentation.",
+    "tier_1_features": "5 projects\n1,000 API calls/mo\nCommunity support\nBasic analytics",
+    "tier_1_cta": "Get Started Free",
+    "tier_2_name": "Pro",
+    "tier_2_badge": "Most Popular",
+    "tier_2_price": "$49",
+    "tier_2_period": "/month",
+    "tier_2_desc": "For growing teams that need more power.",
+    "tier_2_features": "Unlimited projects\n100,000 API calls/mo\nPriority support\nAdvanced analytics\nCustom integrations\nTeam collaboration",
+    "tier_2_cta": "Start Free Trial",
+    "tier_3_name": "Enterprise",
+    "tier_3_price": "Custom",
+    "tier_3_period": "",
+    "tier_3_desc": "Tailored solutions for large organizations.",
+    "tier_3_features": "Everything in Pro\nUnlimited API calls\nDedicated support\nSLA guarantee\nSSO & SAML\nCustom contracts",
+    "tier_3_cta": "Contact Sales",
+    "bg_color": "#0c0c14",
+    "text_color": "#ffffff",
+    "muted_color": "#a1a1aa"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "{{bg_color}}", "text": "{{text_color}}" },
+          "spacing": { "padding": { "top": "100px", "bottom": "100px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/heading",
+          "attrs": {
+            "textAlign": "center",
+            "level": 2,
+            "style": { "typography": { "fontSize": "42px", "fontWeight": "700", "letterSpacing": "-0.02em" } }
+          },
+          "innerHTML": "{{heading}}"
+        },
+        {
+          "blockName": "core/paragraph",
+          "attrs": {
+            "align": "center",
+            "style": {
+              "typography": { "fontSize": "18px", "lineHeight": "1.6" },
+              "color": { "text": "{{muted_color}}" },
+              "spacing": { "margin": { "top": "16px", "bottom": "48px" } }
+            }
+          },
+          "innerHTML": "{{subheading}}"
+        },
+        {
+          "blockName": "core/columns",
+          "attrs": { "className": "wpa-stagger-children", "style": { "spacing": { "blockGap": { "left": "24px" } } } },
+          "innerBlocks": [
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/group",
+                  "attrs": {
+                    "className": "wpa-glass wpa-lift",
+                    "style": { "spacing": { "padding": { "top": "36px", "bottom": "36px", "left": "28px", "right": "28px" } } }
+                  },
+                  "innerBlocks": [
+                    { "blockName": "core/heading", "attrs": { "level": 3, "style": { "typography": { "fontSize": "18px", "fontWeight": "600" }, "color": { "text": "{{muted_color}}" } } }, "innerHTML": "{{tier_1_name}}" },
+                    { "blockName": "core/heading", "attrs": { "level": 2, "style": { "typography": { "fontSize": "48px", "fontWeight": "800", "letterSpacing": "-0.03em" }, "spacing": { "margin": { "top": "12px" } } } }, "innerHTML": "{{tier_1_price}}<span style=\"font-size:18px;font-weight:400;color:{{muted_color}}\">{{tier_1_period}}</span>" },
+                    { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "15px", "lineHeight": "1.6" }, "color": { "text": "{{muted_color}}" }, "spacing": { "margin": { "top": "8px", "bottom": "24px" } } } }, "innerHTML": "{{tier_1_desc}}" },
+                    { "blockName": "core/buttons", "attrs": { "layout": { "type": "flex", "justifyContent": "center" } }, "innerBlocks": [{ "blockName": "core/button", "attrs": { "style": { "color": { "background": "transparent", "text": "#ffffff" }, "typography": { "fontSize": "15px", "fontWeight": "600" }, "border": { "radius": "100px", "width": "1px", "color": "rgba(255,255,255,0.2)" }, "spacing": { "padding": { "top": "14px", "bottom": "14px", "left": "32px", "right": "32px" } } } }, "innerHTML": "{{tier_1_cta}}" }] }
+                  ]
+                }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/group",
+                  "attrs": {
+                    "className": "wpa-glass wpa-glow wpa-border-glow wpa-lift",
+                    "style": { "spacing": { "padding": { "top": "36px", "bottom": "36px", "left": "28px", "right": "28px" } } }
+                  },
+                  "innerBlocks": [
+                    { "blockName": "core/paragraph", "attrs": { "align": "center", "style": { "typography": { "fontSize": "12px", "fontWeight": "600", "textTransform": "uppercase", "letterSpacing": "0.08em" }, "color": { "text": "#818cf8", "background": "rgba(99,102,241,0.15)" }, "border": { "radius": "100px" }, "spacing": { "padding": { "top": "4px", "bottom": "4px", "left": "12px", "right": "12px" } } } }, "innerHTML": "{{tier_2_badge}}" },
+                    { "blockName": "core/heading", "attrs": { "level": 3, "style": { "typography": { "fontSize": "18px", "fontWeight": "600" }, "color": { "text": "{{muted_color}}" }, "spacing": { "margin": { "top": "16px" } } } }, "innerHTML": "{{tier_2_name}}" },
+                    { "blockName": "core/heading", "attrs": { "level": 2, "style": { "typography": { "fontSize": "48px", "fontWeight": "800", "letterSpacing": "-0.03em" }, "spacing": { "margin": { "top": "12px" } } } }, "innerHTML": "{{tier_2_price}}<span style=\"font-size:18px;font-weight:400;color:{{muted_color}}\">{{tier_2_period}}</span>" },
+                    { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "15px", "lineHeight": "1.6" }, "color": { "text": "{{muted_color}}" }, "spacing": { "margin": { "top": "8px", "bottom": "24px" } } } }, "innerHTML": "{{tier_2_desc}}" },
+                    { "blockName": "core/buttons", "attrs": { "layout": { "type": "flex", "justifyContent": "center" } }, "innerBlocks": [{ "blockName": "core/button", "attrs": { "className": "wpa-glow", "style": { "color": { "background": "#6366f1", "text": "#ffffff" }, "typography": { "fontSize": "15px", "fontWeight": "600" }, "border": { "radius": "100px" }, "spacing": { "padding": { "top": "14px", "bottom": "14px", "left": "32px", "right": "32px" } } } }, "innerHTML": "{{tier_2_cta}}" }] }
+                  ]
+                }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/group",
+                  "attrs": {
+                    "className": "wpa-glass wpa-lift",
+                    "style": { "spacing": { "padding": { "top": "36px", "bottom": "36px", "left": "28px", "right": "28px" } } }
+                  },
+                  "innerBlocks": [
+                    { "blockName": "core/heading", "attrs": { "level": 3, "style": { "typography": { "fontSize": "18px", "fontWeight": "600" }, "color": { "text": "{{muted_color}}" } } }, "innerHTML": "{{tier_3_name}}" },
+                    { "blockName": "core/heading", "attrs": { "level": 2, "style": { "typography": { "fontSize": "48px", "fontWeight": "800", "letterSpacing": "-0.03em" }, "spacing": { "margin": { "top": "12px" } } } }, "innerHTML": "{{tier_3_price}}" },
+                    { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "15px", "lineHeight": "1.6" }, "color": { "text": "{{muted_color}}" }, "spacing": { "margin": { "top": "8px", "bottom": "24px" } } } }, "innerHTML": "{{tier_3_desc}}" },
+                    { "blockName": "core/buttons", "attrs": { "layout": { "type": "flex", "justifyContent": "center" } }, "innerBlocks": [{ "blockName": "core/button", "attrs": { "style": { "color": { "background": "transparent", "text": "#ffffff" }, "typography": { "fontSize": "15px", "fontWeight": "600" }, "border": { "radius": "100px", "width": "1px", "color": "rgba(255,255,255,0.2)" }, "spacing": { "padding": { "top": "14px", "bottom": "14px", "left": "32px", "right": "32px" } } } }, "innerHTML": "{{tier_3_cta}}" }] }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

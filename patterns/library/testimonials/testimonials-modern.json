@@ -1,0 +1,118 @@
+{
+  "id": "testimonials-modern",
+  "name": "Modern Testimonial Cards",
+  "category": "testimonials",
+  "description": "Dark background with glassmorphic testimonial cards, star ratings, avatar placeholders, glow border accents",
+  "variables": {
+    "heading": "Loved by Teams Everywhere",
+    "subheading": "See why thousands of companies trust us to power their workflows.",
+    "testimonial_1": "This platform completely transformed how we ship products. What used to take weeks now takes hours. The AI features alone saved us 200+ engineering hours last quarter.",
+    "name_1": "Sarah Chen",
+    "role_1": "VP of Engineering, TechCorp",
+    "testimonial_2": "The best investment we've made this year. Our team's productivity doubled within the first month. The integrations work flawlessly.",
+    "name_2": "Marcus Rodriguez",
+    "role_2": "CTO, StartupHQ",
+    "testimonial_3": "Finally a tool that developers actually enjoy using. Clean API, great docs, and the support team is incredibly responsive.",
+    "name_3": "Emily Tanaka",
+    "role_3": "Lead Developer, DesignLab",
+    "bg_color": "#0c0c14",
+    "text_color": "#ffffff",
+    "muted_color": "#a1a1aa"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "{{bg_color}}", "text": "{{text_color}}" },
+          "spacing": { "padding": { "top": "100px", "bottom": "100px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/heading",
+          "attrs": {
+            "textAlign": "center",
+            "level": 2,
+            "style": { "typography": { "fontSize": "42px", "fontWeight": "700", "letterSpacing": "-0.02em" } }
+          },
+          "innerHTML": "{{heading}}"
+        },
+        {
+          "blockName": "core/paragraph",
+          "attrs": {
+            "align": "center",
+            "style": {
+              "typography": { "fontSize": "18px", "lineHeight": "1.6" },
+              "color": { "text": "{{muted_color}}" },
+              "spacing": { "margin": { "top": "16px", "bottom": "48px" } }
+            }
+          },
+          "innerHTML": "{{subheading}}"
+        },
+        {
+          "blockName": "core/columns",
+          "attrs": { "className": "wpa-stagger-children" },
+          "innerBlocks": [
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/group",
+                  "attrs": {
+                    "className": "wpa-glass wpa-border-glow",
+                    "style": { "spacing": { "padding": { "top": "32px", "bottom": "32px", "left": "28px", "right": "28px" } } }
+                  },
+                  "innerBlocks": [
+                    { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "16px" }, "spacing": { "margin": { "bottom": "16px" } } } }, "innerHTML": "⭐⭐⭐⭐⭐" },
+                    { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "15px", "lineHeight": "1.7" }, "color": { "text": "{{muted_color}}" } } }, "innerHTML": "{{testimonial_1}}" },
+                    { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "15px", "fontWeight": "600" }, "spacing": { "margin": { "top": "20px" } } } }, "innerHTML": "{{name_1}}" },
+                    { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "13px" }, "color": { "text": "{{muted_color}}" }, "spacing": { "margin": { "top": "2px" } } } }, "innerHTML": "{{role_1}}" }
+                  ]
+                }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/group",
+                  "attrs": {
+                    "className": "wpa-glass wpa-border-glow",
+                    "style": { "spacing": { "padding": { "top": "32px", "bottom": "32px", "left": "28px", "right": "28px" } } }
+                  },
+                  "innerBlocks": [
+                    { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "16px" }, "spacing": { "margin": { "bottom": "16px" } } } }, "innerHTML": "⭐⭐⭐⭐⭐" },
+                    { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "15px", "lineHeight": "1.7" }, "color": { "text": "{{muted_color}}" } } }, "innerHTML": "{{testimonial_2}}" },
+                    { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "15px", "fontWeight": "600" }, "spacing": { "margin": { "top": "20px" } } } }, "innerHTML": "{{name_2}}" },
+                    { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "13px" }, "color": { "text": "{{muted_color}}" }, "spacing": { "margin": { "top": "2px" } } } }, "innerHTML": "{{role_2}}" }
+                  ]
+                }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/group",
+                  "attrs": {
+                    "className": "wpa-glass wpa-border-glow",
+                    "style": { "spacing": { "padding": { "top": "32px", "bottom": "32px", "left": "28px", "right": "28px" } } }
+                  },
+                  "innerBlocks": [
+                    { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "16px" }, "spacing": { "margin": { "bottom": "16px" } } } }, "innerHTML": "⭐⭐⭐⭐⭐" },
+                    { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "15px", "lineHeight": "1.7" }, "color": { "text": "{{muted_color}}" } } }, "innerHTML": "{{testimonial_3}}" },
+                    { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "15px", "fontWeight": "600" }, "spacing": { "margin": { "top": "20px" } } } }, "innerHTML": "{{name_3}}" },
+                    { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "13px" }, "color": { "text": "{{muted_color}}" }, "spacing": { "margin": { "top": "2px" } } } }, "innerHTML": "{{role_3}}" }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

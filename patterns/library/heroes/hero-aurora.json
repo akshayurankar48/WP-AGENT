@@ -1,0 +1,86 @@
+{
+  "id": "hero-aurora",
+  "name": "Aurora Gradient Hero",
+  "category": "heroes",
+  "description": "Animated aurora gradient background with oversized gradient-text heading, pill glow buttons, generous 160px padding",
+  "variables": {
+    "heading": "The Future of Building",
+    "subheading": "Ship faster, iterate smarter, and scale effortlessly with the platform trusted by 50,000+ teams worldwide.",
+    "cta_primary": "Start Building Free",
+    "cta_secondary": "Watch Demo",
+    "bg_color": "#0c0c14",
+    "text_color": "#ffffff",
+    "subtitle_color": "#a1a1aa"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "className": "wpa-aurora wpa-noise",
+        "style": {
+          "color": { "background": "{{bg_color}}", "text": "{{text_color}}" },
+          "spacing": { "padding": { "top": "160px", "bottom": "160px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/heading",
+          "attrs": {
+            "textAlign": "center",
+            "level": 1,
+            "className": "wpa-gradient-text",
+            "style": {
+              "typography": { "fontSize": "72px", "fontWeight": "800", "letterSpacing": "-0.04em", "lineHeight": "1.05" }
+            }
+          },
+          "innerHTML": "{{heading}}"
+        },
+        {
+          "blockName": "core/paragraph",
+          "attrs": {
+            "align": "center",
+            "style": {
+              "typography": { "fontSize": "20px", "lineHeight": "1.6" },
+              "color": { "text": "{{subtitle_color}}" },
+              "spacing": { "margin": { "top": "24px", "bottom": "48px" } }
+            }
+          },
+          "innerHTML": "{{subheading}}"
+        },
+        {
+          "blockName": "core/buttons",
+          "attrs": { "layout": { "type": "flex", "justifyContent": "center" } },
+          "innerBlocks": [
+            {
+              "blockName": "core/button",
+              "attrs": {
+                "className": "wpa-glow",
+                "style": {
+                  "color": { "background": "#6366f1", "text": "#ffffff" },
+                  "typography": { "fontSize": "16px", "fontWeight": "600" },
+                  "border": { "radius": "100px" },
+                  "spacing": { "padding": { "top": "18px", "bottom": "18px", "left": "48px", "right": "48px" } }
+                }
+              },
+              "innerHTML": "{{cta_primary}}"
+            },
+            {
+              "blockName": "core/button",
+              "attrs": {
+                "style": {
+                  "color": { "background": "transparent", "text": "#ffffff" },
+                  "typography": { "fontSize": "16px", "fontWeight": "600" },
+                  "border": { "radius": "100px", "width": "1px", "color": "rgba(255,255,255,0.2)" },
+                  "spacing": { "padding": { "top": "18px", "bottom": "18px", "left": "48px", "right": "48px" } }
+                }
+              },
+              "innerHTML": "{{cta_secondary}}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

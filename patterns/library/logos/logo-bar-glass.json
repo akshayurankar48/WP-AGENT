@@ -1,0 +1,59 @@
+{
+  "id": "logo-bar-glass",
+  "name": "Glass Logo Bar",
+  "category": "logos",
+  "description": "Dark background with a glassmorphic strip containing 5 partner/client logo placeholders, subtle noise",
+  "variables": {
+    "heading": "Trusted by industry leaders",
+    "logo_1_url": "https://placehold.co/140x40/1a1a2e/6366f1?text=Acme",
+    "logo_2_url": "https://placehold.co/140x40/1a1a2e/6366f1?text=Globex",
+    "logo_3_url": "https://placehold.co/140x40/1a1a2e/6366f1?text=Initech",
+    "logo_4_url": "https://placehold.co/140x40/1a1a2e/6366f1?text=Hooli",
+    "logo_5_url": "https://placehold.co/140x40/1a1a2e/6366f1?text=Stark",
+    "bg_color": "#0c0c14",
+    "text_color": "#ffffff",
+    "muted_color": "#71717a"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "{{bg_color}}", "text": "{{text_color}}" },
+          "spacing": { "padding": { "top": "60px", "bottom": "60px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/paragraph",
+          "attrs": {
+            "align": "center",
+            "style": {
+              "typography": { "fontSize": "13px", "fontWeight": "600", "textTransform": "uppercase", "letterSpacing": "0.1em" },
+              "color": { "text": "{{muted_color}}" },
+              "spacing": { "margin": { "bottom": "32px" } }
+            }
+          },
+          "innerHTML": "{{heading}}"
+        },
+        {
+          "blockName": "core/group",
+          "attrs": {
+            "className": "wpa-glass wpa-noise",
+            "style": { "spacing": { "padding": { "top": "24px", "bottom": "24px", "left": "32px", "right": "32px" } } },
+            "layout": { "type": "flex", "justifyContent": "space-between", "flexWrap": "wrap" }
+          },
+          "innerBlocks": [
+            { "blockName": "core/image", "attrs": { "url": "{{logo_1_url}}", "alt": "Partner logo", "width": 120, "style": { "filter": "grayscale(100%) brightness(1.5)", "opacity": "0.6" } } },
+            { "blockName": "core/image", "attrs": { "url": "{{logo_2_url}}", "alt": "Partner logo", "width": 120, "style": { "filter": "grayscale(100%) brightness(1.5)", "opacity": "0.6" } } },
+            { "blockName": "core/image", "attrs": { "url": "{{logo_3_url}}", "alt": "Partner logo", "width": 120, "style": { "filter": "grayscale(100%) brightness(1.5)", "opacity": "0.6" } } },
+            { "blockName": "core/image", "attrs": { "url": "{{logo_4_url}}", "alt": "Partner logo", "width": 120, "style": { "filter": "grayscale(100%) brightness(1.5)", "opacity": "0.6" } } },
+            { "blockName": "core/image", "attrs": { "url": "{{logo_5_url}}", "alt": "Partner logo", "width": 120, "style": { "filter": "grayscale(100%) brightness(1.5)", "opacity": "0.6" } } }
+          ]
+        }
+      ]
+    }
+  ]
+}

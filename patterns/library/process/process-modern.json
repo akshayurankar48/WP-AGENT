@@ -1,0 +1,103 @@
+{
+  "id": "process-modern",
+  "name": "Modern Process Steps",
+  "category": "process",
+  "description": "Dark background with numbered circles, gradient borders, connecting descriptions, stagger animation",
+  "variables": {
+    "heading": "How It Works",
+    "subheading": "Get up and running in three simple steps.",
+    "step_1_title": "Sign Up",
+    "step_1_desc": "Create your account in 30 seconds. No credit card required. Get instant access to all core features and start exploring.",
+    "step_2_title": "Configure",
+    "step_2_desc": "Connect your tools, invite your team, and customize your workspace. Our setup wizard handles the heavy lifting.",
+    "step_3_title": "Launch",
+    "step_3_desc": "You're ready to go. Deploy your first project, monitor results in real-time, and scale as you grow.",
+    "bg_color": "#0c0c14",
+    "text_color": "#ffffff",
+    "muted_color": "#a1a1aa"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "{{bg_color}}", "text": "{{text_color}}" },
+          "spacing": { "padding": { "top": "100px", "bottom": "100px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/heading",
+          "attrs": {
+            "textAlign": "center",
+            "level": 2,
+            "style": { "typography": { "fontSize": "42px", "fontWeight": "700", "letterSpacing": "-0.02em" } }
+          },
+          "innerHTML": "{{heading}}"
+        },
+        {
+          "blockName": "core/paragraph",
+          "attrs": {
+            "align": "center",
+            "style": {
+              "typography": { "fontSize": "18px", "lineHeight": "1.6" },
+              "color": { "text": "{{muted_color}}" },
+              "spacing": { "margin": { "top": "16px", "bottom": "56px" } }
+            }
+          },
+          "innerHTML": "{{subheading}}"
+        },
+        {
+          "blockName": "core/columns",
+          "attrs": { "className": "wpa-stagger-children" },
+          "innerBlocks": [
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/group",
+                  "attrs": { "layout": { "type": "flex", "orientation": "vertical", "justifyContent": "center" } },
+                  "innerBlocks": [
+                    { "blockName": "core/paragraph", "attrs": { "align": "center", "className": "wpa-gradient-border", "style": { "typography": { "fontSize": "24px", "fontWeight": "700" }, "color": { "text": "#818cf8" }, "border": { "radius": "100px" }, "spacing": { "padding": { "top": "12px", "bottom": "12px", "left": "20px", "right": "20px" } } } }, "innerHTML": "1" },
+                    { "blockName": "core/heading", "attrs": { "textAlign": "center", "level": 3, "style": { "typography": { "fontSize": "22px", "fontWeight": "600" }, "spacing": { "margin": { "top": "20px" } } } }, "innerHTML": "{{step_1_title}}" },
+                    { "blockName": "core/paragraph", "attrs": { "align": "center", "style": { "typography": { "fontSize": "15px", "lineHeight": "1.7" }, "color": { "text": "{{muted_color}}" }, "spacing": { "margin": { "top": "8px" } } } }, "innerHTML": "{{step_1_desc}}" }
+                  ]
+                }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/group",
+                  "attrs": { "layout": { "type": "flex", "orientation": "vertical", "justifyContent": "center" } },
+                  "innerBlocks": [
+                    { "blockName": "core/paragraph", "attrs": { "align": "center", "className": "wpa-gradient-border", "style": { "typography": { "fontSize": "24px", "fontWeight": "700" }, "color": { "text": "#818cf8" }, "border": { "radius": "100px" }, "spacing": { "padding": { "top": "12px", "bottom": "12px", "left": "20px", "right": "20px" } } } }, "innerHTML": "2" },
+                    { "blockName": "core/heading", "attrs": { "textAlign": "center", "level": 3, "style": { "typography": { "fontSize": "22px", "fontWeight": "600" }, "spacing": { "margin": { "top": "20px" } } } }, "innerHTML": "{{step_2_title}}" },
+                    { "blockName": "core/paragraph", "attrs": { "align": "center", "style": { "typography": { "fontSize": "15px", "lineHeight": "1.7" }, "color": { "text": "{{muted_color}}" }, "spacing": { "margin": { "top": "8px" } } } }, "innerHTML": "{{step_2_desc}}" }
+                  ]
+                }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/group",
+                  "attrs": { "layout": { "type": "flex", "orientation": "vertical", "justifyContent": "center" } },
+                  "innerBlocks": [
+                    { "blockName": "core/paragraph", "attrs": { "align": "center", "className": "wpa-gradient-border", "style": { "typography": { "fontSize": "24px", "fontWeight": "700" }, "color": { "text": "#818cf8" }, "border": { "radius": "100px" }, "spacing": { "padding": { "top": "12px", "bottom": "12px", "left": "20px", "right": "20px" } } } }, "innerHTML": "3" },
+                    { "blockName": "core/heading", "attrs": { "textAlign": "center", "level": 3, "style": { "typography": { "fontSize": "22px", "fontWeight": "600" }, "spacing": { "margin": { "top": "20px" } } } }, "innerHTML": "{{step_3_title}}" },
+                    { "blockName": "core/paragraph", "attrs": { "align": "center", "style": { "typography": { "fontSize": "15px", "lineHeight": "1.7" }, "color": { "text": "{{muted_color}}" }, "spacing": { "margin": { "top": "8px" } } } }, "innerHTML": "{{step_3_desc}}" }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,113 @@
+{
+  "id": "content-glass-cards",
+  "name": "Content Grid with Glass Cards",
+  "category": "content",
+  "description": "2-column grid of glassmorphic cards with icon, heading, and description, lift on hover",
+  "variables": {
+    "heading": "Built for Modern Teams",
+    "subheading": "Everything you need to move fast and build with confidence.",
+    "card_1_icon": "🔄",
+    "card_1_title": "Continuous Deployment",
+    "card_1_desc": "Push to main and watch your changes go live in seconds. Zero-downtime deploys with automatic rollbacks.",
+    "card_2_icon": "📦",
+    "card_2_title": "Package Management",
+    "card_2_desc": "Built-in dependency management with automatic security scanning and license compliance checks.",
+    "card_3_icon": "🔍",
+    "card_3_title": "Observability",
+    "card_3_desc": "Real-time logs, metrics, and traces. Find and fix issues before your users notice them.",
+    "card_4_icon": "🌐",
+    "card_4_title": "Global Edge Network",
+    "card_4_desc": "Content delivered from 200+ edge locations worldwide. Your users get sub-50ms response times everywhere.",
+    "bg_color": "#0c0c14",
+    "text_color": "#ffffff",
+    "muted_color": "#a1a1aa"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "{{bg_color}}", "text": "{{text_color}}" },
+          "spacing": { "padding": { "top": "100px", "bottom": "100px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/heading",
+          "attrs": {
+            "textAlign": "center",
+            "level": 2,
+            "style": { "typography": { "fontSize": "42px", "fontWeight": "700", "letterSpacing": "-0.02em" } }
+          },
+          "innerHTML": "{{heading}}"
+        },
+        {
+          "blockName": "core/paragraph",
+          "attrs": {
+            "align": "center",
+            "style": {
+              "typography": { "fontSize": "18px", "lineHeight": "1.6" },
+              "color": { "text": "{{muted_color}}" },
+              "spacing": { "margin": { "top": "16px", "bottom": "48px" } }
+            }
+          },
+          "innerHTML": "{{subheading}}"
+        },
+        {
+          "blockName": "core/columns",
+          "attrs": { "className": "wpa-stagger-children" },
+          "innerBlocks": [
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/group",
+                  "attrs": { "className": "wpa-glass wpa-lift", "style": { "spacing": { "padding": { "top": "32px", "bottom": "32px", "left": "28px", "right": "28px" }, "margin": { "bottom": "24px" } } } },
+                  "innerBlocks": [
+                    { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "32px" } } }, "innerHTML": "{{card_1_icon}}" },
+                    { "blockName": "core/heading", "attrs": { "level": 3, "style": { "typography": { "fontSize": "20px", "fontWeight": "600" }, "spacing": { "margin": { "top": "12px" } } } }, "innerHTML": "{{card_1_title}}" },
+                    { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "15px", "lineHeight": "1.7" }, "color": { "text": "{{muted_color}}" }, "spacing": { "margin": { "top": "8px" } } } }, "innerHTML": "{{card_1_desc}}" }
+                  ]
+                },
+                {
+                  "blockName": "core/group",
+                  "attrs": { "className": "wpa-glass wpa-lift", "style": { "spacing": { "padding": { "top": "32px", "bottom": "32px", "left": "28px", "right": "28px" } } } },
+                  "innerBlocks": [
+                    { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "32px" } } }, "innerHTML": "{{card_3_icon}}" },
+                    { "blockName": "core/heading", "attrs": { "level": 3, "style": { "typography": { "fontSize": "20px", "fontWeight": "600" }, "spacing": { "margin": { "top": "12px" } } } }, "innerHTML": "{{card_3_title}}" },
+                    { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "15px", "lineHeight": "1.7" }, "color": { "text": "{{muted_color}}" }, "spacing": { "margin": { "top": "8px" } } } }, "innerHTML": "{{card_3_desc}}" }
+                  ]
+                }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/group",
+                  "attrs": { "className": "wpa-glass wpa-lift", "style": { "spacing": { "padding": { "top": "32px", "bottom": "32px", "left": "28px", "right": "28px" }, "margin": { "bottom": "24px" } } } },
+                  "innerBlocks": [
+                    { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "32px" } } }, "innerHTML": "{{card_2_icon}}" },
+                    { "blockName": "core/heading", "attrs": { "level": 3, "style": { "typography": { "fontSize": "20px", "fontWeight": "600" }, "spacing": { "margin": { "top": "12px" } } } }, "innerHTML": "{{card_2_title}}" },
+                    { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "15px", "lineHeight": "1.7" }, "color": { "text": "{{muted_color}}" }, "spacing": { "margin": { "top": "8px" } } } }, "innerHTML": "{{card_2_desc}}" }
+                  ]
+                },
+                {
+                  "blockName": "core/group",
+                  "attrs": { "className": "wpa-glass wpa-lift", "style": { "spacing": { "padding": { "top": "32px", "bottom": "32px", "left": "28px", "right": "28px" } } } },
+                  "innerBlocks": [
+                    { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "32px" } } }, "innerHTML": "{{card_4_icon}}" },
+                    { "blockName": "core/heading", "attrs": { "level": 3, "style": { "typography": { "fontSize": "20px", "fontWeight": "600" }, "spacing": { "margin": { "top": "12px" } } } }, "innerHTML": "{{card_4_title}}" },
+                    { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "15px", "lineHeight": "1.7" }, "color": { "text": "{{muted_color}}" }, "spacing": { "margin": { "top": "8px" } } } }, "innerHTML": "{{card_4_desc}}" }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "id": "modern-saas",
+  "name": "Modern SaaS Landing",
+  "description": "Premium SaaS landing page: aurora hero + glass logo bar + bento features + gradient stats + modern testimonials + glass pricing + modern FAQ + aurora CTA",
+  "sections": ["hero-aurora", "logo-bar-glass", "features-bento", "stats-gradient", "testimonials-modern", "pricing-glass", "faq-modern", "cta-aurora"]
+}

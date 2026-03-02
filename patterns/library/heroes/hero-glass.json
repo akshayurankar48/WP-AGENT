@@ -1,0 +1,97 @@
+{
+  "id": "hero-glass",
+  "name": "Glassmorphic Hero",
+  "category": "heroes",
+  "description": "Dark background with centered glassmorphic card panel containing heading, subtext, and two buttons",
+  "variables": {
+    "heading": "Build Without Limits",
+    "subheading": "A next-generation platform that combines AI-powered automation with developer-friendly tools. Ship products your users love.",
+    "cta_primary": "Get Started",
+    "cta_secondary": "Learn More",
+    "bg_color": "#0c0c14",
+    "text_color": "#ffffff",
+    "subtitle_color": "#a1a1aa"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "{{bg_color}}", "text": "{{text_color}}" },
+          "spacing": { "padding": { "top": "140px", "bottom": "140px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/group",
+          "attrs": {
+            "className": "wpa-glass",
+            "style": {
+              "spacing": { "padding": { "top": "64px", "bottom": "64px", "left": "48px", "right": "48px" } }
+            },
+            "layout": { "type": "constrained" }
+          },
+          "innerBlocks": [
+            {
+              "blockName": "core/heading",
+              "attrs": {
+                "textAlign": "center",
+                "level": 1,
+                "style": {
+                  "typography": { "fontSize": "56px", "fontWeight": "800", "letterSpacing": "-0.03em", "lineHeight": "1.1" },
+                  "color": { "text": "#ffffff" }
+                }
+              },
+              "innerHTML": "{{heading}}"
+            },
+            {
+              "blockName": "core/paragraph",
+              "attrs": {
+                "align": "center",
+                "style": {
+                  "typography": { "fontSize": "18px", "lineHeight": "1.7" },
+                  "color": { "text": "{{subtitle_color}}" },
+                  "spacing": { "margin": { "top": "20px", "bottom": "40px" } }
+                }
+              },
+              "innerHTML": "{{subheading}}"
+            },
+            {
+              "blockName": "core/buttons",
+              "attrs": { "layout": { "type": "flex", "justifyContent": "center" } },
+              "innerBlocks": [
+                {
+                  "blockName": "core/button",
+                  "attrs": {
+                    "className": "wpa-glow",
+                    "style": {
+                      "color": { "background": "#6366f1", "text": "#ffffff" },
+                      "typography": { "fontSize": "16px", "fontWeight": "600" },
+                      "border": { "radius": "100px" },
+                      "spacing": { "padding": { "top": "16px", "bottom": "16px", "left": "40px", "right": "40px" } }
+                    }
+                  },
+                  "innerHTML": "{{cta_primary}}"
+                },
+                {
+                  "blockName": "core/button",
+                  "attrs": {
+                    "style": {
+                      "color": { "background": "transparent", "text": "#ffffff" },
+                      "typography": { "fontSize": "16px", "fontWeight": "600" },
+                      "border": { "radius": "100px", "width": "1px", "color": "rgba(255,255,255,0.15)" },
+                      "spacing": { "padding": { "top": "16px", "bottom": "16px", "left": "40px", "right": "40px" } }
+                    }
+                  },
+                  "innerHTML": "{{cta_secondary}}"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
