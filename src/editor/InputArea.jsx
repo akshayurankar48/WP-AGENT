@@ -95,6 +95,7 @@ const textarea = css`
 `;
 
 const btnBase = css`
+	${ focusRing };
 	flex-shrink: 0;
 	width: 32px;
 	height: 32px;
@@ -104,6 +105,7 @@ const btnBase = css`
 	border: none;
 	border-radius: ${ radii.md };
 	cursor: pointer;
+	outline: none;
 	transition: all 0.15s ease;
 `;
 

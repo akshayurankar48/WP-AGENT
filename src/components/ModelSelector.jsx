@@ -58,7 +58,7 @@ export default function ModelSelector( { model = '', onModelChange } ) {
 							key={ m.value }
 							type="button"
 							onClick={ () => onModelChange?.( m.value ) }
-							className={ `group flex items-center gap-4 p-4 rounded-xl border border-solid text-left cursor-pointer transition-all duration-200 ${
+							className={ `group flex items-center gap-4 p-4 rounded-xl border border-solid text-left cursor-pointer transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-800 ${
 								isSelected
 									? 'border-border-interactive bg-background-primary shadow-sm ring-1 ring-border-interactive'
 									: 'border-border-subtle bg-background-primary hover:border-border-interactive hover:shadow-sm'

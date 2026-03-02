@@ -231,7 +231,7 @@ export default function Settings() {
 									<button
 										type="button"
 										onClick={ () => setActiveTab( item.slug ) }
-										className={ `flex items-center gap-3 w-full px-3 py-2.5 rounded-lg text-left border-0 cursor-pointer transition-all duration-150 ${
+										className={ `flex items-center gap-3 w-full px-3 py-2.5 rounded-lg text-left border-0 cursor-pointer transition-all duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-800 ${
 											isActive
 												? 'bg-background-primary shadow-sm text-text-primary font-medium'
 												: 'bg-transparent text-text-secondary hover:bg-background-primary hover:text-text-primary'

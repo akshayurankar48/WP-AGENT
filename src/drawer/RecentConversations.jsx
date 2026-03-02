@@ -71,12 +71,14 @@ const dropdownHeader = css`
 `;
 
 const itemStyle = css`
+	${ focusRing };
 	display: flex;
 	align-items: center;
 	gap: 10px;
 	width: 100%;
 	padding: 10px 14px;
 	border: none;
+	outline: none;
 	background: none;
 	cursor: pointer;
 	text-align: left;
@@ -120,6 +122,7 @@ const itemTime = css`
 `;
 
 const viewAllStyle = css`
+	${ focusRing };
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -127,6 +130,7 @@ const viewAllStyle = css`
 	width: 100%;
 	padding: 10px 14px;
 	border: none;
+	outline: none;
 	border-top: 1px solid ${ colors.border };
 	background: ${ colors.bgSubtle };
 	font-size: ${ fontSizes.xs };

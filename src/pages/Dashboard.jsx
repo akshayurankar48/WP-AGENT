@@ -150,7 +150,7 @@ export default function Dashboard() {
 					<div className="flex gap-3">
 						<button
 							type="button"
-							className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white text-indigo-700 font-semibold text-sm shadow-md hover:bg-white/90 transition-colors duration-200 border-none cursor-pointer"
+							className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white text-indigo-700 font-semibold text-sm shadow-md hover:bg-white/90 transition-colors duration-200 border-none cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-indigo-600"
 							onClick={ () => {
 								window.location.href = editorUrl;
 							} }
@@ -160,7 +160,7 @@ export default function Dashboard() {
 						</button>
 						<button
 							type="button"
-							className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white/15 text-white font-semibold text-sm hover:bg-white/25 transition-colors duration-200 border border-solid border-white/30 cursor-pointer"
+							className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white/15 text-white font-semibold text-sm hover:bg-white/25 transition-colors duration-200 border border-solid border-white/30 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-indigo-600"
 							onClick={ () => {
 								window.location.href = editorUrl + '?wp-agent-demo=saas-landing';
 							} }

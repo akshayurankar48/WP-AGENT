@@ -106,7 +106,7 @@ export default function ProviderKeys( {
 					<button
 						type="button"
 						onClick={ () => onBackendChange?.( 'openrouter' ) }
-						className={ `flex-1 flex items-center gap-3 p-4 rounded-xl border border-solid cursor-pointer transition-all duration-150 ${
+						className={ `flex-1 flex items-center gap-3 p-4 rounded-xl border border-solid cursor-pointer transition-all duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-800 ${
 							! isProviders
 								? 'border-brand-800 bg-violet-50 shadow-sm'
 								: 'border-border-subtle bg-background-primary hover:border-border-strong'
@@ -128,7 +128,7 @@ export default function ProviderKeys( {
 					<button
 						type="button"
 						onClick={ () => onBackendChange?.( 'providers' ) }
-						className={ `flex-1 flex items-center gap-3 p-4 rounded-xl border border-solid cursor-pointer transition-all duration-150 ${
+						className={ `flex-1 flex items-center gap-3 p-4 rounded-xl border border-solid cursor-pointer transition-all duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-800 ${
 							isProviders
 								? 'border-brand-800 bg-violet-50 shadow-sm'
 								: 'border-border-subtle bg-background-primary hover:border-border-strong'
