@@ -6,6 +6,7 @@
  */
 
 import { css } from '@emotion/css';
+import { useEffect, useRef } from '@wordpress/element';
 import { useChat } from '../hooks/use-chat';
 import { useBlockActions } from '../hooks/use-block-actions';
 import { useEditorContext } from '../hooks/use-editor-context';
@@ -157,6 +158,26 @@ const ChatPanel = () => {
 
 	// Process pending client-side block actions from the AI.
 	useBlockActions();
+
+	// Auto-send demo prompt when launched from dashboard.
+	const demoFired = useRef( false );
+	useEffect( () => {
+		if ( demoFired.current || ! hasApiKey || isStreaming || isLoading ) {
+			return;
+		}
+		const params = new URLSearchParams( window.location.search );
+		const demo = params.get( 'wp-agent-demo' );
+		if ( ! demo ) {
+			return;
+		}
+		demoFired.current = true;
+		const prompts = {
+			'saas-landing': 'Build a modern SaaS landing page with aurora gradient hero, glassmorphic feature cards, gradient stats, testimonials, pricing section, FAQ, and a glowing CTA. Use the modern-saas blueprint.',
+			agency: 'Build a creative agency portfolio page with glassmorphic hero, feature showcase, content cards, testimonials, process steps, and aurora CTA. Use the agency-portfolio blueprint.',
+		};
+		const msg = prompts[ demo ] || prompts[ 'saas-landing' ];
+		setTimeout( () => sendMessage( msg ), 500 );
+	}, [ hasApiKey, isStreaming, isLoading ] ); // eslint-disable-line react-hooks/exhaustive-deps
 
 	const hasMessages = messages.length > 0;
 

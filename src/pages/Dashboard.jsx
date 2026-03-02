@@ -16,6 +16,7 @@ import {
 	Brain,
 	History,
 	ArrowRight,
+	Play,
 } from 'lucide-react';
 import PageLayout from '../components/PageLayout';
 
@@ -147,6 +148,16 @@ export default function Dashboard() {
 						} }
 					>
 						Open Editor
+					</Button>
+					<Button
+						variant="outline"
+						size="md"
+						icon={ <Play className="size-4" /> }
+						onClick={ () => {
+							window.location.href = editorUrl + '?wp-agent-demo=saas-landing';
+						} }
+					>
+						Try a Demo
 					</Button>
 				</div>
 			</div>
