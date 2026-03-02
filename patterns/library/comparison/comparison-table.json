@@ -1,0 +1,261 @@
+{
+  "id": "comparison-table",
+  "name": "Comparison Table",
+  "category": "comparison",
+  "description": "Structured comparison table with feature labels and checkmarks across Basic and Pro plans",
+  "variables": {
+    "heading": "Compare Plans",
+    "subheading": "Find the plan that fits your needs. Upgrade anytime as you grow.",
+    "basic_title": "Basic",
+    "pro_title": "Pro",
+    "feature_1": "Unlimited Projects",
+    "feature_2": "Custom Domains",
+    "feature_3": "Priority Support",
+    "feature_4": "Advanced Analytics",
+    "feature_5": "Team Collaboration",
+    "feature_6": "API Access",
+    "basic_1": "\u2713",
+    "basic_2": "\u2713",
+    "basic_3": "\u2717",
+    "basic_4": "\u2717",
+    "basic_5": "\u2717",
+    "basic_6": "\u2717",
+    "pro_1": "\u2713",
+    "pro_2": "\u2713",
+    "pro_3": "\u2713",
+    "pro_4": "\u2713",
+    "pro_5": "\u2713",
+    "pro_6": "\u2713",
+    "bg_color": "{{bg_light}}",
+    "text_color": "{{text_dark}}",
+    "muted_color": "{{text_muted}}",
+    "accent_color": "{{accent}}",
+    "border_color": "{{border_light}}",
+    "highlight_bg": "{{primary}}"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "{{bg_color}}" },
+          "spacing": { "padding": { "top": "100px", "bottom": "100px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/heading",
+          "attrs": {
+            "textAlign": "center",
+            "level": 2,
+            "style": {
+              "typography": { "fontSize": "42px", "fontWeight": "700", "letterSpacing": "-0.02em" },
+              "color": { "text": "{{text_color}}" },
+              "spacing": { "margin": { "bottom": "16px" } }
+            }
+          },
+          "innerHTML": "{{heading}}"
+        },
+        {
+          "blockName": "core/paragraph",
+          "attrs": {
+            "align": "center",
+            "style": {
+              "typography": { "fontSize": "18px", "lineHeight": "1.6" },
+              "color": { "text": "{{muted_color}}" },
+              "spacing": { "margin": { "bottom": "64px" } }
+            }
+          },
+          "innerHTML": "{{subheading}}"
+        },
+        {
+          "blockName": "core/columns",
+          "attrs": {
+            "style": {
+              "spacing": { "blockGap": { "left": "0px" } },
+              "border": { "radius": "12px", "width": "1px", "color": "{{border_color}}" }
+            }
+          },
+          "innerBlocks": [
+            {
+              "blockName": "core/column",
+              "attrs": { "width": "40%" },
+              "innerBlocks": [
+                {
+                  "blockName": "core/group",
+                  "attrs": {
+                    "style": {
+                      "spacing": { "padding": { "top": "20px", "bottom": "20px", "left": "24px", "right": "24px" } },
+                      "border": { "bottom": { "color": "{{border_color}}", "width": "1px" } }
+                    }
+                  },
+                  "innerBlocks": [
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "14px", "fontWeight": "600", "textTransform": "uppercase", "letterSpacing": "0.05em" },
+                          "color": { "text": "{{muted_color}}" }
+                        }
+                      },
+                      "innerHTML": "Features"
+                    }
+                  ]
+                },
+                {
+                  "blockName": "core/group",
+                  "attrs": { "style": { "spacing": { "padding": { "top": "16px", "bottom": "16px", "left": "24px", "right": "24px" } }, "border": { "bottom": { "color": "{{border_color}}", "width": "1px" } } } },
+                  "innerBlocks": [{ "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "16px" }, "color": { "text": "{{text_color}}" } } }, "innerHTML": "{{feature_1}}" }]
+                },
+                {
+                  "blockName": "core/group",
+                  "attrs": { "style": { "spacing": { "padding": { "top": "16px", "bottom": "16px", "left": "24px", "right": "24px" } }, "border": { "bottom": { "color": "{{border_color}}", "width": "1px" } } } },
+                  "innerBlocks": [{ "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "16px" }, "color": { "text": "{{text_color}}" } } }, "innerHTML": "{{feature_2}}" }]
+                },
+                {
+                  "blockName": "core/group",
+                  "attrs": { "style": { "spacing": { "padding": { "top": "16px", "bottom": "16px", "left": "24px", "right": "24px" } }, "border": { "bottom": { "color": "{{border_color}}", "width": "1px" } } } },
+                  "innerBlocks": [{ "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "16px" }, "color": { "text": "{{text_color}}" } } }, "innerHTML": "{{feature_3}}" }]
+                },
+                {
+                  "blockName": "core/group",
+                  "attrs": { "style": { "spacing": { "padding": { "top": "16px", "bottom": "16px", "left": "24px", "right": "24px" } }, "border": { "bottom": { "color": "{{border_color}}", "width": "1px" } } } },
+                  "innerBlocks": [{ "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "16px" }, "color": { "text": "{{text_color}}" } } }, "innerHTML": "{{feature_4}}" }]
+                },
+                {
+                  "blockName": "core/group",
+                  "attrs": { "style": { "spacing": { "padding": { "top": "16px", "bottom": "16px", "left": "24px", "right": "24px" } }, "border": { "bottom": { "color": "{{border_color}}", "width": "1px" } } } },
+                  "innerBlocks": [{ "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "16px" }, "color": { "text": "{{text_color}}" } } }, "innerHTML": "{{feature_5}}" }]
+                },
+                {
+                  "blockName": "core/group",
+                  "attrs": { "style": { "spacing": { "padding": { "top": "16px", "bottom": "16px", "left": "24px", "right": "24px" } } } },
+                  "innerBlocks": [{ "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "16px" }, "color": { "text": "{{text_color}}" } } }, "innerHTML": "{{feature_6}}" }]
+                }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "attrs": { "width": "30%" },
+              "innerBlocks": [
+                {
+                  "blockName": "core/group",
+                  "attrs": {
+                    "style": {
+                      "spacing": { "padding": { "top": "20px", "bottom": "20px", "left": "24px", "right": "24px" } },
+                      "border": { "bottom": { "color": "{{border_color}}", "width": "1px" }, "left": { "color": "{{border_color}}", "width": "1px" } }
+                    }
+                  },
+                  "innerBlocks": [
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "align": "center",
+                        "style": {
+                          "typography": { "fontSize": "16px", "fontWeight": "600" },
+                          "color": { "text": "{{text_color}}" }
+                        }
+                      },
+                      "innerHTML": "{{basic_title}}"
+                    }
+                  ]
+                },
+                {
+                  "blockName": "core/group",
+                  "attrs": { "style": { "spacing": { "padding": { "top": "16px", "bottom": "16px" } }, "border": { "bottom": { "color": "{{border_color}}", "width": "1px" }, "left": { "color": "{{border_color}}", "width": "1px" } } } },
+                  "innerBlocks": [{ "blockName": "core/paragraph", "attrs": { "align": "center", "style": { "typography": { "fontSize": "18px" }, "color": { "text": "{{accent_color}}" } } }, "innerHTML": "{{basic_1}}" }]
+                },
+                {
+                  "blockName": "core/group",
+                  "attrs": { "style": { "spacing": { "padding": { "top": "16px", "bottom": "16px" } }, "border": { "bottom": { "color": "{{border_color}}", "width": "1px" }, "left": { "color": "{{border_color}}", "width": "1px" } } } },
+                  "innerBlocks": [{ "blockName": "core/paragraph", "attrs": { "align": "center", "style": { "typography": { "fontSize": "18px" }, "color": { "text": "{{accent_color}}" } } }, "innerHTML": "{{basic_2}}" }]
+                },
+                {
+                  "blockName": "core/group",
+                  "attrs": { "style": { "spacing": { "padding": { "top": "16px", "bottom": "16px" } }, "border": { "bottom": { "color": "{{border_color}}", "width": "1px" }, "left": { "color": "{{border_color}}", "width": "1px" } } } },
+                  "innerBlocks": [{ "blockName": "core/paragraph", "attrs": { "align": "center", "style": { "typography": { "fontSize": "18px" }, "color": { "text": "{{muted_color}}" } } }, "innerHTML": "{{basic_3}}" }]
+                },
+                {
+                  "blockName": "core/group",
+                  "attrs": { "style": { "spacing": { "padding": { "top": "16px", "bottom": "16px" } }, "border": { "bottom": { "color": "{{border_color}}", "width": "1px" }, "left": { "color": "{{border_color}}", "width": "1px" } } } },
+                  "innerBlocks": [{ "blockName": "core/paragraph", "attrs": { "align": "center", "style": { "typography": { "fontSize": "18px" }, "color": { "text": "{{muted_color}}" } } }, "innerHTML": "{{basic_4}}" }]
+                },
+                {
+                  "blockName": "core/group",
+                  "attrs": { "style": { "spacing": { "padding": { "top": "16px", "bottom": "16px" } }, "border": { "bottom": { "color": "{{border_color}}", "width": "1px" }, "left": { "color": "{{border_color}}", "width": "1px" } } } },
+                  "innerBlocks": [{ "blockName": "core/paragraph", "attrs": { "align": "center", "style": { "typography": { "fontSize": "18px" }, "color": { "text": "{{muted_color}}" } } }, "innerHTML": "{{basic_5}}" }]
+                },
+                {
+                  "blockName": "core/group",
+                  "attrs": { "style": { "spacing": { "padding": { "top": "16px", "bottom": "16px" } }, "border": { "left": { "color": "{{border_color}}", "width": "1px" } } } },
+                  "innerBlocks": [{ "blockName": "core/paragraph", "attrs": { "align": "center", "style": { "typography": { "fontSize": "18px" }, "color": { "text": "{{muted_color}}" } } }, "innerHTML": "{{basic_6}}" }]
+                }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "attrs": { "width": "30%" },
+              "innerBlocks": [
+                {
+                  "blockName": "core/group",
+                  "attrs": {
+                    "style": {
+                      "color": { "background": "{{highlight_bg}}" },
+                      "spacing": { "padding": { "top": "20px", "bottom": "20px", "left": "24px", "right": "24px" } },
+                      "border": { "bottom": { "color": "rgba(255,255,255,0.2)", "width": "1px" } }
+                    }
+                  },
+                  "innerBlocks": [
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "align": "center",
+                        "style": {
+                          "typography": { "fontSize": "16px", "fontWeight": "600" },
+                          "color": { "text": "#ffffff" }
+                        }
+                      },
+                      "innerHTML": "{{pro_title}}"
+                    }
+                  ]
+                },
+                {
+                  "blockName": "core/group",
+                  "attrs": { "style": { "color": { "background": "{{highlight_bg}}" }, "spacing": { "padding": { "top": "16px", "bottom": "16px" } }, "border": { "bottom": { "color": "rgba(255,255,255,0.2)", "width": "1px" } } } },
+                  "innerBlocks": [{ "blockName": "core/paragraph", "attrs": { "align": "center", "style": { "typography": { "fontSize": "18px" }, "color": { "text": "#ffffff" } } }, "innerHTML": "{{pro_1}}" }]
+                },
+                {
+                  "blockName": "core/group",
+                  "attrs": { "style": { "color": { "background": "{{highlight_bg}}" }, "spacing": { "padding": { "top": "16px", "bottom": "16px" } }, "border": { "bottom": { "color": "rgba(255,255,255,0.2)", "width": "1px" } } } },
+                  "innerBlocks": [{ "blockName": "core/paragraph", "attrs": { "align": "center", "style": { "typography": { "fontSize": "18px" }, "color": { "text": "#ffffff" } } }, "innerHTML": "{{pro_2}}" }]
+                },
+                {
+                  "blockName": "core/group",
+                  "attrs": { "style": { "color": { "background": "{{highlight_bg}}" }, "spacing": { "padding": { "top": "16px", "bottom": "16px" } }, "border": { "bottom": { "color": "rgba(255,255,255,0.2)", "width": "1px" } } } },
+                  "innerBlocks": [{ "blockName": "core/paragraph", "attrs": { "align": "center", "style": { "typography": { "fontSize": "18px" }, "color": { "text": "#ffffff" } } }, "innerHTML": "{{pro_3}}" }]
+                },
+                {
+                  "blockName": "core/group",
+                  "attrs": { "style": { "color": { "background": "{{highlight_bg}}" }, "spacing": { "padding": { "top": "16px", "bottom": "16px" } }, "border": { "bottom": { "color": "rgba(255,255,255,0.2)", "width": "1px" } } } },
+                  "innerBlocks": [{ "blockName": "core/paragraph", "attrs": { "align": "center", "style": { "typography": { "fontSize": "18px" }, "color": { "text": "#ffffff" } } }, "innerHTML": "{{pro_4}}" }]
+                },
+                {
+                  "blockName": "core/group",
+                  "attrs": { "style": { "color": { "background": "{{highlight_bg}}" }, "spacing": { "padding": { "top": "16px", "bottom": "16px" } }, "border": { "bottom": { "color": "rgba(255,255,255,0.2)", "width": "1px" } } } },
+                  "innerBlocks": [{ "blockName": "core/paragraph", "attrs": { "align": "center", "style": { "typography": { "fontSize": "18px" }, "color": { "text": "#ffffff" } } }, "innerHTML": "{{pro_5}}" }]
+                },
+                {
+                  "blockName": "core/group",
+                  "attrs": { "style": { "color": { "background": "{{highlight_bg}}" }, "spacing": { "padding": { "top": "16px", "bottom": "16px" } } } },
+                  "innerBlocks": [{ "blockName": "core/paragraph", "attrs": { "align": "center", "style": { "typography": { "fontSize": "18px" }, "color": { "text": "#ffffff" } } }, "innerHTML": "{{pro_6}}" }]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

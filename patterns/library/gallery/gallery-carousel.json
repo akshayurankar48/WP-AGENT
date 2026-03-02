@@ -1,0 +1,173 @@
+{
+  "id": "gallery-carousel",
+  "name": "Carousel Gallery",
+  "category": "gallery",
+  "description": "Horizontal carousel-style gallery with four captioned images in a wide row layout on a light background",
+  "variables": {
+    "heading": "Latest Projects",
+    "subheading": "Scroll through our recent work and see what we have been building.",
+    "image_1": "https://placehold.co/600x400/e5e7eb/6b7280?text=Slide+1",
+    "caption_1": "Brand Identity Redesign",
+    "image_2": "https://placehold.co/600x400/e5e7eb/6b7280?text=Slide+2",
+    "caption_2": "E-Commerce Platform",
+    "image_3": "https://placehold.co/600x400/e5e7eb/6b7280?text=Slide+3",
+    "caption_3": "Mobile App Launch",
+    "image_4": "https://placehold.co/600x400/e5e7eb/6b7280?text=Slide+4",
+    "caption_4": "Marketing Campaign",
+    "bg_color": "{{bg_light}}",
+    "text_color": "{{text_dark}}",
+    "muted_color": "{{text_muted}}"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "{{bg_color}}" },
+          "spacing": { "padding": { "top": "100px", "bottom": "100px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/heading",
+          "attrs": {
+            "textAlign": "center",
+            "level": 2,
+            "style": {
+              "typography": { "fontSize": "42px", "fontWeight": "700", "letterSpacing": "-0.02em" },
+              "color": { "text": "{{text_color}}" },
+              "spacing": { "margin": { "bottom": "16px" } }
+            }
+          },
+          "innerHTML": "{{heading}}"
+        },
+        {
+          "blockName": "core/paragraph",
+          "attrs": {
+            "align": "center",
+            "style": {
+              "typography": { "fontSize": "18px" },
+              "color": { "text": "{{muted_color}}" },
+              "spacing": { "margin": { "bottom": "64px" } }
+            }
+          },
+          "innerHTML": "{{subheading}}"
+        },
+        {
+          "blockName": "core/columns",
+          "attrs": {
+            "style": { "spacing": { "blockGap": { "left": "24px" } } }
+          },
+          "innerBlocks": [
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/image",
+                  "attrs": {
+                    "url": "{{image_1}}",
+                    "alt": "{{caption_1}}",
+                    "style": { "border": { "radius": "16px" } },
+                    "sizeSlug": "full"
+                  }
+                },
+                {
+                  "blockName": "core/paragraph",
+                  "attrs": {
+                    "align": "center",
+                    "style": {
+                      "typography": { "fontSize": "15px", "fontWeight": "500" },
+                      "color": { "text": "{{text_color}}" },
+                      "spacing": { "margin": { "top": "12px" } }
+                    }
+                  },
+                  "innerHTML": "{{caption_1}}"
+                }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/image",
+                  "attrs": {
+                    "url": "{{image_2}}",
+                    "alt": "{{caption_2}}",
+                    "style": { "border": { "radius": "16px" } },
+                    "sizeSlug": "full"
+                  }
+                },
+                {
+                  "blockName": "core/paragraph",
+                  "attrs": {
+                    "align": "center",
+                    "style": {
+                      "typography": { "fontSize": "15px", "fontWeight": "500" },
+                      "color": { "text": "{{text_color}}" },
+                      "spacing": { "margin": { "top": "12px" } }
+                    }
+                  },
+                  "innerHTML": "{{caption_2}}"
+                }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/image",
+                  "attrs": {
+                    "url": "{{image_3}}",
+                    "alt": "{{caption_3}}",
+                    "style": { "border": { "radius": "16px" } },
+                    "sizeSlug": "full"
+                  }
+                },
+                {
+                  "blockName": "core/paragraph",
+                  "attrs": {
+                    "align": "center",
+                    "style": {
+                      "typography": { "fontSize": "15px", "fontWeight": "500" },
+                      "color": { "text": "{{text_color}}" },
+                      "spacing": { "margin": { "top": "12px" } }
+                    }
+                  },
+                  "innerHTML": "{{caption_3}}"
+                }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/image",
+                  "attrs": {
+                    "url": "{{image_4}}",
+                    "alt": "{{caption_4}}",
+                    "style": { "border": { "radius": "16px" } },
+                    "sizeSlug": "full"
+                  }
+                },
+                {
+                  "blockName": "core/paragraph",
+                  "attrs": {
+                    "align": "center",
+                    "style": {
+                      "typography": { "fontSize": "15px", "fontWeight": "500" },
+                      "color": { "text": "{{text_color}}" },
+                      "spacing": { "margin": { "top": "12px" } }
+                    }
+                  },
+                  "innerHTML": "{{caption_4}}"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "id": "contact-map",
+  "name": "Contact with Map",
+  "category": "contact",
+  "description": "Contact section with centered heading and subtitle, followed by a two-column layout with map placeholder on the left and contact details on the right",
+  "variables": {
+    "heading": "Visit Our Office",
+    "subtitle": "We'd love to meet you in person. Stop by our office or get in touch using the details below.",
+    "map_url": "https://placehold.co/800x400/e5e7eb/9ca3af?text=Map+Location",
+    "email": "contact@example.com",
+    "phone": "+1 (555) 234-5678",
+    "address": "789 Market Street, Suite 400, San Francisco, CA 94103",
+    "hours": "Monday - Friday: 9:00 AM - 6:00 PM",
+    "bg_color": "{{bg_light}}",
+    "text_color": "{{text_dark}}",
+    "muted_color": "{{text_muted}}",
+    "accent_color": "{{primary}}",
+    "label_color": "{{text_muted}}"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "{{bg_color}}" },
+          "spacing": { "padding": { "top": "100px", "bottom": "100px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        { "blockName": "core/heading", "attrs": { "textAlign": "center", "level": 2, "style": { "typography": { "fontSize": "42px", "fontWeight": "700", "letterSpacing": "-0.02em" }, "color": { "text": "{{text_color}}" }, "spacing": { "margin": { "bottom": "16px" } } } }, "innerHTML": "{{heading}}" },
+        { "blockName": "core/paragraph", "attrs": { "align": "center", "style": { "typography": { "fontSize": "18px", "lineHeight": "1.7" }, "color": { "text": "{{muted_color}}" }, "spacing": { "margin": { "bottom": "56px" } } } }, "innerHTML": "{{subtitle}}" },
+        {
+          "blockName": "core/columns",
+          "attrs": { "style": { "spacing": { "blockGap": { "left": "48px" } } } },
+          "innerBlocks": [
+            {
+              "blockName": "core/column",
+              "attrs": { "width": "60%" },
+              "innerBlocks": [
+                { "blockName": "core/image", "attrs": { "url": "{{map_url}}", "alt": "Office location map", "style": { "border": { "radius": "12px" } }, "sizeSlug": "full" } }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "attrs": { "width": "40%" },
+              "innerBlocks": [
+                { "blockName": "core/heading", "attrs": { "level": 4, "style": { "typography": { "fontSize": "13px", "textTransform": "uppercase", "letterSpacing": "0.1em", "fontWeight": "600" }, "color": { "text": "{{label_color}}" }, "spacing": { "margin": { "bottom": "12px" } } } }, "innerHTML": "Email" },
+                { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "17px" }, "color": { "text": "{{text_color}}" }, "spacing": { "margin": { "bottom": "28px" } } } }, "innerHTML": "{{email}}" },
+                { "blockName": "core/heading", "attrs": { "level": 4, "style": { "typography": { "fontSize": "13px", "textTransform": "uppercase", "letterSpacing": "0.1em", "fontWeight": "600" }, "color": { "text": "{{label_color}}" }, "spacing": { "margin": { "bottom": "12px" } } } }, "innerHTML": "Phone" },
+                { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "17px" }, "color": { "text": "{{text_color}}" }, "spacing": { "margin": { "bottom": "28px" } } } }, "innerHTML": "{{phone}}" },
+                { "blockName": "core/heading", "attrs": { "level": 4, "style": { "typography": { "fontSize": "13px", "textTransform": "uppercase", "letterSpacing": "0.1em", "fontWeight": "600" }, "color": { "text": "{{label_color}}" }, "spacing": { "margin": { "bottom": "12px" } } } }, "innerHTML": "Address" },
+                { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "17px", "lineHeight": "1.6" }, "color": { "text": "{{text_color}}" }, "spacing": { "margin": { "bottom": "28px" } } } }, "innerHTML": "{{address}}" },
+                { "blockName": "core/heading", "attrs": { "level": 4, "style": { "typography": { "fontSize": "13px", "textTransform": "uppercase", "letterSpacing": "0.1em", "fontWeight": "600" }, "color": { "text": "{{label_color}}" }, "spacing": { "margin": { "bottom": "12px" } } } }, "innerHTML": "Hours" },
+                { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "17px" }, "color": { "text": "{{text_color}}" } } }, "innerHTML": "{{hours}}" }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

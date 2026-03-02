@@ -1,0 +1,100 @@
+{
+  "id": "faq-search",
+  "name": "FAQ with Search Concept",
+  "category": "faq",
+  "description": "Clean FAQ section with search-oriented intro text and well-spaced accordion items on a white background",
+  "variables": {
+    "heading": "How Can We Help?",
+    "subheading": "Search our knowledge base or browse the most frequently asked questions below.",
+    "intro": "Popular topics: Getting started, Billing & payments, Account settings, Integrations, API access",
+    "q1": "How do I reset my password?",
+    "a1": "Go to the login page and click \"Forgot Password.\" Enter the email address associated with your account, and we will send you a secure reset link. The link expires after 24 hours for security.",
+    "q2": "What payment methods do you accept?",
+    "a2": "We accept all major credit cards (Visa, Mastercard, American Express), PayPal, and bank transfers for annual plans. Enterprise customers can also pay by invoice with NET-30 terms.",
+    "q3": "How do I upgrade or downgrade my plan?",
+    "a3": "Navigate to Settings then Billing in your dashboard. Click \"Change Plan\" to see all available options. Upgrades take effect immediately with prorated billing. Downgrades apply at the end of your current billing cycle.",
+    "q4": "Can I export my data?",
+    "a4": "Yes. You can export all your data at any time from Settings then Data Management. We support CSV, JSON, and XML formats. Full account exports typically complete within a few minutes.",
+    "q5": "Do you have an API?",
+    "a5": "Yes. Our REST API gives you full programmatic access to your account. Documentation is available at docs.example.com/api. All plans include API access, with rate limits varying by tier.",
+    "bg_color": "{{bg_white}}",
+    "text_color": "{{text_dark}}",
+    "muted_color": "{{text_muted}}",
+    "accent_color": "{{primary}}",
+    "border_color": "{{border_light}}"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "{{bg_color}}" },
+          "spacing": { "padding": { "top": "100px", "bottom": "100px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/heading",
+          "attrs": { "textAlign": "center", "level": 2, "style": { "typography": { "fontSize": "42px", "fontWeight": "700", "letterSpacing": "-0.02em" }, "color": { "text": "{{text_color}}" }, "spacing": { "margin": { "bottom": "16px" } } } },
+          "innerHTML": "{{heading}}"
+        },
+        {
+          "blockName": "core/paragraph",
+          "attrs": { "align": "center", "style": { "typography": { "fontSize": "18px", "lineHeight": "1.6" }, "color": { "text": "{{muted_color}}" }, "spacing": { "margin": { "bottom": "12px" } } } },
+          "innerHTML": "{{subheading}}"
+        },
+        {
+          "blockName": "core/paragraph",
+          "attrs": { "align": "center", "style": { "typography": { "fontSize": "15px", "fontWeight": "500" }, "color": { "text": "{{accent_color}}" }, "spacing": { "margin": { "bottom": "56px" } } } },
+          "innerHTML": "{{intro}}"
+        },
+        {
+          "blockName": "core/group",
+          "attrs": {
+            "style": { "spacing": { "blockGap": "0px" } },
+            "layout": { "type": "constrained", "contentSize": "720px" }
+          },
+          "innerBlocks": [
+            {
+              "blockName": "core/details",
+              "attrs": { "summary": "{{q1}}", "style": { "spacing": { "padding": { "top": "24px", "bottom": "24px" } }, "border": { "bottom": { "width": "1px", "color": "{{border_color}}" } }, "typography": { "fontSize": "17px", "fontWeight": "600" } } },
+              "innerBlocks": [
+                { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "15px", "lineHeight": "1.7" }, "color": { "text": "{{muted_color}}" }, "spacing": { "margin": { "top": "8px" } } } }, "innerHTML": "{{a1}}" }
+              ]
+            },
+            {
+              "blockName": "core/details",
+              "attrs": { "summary": "{{q2}}", "style": { "spacing": { "padding": { "top": "24px", "bottom": "24px" } }, "border": { "bottom": { "width": "1px", "color": "{{border_color}}" } }, "typography": { "fontSize": "17px", "fontWeight": "600" } } },
+              "innerBlocks": [
+                { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "15px", "lineHeight": "1.7" }, "color": { "text": "{{muted_color}}" }, "spacing": { "margin": { "top": "8px" } } } }, "innerHTML": "{{a2}}" }
+              ]
+            },
+            {
+              "blockName": "core/details",
+              "attrs": { "summary": "{{q3}}", "style": { "spacing": { "padding": { "top": "24px", "bottom": "24px" } }, "border": { "bottom": { "width": "1px", "color": "{{border_color}}" } }, "typography": { "fontSize": "17px", "fontWeight": "600" } } },
+              "innerBlocks": [
+                { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "15px", "lineHeight": "1.7" }, "color": { "text": "{{muted_color}}" }, "spacing": { "margin": { "top": "8px" } } } }, "innerHTML": "{{a3}}" }
+              ]
+            },
+            {
+              "blockName": "core/details",
+              "attrs": { "summary": "{{q4}}", "style": { "spacing": { "padding": { "top": "24px", "bottom": "24px" } }, "border": { "bottom": { "width": "1px", "color": "{{border_color}}" } }, "typography": { "fontSize": "17px", "fontWeight": "600" } } },
+              "innerBlocks": [
+                { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "15px", "lineHeight": "1.7" }, "color": { "text": "{{muted_color}}" }, "spacing": { "margin": { "top": "8px" } } } }, "innerHTML": "{{a4}}" }
+              ]
+            },
+            {
+              "blockName": "core/details",
+              "attrs": { "summary": "{{q5}}", "style": { "spacing": { "padding": { "top": "24px", "bottom": "24px" } }, "border": { "bottom": { "width": "1px", "color": "{{border_color}}" } }, "typography": { "fontSize": "17px", "fontWeight": "600" } } },
+              "innerBlocks": [
+                { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "15px", "lineHeight": "1.7" }, "color": { "text": "{{muted_color}}" }, "spacing": { "margin": { "top": "8px" } } } }, "innerHTML": "{{a5}}" }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

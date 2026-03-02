@@ -1,0 +1,219 @@
+{
+  "id": "services-icons",
+  "name": "Icon Services Grid",
+  "category": "services",
+  "description": "Compact four-column service overview with emoji icons, headings, and short descriptions without card backgrounds on a light background",
+  "variables": {
+    "heading": "Our Capabilities",
+    "subheading": "A broad range of skills under one roof, tailored to your goals.",
+    "service_1_icon": "\u26a1",
+    "service_1_title": "Performance",
+    "service_1_desc": "Blazing fast load times and smooth interactions that keep users engaged.",
+    "service_2_icon": "\ud83d\udd12",
+    "service_2_title": "Security",
+    "service_2_desc": "Enterprise-grade protection for your data and your customers.",
+    "service_3_icon": "\ud83c\udfa8",
+    "service_3_title": "Design",
+    "service_3_desc": "Beautiful interfaces that balance aesthetics with usability.",
+    "service_4_icon": "\ud83d\ude80",
+    "service_4_title": "Scalability",
+    "service_4_desc": "Architecture that grows with you from launch day to enterprise scale.",
+    "bg_color": "{{bg_light}}",
+    "text_color": "{{text_dark}}",
+    "muted_color": "{{text_muted}}"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "{{bg_color}}" },
+          "spacing": { "padding": { "top": "100px", "bottom": "100px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/heading",
+          "attrs": {
+            "textAlign": "center",
+            "level": 2,
+            "style": {
+              "typography": { "fontSize": "42px", "fontWeight": "700", "letterSpacing": "-0.02em" },
+              "color": { "text": "{{text_color}}" },
+              "spacing": { "margin": { "bottom": "16px" } }
+            }
+          },
+          "innerHTML": "{{heading}}"
+        },
+        {
+          "blockName": "core/paragraph",
+          "attrs": {
+            "align": "center",
+            "style": {
+              "typography": { "fontSize": "18px" },
+              "color": { "text": "{{muted_color}}" },
+              "spacing": { "margin": { "bottom": "64px" } }
+            }
+          },
+          "innerHTML": "{{subheading}}"
+        },
+        {
+          "blockName": "core/columns",
+          "attrs": { "style": { "spacing": { "blockGap": { "left": "40px" } } } },
+          "innerBlocks": [
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/paragraph",
+                  "attrs": {
+                    "style": {
+                      "typography": { "fontSize": "36px" },
+                      "spacing": { "margin": { "bottom": "12px" } }
+                    }
+                  },
+                  "innerHTML": "{{service_1_icon}}"
+                },
+                {
+                  "blockName": "core/heading",
+                  "attrs": {
+                    "level": 4,
+                    "style": {
+                      "typography": { "fontSize": "18px", "fontWeight": "600" },
+                      "color": { "text": "{{text_color}}" },
+                      "spacing": { "margin": { "bottom": "8px" } }
+                    }
+                  },
+                  "innerHTML": "{{service_1_title}}"
+                },
+                {
+                  "blockName": "core/paragraph",
+                  "attrs": {
+                    "style": {
+                      "typography": { "fontSize": "15px", "lineHeight": "1.6" },
+                      "color": { "text": "{{muted_color}}" }
+                    }
+                  },
+                  "innerHTML": "{{service_1_desc}}"
+                }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/paragraph",
+                  "attrs": {
+                    "style": {
+                      "typography": { "fontSize": "36px" },
+                      "spacing": { "margin": { "bottom": "12px" } }
+                    }
+                  },
+                  "innerHTML": "{{service_2_icon}}"
+                },
+                {
+                  "blockName": "core/heading",
+                  "attrs": {
+                    "level": 4,
+                    "style": {
+                      "typography": { "fontSize": "18px", "fontWeight": "600" },
+                      "color": { "text": "{{text_color}}" },
+                      "spacing": { "margin": { "bottom": "8px" } }
+                    }
+                  },
+                  "innerHTML": "{{service_2_title}}"
+                },
+                {
+                  "blockName": "core/paragraph",
+                  "attrs": {
+                    "style": {
+                      "typography": { "fontSize": "15px", "lineHeight": "1.6" },
+                      "color": { "text": "{{muted_color}}" }
+                    }
+                  },
+                  "innerHTML": "{{service_2_desc}}"
+                }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/paragraph",
+                  "attrs": {
+                    "style": {
+                      "typography": { "fontSize": "36px" },
+                      "spacing": { "margin": { "bottom": "12px" } }
+                    }
+                  },
+                  "innerHTML": "{{service_3_icon}}"
+                },
+                {
+                  "blockName": "core/heading",
+                  "attrs": {
+                    "level": 4,
+                    "style": {
+                      "typography": { "fontSize": "18px", "fontWeight": "600" },
+                      "color": { "text": "{{text_color}}" },
+                      "spacing": { "margin": { "bottom": "8px" } }
+                    }
+                  },
+                  "innerHTML": "{{service_3_title}}"
+                },
+                {
+                  "blockName": "core/paragraph",
+                  "attrs": {
+                    "style": {
+                      "typography": { "fontSize": "15px", "lineHeight": "1.6" },
+                      "color": { "text": "{{muted_color}}" }
+                    }
+                  },
+                  "innerHTML": "{{service_3_desc}}"
+                }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/paragraph",
+                  "attrs": {
+                    "style": {
+                      "typography": { "fontSize": "36px" },
+                      "spacing": { "margin": { "bottom": "12px" } }
+                    }
+                  },
+                  "innerHTML": "{{service_4_icon}}"
+                },
+                {
+                  "blockName": "core/heading",
+                  "attrs": {
+                    "level": 4,
+                    "style": {
+                      "typography": { "fontSize": "18px", "fontWeight": "600" },
+                      "color": { "text": "{{text_color}}" },
+                      "spacing": { "margin": { "bottom": "8px" } }
+                    }
+                  },
+                  "innerHTML": "{{service_4_title}}"
+                },
+                {
+                  "blockName": "core/paragraph",
+                  "attrs": {
+                    "style": {
+                      "typography": { "fontSize": "15px", "lineHeight": "1.6" },
+                      "color": { "text": "{{muted_color}}" }
+                    }
+                  },
+                  "innerHTML": "{{service_4_desc}}"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

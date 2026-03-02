@@ -1,0 +1,227 @@
+{
+  "id": "services-tabs",
+  "name": "Tab-Style Services",
+  "category": "services",
+  "description": "Two-column tab-style service layout with service names listed on the left and detailed descriptions stacked on the right with visual separators",
+  "variables": {
+    "heading": "How We Help",
+    "service_1_title": "Strategy & Consulting",
+    "service_1_desc": "We start by understanding where you are and where you want to go. Our strategy team conducts thorough market analysis, competitive research, and user interviews to build a roadmap that aligns your business goals with real user needs. Every recommendation is backed by data.",
+    "service_2_title": "Design & Prototyping",
+    "service_2_desc": "From wireframes to pixel-perfect mockups, our design process is collaborative and iterative. We create interactive prototypes that let you experience the product before a single line of code is written, reducing risk and accelerating decision-making.",
+    "service_3_title": "Development & Launch",
+    "service_3_desc": "Our engineering team builds with modern tools and proven patterns. We focus on clean architecture, comprehensive testing, and performance optimization so your product launches with confidence and scales without compromise.",
+    "bg_color": "{{bg_light}}",
+    "text_color": "{{text_dark}}",
+    "muted_color": "{{text_muted}}",
+    "accent_color": "{{primary}}",
+    "border_color": "{{border_light}}"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "{{bg_color}}" },
+          "spacing": { "padding": { "top": "100px", "bottom": "100px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/heading",
+          "attrs": {
+            "level": 2,
+            "style": {
+              "typography": { "fontSize": "42px", "fontWeight": "700", "letterSpacing": "-0.02em" },
+              "color": { "text": "{{text_color}}" },
+              "spacing": { "margin": { "bottom": "64px" } }
+            }
+          },
+          "innerHTML": "{{heading}}"
+        },
+        {
+          "blockName": "core/columns",
+          "attrs": {
+            "verticalAlignment": "top",
+            "style": { "spacing": { "blockGap": { "left": "60px" } } }
+          },
+          "innerBlocks": [
+            {
+              "blockName": "core/column",
+              "attrs": { "width": "35%", "verticalAlignment": "top" },
+              "innerBlocks": [
+                {
+                  "blockName": "core/group",
+                  "attrs": {
+                    "style": {
+                      "border": { "left": { "color": "{{accent_color}}", "width": "3px", "style": "solid" } },
+                      "spacing": { "padding": { "left": "20px", "top": "12px", "bottom": "12px" }, "margin": { "bottom": "8px" } }
+                    }
+                  },
+                  "innerBlocks": [
+                    {
+                      "blockName": "core/heading",
+                      "attrs": {
+                        "level": 3,
+                        "style": {
+                          "typography": { "fontSize": "20px", "fontWeight": "600" },
+                          "color": { "text": "{{accent_color}}" }
+                        }
+                      },
+                      "innerHTML": "{{service_1_title}}"
+                    }
+                  ]
+                },
+                {
+                  "blockName": "core/group",
+                  "attrs": {
+                    "style": {
+                      "border": { "left": { "color": "{{border_color}}", "width": "3px", "style": "solid" } },
+                      "spacing": { "padding": { "left": "20px", "top": "12px", "bottom": "12px" }, "margin": { "bottom": "8px" } }
+                    }
+                  },
+                  "innerBlocks": [
+                    {
+                      "blockName": "core/heading",
+                      "attrs": {
+                        "level": 3,
+                        "style": {
+                          "typography": { "fontSize": "20px", "fontWeight": "600" },
+                          "color": { "text": "{{text_color}}" }
+                        }
+                      },
+                      "innerHTML": "{{service_2_title}}"
+                    }
+                  ]
+                },
+                {
+                  "blockName": "core/group",
+                  "attrs": {
+                    "style": {
+                      "border": { "left": { "color": "{{border_color}}", "width": "3px", "style": "solid" } },
+                      "spacing": { "padding": { "left": "20px", "top": "12px", "bottom": "12px" } }
+                    }
+                  },
+                  "innerBlocks": [
+                    {
+                      "blockName": "core/heading",
+                      "attrs": {
+                        "level": 3,
+                        "style": {
+                          "typography": { "fontSize": "20px", "fontWeight": "600" },
+                          "color": { "text": "{{text_color}}" }
+                        }
+                      },
+                      "innerHTML": "{{service_3_title}}"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "attrs": { "width": "65%", "verticalAlignment": "top" },
+              "innerBlocks": [
+                {
+                  "blockName": "core/group",
+                  "attrs": {
+                    "style": {
+                      "border": { "bottom": { "color": "{{border_color}}", "width": "1px", "style": "solid" } },
+                      "spacing": { "padding": { "bottom": "32px" }, "margin": { "bottom": "32px" } }
+                    }
+                  },
+                  "innerBlocks": [
+                    {
+                      "blockName": "core/heading",
+                      "attrs": {
+                        "level": 4,
+                        "style": {
+                          "typography": { "fontSize": "18px", "fontWeight": "600" },
+                          "color": { "text": "{{text_color}}" },
+                          "spacing": { "margin": { "bottom": "12px" } }
+                        }
+                      },
+                      "innerHTML": "{{service_1_title}}"
+                    },
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "16px", "lineHeight": "1.7" },
+                          "color": { "text": "{{muted_color}}" }
+                        }
+                      },
+                      "innerHTML": "{{service_1_desc}}"
+                    }
+                  ]
+                },
+                {
+                  "blockName": "core/group",
+                  "attrs": {
+                    "style": {
+                      "border": { "bottom": { "color": "{{border_color}}", "width": "1px", "style": "solid" } },
+                      "spacing": { "padding": { "bottom": "32px" }, "margin": { "bottom": "32px" } }
+                    }
+                  },
+                  "innerBlocks": [
+                    {
+                      "blockName": "core/heading",
+                      "attrs": {
+                        "level": 4,
+                        "style": {
+                          "typography": { "fontSize": "18px", "fontWeight": "600" },
+                          "color": { "text": "{{text_color}}" },
+                          "spacing": { "margin": { "bottom": "12px" } }
+                        }
+                      },
+                      "innerHTML": "{{service_2_title}}"
+                    },
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "16px", "lineHeight": "1.7" },
+                          "color": { "text": "{{muted_color}}" }
+                        }
+                      },
+                      "innerHTML": "{{service_2_desc}}"
+                    }
+                  ]
+                },
+                {
+                  "blockName": "core/group",
+                  "innerBlocks": [
+                    {
+                      "blockName": "core/heading",
+                      "attrs": {
+                        "level": 4,
+                        "style": {
+                          "typography": { "fontSize": "18px", "fontWeight": "600" },
+                          "color": { "text": "{{text_color}}" },
+                          "spacing": { "margin": { "bottom": "12px" } }
+                        }
+                      },
+                      "innerHTML": "{{service_3_title}}"
+                    },
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "16px", "lineHeight": "1.7" },
+                          "color": { "text": "{{muted_color}}" }
+                        }
+                      },
+                      "innerHTML": "{{service_3_desc}}"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

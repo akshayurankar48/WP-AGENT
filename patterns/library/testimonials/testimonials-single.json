@@ -1,0 +1,87 @@
+{
+  "id": "testimonials-single",
+  "name": "Single Large Testimonial",
+  "category": "testimonials",
+  "description": "Elegant single testimonial with large decorative quote marks, centered quote text, author name and role",
+  "variables": {
+    "quote": "Working with this team completely changed our trajectory. In six months we went from struggling to find product-market fit to serving over 10,000 active users. The platform just works.",
+    "author_name": "Alexandra Torres",
+    "author_role": "Chief Product Officer at Wavelength",
+    "bg_color": "{{bg_light}}",
+    "text_color": "{{text_dark}}",
+    "muted_color": "{{text_muted}}",
+    "accent_color": "{{primary}}"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "{{bg_color}}" },
+          "spacing": { "padding": { "top": "100px", "bottom": "100px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained", "contentSize": "720px" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/paragraph",
+          "attrs": {
+            "align": "center",
+            "style": {
+              "typography": { "fontSize": "64px", "lineHeight": "1" },
+              "color": { "text": "{{accent_color}}" },
+              "spacing": { "margin": { "bottom": "0px" } }
+            }
+          },
+          "innerHTML": "\u201c"
+        },
+        {
+          "blockName": "core/paragraph",
+          "attrs": {
+            "align": "center",
+            "style": {
+              "typography": { "fontSize": "24px", "lineHeight": "1.7", "fontStyle": "italic" },
+              "color": { "text": "{{text_color}}" },
+              "spacing": { "margin": { "top": "0px", "bottom": "40px" } }
+            }
+          },
+          "innerHTML": "{{quote}}"
+        },
+        {
+          "blockName": "core/separator",
+          "attrs": {
+            "style": {
+              "color": { "background": "{{accent_color}}" },
+              "spacing": { "margin": { "bottom": "24px" } }
+            },
+            "className": "is-style-wide"
+          }
+        },
+        {
+          "blockName": "core/paragraph",
+          "attrs": {
+            "align": "center",
+            "style": {
+              "typography": { "fontSize": "17px", "fontWeight": "700" },
+              "color": { "text": "{{text_color}}" },
+              "spacing": { "margin": { "bottom": "4px" } }
+            }
+          },
+          "innerHTML": "{{author_name}}"
+        },
+        {
+          "blockName": "core/paragraph",
+          "attrs": {
+            "align": "center",
+            "style": {
+              "typography": { "fontSize": "15px" },
+              "color": { "text": "{{muted_color}}" }
+            }
+          },
+          "innerHTML": "{{author_role}}"
+        }
+      ]
+    }
+  ]
+}

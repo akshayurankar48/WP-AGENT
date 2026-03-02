@@ -1,0 +1,52 @@
+{
+  "id": "footer-minimal",
+  "name": "Minimal Footer",
+  "category": "footers",
+  "description": "Compact minimal footer with company name, copyright, and navigation links centered on a light background",
+  "variables": {
+    "company": "Acme Inc.",
+    "copyright": "2024 Acme Inc.",
+    "nav_links": "Privacy Policy  ·  Terms of Service  ·  Support  ·  Contact",
+    "bg_color": "{{bg_light}}",
+    "text_color": "{{text_muted}}"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "{{bg_color}}" },
+          "spacing": { "padding": { "top": "40px", "bottom": "40px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/group",
+          "attrs": {
+            "layout": { "type": "flex", "flexWrap": "wrap", "justifyContent": "center" },
+            "style": { "spacing": { "blockGap": "24px" } }
+          },
+          "innerBlocks": [
+            {
+              "blockName": "core/paragraph",
+              "attrs": { "style": { "typography": { "fontSize": "14px", "fontWeight": "600" }, "color": { "text": "{{text_dark}}" } } },
+              "innerHTML": "{{company}}"
+            },
+            {
+              "blockName": "core/paragraph",
+              "attrs": { "style": { "typography": { "fontSize": "14px" }, "color": { "text": "{{text_color}}" } } },
+              "innerHTML": "{{nav_links}}"
+            }
+          ]
+        },
+        {
+          "blockName": "core/paragraph",
+          "attrs": { "align": "center", "style": { "typography": { "fontSize": "13px" }, "color": { "text": "{{text_color}}" }, "spacing": { "margin": { "top": "16px" } } } },
+          "innerHTML": "{{copyright}}"
+        }
+      ]
+    }
+  ]
+}

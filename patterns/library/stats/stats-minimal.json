@@ -1,0 +1,68 @@
+{
+  "id": "stats-minimal",
+  "name": "Minimal Stats Row",
+  "category": "stats",
+  "description": "Four-column minimal stats row with large bold numbers and small muted labels on a clean white background, no cards or backgrounds",
+  "variables": {
+    "stat_1": "10M+",
+    "label_1": "Downloads",
+    "stat_2": "150+",
+    "label_2": "Countries",
+    "stat_3": "99.95%",
+    "label_3": "Uptime",
+    "stat_4": "24/7",
+    "label_4": "Support",
+    "bg_color": "{{bg_white}}",
+    "number_color": "{{text_dark}}",
+    "label_color": "{{text_muted}}"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "{{bg_color}}" },
+          "spacing": { "padding": { "top": "80px", "bottom": "80px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/columns",
+          "attrs": { "style": { "spacing": { "blockGap": { "left": "32px" } } } },
+          "innerBlocks": [
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                { "blockName": "core/heading", "attrs": { "textAlign": "center", "level": 3, "style": { "typography": { "fontSize": "48px", "fontWeight": "800", "letterSpacing": "-0.02em" }, "color": { "text": "{{number_color}}" }, "spacing": { "margin": { "bottom": "8px" } } } }, "innerHTML": "{{stat_1}}" },
+                { "blockName": "core/paragraph", "attrs": { "align": "center", "style": { "typography": { "fontSize": "14px", "fontWeight": "500", "textTransform": "uppercase", "letterSpacing": "0.08em" }, "color": { "text": "{{label_color}}" } } }, "innerHTML": "{{label_1}}" }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                { "blockName": "core/heading", "attrs": { "textAlign": "center", "level": 3, "style": { "typography": { "fontSize": "48px", "fontWeight": "800", "letterSpacing": "-0.02em" }, "color": { "text": "{{number_color}}" }, "spacing": { "margin": { "bottom": "8px" } } } }, "innerHTML": "{{stat_2}}" },
+                { "blockName": "core/paragraph", "attrs": { "align": "center", "style": { "typography": { "fontSize": "14px", "fontWeight": "500", "textTransform": "uppercase", "letterSpacing": "0.08em" }, "color": { "text": "{{label_color}}" } } }, "innerHTML": "{{label_2}}" }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                { "blockName": "core/heading", "attrs": { "textAlign": "center", "level": 3, "style": { "typography": { "fontSize": "48px", "fontWeight": "800", "letterSpacing": "-0.02em" }, "color": { "text": "{{number_color}}" }, "spacing": { "margin": { "bottom": "8px" } } } }, "innerHTML": "{{stat_3}}" },
+                { "blockName": "core/paragraph", "attrs": { "align": "center", "style": { "typography": { "fontSize": "14px", "fontWeight": "500", "textTransform": "uppercase", "letterSpacing": "0.08em" }, "color": { "text": "{{label_color}}" } } }, "innerHTML": "{{label_3}}" }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                { "blockName": "core/heading", "attrs": { "textAlign": "center", "level": 3, "style": { "typography": { "fontSize": "48px", "fontWeight": "800", "letterSpacing": "-0.02em" }, "color": { "text": "{{number_color}}" }, "spacing": { "margin": { "bottom": "8px" } } } }, "innerHTML": "{{stat_4}}" },
+                { "blockName": "core/paragraph", "attrs": { "align": "center", "style": { "typography": { "fontSize": "14px", "fontWeight": "500", "textTransform": "uppercase", "letterSpacing": "0.08em" }, "color": { "text": "{{label_color}}" } } }, "innerHTML": "{{label_4}}" }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

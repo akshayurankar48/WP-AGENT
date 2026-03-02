@@ -1,0 +1,54 @@
+{
+  "id": "newsletter-inline",
+  "name": "Inline Newsletter Card",
+  "category": "newsletter",
+  "description": "Compact inline newsletter card with subtle border, small centered heading, one-line description, and CTA button, ideal for embedding within content sections",
+  "variables": {
+    "heading": "Stay Updated",
+    "description": "Get the latest news and updates delivered to your inbox. No spam, ever.",
+    "cta_label": "Join the List",
+    "cta_url": "#subscribe",
+    "bg_color": "{{bg_white}}",
+    "text_color": "{{text_dark}}",
+    "muted_color": "{{text_muted}}",
+    "accent_color": "{{primary}}",
+    "border_color": "{{border_light}}"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "transparent" },
+          "spacing": { "padding": { "top": "40px", "bottom": "40px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained", "contentSize": "640px" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/group",
+          "attrs": {
+            "style": {
+              "color": { "background": "{{bg_color}}" },
+              "spacing": { "padding": { "top": "40px", "bottom": "40px", "left": "40px", "right": "40px" } },
+              "border": { "radius": "12px", "width": "1px", "color": "{{border_color}}", "style": "solid" }
+            },
+            "layout": { "type": "constrained" }
+          },
+          "innerBlocks": [
+            { "blockName": "core/heading", "attrs": { "textAlign": "center", "level": 3, "style": { "typography": { "fontSize": "28px", "fontWeight": "700", "letterSpacing": "-0.01em" }, "color": { "text": "{{text_color}}" }, "spacing": { "margin": { "bottom": "10px" } } } }, "innerHTML": "{{heading}}" },
+            { "blockName": "core/paragraph", "attrs": { "align": "center", "style": { "typography": { "fontSize": "16px", "lineHeight": "1.6" }, "color": { "text": "{{muted_color}}" }, "spacing": { "margin": { "bottom": "24px" } } } }, "innerHTML": "{{description}}" },
+            {
+              "blockName": "core/buttons",
+              "attrs": { "layout": { "type": "flex", "justifyContent": "center" } },
+              "innerBlocks": [
+                { "blockName": "core/button", "attrs": { "url": "{{cta_url}}", "style": { "color": { "background": "{{accent_color}}", "text": "#ffffff" }, "typography": { "fontSize": "15px", "fontWeight": "600" }, "spacing": { "padding": { "top": "14px", "bottom": "14px", "left": "32px", "right": "32px" } }, "border": { "radius": "100px" } } }, "innerHTML": "{{cta_label}}" }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

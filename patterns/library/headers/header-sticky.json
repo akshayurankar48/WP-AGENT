@@ -1,0 +1,50 @@
+{
+  "id": "header-sticky",
+  "name": "Sticky Section Header",
+  "category": "headers",
+  "description": "Prominent section header with eyebrow text, large heading, subtitle, and a horizontal rule separator on light background",
+  "variables": {
+    "eyebrow": "OUR APPROACH",
+    "heading": "Designed for Scale, Built for Speed",
+    "subheading": "Every detail of our platform has been engineered to handle millions of requests without breaking a sweat. From architecture to interface, performance is never an afterthought.",
+    "bg_color": "{{bg_light}}",
+    "eyebrow_color": "{{accent}}",
+    "text_color": "{{text_dark}}",
+    "muted_color": "{{text_muted}}",
+    "border_color": "{{border_light}}"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "{{bg_color}}" },
+          "spacing": { "padding": { "top": "100px", "bottom": "48px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/paragraph",
+          "attrs": { "align": "center", "style": { "typography": { "fontSize": "14px", "fontWeight": "700", "textTransform": "uppercase", "letterSpacing": "0.1em" }, "color": { "text": "{{eyebrow_color}}" }, "spacing": { "margin": { "bottom": "20px" } } } },
+          "innerHTML": "{{eyebrow}}"
+        },
+        {
+          "blockName": "core/heading",
+          "attrs": { "textAlign": "center", "level": 2, "style": { "typography": { "fontSize": "48px", "fontWeight": "800", "letterSpacing": "-0.025em", "lineHeight": "1.1" }, "color": { "text": "{{text_color}}" }, "spacing": { "margin": { "bottom": "20px" } } } },
+          "innerHTML": "{{heading}}"
+        },
+        {
+          "blockName": "core/paragraph",
+          "attrs": { "align": "center", "style": { "typography": { "fontSize": "19px", "lineHeight": "1.6" }, "color": { "text": "{{muted_color}}" }, "spacing": { "margin": { "bottom": "48px" } } } },
+          "innerHTML": "{{subheading}}"
+        },
+        {
+          "blockName": "core/separator",
+          "attrs": { "style": { "color": { "background": "{{border_color}}" }, "spacing": { "margin": { "top": "0px", "bottom": "0px" } } } }
+        }
+      ]
+    }
+  ]
+}

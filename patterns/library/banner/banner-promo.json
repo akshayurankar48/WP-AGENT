@@ -1,0 +1,90 @@
+{
+  "id": "banner-promo",
+  "name": "Promo Banner",
+  "category": "banner",
+  "description": "Promotional banner with dark background, accent border-left, promo text, and call-to-action button",
+  "variables": {
+    "heading": "Early Bird Pricing Ends Friday",
+    "description": "Lock in 40% off our annual plan before launch day. Limited spots available for founding members.",
+    "cta_text": "Claim Your Spot",
+    "bg_color": "{{bg_dark}}",
+    "text_color": "#ffffff",
+    "muted_color": "{{text_light}}",
+    "accent_color": "{{accent}}"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "{{bg_color}}" },
+          "spacing": { "padding": { "top": "40px", "bottom": "40px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/group",
+          "attrs": {
+            "style": {
+              "border": { "left": { "color": "{{accent_color}}", "width": "4px" }, "radius": "8px" },
+              "color": { "background": "rgba(255,255,255,0.04)" },
+              "spacing": { "padding": { "top": "28px", "bottom": "28px", "left": "32px", "right": "32px" } }
+            },
+            "layout": { "type": "flex", "justifyContent": "space-between", "verticalAlignment": "center" }
+          },
+          "innerBlocks": [
+            {
+              "blockName": "core/group",
+              "attrs": {
+                "style": { "layout": { "selfStretch": "fill" } }
+              },
+              "innerBlocks": [
+                {
+                  "blockName": "core/heading",
+                  "attrs": {
+                    "level": 3,
+                    "style": {
+                      "typography": { "fontSize": "22px", "fontWeight": "700" },
+                      "color": { "text": "{{text_color}}" },
+                      "spacing": { "margin": { "bottom": "8px" } }
+                    }
+                  },
+                  "innerHTML": "{{heading}}"
+                },
+                {
+                  "blockName": "core/paragraph",
+                  "attrs": {
+                    "style": {
+                      "typography": { "fontSize": "15px", "lineHeight": "1.5" },
+                      "color": { "text": "{{muted_color}}" }
+                    }
+                  },
+                  "innerHTML": "{{description}}"
+                }
+              ]
+            },
+            {
+              "blockName": "core/buttons",
+              "innerBlocks": [
+                {
+                  "blockName": "core/button",
+                  "attrs": {
+                    "style": {
+                      "color": { "background": "{{accent_color}}", "text": "#ffffff" },
+                      "typography": { "fontSize": "15px", "fontWeight": "600" },
+                      "border": { "radius": "8px" },
+                      "spacing": { "padding": { "top": "14px", "bottom": "14px", "left": "28px", "right": "28px" } }
+                    }
+                  },
+                  "innerHTML": "{{cta_text}}"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

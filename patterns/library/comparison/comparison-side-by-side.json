@@ -1,0 +1,189 @@
+{
+  "id": "comparison-side-by-side",
+  "name": "Side by Side Comparison",
+  "category": "comparison",
+  "description": "Before vs After or Us vs Them comparison with pain points and benefits side by side",
+  "variables": {
+    "left_heading": "Without Us",
+    "left_point_1": "\u2717  Wasting hours on repetitive manual tasks every single day",
+    "left_point_2": "\u2717  Scattered tools that don't talk to each other",
+    "left_point_3": "\u2717  Missed deadlines and constant miscommunication",
+    "left_point_4": "\u2717  Growing costs with no clear return on investment",
+    "right_heading": "With Us",
+    "right_point_1": "\u2713  Automate workflows and reclaim 10+ hours per week",
+    "right_point_2": "\u2713  One unified platform for your entire team",
+    "right_point_3": "\u2713  On-time delivery with built-in project tracking",
+    "right_point_4": "\u2713  Transparent pricing with measurable ROI from day one",
+    "bg_color": "{{bg_white}}",
+    "text_color": "{{text_dark}}",
+    "muted_color": "{{text_muted}}",
+    "accent_color": "{{accent}}",
+    "left_bg": "{{bg_light}}",
+    "right_bg": "rgba(99,102,241,0.06)"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "{{bg_color}}" },
+          "spacing": { "padding": { "top": "100px", "bottom": "100px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/columns",
+          "attrs": { "style": { "spacing": { "blockGap": { "left": "0px" } } } },
+          "innerBlocks": [
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/group",
+                  "attrs": {
+                    "style": {
+                      "color": { "background": "{{left_bg}}" },
+                      "border": { "radius": { "topLeft": "16px", "bottomLeft": "16px", "topRight": "0px", "bottomRight": "0px" } },
+                      "spacing": { "padding": { "top": "48px", "bottom": "48px", "left": "40px", "right": "40px" } }
+                    }
+                  },
+                  "innerBlocks": [
+                    {
+                      "blockName": "core/heading",
+                      "attrs": {
+                        "level": 3,
+                        "style": {
+                          "typography": { "fontSize": "28px", "fontWeight": "700" },
+                          "color": { "text": "{{text_color}}" },
+                          "spacing": { "margin": { "bottom": "32px" } }
+                        }
+                      },
+                      "innerHTML": "{{left_heading}}"
+                    },
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "16px", "lineHeight": "1.7" },
+                          "color": { "text": "{{muted_color}}" },
+                          "spacing": { "margin": { "bottom": "20px" } }
+                        }
+                      },
+                      "innerHTML": "{{left_point_1}}"
+                    },
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "16px", "lineHeight": "1.7" },
+                          "color": { "text": "{{muted_color}}" },
+                          "spacing": { "margin": { "bottom": "20px" } }
+                        }
+                      },
+                      "innerHTML": "{{left_point_2}}"
+                    },
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "16px", "lineHeight": "1.7" },
+                          "color": { "text": "{{muted_color}}" },
+                          "spacing": { "margin": { "bottom": "20px" } }
+                        }
+                      },
+                      "innerHTML": "{{left_point_3}}"
+                    },
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "16px", "lineHeight": "1.7" },
+                          "color": { "text": "{{muted_color}}" }
+                        }
+                      },
+                      "innerHTML": "{{left_point_4}}"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/group",
+                  "attrs": {
+                    "style": {
+                      "color": { "background": "{{right_bg}}" },
+                      "border": { "radius": { "topLeft": "0px", "bottomLeft": "0px", "topRight": "16px", "bottomRight": "16px" } },
+                      "spacing": { "padding": { "top": "48px", "bottom": "48px", "left": "40px", "right": "40px" } }
+                    }
+                  },
+                  "innerBlocks": [
+                    {
+                      "blockName": "core/heading",
+                      "attrs": {
+                        "level": 3,
+                        "style": {
+                          "typography": { "fontSize": "28px", "fontWeight": "700" },
+                          "color": { "text": "{{accent_color}}" },
+                          "spacing": { "margin": { "bottom": "32px" } }
+                        }
+                      },
+                      "innerHTML": "{{right_heading}}"
+                    },
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "16px", "lineHeight": "1.7" },
+                          "color": { "text": "{{text_color}}" },
+                          "spacing": { "margin": { "bottom": "20px" } }
+                        }
+                      },
+                      "innerHTML": "{{right_point_1}}"
+                    },
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "16px", "lineHeight": "1.7" },
+                          "color": { "text": "{{text_color}}" },
+                          "spacing": { "margin": { "bottom": "20px" } }
+                        }
+                      },
+                      "innerHTML": "{{right_point_2}}"
+                    },
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "16px", "lineHeight": "1.7" },
+                          "color": { "text": "{{text_color}}" },
+                          "spacing": { "margin": { "bottom": "20px" } }
+                        }
+                      },
+                      "innerHTML": "{{right_point_3}}"
+                    },
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "16px", "lineHeight": "1.7" },
+                          "color": { "text": "{{text_color}}" }
+                        }
+                      },
+                      "innerHTML": "{{right_point_4}}"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

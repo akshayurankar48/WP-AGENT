@@ -1,0 +1,6 @@
+{
+  "id": "app-download",
+  "name": "App Download Page",
+  "description": "App download page: glass hero + bento features + gradient stats + side-by-side comparison + modern testimonials + aurora CTA + dark footer",
+  "sections": ["hero-glass", "features-bento", "stats-gradient", "comparison-side-by-side", "testimonials-modern", "cta-aurora", "footer-dark"]
+}

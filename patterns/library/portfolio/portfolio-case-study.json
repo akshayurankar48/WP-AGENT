@@ -1,0 +1,173 @@
+{
+  "id": "portfolio-case-study",
+  "name": "Case Study Highlight",
+  "category": "portfolio",
+  "description": "Single featured project case study with large image, details, key metrics, and call-to-action button",
+  "variables": {
+    "project_name": "Revamping Digital Banking for 2 Million Users",
+    "client_name": "Meridian Financial Group",
+    "description": "We partnered with Meridian to completely redesign their mobile and web banking experience. The result was a unified platform that reduced customer support tickets by 45% and increased daily active users by 60% within the first quarter.",
+    "stat_1_value": "60%",
+    "stat_1_label": "Increase in Daily Active Users",
+    "stat_2_value": "45%",
+    "stat_2_label": "Reduction in Support Tickets",
+    "cta_text": "View Case Study",
+    "bg_color": "{{bg_dark}}",
+    "text_color": "#ffffff",
+    "muted_color": "{{text_muted}}",
+    "accent_color": "{{accent}}"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "{{bg_color}}" },
+          "spacing": { "padding": { "top": "100px", "bottom": "100px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/columns",
+          "attrs": {
+            "style": { "spacing": { "blockGap": { "left": "60px" } } }
+          },
+          "innerBlocks": [
+            {
+              "blockName": "core/column",
+              "attrs": { "width": "55%" },
+              "innerBlocks": [
+                {
+                  "blockName": "core/image",
+                  "attrs": {
+                    "url": "https://placehold.co/800x500/1a1a2e/666666?text=Case+Study",
+                    "alt": "Case study featured image",
+                    "style": { "border": { "radius": "12px" } }
+                  },
+                  "innerHTML": "<figure class=\"wp-block-image\"><img src=\"https://placehold.co/800x500/1a1a2e/666666?text=Case+Study\" alt=\"Case study featured image\"/></figure>"
+                }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "attrs": { "width": "45%" },
+              "innerBlocks": [
+                {
+                  "blockName": "core/paragraph",
+                  "attrs": {
+                    "style": {
+                      "typography": { "fontSize": "14px", "textTransform": "uppercase", "letterSpacing": "0.1em", "fontWeight": "600" },
+                      "color": { "text": "{{accent_color}}" },
+                      "spacing": { "margin": { "bottom": "16px" } }
+                    }
+                  },
+                  "innerHTML": "{{client_name}}"
+                },
+                {
+                  "blockName": "core/heading",
+                  "attrs": {
+                    "level": 2,
+                    "style": {
+                      "typography": { "fontSize": "32px", "fontWeight": "700", "lineHeight": "1.2", "letterSpacing": "-0.01em" },
+                      "color": { "text": "{{text_color}}" },
+                      "spacing": { "margin": { "bottom": "20px" } }
+                    }
+                  },
+                  "innerHTML": "{{project_name}}"
+                },
+                {
+                  "blockName": "core/paragraph",
+                  "attrs": {
+                    "style": {
+                      "typography": { "fontSize": "16px", "lineHeight": "1.7" },
+                      "color": { "text": "{{muted_color}}" },
+                      "spacing": { "margin": { "bottom": "32px" } }
+                    }
+                  },
+                  "innerHTML": "{{description}}"
+                },
+                {
+                  "blockName": "core/columns",
+                  "attrs": { "style": { "spacing": { "blockGap": { "left": "32px" }, "margin": { "bottom": "36px" } } } },
+                  "innerBlocks": [
+                    {
+                      "blockName": "core/column",
+                      "innerBlocks": [
+                        {
+                          "blockName": "core/paragraph",
+                          "attrs": {
+                            "style": {
+                              "typography": { "fontSize": "36px", "fontWeight": "800" },
+                              "color": { "text": "{{accent_color}}" },
+                              "spacing": { "margin": { "bottom": "4px" } }
+                            }
+                          },
+                          "innerHTML": "{{stat_1_value}}"
+                        },
+                        {
+                          "blockName": "core/paragraph",
+                          "attrs": {
+                            "style": {
+                              "typography": { "fontSize": "14px" },
+                              "color": { "text": "{{muted_color}}" }
+                            }
+                          },
+                          "innerHTML": "{{stat_1_label}}"
+                        }
+                      ]
+                    },
+                    {
+                      "blockName": "core/column",
+                      "innerBlocks": [
+                        {
+                          "blockName": "core/paragraph",
+                          "attrs": {
+                            "style": {
+                              "typography": { "fontSize": "36px", "fontWeight": "800" },
+                              "color": { "text": "{{accent_color}}" },
+                              "spacing": { "margin": { "bottom": "4px" } }
+                            }
+                          },
+                          "innerHTML": "{{stat_2_value}}"
+                        },
+                        {
+                          "blockName": "core/paragraph",
+                          "attrs": {
+                            "style": {
+                              "typography": { "fontSize": "14px" },
+                              "color": { "text": "{{muted_color}}" }
+                            }
+                          },
+                          "innerHTML": "{{stat_2_label}}"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "blockName": "core/buttons",
+                  "innerBlocks": [
+                    {
+                      "blockName": "core/button",
+                      "attrs": {
+                        "style": {
+                          "color": { "background": "{{accent_color}}", "text": "#ffffff" },
+                          "typography": { "fontSize": "16px", "fontWeight": "600" },
+                          "border": { "radius": "8px" },
+                          "spacing": { "padding": { "top": "16px", "bottom": "16px", "left": "32px", "right": "32px" } }
+                        }
+                      },
+                      "innerHTML": "{{cta_text}}"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

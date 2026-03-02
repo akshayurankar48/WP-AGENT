@@ -1,0 +1,223 @@
+{
+  "id": "blog-minimal",
+  "name": "Minimal Blog List",
+  "category": "blog",
+  "description": "Text-only minimal blog list with four posts showing date, title, and excerpt separated by thin borders on a white background",
+  "variables": {
+    "heading": "Journal",
+    "post_1_date": "February 28, 2025",
+    "post_1_title": "On the Importance of Thoughtful Defaults",
+    "post_1_excerpt": "Good software gets out of your way. We explore why spending extra time on default settings creates a better experience for the majority of users.",
+    "post_2_date": "February 14, 2025",
+    "post_2_title": "Lessons From Scaling to One Million Users",
+    "post_2_excerpt": "What worked, what broke, and what we would do differently if we could start over. Honest reflections on growing a product at speed.",
+    "post_3_date": "January 30, 2025",
+    "post_3_title": "Design Systems Are Not Just for Big Teams",
+    "post_3_excerpt": "Even a team of two benefits from shared components and consistent patterns. Here is how to start small and build something that scales.",
+    "post_4_date": "January 15, 2025",
+    "post_4_title": "The Hidden Cost of Technical Shortcuts",
+    "post_4_excerpt": "Every shortcut compounds. We learned this the hard way and now budget refactoring time into every sprint as a non-negotiable investment.",
+    "bg_color": "{{bg_white}}",
+    "text_color": "{{text_dark}}",
+    "muted_color": "{{text_muted}}",
+    "border_color": "{{border_light}}"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "{{bg_color}}" },
+          "spacing": { "padding": { "top": "100px", "bottom": "100px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/heading",
+          "attrs": {
+            "textAlign": "center",
+            "level": 2,
+            "style": {
+              "typography": { "fontSize": "42px", "fontWeight": "700", "letterSpacing": "-0.02em" },
+              "color": { "text": "{{text_color}}" },
+              "spacing": { "margin": { "bottom": "64px" } }
+            }
+          },
+          "innerHTML": "{{heading}}"
+        },
+        {
+          "blockName": "core/group",
+          "attrs": {
+            "style": {
+              "border": { "bottom": { "color": "{{border_color}}", "width": "1px", "style": "solid" } },
+              "spacing": { "padding": { "bottom": "32px" }, "margin": { "bottom": "32px" } }
+            }
+          },
+          "innerBlocks": [
+            {
+              "blockName": "core/paragraph",
+              "attrs": {
+                "style": {
+                  "typography": { "fontSize": "14px" },
+                  "color": { "text": "{{muted_color}}" },
+                  "spacing": { "margin": { "bottom": "8px" } }
+                }
+              },
+              "innerHTML": "{{post_1_date}}"
+            },
+            {
+              "blockName": "core/heading",
+              "attrs": {
+                "level": 3,
+                "style": {
+                  "typography": { "fontSize": "22px", "fontWeight": "600", "lineHeight": "1.3" },
+                  "color": { "text": "{{text_color}}" },
+                  "spacing": { "margin": { "bottom": "10px" } }
+                }
+              },
+              "innerHTML": "{{post_1_title}}"
+            },
+            {
+              "blockName": "core/paragraph",
+              "attrs": {
+                "style": {
+                  "typography": { "fontSize": "16px", "lineHeight": "1.7" },
+                  "color": { "text": "{{muted_color}}" }
+                }
+              },
+              "innerHTML": "{{post_1_excerpt}}"
+            }
+          ]
+        },
+        {
+          "blockName": "core/group",
+          "attrs": {
+            "style": {
+              "border": { "bottom": { "color": "{{border_color}}", "width": "1px", "style": "solid" } },
+              "spacing": { "padding": { "bottom": "32px" }, "margin": { "bottom": "32px" } }
+            }
+          },
+          "innerBlocks": [
+            {
+              "blockName": "core/paragraph",
+              "attrs": {
+                "style": {
+                  "typography": { "fontSize": "14px" },
+                  "color": { "text": "{{muted_color}}" },
+                  "spacing": { "margin": { "bottom": "8px" } }
+                }
+              },
+              "innerHTML": "{{post_2_date}}"
+            },
+            {
+              "blockName": "core/heading",
+              "attrs": {
+                "level": 3,
+                "style": {
+                  "typography": { "fontSize": "22px", "fontWeight": "600", "lineHeight": "1.3" },
+                  "color": { "text": "{{text_color}}" },
+                  "spacing": { "margin": { "bottom": "10px" } }
+                }
+              },
+              "innerHTML": "{{post_2_title}}"
+            },
+            {
+              "blockName": "core/paragraph",
+              "attrs": {
+                "style": {
+                  "typography": { "fontSize": "16px", "lineHeight": "1.7" },
+                  "color": { "text": "{{muted_color}}" }
+                }
+              },
+              "innerHTML": "{{post_2_excerpt}}"
+            }
+          ]
+        },
+        {
+          "blockName": "core/group",
+          "attrs": {
+            "style": {
+              "border": { "bottom": { "color": "{{border_color}}", "width": "1px", "style": "solid" } },
+              "spacing": { "padding": { "bottom": "32px" }, "margin": { "bottom": "32px" } }
+            }
+          },
+          "innerBlocks": [
+            {
+              "blockName": "core/paragraph",
+              "attrs": {
+                "style": {
+                  "typography": { "fontSize": "14px" },
+                  "color": { "text": "{{muted_color}}" },
+                  "spacing": { "margin": { "bottom": "8px" } }
+                }
+              },
+              "innerHTML": "{{post_3_date}}"
+            },
+            {
+              "blockName": "core/heading",
+              "attrs": {
+                "level": 3,
+                "style": {
+                  "typography": { "fontSize": "22px", "fontWeight": "600", "lineHeight": "1.3" },
+                  "color": { "text": "{{text_color}}" },
+                  "spacing": { "margin": { "bottom": "10px" } }
+                }
+              },
+              "innerHTML": "{{post_3_title}}"
+            },
+            {
+              "blockName": "core/paragraph",
+              "attrs": {
+                "style": {
+                  "typography": { "fontSize": "16px", "lineHeight": "1.7" },
+                  "color": { "text": "{{muted_color}}" }
+                }
+              },
+              "innerHTML": "{{post_3_excerpt}}"
+            }
+          ]
+        },
+        {
+          "blockName": "core/group",
+          "innerBlocks": [
+            {
+              "blockName": "core/paragraph",
+              "attrs": {
+                "style": {
+                  "typography": { "fontSize": "14px" },
+                  "color": { "text": "{{muted_color}}" },
+                  "spacing": { "margin": { "bottom": "8px" } }
+                }
+              },
+              "innerHTML": "{{post_4_date}}"
+            },
+            {
+              "blockName": "core/heading",
+              "attrs": {
+                "level": 3,
+                "style": {
+                  "typography": { "fontSize": "22px", "fontWeight": "600", "lineHeight": "1.3" },
+                  "color": { "text": "{{text_color}}" },
+                  "spacing": { "margin": { "bottom": "10px" } }
+                }
+              },
+              "innerHTML": "{{post_4_title}}"
+            },
+            {
+              "blockName": "core/paragraph",
+              "attrs": {
+                "style": {
+                  "typography": { "fontSize": "16px", "lineHeight": "1.7" },
+                  "color": { "text": "{{muted_color}}" }
+                }
+              },
+              "innerHTML": "{{post_4_excerpt}}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

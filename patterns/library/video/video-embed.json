@@ -1,0 +1,115 @@
+{
+  "id": "video-embed",
+  "name": "Video Embed Section",
+  "category": "video",
+  "description": "Clean video embed section with heading, subtitle, centered 16:9 video placeholder, and caption",
+  "variables": {
+    "heading": "How It Works",
+    "subheading": "A quick walkthrough of our platform in under 3 minutes.",
+    "caption": "See the full product tour on our YouTube channel.",
+    "bg_color": "{{bg_light}}",
+    "text_color": "{{text_dark}}",
+    "muted_color": "{{text_muted}}",
+    "accent_color": "{{accent}}",
+    "placeholder_bg": "{{bg_dark}}"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "{{bg_color}}" },
+          "spacing": { "padding": { "top": "100px", "bottom": "100px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/heading",
+          "attrs": {
+            "textAlign": "center",
+            "level": 2,
+            "style": {
+              "typography": { "fontSize": "42px", "fontWeight": "700", "letterSpacing": "-0.02em" },
+              "color": { "text": "{{text_color}}" },
+              "spacing": { "margin": { "bottom": "16px" } }
+            }
+          },
+          "innerHTML": "{{heading}}"
+        },
+        {
+          "blockName": "core/paragraph",
+          "attrs": {
+            "align": "center",
+            "style": {
+              "typography": { "fontSize": "18px", "lineHeight": "1.6" },
+              "color": { "text": "{{muted_color}}" },
+              "spacing": { "margin": { "bottom": "48px" } }
+            }
+          },
+          "innerHTML": "{{subheading}}"
+        },
+        {
+          "blockName": "core/group",
+          "attrs": {
+            "style": {
+              "color": { "background": "{{placeholder_bg}}" },
+              "border": { "radius": "12px" },
+              "spacing": { "padding": { "top": "0px", "bottom": "56.25%", "left": "0px", "right": "0px" } },
+              "dimensions": { "minHeight": "0px" }
+            },
+            "layout": { "type": "constrained" }
+          },
+          "innerBlocks": [
+            {
+              "blockName": "core/group",
+              "attrs": {
+                "style": {
+                  "spacing": { "padding": { "top": "160px" } }
+                },
+                "layout": { "type": "flex", "justifyContent": "center" }
+              },
+              "innerBlocks": [
+                {
+                  "blockName": "core/group",
+                  "attrs": {
+                    "style": {
+                      "color": { "background": "rgba(255,255,255,0.1)" },
+                      "border": { "radius": "100%" },
+                      "spacing": { "padding": { "top": "24px", "bottom": "24px", "left": "28px", "right": "20px" } }
+                    }
+                  },
+                  "innerBlocks": [
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "32px" },
+                          "color": { "text": "#ffffff" }
+                        }
+                      },
+                      "innerHTML": "\u25b6"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "blockName": "core/paragraph",
+          "attrs": {
+            "align": "center",
+            "style": {
+              "typography": { "fontSize": "14px" },
+              "color": { "text": "{{muted_color}}" },
+              "spacing": { "margin": { "top": "20px" } }
+            }
+          },
+          "innerHTML": "{{caption}}"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "id": "freelancer-portfolio",
+  "name": "Freelancer Portfolio",
+  "description": "Freelancer portfolio page: minimal hero + portfolio grid + detailed services + quote testimonial + contact info + minimal footer",
+  "sections": ["hero-minimal", "portfolio-grid", "services-detailed", "testimonials-quote", "contact-info", "footer-minimal"]
+}

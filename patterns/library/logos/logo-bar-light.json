@@ -1,0 +1,57 @@
+{
+  "id": "logo-bar-light",
+  "name": "Logo Bar Light",
+  "category": "logos",
+  "description": "Row of partner or client logos on an explicitly white background with muted heading and minimal padding",
+  "variables": {
+    "heading": "Trusted by Leading Brands",
+    "logo_1_url": "https://placehold.co/160x48/f8fafc/94a3b8?text=Stripe",
+    "logo_2_url": "https://placehold.co/160x48/f8fafc/94a3b8?text=Notion",
+    "logo_3_url": "https://placehold.co/160x48/f8fafc/94a3b8?text=Figma",
+    "logo_4_url": "https://placehold.co/160x48/f8fafc/94a3b8?text=Vercel",
+    "logo_5_url": "https://placehold.co/160x48/f8fafc/94a3b8?text=Linear",
+    "bg_color": "{{bg_white}}",
+    "text_color": "{{text_muted}}"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "{{bg_color}}" },
+          "spacing": { "padding": { "top": "48px", "bottom": "48px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/paragraph",
+          "attrs": {
+            "align": "center",
+            "style": {
+              "typography": { "fontSize": "13px", "textTransform": "uppercase", "letterSpacing": "0.12em", "fontWeight": "600" },
+              "color": { "text": "{{text_color}}" },
+              "spacing": { "margin": { "bottom": "36px" } }
+            }
+          },
+          "innerHTML": "{{heading}}"
+        },
+        {
+          "blockName": "core/columns",
+          "attrs": {
+            "verticalAlignment": "center",
+            "style": { "spacing": { "blockGap": { "left": "48px" } } }
+          },
+          "innerBlocks": [
+            { "blockName": "core/column", "attrs": { "verticalAlignment": "center" }, "innerBlocks": [{ "blockName": "core/image", "attrs": { "url": "{{logo_1_url}}", "alt": "Partner logo", "align": "center" } }] },
+            { "blockName": "core/column", "attrs": { "verticalAlignment": "center" }, "innerBlocks": [{ "blockName": "core/image", "attrs": { "url": "{{logo_2_url}}", "alt": "Partner logo", "align": "center" } }] },
+            { "blockName": "core/column", "attrs": { "verticalAlignment": "center" }, "innerBlocks": [{ "blockName": "core/image", "attrs": { "url": "{{logo_3_url}}", "alt": "Partner logo", "align": "center" } }] },
+            { "blockName": "core/column", "attrs": { "verticalAlignment": "center" }, "innerBlocks": [{ "blockName": "core/image", "attrs": { "url": "{{logo_4_url}}", "alt": "Partner logo", "align": "center" } }] },
+            { "blockName": "core/column", "attrs": { "verticalAlignment": "center" }, "innerBlocks": [{ "blockName": "core/image", "attrs": { "url": "{{logo_5_url}}", "alt": "Partner logo", "align": "center" } }] }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,278 @@
+{
+  "id": "portfolio-grid",
+  "name": "Portfolio Grid",
+  "category": "portfolio",
+  "description": "2x2 portfolio grid with project images, titles, and category labels on a dark background",
+  "variables": {
+    "heading": "Our Work",
+    "subheading": "A selection of projects we are proud to have been a part of.",
+    "project_1_title": "Brand Identity Redesign",
+    "project_1_category": "Branding",
+    "project_2_title": "E-Commerce Platform",
+    "project_2_category": "Web Development",
+    "project_3_title": "Mobile Banking App",
+    "project_3_category": "Product Design",
+    "project_4_title": "Marketing Campaign",
+    "project_4_category": "Digital Strategy",
+    "bg_color": "{{bg_dark}}",
+    "text_color": "#ffffff",
+    "muted_color": "{{text_muted}}",
+    "card_bg": "rgba(255,255,255,0.05)"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "{{bg_color}}" },
+          "spacing": { "padding": { "top": "100px", "bottom": "100px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/heading",
+          "attrs": {
+            "textAlign": "center",
+            "level": 2,
+            "style": {
+              "typography": { "fontSize": "42px", "fontWeight": "700", "letterSpacing": "-0.02em" },
+              "color": { "text": "{{text_color}}" },
+              "spacing": { "margin": { "bottom": "16px" } }
+            }
+          },
+          "innerHTML": "{{heading}}"
+        },
+        {
+          "blockName": "core/paragraph",
+          "attrs": {
+            "align": "center",
+            "style": {
+              "typography": { "fontSize": "18px", "lineHeight": "1.6" },
+              "color": { "text": "{{muted_color}}" },
+              "spacing": { "margin": { "bottom": "64px" } }
+            }
+          },
+          "innerHTML": "{{subheading}}"
+        },
+        {
+          "blockName": "core/columns",
+          "attrs": { "style": { "spacing": { "blockGap": { "left": "32px", "top": "32px" } } } },
+          "innerBlocks": [
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/group",
+                  "attrs": {
+                    "style": {
+                      "color": { "background": "{{card_bg}}" },
+                      "border": { "radius": "12px" },
+                      "spacing": { "padding": { "top": "0px", "bottom": "24px", "left": "0px", "right": "0px" } }
+                    }
+                  },
+                  "innerBlocks": [
+                    {
+                      "blockName": "core/image",
+                      "attrs": {
+                        "url": "https://placehold.co/600x400/2a2a2a/666666?text=Brand+Identity",
+                        "alt": "Brand Identity Redesign",
+                        "style": {
+                          "border": { "radius": { "topLeft": "12px", "topRight": "12px", "bottomLeft": "0px", "bottomRight": "0px" } }
+                        }
+                      },
+                      "innerHTML": "<figure class=\"wp-block-image\"><img src=\"https://placehold.co/600x400/2a2a2a/666666?text=Brand+Identity\" alt=\"Brand Identity Redesign\"/></figure>"
+                    },
+                    {
+                      "blockName": "core/heading",
+                      "attrs": {
+                        "level": 3,
+                        "style": {
+                          "typography": { "fontSize": "20px", "fontWeight": "600" },
+                          "color": { "text": "{{text_color}}" },
+                          "spacing": { "margin": { "top": "20px", "bottom": "8px" }, "padding": { "left": "24px", "right": "24px" } }
+                        }
+                      },
+                      "innerHTML": "{{project_1_title}}"
+                    },
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "14px", "textTransform": "uppercase", "letterSpacing": "0.05em" },
+                          "color": { "text": "{{muted_color}}" },
+                          "spacing": { "padding": { "left": "24px", "right": "24px" } }
+                        }
+                      },
+                      "innerHTML": "{{project_1_category}}"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/group",
+                  "attrs": {
+                    "style": {
+                      "color": { "background": "{{card_bg}}" },
+                      "border": { "radius": "12px" },
+                      "spacing": { "padding": { "top": "0px", "bottom": "24px", "left": "0px", "right": "0px" } }
+                    }
+                  },
+                  "innerBlocks": [
+                    {
+                      "blockName": "core/image",
+                      "attrs": {
+                        "url": "https://placehold.co/600x400/2a2a2a/666666?text=E-Commerce",
+                        "alt": "E-Commerce Platform",
+                        "style": {
+                          "border": { "radius": { "topLeft": "12px", "topRight": "12px", "bottomLeft": "0px", "bottomRight": "0px" } }
+                        }
+                      },
+                      "innerHTML": "<figure class=\"wp-block-image\"><img src=\"https://placehold.co/600x400/2a2a2a/666666?text=E-Commerce\" alt=\"E-Commerce Platform\"/></figure>"
+                    },
+                    {
+                      "blockName": "core/heading",
+                      "attrs": {
+                        "level": 3,
+                        "style": {
+                          "typography": { "fontSize": "20px", "fontWeight": "600" },
+                          "color": { "text": "{{text_color}}" },
+                          "spacing": { "margin": { "top": "20px", "bottom": "8px" }, "padding": { "left": "24px", "right": "24px" } }
+                        }
+                      },
+                      "innerHTML": "{{project_2_title}}"
+                    },
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "14px", "textTransform": "uppercase", "letterSpacing": "0.05em" },
+                          "color": { "text": "{{muted_color}}" },
+                          "spacing": { "padding": { "left": "24px", "right": "24px" } }
+                        }
+                      },
+                      "innerHTML": "{{project_2_category}}"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "blockName": "core/columns",
+          "attrs": { "style": { "spacing": { "blockGap": { "left": "32px", "top": "32px" }, "margin": { "top": "32px" } } } },
+          "innerBlocks": [
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/group",
+                  "attrs": {
+                    "style": {
+                      "color": { "background": "{{card_bg}}" },
+                      "border": { "radius": "12px" },
+                      "spacing": { "padding": { "top": "0px", "bottom": "24px", "left": "0px", "right": "0px" } }
+                    }
+                  },
+                  "innerBlocks": [
+                    {
+                      "blockName": "core/image",
+                      "attrs": {
+                        "url": "https://placehold.co/600x400/2a2a2a/666666?text=Banking+App",
+                        "alt": "Mobile Banking App",
+                        "style": {
+                          "border": { "radius": { "topLeft": "12px", "topRight": "12px", "bottomLeft": "0px", "bottomRight": "0px" } }
+                        }
+                      },
+                      "innerHTML": "<figure class=\"wp-block-image\"><img src=\"https://placehold.co/600x400/2a2a2a/666666?text=Banking+App\" alt=\"Mobile Banking App\"/></figure>"
+                    },
+                    {
+                      "blockName": "core/heading",
+                      "attrs": {
+                        "level": 3,
+                        "style": {
+                          "typography": { "fontSize": "20px", "fontWeight": "600" },
+                          "color": { "text": "{{text_color}}" },
+                          "spacing": { "margin": { "top": "20px", "bottom": "8px" }, "padding": { "left": "24px", "right": "24px" } }
+                        }
+                      },
+                      "innerHTML": "{{project_3_title}}"
+                    },
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "14px", "textTransform": "uppercase", "letterSpacing": "0.05em" },
+                          "color": { "text": "{{muted_color}}" },
+                          "spacing": { "padding": { "left": "24px", "right": "24px" } }
+                        }
+                      },
+                      "innerHTML": "{{project_3_category}}"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/group",
+                  "attrs": {
+                    "style": {
+                      "color": { "background": "{{card_bg}}" },
+                      "border": { "radius": "12px" },
+                      "spacing": { "padding": { "top": "0px", "bottom": "24px", "left": "0px", "right": "0px" } }
+                    }
+                  },
+                  "innerBlocks": [
+                    {
+                      "blockName": "core/image",
+                      "attrs": {
+                        "url": "https://placehold.co/600x400/2a2a2a/666666?text=Marketing",
+                        "alt": "Marketing Campaign",
+                        "style": {
+                          "border": { "radius": { "topLeft": "12px", "topRight": "12px", "bottomLeft": "0px", "bottomRight": "0px" } }
+                        }
+                      },
+                      "innerHTML": "<figure class=\"wp-block-image\"><img src=\"https://placehold.co/600x400/2a2a2a/666666?text=Marketing\" alt=\"Marketing Campaign\"/></figure>"
+                    },
+                    {
+                      "blockName": "core/heading",
+                      "attrs": {
+                        "level": 3,
+                        "style": {
+                          "typography": { "fontSize": "20px", "fontWeight": "600" },
+                          "color": { "text": "{{text_color}}" },
+                          "spacing": { "margin": { "top": "20px", "bottom": "8px" }, "padding": { "left": "24px", "right": "24px" } }
+                        }
+                      },
+                      "innerHTML": "{{project_4_title}}"
+                    },
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "14px", "textTransform": "uppercase", "letterSpacing": "0.05em" },
+                          "color": { "text": "{{muted_color}}" },
+                          "spacing": { "padding": { "left": "24px", "right": "24px" } }
+                        }
+                      },
+                      "innerHTML": "{{project_4_category}}"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

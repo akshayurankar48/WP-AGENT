@@ -1,0 +1,347 @@
+{
+  "id": "testimonials-wall",
+  "name": "Testimonial Wall Grid",
+  "category": "testimonials",
+  "description": "Dark background testimonial wall with 6 cards in a 3-column masonry-style grid, semi-transparent card backgrounds",
+  "variables": {
+    "heading": "What People Are Saying",
+    "quote_1": "Migrated our entire infrastructure in a weekend. Zero downtime. The documentation alone is worth the price of admission.",
+    "author_1": "James Liu",
+    "role_1": "CTO at Gridwork",
+    "quote_2": "Finally a tool that doesn't try to do everything. It does one thing perfectly and integrates with everything else.",
+    "author_2": "Nina Patel",
+    "role_2": "Lead Developer at Forma",
+    "quote_3": "Our support tickets dropped 60% after implementing the self-service portal. Customers actually enjoy using it.",
+    "author_3": "Carlos Mendez",
+    "role_3": "Support Manager at Helix",
+    "quote_4": "I've recommended this to every founder I know. It removes so much friction from the early stages.",
+    "author_4": "Sophie Andersen",
+    "role_4": "Founder at Seedling",
+    "quote_5": "The API is a dream to work with. Clean, consistent, well-documented. Our integration took two days instead of two weeks.",
+    "author_5": "Raj Krishnamurthy",
+    "role_5": "Senior Engineer at Apex",
+    "quote_6": "Easily saved us 20 hours a week on reporting. The dashboards update in real time and the exports are perfect.",
+    "author_6": "Emily Sato",
+    "role_6": "Analytics Lead at Prism",
+    "bg_color": "{{bg_dark}}",
+    "card_bg": "rgba(255,255,255,0.05)",
+    "text_color": "rgba(255,255,255,0.9)",
+    "author_text": "#ffffff",
+    "muted_color": "rgba(255,255,255,0.5)",
+    "heading_color": "#ffffff",
+    "border_color": "rgba(255,255,255,0.08)"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "{{bg_color}}" },
+          "spacing": { "padding": { "top": "100px", "bottom": "100px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/heading",
+          "attrs": {
+            "textAlign": "center",
+            "level": 2,
+            "style": {
+              "typography": { "fontSize": "42px", "fontWeight": "700", "letterSpacing": "-0.02em" },
+              "color": { "text": "{{heading_color}}" },
+              "spacing": { "margin": { "bottom": "64px" } }
+            }
+          },
+          "innerHTML": "{{heading}}"
+        },
+        {
+          "blockName": "core/columns",
+          "attrs": { "style": { "spacing": { "blockGap": { "left": "20px", "top": "20px" } } } },
+          "innerBlocks": [
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/group",
+                  "attrs": {
+                    "style": {
+                      "color": { "background": "{{card_bg}}" },
+                      "spacing": { "padding": { "top": "32px", "bottom": "32px", "left": "28px", "right": "28px" } },
+                      "border": { "radius": "12px", "width": "1px", "color": "{{border_color}}" }
+                    }
+                  },
+                  "innerBlocks": [
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "15px", "lineHeight": "1.7" },
+                          "color": { "text": "{{text_color}}" },
+                          "spacing": { "margin": { "bottom": "20px" } }
+                        }
+                      },
+                      "innerHTML": "\"{{quote_1}}\""
+                    },
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "14px", "fontWeight": "600" },
+                          "color": { "text": "{{author_text}}" },
+                          "spacing": { "margin": { "bottom": "2px" } }
+                        }
+                      },
+                      "innerHTML": "{{author_1}}"
+                    },
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "13px" },
+                          "color": { "text": "{{muted_color}}" }
+                        }
+                      },
+                      "innerHTML": "{{role_1}}"
+                    }
+                  ]
+                },
+                {
+                  "blockName": "core/group",
+                  "attrs": {
+                    "style": {
+                      "color": { "background": "{{card_bg}}" },
+                      "spacing": { "padding": { "top": "32px", "bottom": "32px", "left": "28px", "right": "28px" }, "margin": { "top": "20px" } },
+                      "border": { "radius": "12px", "width": "1px", "color": "{{border_color}}" }
+                    }
+                  },
+                  "innerBlocks": [
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "15px", "lineHeight": "1.7" },
+                          "color": { "text": "{{text_color}}" },
+                          "spacing": { "margin": { "bottom": "20px" } }
+                        }
+                      },
+                      "innerHTML": "\"{{quote_4}}\""
+                    },
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "14px", "fontWeight": "600" },
+                          "color": { "text": "{{author_text}}" },
+                          "spacing": { "margin": { "bottom": "2px" } }
+                        }
+                      },
+                      "innerHTML": "{{author_4}}"
+                    },
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "13px" },
+                          "color": { "text": "{{muted_color}}" }
+                        }
+                      },
+                      "innerHTML": "{{role_4}}"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/group",
+                  "attrs": {
+                    "style": {
+                      "color": { "background": "{{card_bg}}" },
+                      "spacing": { "padding": { "top": "32px", "bottom": "32px", "left": "28px", "right": "28px" } },
+                      "border": { "radius": "12px", "width": "1px", "color": "{{border_color}}" }
+                    }
+                  },
+                  "innerBlocks": [
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "15px", "lineHeight": "1.7" },
+                          "color": { "text": "{{text_color}}" },
+                          "spacing": { "margin": { "bottom": "20px" } }
+                        }
+                      },
+                      "innerHTML": "\"{{quote_2}}\""
+                    },
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "14px", "fontWeight": "600" },
+                          "color": { "text": "{{author_text}}" },
+                          "spacing": { "margin": { "bottom": "2px" } }
+                        }
+                      },
+                      "innerHTML": "{{author_2}}"
+                    },
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "13px" },
+                          "color": { "text": "{{muted_color}}" }
+                        }
+                      },
+                      "innerHTML": "{{role_2}}"
+                    }
+                  ]
+                },
+                {
+                  "blockName": "core/group",
+                  "attrs": {
+                    "style": {
+                      "color": { "background": "{{card_bg}}" },
+                      "spacing": { "padding": { "top": "32px", "bottom": "32px", "left": "28px", "right": "28px" }, "margin": { "top": "20px" } },
+                      "border": { "radius": "12px", "width": "1px", "color": "{{border_color}}" }
+                    }
+                  },
+                  "innerBlocks": [
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "15px", "lineHeight": "1.7" },
+                          "color": { "text": "{{text_color}}" },
+                          "spacing": { "margin": { "bottom": "20px" } }
+                        }
+                      },
+                      "innerHTML": "\"{{quote_5}}\""
+                    },
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "14px", "fontWeight": "600" },
+                          "color": { "text": "{{author_text}}" },
+                          "spacing": { "margin": { "bottom": "2px" } }
+                        }
+                      },
+                      "innerHTML": "{{author_5}}"
+                    },
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "13px" },
+                          "color": { "text": "{{muted_color}}" }
+                        }
+                      },
+                      "innerHTML": "{{role_5}}"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/group",
+                  "attrs": {
+                    "style": {
+                      "color": { "background": "{{card_bg}}" },
+                      "spacing": { "padding": { "top": "32px", "bottom": "32px", "left": "28px", "right": "28px" } },
+                      "border": { "radius": "12px", "width": "1px", "color": "{{border_color}}" }
+                    }
+                  },
+                  "innerBlocks": [
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "15px", "lineHeight": "1.7" },
+                          "color": { "text": "{{text_color}}" },
+                          "spacing": { "margin": { "bottom": "20px" } }
+                        }
+                      },
+                      "innerHTML": "\"{{quote_3}}\""
+                    },
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "14px", "fontWeight": "600" },
+                          "color": { "text": "{{author_text}}" },
+                          "spacing": { "margin": { "bottom": "2px" } }
+                        }
+                      },
+                      "innerHTML": "{{author_3}}"
+                    },
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "13px" },
+                          "color": { "text": "{{muted_color}}" }
+                        }
+                      },
+                      "innerHTML": "{{role_3}}"
+                    }
+                  ]
+                },
+                {
+                  "blockName": "core/group",
+                  "attrs": {
+                    "style": {
+                      "color": { "background": "{{card_bg}}" },
+                      "spacing": { "padding": { "top": "32px", "bottom": "32px", "left": "28px", "right": "28px" }, "margin": { "top": "20px" } },
+                      "border": { "radius": "12px", "width": "1px", "color": "{{border_color}}" }
+                    }
+                  },
+                  "innerBlocks": [
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "15px", "lineHeight": "1.7" },
+                          "color": { "text": "{{text_color}}" },
+                          "spacing": { "margin": { "bottom": "20px" } }
+                        }
+                      },
+                      "innerHTML": "\"{{quote_6}}\""
+                    },
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "14px", "fontWeight": "600" },
+                          "color": { "text": "{{author_text}}" },
+                          "spacing": { "margin": { "bottom": "2px" } }
+                        }
+                      },
+                      "innerHTML": "{{author_6}}"
+                    },
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "13px" },
+                          "color": { "text": "{{muted_color}}" }
+                        }
+                      },
+                      "innerHTML": "{{role_6}}"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

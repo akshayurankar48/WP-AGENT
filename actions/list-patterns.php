@@ -41,7 +41,7 @@ class List_Patterns implements Action_Interface {
 		return 'List available curated section patterns for building pages. '
 			. 'Returns pattern metadata (id, name, category, description) — no block JSON. '
 			. 'Use this to browse the pattern catalog, then call get_pattern to fetch the full blocks for a specific pattern. '
-			. 'Categories: heroes, features, testimonials, pricing, cta, stats, content, faq, footers, headers.';
+			. 'Categories: heroes, features, testimonials, pricing, cta, stats, content, faq, footers, headers, contact, newsletter, team, logos, process, gallery, blog, services, portfolio, comparison, banner, dividers, video.';
 	}
 
 	/**
@@ -56,7 +56,7 @@ class List_Patterns implements Action_Interface {
 			'properties' => array(
 				'category' => array(
 					'type'        => 'string',
-					'enum'        => array( 'heroes', 'features', 'testimonials', 'pricing', 'cta', 'stats', 'content', 'faq', 'footers', 'headers' ),
+					'enum'        => array( 'heroes', 'features', 'testimonials', 'pricing', 'cta', 'stats', 'content', 'faq', 'footers', 'headers', 'contact', 'newsletter', 'team', 'logos', 'process', 'gallery', 'blog', 'services', 'portfolio', 'comparison', 'banner', 'dividers', 'video' ),
 					'description' => 'Filter patterns by category. Omit to list all patterns.',
 				),
 				'search'   => array(
@@ -105,7 +105,7 @@ class List_Patterns implements Action_Interface {
 
 		// Also include blueprints metadata.
 		$blueprints    = array();
-		$blueprint_ids = array( 'landing-page', 'saas-landing', 'startup-page', 'about-page' );
+		$blueprint_ids = array( 'landing-page', 'saas-landing', 'startup-page', 'about-page', 'modern-saas', 'agency-portfolio', 'product-launch', 'restaurant-page', 'ecommerce-landing', 'freelancer-portfolio', 'real-estate', 'fitness-gym', 'nonprofit-org', 'event-landing', 'consulting-firm', 'education-course', 'app-download' );
 		foreach ( $blueprint_ids as $bp_id ) {
 			$bp = $manager->get_blueprint( $bp_id );
 			if ( $bp ) {

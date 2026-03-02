@@ -1,0 +1,6 @@
+{
+  "id": "nonprofit-org",
+  "name": "Nonprofit Organization",
+  "description": "Nonprofit page: split hero + animated stats + icon services + single testimonial + gradient CTA + newsletter banner + multi-column footer",
+  "sections": ["hero-split", "stats-animated", "services-icons", "testimonials-single", "cta-gradient", "newsletter-banner", "footer-columns"]
+}

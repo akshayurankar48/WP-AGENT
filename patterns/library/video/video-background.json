@@ -1,0 +1,100 @@
+{
+  "id": "video-background",
+  "name": "Video Background Section",
+  "category": "video",
+  "description": "Dark overlay section with centered heading, description, and dual call-to-action buttons for mid-page placement",
+  "variables": {
+    "heading": "Experience the Difference",
+    "description": "Our platform combines cutting-edge technology with intuitive design to deliver results that matter. See for yourself why thousands of teams have made the switch.",
+    "cta_primary": "Start Free Trial",
+    "cta_secondary": "Watch Demo",
+    "bg_color": "{{bg_dark}}",
+    "overlay_color": "rgba(0,0,0,0.6)",
+    "text_color": "#ffffff",
+    "muted_color": "{{text_light}}",
+    "accent_color": "{{primary}}"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "{{bg_color}}" },
+          "spacing": { "padding": { "top": "100px", "bottom": "100px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/group",
+          "attrs": {
+            "style": {
+              "color": { "background": "{{overlay_color}}" },
+              "border": { "radius": "20px" },
+              "spacing": { "padding": { "top": "100px", "bottom": "100px", "left": "60px", "right": "60px" } }
+            },
+            "layout": { "type": "constrained", "contentSize": "680px" }
+          },
+          "innerBlocks": [
+            {
+              "blockName": "core/heading",
+              "attrs": {
+                "textAlign": "center",
+                "level": 2,
+                "style": {
+                  "typography": { "fontSize": "56px", "fontWeight": "800", "letterSpacing": "-0.03em", "lineHeight": "1.1" },
+                  "color": { "text": "{{text_color}}" },
+                  "spacing": { "margin": { "bottom": "24px" } }
+                }
+              },
+              "innerHTML": "{{heading}}"
+            },
+            {
+              "blockName": "core/paragraph",
+              "attrs": {
+                "align": "center",
+                "style": {
+                  "typography": { "fontSize": "18px", "lineHeight": "1.7" },
+                  "color": { "text": "{{muted_color}}" },
+                  "spacing": { "margin": { "bottom": "48px" } }
+                }
+              },
+              "innerHTML": "{{description}}"
+            },
+            {
+              "blockName": "core/buttons",
+              "attrs": { "layout": { "type": "flex", "justifyContent": "center" } },
+              "innerBlocks": [
+                {
+                  "blockName": "core/button",
+                  "attrs": {
+                    "style": {
+                      "color": { "background": "{{accent_color}}", "text": "#ffffff" },
+                      "typography": { "fontSize": "16px", "fontWeight": "600" },
+                      "border": { "radius": "100px" },
+                      "spacing": { "padding": { "top": "18px", "bottom": "18px", "left": "40px", "right": "40px" } }
+                    }
+                  },
+                  "innerHTML": "{{cta_primary}}"
+                },
+                {
+                  "blockName": "core/button",
+                  "attrs": {
+                    "style": {
+                      "color": { "background": "transparent", "text": "#ffffff" },
+                      "typography": { "fontSize": "16px", "fontWeight": "600" },
+                      "border": { "radius": "100px", "width": "2px", "color": "rgba(255,255,255,0.4)" },
+                      "spacing": { "padding": { "top": "18px", "bottom": "18px", "left": "40px", "right": "40px" } }
+                    }
+                  },
+                  "innerHTML": "{{cta_secondary}}"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

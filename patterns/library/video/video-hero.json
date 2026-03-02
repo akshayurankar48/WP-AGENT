@@ -1,0 +1,91 @@
+{
+  "id": "video-hero",
+  "name": "Video Hero Section",
+  "category": "video",
+  "description": "Cinematic full-width video hero with large heading, subtitle, and play video call-to-action button",
+  "variables": {
+    "heading": "See What's Possible",
+    "subheading": "Watch how leading teams are transforming their workflows and shipping products 3x faster.",
+    "cta_text": "\u25b6  Play Video",
+    "bg_color": "{{bg_dark}}",
+    "text_color": "#ffffff",
+    "muted_color": "{{text_light}}",
+    "accent_color": "{{accent}}"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "{{bg_color}}" },
+          "spacing": { "padding": { "top": "100px", "bottom": "100px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/heading",
+          "attrs": {
+            "textAlign": "center",
+            "level": 1,
+            "style": {
+              "typography": { "fontSize": "64px", "fontWeight": "800", "letterSpacing": "-0.03em", "lineHeight": "1.1" },
+              "color": { "text": "{{text_color}}" },
+              "spacing": { "margin": { "bottom": "24px" } }
+            }
+          },
+          "innerHTML": "{{heading}}"
+        },
+        {
+          "blockName": "core/paragraph",
+          "attrs": {
+            "align": "center",
+            "style": {
+              "typography": { "fontSize": "20px", "lineHeight": "1.6" },
+              "color": { "text": "{{muted_color}}" },
+              "spacing": { "margin": { "bottom": "48px" } }
+            }
+          },
+          "innerHTML": "{{subheading}}"
+        },
+        {
+          "blockName": "core/group",
+          "attrs": {
+            "style": {
+              "color": { "background": "rgba(255,255,255,0.05)" },
+              "border": { "radius": "16px" },
+              "spacing": { "padding": { "top": "120px", "bottom": "120px" } },
+              "dimensions": { "minHeight": "400px" }
+            },
+            "layout": { "type": "flex", "justifyContent": "center", "verticalAlignment": "center" }
+          },
+          "innerBlocks": [
+            {
+              "blockName": "core/group",
+              "attrs": {
+                "style": {
+                  "color": { "background": "{{accent_color}}" },
+                  "border": { "radius": "100px" },
+                  "spacing": { "padding": { "top": "20px", "bottom": "20px", "left": "40px", "right": "40px" } }
+                }
+              },
+              "innerBlocks": [
+                {
+                  "blockName": "core/paragraph",
+                  "attrs": {
+                    "style": {
+                      "typography": { "fontSize": "18px", "fontWeight": "600" },
+                      "color": { "text": "#ffffff" }
+                    }
+                  },
+                  "innerHTML": "{{cta_text}}"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

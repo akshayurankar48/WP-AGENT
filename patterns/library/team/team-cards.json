@@ -1,0 +1,149 @@
+{
+  "id": "team-cards",
+  "name": "Team Cards with Detail",
+  "category": "team",
+  "description": "Three-column team cards with photo, name, role in accent color, bio paragraph, and social links text, featuring white card backgrounds with rounded corners on a light page background",
+  "variables": {
+    "heading": "The People Behind the Vision",
+    "subheading": "A diverse group of thinkers, builders, and creators dedicated to making great things happen.",
+    "member_1_image": "https://placehold.co/400x400/e5e7eb/6b7280?text=Photo",
+    "member_1_name": "Elena Rodriguez",
+    "member_1_role": "Chief Executive Officer",
+    "member_1_bio": "Elena brings over 15 years of leadership experience in tech startups. She is passionate about building products that make a difference in people's lives.",
+    "member_1_social": "LinkedIn / Twitter / GitHub",
+    "member_2_image": "https://placehold.co/400x400/e5e7eb/6b7280?text=Photo",
+    "member_2_name": "James Okafor",
+    "member_2_role": "VP of Engineering",
+    "member_2_bio": "James is an architect at heart who loves turning complex problems into elegant solutions. He leads our engineering team with empathy and precision.",
+    "member_2_social": "LinkedIn / GitHub",
+    "member_3_image": "https://placehold.co/400x400/e5e7eb/6b7280?text=Photo",
+    "member_3_name": "Priya Sharma",
+    "member_3_role": "Head of Product Design",
+    "member_3_bio": "Priya crafts user experiences that feel effortless. With a background in cognitive science, she designs interfaces that truly understand people.",
+    "member_3_social": "LinkedIn / Dribbble / Twitter",
+    "bg_color": "{{bg_light}}",
+    "card_bg": "{{bg_white}}",
+    "text_color": "{{text_dark}}",
+    "muted_color": "{{text_muted}}",
+    "accent_color": "{{primary}}"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "{{bg_color}}" },
+          "spacing": { "padding": { "top": "100px", "bottom": "100px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        { "blockName": "core/heading", "attrs": { "textAlign": "center", "level": 2, "style": { "typography": { "fontSize": "42px", "fontWeight": "700", "letterSpacing": "-0.02em" }, "color": { "text": "{{text_color}}" }, "spacing": { "margin": { "bottom": "16px" } } } }, "innerHTML": "{{heading}}" },
+        { "blockName": "core/paragraph", "attrs": { "align": "center", "style": { "typography": { "fontSize": "18px", "lineHeight": "1.7" }, "color": { "text": "{{muted_color}}" }, "spacing": { "margin": { "bottom": "64px" } } } }, "innerHTML": "{{subheading}}" },
+        {
+          "blockName": "core/columns",
+          "attrs": { "style": { "spacing": { "blockGap": { "left": "32px" } } } },
+          "innerBlocks": [
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/group",
+                  "attrs": {
+                    "style": {
+                      "color": { "background": "{{card_bg}}" },
+                      "spacing": { "padding": { "top": "0px", "bottom": "32px", "left": "0px", "right": "0px" } },
+                      "border": { "radius": "16px" }
+                    },
+                    "layout": { "type": "constrained" }
+                  },
+                  "innerBlocks": [
+                    { "blockName": "core/image", "attrs": { "url": "{{member_1_image}}", "alt": "{{member_1_name}}", "style": { "border": { "radius": "16px 16px 0px 0px" } }, "sizeSlug": "full" } },
+                    {
+                      "blockName": "core/group",
+                      "attrs": {
+                        "style": { "spacing": { "padding": { "top": "24px", "left": "24px", "right": "24px" } } },
+                        "layout": { "type": "constrained" }
+                      },
+                      "innerBlocks": [
+                        { "blockName": "core/heading", "attrs": { "level": 3, "style": { "typography": { "fontSize": "22px", "fontWeight": "600" }, "color": { "text": "{{text_color}}" }, "spacing": { "margin": { "bottom": "4px" } } } }, "innerHTML": "{{member_1_name}}" },
+                        { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "14px", "fontWeight": "600", "textTransform": "uppercase", "letterSpacing": "0.05em" }, "color": { "text": "{{accent_color}}" }, "spacing": { "margin": { "bottom": "16px" } } } }, "innerHTML": "{{member_1_role}}" },
+                        { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "15px", "lineHeight": "1.7" }, "color": { "text": "{{muted_color}}" }, "spacing": { "margin": { "bottom": "16px" } } } }, "innerHTML": "{{member_1_bio}}" },
+                        { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "13px", "fontWeight": "500" }, "color": { "text": "{{accent_color}}" } } }, "innerHTML": "{{member_1_social}}" }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/group",
+                  "attrs": {
+                    "style": {
+                      "color": { "background": "{{card_bg}}" },
+                      "spacing": { "padding": { "top": "0px", "bottom": "32px", "left": "0px", "right": "0px" } },
+                      "border": { "radius": "16px" }
+                    },
+                    "layout": { "type": "constrained" }
+                  },
+                  "innerBlocks": [
+                    { "blockName": "core/image", "attrs": { "url": "{{member_2_image}}", "alt": "{{member_2_name}}", "style": { "border": { "radius": "16px 16px 0px 0px" } }, "sizeSlug": "full" } },
+                    {
+                      "blockName": "core/group",
+                      "attrs": {
+                        "style": { "spacing": { "padding": { "top": "24px", "left": "24px", "right": "24px" } } },
+                        "layout": { "type": "constrained" }
+                      },
+                      "innerBlocks": [
+                        { "blockName": "core/heading", "attrs": { "level": 3, "style": { "typography": { "fontSize": "22px", "fontWeight": "600" }, "color": { "text": "{{text_color}}" }, "spacing": { "margin": { "bottom": "4px" } } } }, "innerHTML": "{{member_2_name}}" },
+                        { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "14px", "fontWeight": "600", "textTransform": "uppercase", "letterSpacing": "0.05em" }, "color": { "text": "{{accent_color}}" }, "spacing": { "margin": { "bottom": "16px" } } } }, "innerHTML": "{{member_2_role}}" },
+                        { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "15px", "lineHeight": "1.7" }, "color": { "text": "{{muted_color}}" }, "spacing": { "margin": { "bottom": "16px" } } } }, "innerHTML": "{{member_2_bio}}" },
+                        { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "13px", "fontWeight": "500" }, "color": { "text": "{{accent_color}}" } } }, "innerHTML": "{{member_2_social}}" }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/group",
+                  "attrs": {
+                    "style": {
+                      "color": { "background": "{{card_bg}}" },
+                      "spacing": { "padding": { "top": "0px", "bottom": "32px", "left": "0px", "right": "0px" } },
+                      "border": { "radius": "16px" }
+                    },
+                    "layout": { "type": "constrained" }
+                  },
+                  "innerBlocks": [
+                    { "blockName": "core/image", "attrs": { "url": "{{member_3_image}}", "alt": "{{member_3_name}}", "style": { "border": { "radius": "16px 16px 0px 0px" } }, "sizeSlug": "full" } },
+                    {
+                      "blockName": "core/group",
+                      "attrs": {
+                        "style": { "spacing": { "padding": { "top": "24px", "left": "24px", "right": "24px" } } },
+                        "layout": { "type": "constrained" }
+                      },
+                      "innerBlocks": [
+                        { "blockName": "core/heading", "attrs": { "level": 3, "style": { "typography": { "fontSize": "22px", "fontWeight": "600" }, "color": { "text": "{{text_color}}" }, "spacing": { "margin": { "bottom": "4px" } } } }, "innerHTML": "{{member_3_name}}" },
+                        { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "14px", "fontWeight": "600", "textTransform": "uppercase", "letterSpacing": "0.05em" }, "color": { "text": "{{accent_color}}" }, "spacing": { "margin": { "bottom": "16px" } } } }, "innerHTML": "{{member_3_role}}" },
+                        { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "15px", "lineHeight": "1.7" }, "color": { "text": "{{muted_color}}" }, "spacing": { "margin": { "bottom": "16px" } } } }, "innerHTML": "{{member_3_bio}}" },
+                        { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "13px", "fontWeight": "500" }, "color": { "text": "{{accent_color}}" } } }, "innerHTML": "{{member_3_social}}" }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

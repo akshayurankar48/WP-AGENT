@@ -704,7 +704,8 @@ class Prompt_Builder {
 			. "- Animated text: large heading with wpa-gradient-text + minimal body. Agency feel.\n"
 			. "- Product showcase: core/cover with product image + overlay text + CTA. E-commerce.\n"
 			. "- Minimal text: centered heading (72px) + one-line subhead + button. Stripe-like.\n"
-			. "- Full image: core/cover with full background image, overlay, centered content.\n\n"
+			. "- Full image: core/cover with full background image, overlay, centered content.\n"
+			. "- Video background: core/cover dark overlay + big heading + CTA. Cinematic.\n\n"
 
 			. "FEATURES (1-2 per page):\n"
 			. "- Bento grid: wpa-bento-grid with mixed-size cards (8/4/6/6 spans). Tech/SaaS.\n"
@@ -716,6 +717,8 @@ class Prompt_Builder {
 			. "SOCIAL PROOF (1 per page):\n"
 			. "- Logo bar: core/columns (5-6 cols) with company logos/names. Adds credibility.\n"
 			. "- Testimonial cards: core/columns (2-3 cols) each with core/quote block.\n"
+			. "- Testimonial wall: 3-col grid of 6 cards on dark bg. Social proof at scale.\n"
+			. "- Single testimonial: centered large quote + author. Elegant, focused.\n"
 			. "- Stats bar: core/columns (3-4 cols) with big numbers + labels. Accent bg.\n"
 			. "- Rating showcase: star rating + quote + author. Single testimonial.\n\n"
 
@@ -729,11 +732,39 @@ class Prompt_Builder {
 			. "- Timeline: vertical numbered steps using core/group blocks.\n"
 			. "- Steps/Process: horizontal core/columns with numbered headings.\n"
 			. "- Accordion FAQ: core/details blocks inside a core/group.\n"
-			. "- Grid gallery: core/columns with core/image blocks.\n\n"
+			. "- Two-column FAQ: 6 Q&As split across two columns.\n"
+			. "- Grid gallery: core/columns with core/image blocks.\n"
+			. "- Masonry gallery: 3-col mixed-height images for visual variety.\n\n"
 
 			. "PRICING (1 per page):\n"
 			. "- 3-tier: core/columns (3 cols), middle column highlighted (wpa-border-glow or accent bg).\n"
-			. "- Single highlight: one featured plan large + centered, secondary plans below.\n"
+			. "- Toggle pricing: Monthly/Annual toggle with 2-tier cards.\n"
+			. "- Single highlight: one featured plan large + centered, secondary plans below.\n\n"
+
+			. "SERVICES (1-2 per page):\n"
+			. "- Service cards: 3-col cards with emoji icon + name + description + link.\n"
+			. "- Icon services: 4-col compact grid. Emoji + heading + short text.\n"
+			. "- Detailed services: alternating image/text rows. In-depth sections.\n"
+			. "- Tab services: left nav list + right detail panel layout.\n\n"
+
+			. "BLOG/PORTFOLIO:\n"
+			. "- Blog grid: 3-col cards with image + category + title + excerpt.\n"
+			. "- Blog featured: single post highlight (image + title + excerpt + CTA).\n"
+			. "- Portfolio grid: 2x2 project thumbnails with titles on dark bg.\n"
+			. "- Case study: single featured project with metrics + CTA.\n\n"
+
+			. "COMPARISON:\n"
+			. "- Comparison table: feature checklist with Basic vs Pro columns.\n"
+			. "- Side by side: \"Without Us\" vs \"With Us\" pain-points/benefits.\n\n"
+
+			. "BANNERS & DIVIDERS:\n"
+			. "- Announcement banner: compact strip for top-of-page notices.\n"
+			. "- Promo banner: dark strip with CTA. Between-section promotion.\n"
+			. "- Wave/angle/gradient dividers: visual transitions between sections.\n\n"
+
+			. "VIDEO:\n"
+			. "- Video hero: cinematic dark section with play button.\n"
+			. "- Video embed: heading + 16:9 placeholder + caption.\n"
 			. "</section_patterns>\n\n";
 	}
 
@@ -910,7 +941,7 @@ class Prompt_Builder {
 	 */
 	private function get_pattern_library_section() {
 		return "<pattern_library>\n"
-			. 'You have 100+ professionally designed patterns across 20 categories in dark, light, warm, and colorful variants, '
+			. 'You have 90+ professionally designed section patterns across 24 categories in dark, light, warm, and colorful variants, '
 			. "plus 17 full-page blueprints for common industries.\n\n"
 			. 'PATTERN-FIRST RULE: ALWAYS use get_pattern for standard sections. '
 			. "Patterns are pre-designed, responsive, and polished. Raw blocks only for truly unique layouts.\n\n"

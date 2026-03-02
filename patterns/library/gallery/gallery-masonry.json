@@ -1,0 +1,140 @@
+{
+  "id": "gallery-masonry",
+  "name": "Masonry Gallery",
+  "category": "gallery",
+  "description": "Masonry-style three-column gallery with mixed-height images creating visual variety on a light background",
+  "variables": {
+    "heading": "Photo Gallery",
+    "subheading": "Explore our visual story through carefully captured moments.",
+    "image_tall_1": "https://placehold.co/600x800/e5e7eb/6b7280?text=Tall+Image",
+    "image_short_1": "https://placehold.co/600x300/e5e7eb/6b7280?text=Wide+Image",
+    "image_short_2": "https://placehold.co/600x300/e5e7eb/6b7280?text=Wide+Image",
+    "image_tall_2": "https://placehold.co/600x800/e5e7eb/6b7280?text=Tall+Image",
+    "image_medium_1": "https://placehold.co/600x500/e5e7eb/6b7280?text=Medium+Image",
+    "image_medium_2": "https://placehold.co/600x500/e5e7eb/6b7280?text=Medium+Image",
+    "bg_color": "{{bg_light}}",
+    "text_color": "{{text_dark}}",
+    "muted_color": "{{text_muted}}"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "{{bg_color}}" },
+          "spacing": { "padding": { "top": "100px", "bottom": "100px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/heading",
+          "attrs": {
+            "textAlign": "center",
+            "level": 2,
+            "style": {
+              "typography": { "fontSize": "42px", "fontWeight": "700", "letterSpacing": "-0.02em" },
+              "color": { "text": "{{text_color}}" },
+              "spacing": { "margin": { "bottom": "16px" } }
+            }
+          },
+          "innerHTML": "{{heading}}"
+        },
+        {
+          "blockName": "core/paragraph",
+          "attrs": {
+            "align": "center",
+            "style": {
+              "typography": { "fontSize": "18px" },
+              "color": { "text": "{{muted_color}}" },
+              "spacing": { "margin": { "bottom": "64px" } }
+            }
+          },
+          "innerHTML": "{{subheading}}"
+        },
+        {
+          "blockName": "core/columns",
+          "attrs": {
+            "verticalAlignment": "top",
+            "style": { "spacing": { "blockGap": { "left": "24px" } } }
+          },
+          "innerBlocks": [
+            {
+              "blockName": "core/column",
+              "attrs": { "verticalAlignment": "top" },
+              "innerBlocks": [
+                {
+                  "blockName": "core/image",
+                  "attrs": {
+                    "url": "{{image_tall_1}}",
+                    "alt": "Gallery tall image",
+                    "style": { "border": { "radius": "12px" } },
+                    "sizeSlug": "full"
+                  }
+                },
+                {
+                  "blockName": "core/image",
+                  "attrs": {
+                    "url": "{{image_short_1}}",
+                    "alt": "Gallery wide image",
+                    "style": { "border": { "radius": "12px" }, "spacing": { "margin": { "top": "24px" } } },
+                    "sizeSlug": "full"
+                  }
+                }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "attrs": { "verticalAlignment": "top" },
+              "innerBlocks": [
+                {
+                  "blockName": "core/image",
+                  "attrs": {
+                    "url": "{{image_short_2}}",
+                    "alt": "Gallery wide image",
+                    "style": { "border": { "radius": "12px" } },
+                    "sizeSlug": "full"
+                  }
+                },
+                {
+                  "blockName": "core/image",
+                  "attrs": {
+                    "url": "{{image_tall_2}}",
+                    "alt": "Gallery tall image",
+                    "style": { "border": { "radius": "12px" }, "spacing": { "margin": { "top": "24px" } } },
+                    "sizeSlug": "full"
+                  }
+                }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "attrs": { "verticalAlignment": "top" },
+              "innerBlocks": [
+                {
+                  "blockName": "core/image",
+                  "attrs": {
+                    "url": "{{image_medium_1}}",
+                    "alt": "Gallery medium image",
+                    "style": { "border": { "radius": "12px" } },
+                    "sizeSlug": "full"
+                  }
+                },
+                {
+                  "blockName": "core/image",
+                  "attrs": {
+                    "url": "{{image_medium_2}}",
+                    "alt": "Gallery medium image",
+                    "style": { "border": { "radius": "12px" }, "spacing": { "margin": { "top": "24px" } } },
+                    "sizeSlug": "full"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

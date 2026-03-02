@@ -1,0 +1,80 @@
+{
+  "id": "hero-video-bg",
+  "name": "Video Background Hero",
+  "category": "heroes",
+  "description": "Full-width hero with dark video/image background overlay, large centered headline, subtitle, and single CTA button",
+  "variables": {
+    "heading": "Experience the Future of Digital",
+    "subheading": "Immersive technology that transforms how millions of people work, create, and connect every single day.",
+    "cta_primary": "Get Early Access",
+    "overlay_color": "rgba(0,0,0,0.7)",
+    "accent_color": "{{primary}}",
+    "bg_image": "https://placehold.co/1920x900/1a1a2e/1a1a2e?text=+",
+    "text_color": "#ffffff",
+    "subtitle_color": "rgba(255,255,255,0.75)"
+  },
+  "blocks": [
+    {
+      "blockName": "core/cover",
+      "attrs": {
+        "url": "{{bg_image}}",
+        "dimRatio": 80,
+        "overlayColor": "",
+        "customOverlayColor": "{{overlay_color}}",
+        "minHeight": 600,
+        "minHeightUnit": "px",
+        "align": "full",
+        "style": {
+          "spacing": { "padding": { "top": "140px", "bottom": "140px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/heading",
+          "attrs": {
+            "textAlign": "center",
+            "level": 1,
+            "style": {
+              "typography": { "fontSize": "72px", "fontWeight": "800", "letterSpacing": "-0.03em", "lineHeight": "1.08" },
+              "color": { "text": "{{text_color}}" },
+              "spacing": { "margin": { "bottom": "24px" } }
+            }
+          },
+          "innerHTML": "{{heading}}"
+        },
+        {
+          "blockName": "core/paragraph",
+          "attrs": {
+            "align": "center",
+            "style": {
+              "typography": { "fontSize": "20px", "lineHeight": "1.6" },
+              "color": { "text": "{{subtitle_color}}" },
+              "spacing": { "margin": { "bottom": "48px" } },
+              "layout": { "selfStretch": "fixed", "flexSize": "640px" }
+            }
+          },
+          "innerHTML": "{{subheading}}"
+        },
+        {
+          "blockName": "core/buttons",
+          "attrs": { "layout": { "type": "flex", "justifyContent": "center" } },
+          "innerBlocks": [
+            {
+              "blockName": "core/button",
+              "attrs": {
+                "style": {
+                  "color": { "background": "{{accent_color}}", "text": "#ffffff" },
+                  "typography": { "fontSize": "17px", "fontWeight": "600" },
+                  "border": { "radius": "100px" },
+                  "spacing": { "padding": { "top": "20px", "bottom": "20px", "left": "56px", "right": "56px" } }
+                }
+              },
+              "innerHTML": "{{cta_primary}}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

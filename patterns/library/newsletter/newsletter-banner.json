@@ -1,0 +1,62 @@
+{
+  "id": "newsletter-banner",
+  "name": "Newsletter Banner",
+  "category": "newsletter",
+  "description": "Full-width horizontal newsletter banner with heading and description on the left, CTA button on the right, designed to sit between sections on an accent background",
+  "variables": {
+    "heading": "Don't Miss an Update",
+    "description": "Join 15,000+ subscribers and get our weekly digest of insights, tips, and product news.",
+    "cta_label": "Subscribe Now",
+    "cta_url": "#subscribe",
+    "bg_color": "{{primary}}",
+    "text_color": "#ffffff",
+    "muted_color": "rgba(255,255,255,0.8)",
+    "button_bg": "#ffffff",
+    "button_text": "{{primary}}"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "{{bg_color}}" },
+          "spacing": { "padding": { "top": "60px", "bottom": "60px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/columns",
+          "attrs": {
+            "verticalAlignment": "center",
+            "style": { "spacing": { "blockGap": { "left": "48px" } } }
+          },
+          "innerBlocks": [
+            {
+              "blockName": "core/column",
+              "attrs": { "width": "65%", "verticalAlignment": "center" },
+              "innerBlocks": [
+                { "blockName": "core/heading", "attrs": { "level": 3, "style": { "typography": { "fontSize": "28px", "fontWeight": "700", "letterSpacing": "-0.01em" }, "color": { "text": "{{text_color}}" }, "spacing": { "margin": { "bottom": "8px" } } } }, "innerHTML": "{{heading}}" },
+                { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "16px", "lineHeight": "1.6" }, "color": { "text": "{{muted_color}}" }, "spacing": { "margin": { "bottom": "0px" } } } }, "innerHTML": "{{description}}" }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "attrs": { "width": "35%", "verticalAlignment": "center" },
+              "innerBlocks": [
+                {
+                  "blockName": "core/buttons",
+                  "attrs": { "layout": { "type": "flex", "justifyContent": "right" } },
+                  "innerBlocks": [
+                    { "blockName": "core/button", "attrs": { "url": "{{cta_url}}", "style": { "color": { "background": "{{button_bg}}", "text": "{{button_text}}" }, "typography": { "fontSize": "16px", "fontWeight": "600" }, "spacing": { "padding": { "top": "16px", "bottom": "16px", "left": "36px", "right": "36px" } }, "border": { "radius": "100px" } } }, "innerHTML": "{{cta_label}}" }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

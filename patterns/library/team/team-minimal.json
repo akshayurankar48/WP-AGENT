@@ -1,0 +1,70 @@
+{
+  "id": "team-minimal",
+  "name": "Minimal Team List",
+  "category": "team",
+  "description": "Three-column text-only team layout with no images, featuring name, role in accent color, and a one-line bio on a dark background with light text",
+  "variables": {
+    "heading": "Who We Are",
+    "subheading": "A small but mighty team with decades of combined experience.",
+    "member_1_name": "Olivia Foster",
+    "member_1_role": "Founder & CEO",
+    "member_1_bio": "Strategist with a knack for turning ambitious ideas into market-ready products.",
+    "member_2_name": "Raj Mehta",
+    "member_2_role": "Lead Developer",
+    "member_2_bio": "Full-stack engineer obsessed with clean architecture and scalable systems.",
+    "member_3_name": "Lena Andersson",
+    "member_3_role": "Creative Director",
+    "member_3_bio": "Visual storyteller who brings brands to life through bold and thoughtful design.",
+    "bg_color": "{{bg_dark}}",
+    "text_color": "#ffffff",
+    "muted_color": "#94a3b8",
+    "accent_color": "{{primary}}"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "{{bg_color}}", "text": "{{text_color}}" },
+          "spacing": { "padding": { "top": "100px", "bottom": "100px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        { "blockName": "core/heading", "attrs": { "textAlign": "center", "level": 2, "style": { "typography": { "fontSize": "42px", "fontWeight": "700", "letterSpacing": "-0.02em" }, "color": { "text": "{{text_color}}" }, "spacing": { "margin": { "bottom": "16px" } } } }, "innerHTML": "{{heading}}" },
+        { "blockName": "core/paragraph", "attrs": { "align": "center", "style": { "typography": { "fontSize": "18px" }, "color": { "text": "{{muted_color}}" }, "spacing": { "margin": { "bottom": "64px" } } } }, "innerHTML": "{{subheading}}" },
+        {
+          "blockName": "core/columns",
+          "attrs": { "style": { "spacing": { "blockGap": { "left": "48px" } } } },
+          "innerBlocks": [
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                { "blockName": "core/heading", "attrs": { "level": 3, "style": { "typography": { "fontSize": "20px", "fontWeight": "700" }, "color": { "text": "{{text_color}}" }, "spacing": { "margin": { "bottom": "6px" } } } }, "innerHTML": "{{member_1_name}}" },
+                { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "14px", "fontWeight": "600", "textTransform": "uppercase", "letterSpacing": "0.05em" }, "color": { "text": "{{accent_color}}" }, "spacing": { "margin": { "bottom": "12px" } } } }, "innerHTML": "{{member_1_role}}" },
+                { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "15px", "lineHeight": "1.7" }, "color": { "text": "{{muted_color}}" } } }, "innerHTML": "{{member_1_bio}}" }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                { "blockName": "core/heading", "attrs": { "level": 3, "style": { "typography": { "fontSize": "20px", "fontWeight": "700" }, "color": { "text": "{{text_color}}" }, "spacing": { "margin": { "bottom": "6px" } } } }, "innerHTML": "{{member_2_name}}" },
+                { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "14px", "fontWeight": "600", "textTransform": "uppercase", "letterSpacing": "0.05em" }, "color": { "text": "{{accent_color}}" }, "spacing": { "margin": { "bottom": "12px" } } } }, "innerHTML": "{{member_2_role}}" },
+                { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "15px", "lineHeight": "1.7" }, "color": { "text": "{{muted_color}}" } } }, "innerHTML": "{{member_2_bio}}" }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                { "blockName": "core/heading", "attrs": { "level": 3, "style": { "typography": { "fontSize": "20px", "fontWeight": "700" }, "color": { "text": "{{text_color}}" }, "spacing": { "margin": { "bottom": "6px" } } } }, "innerHTML": "{{member_3_name}}" },
+                { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "14px", "fontWeight": "600", "textTransform": "uppercase", "letterSpacing": "0.05em" }, "color": { "text": "{{accent_color}}" }, "spacing": { "margin": { "bottom": "12px" } } } }, "innerHTML": "{{member_3_role}}" },
+                { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "15px", "lineHeight": "1.7" }, "color": { "text": "{{muted_color}}" } } }, "innerHTML": "{{member_3_bio}}" }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

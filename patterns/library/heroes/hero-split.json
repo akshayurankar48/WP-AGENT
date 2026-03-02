@@ -1,0 +1,117 @@
+{
+  "id": "hero-split",
+  "name": "Split Hero with Dual CTAs",
+  "category": "heroes",
+  "description": "Two-column split hero with headline and buttons on the left, image placeholder on the right. Clean corporate layout.",
+  "variables": {
+    "heading": "Ship Products That Customers Love",
+    "subheading": "From idea to launch in weeks, not months. Our platform gives your team the tools to build, test, and iterate faster than ever before.",
+    "cta_primary": "Start Building",
+    "cta_secondary": "Watch Demo",
+    "image_url": "https://placehold.co/640x480/e2e8f0/94a3b8?text=Product+Preview",
+    "bg_color": "{{bg_white}}",
+    "text_color": "{{text_dark}}",
+    "subtitle_color": "{{text_muted}}",
+    "accent_color": "{{primary}}"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "{{bg_color}}" },
+          "spacing": { "padding": { "top": "100px", "bottom": "100px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/columns",
+          "attrs": {
+            "verticalAlignment": "center",
+            "style": { "spacing": { "blockGap": { "left": "64px" } } }
+          },
+          "innerBlocks": [
+            {
+              "blockName": "core/column",
+              "attrs": { "width": "55%" },
+              "innerBlocks": [
+                {
+                  "blockName": "core/heading",
+                  "attrs": {
+                    "level": 1,
+                    "style": {
+                      "typography": { "fontSize": "56px", "fontWeight": "800", "letterSpacing": "-0.03em", "lineHeight": "1.12" },
+                      "color": { "text": "{{text_color}}" },
+                      "spacing": { "margin": { "bottom": "24px" } }
+                    }
+                  },
+                  "innerHTML": "{{heading}}"
+                },
+                {
+                  "blockName": "core/paragraph",
+                  "attrs": {
+                    "style": {
+                      "typography": { "fontSize": "18px", "lineHeight": "1.7" },
+                      "color": { "text": "{{subtitle_color}}" },
+                      "spacing": { "margin": { "bottom": "40px" } }
+                    }
+                  },
+                  "innerHTML": "{{subheading}}"
+                },
+                {
+                  "blockName": "core/buttons",
+                  "attrs": { "layout": { "type": "flex", "justifyContent": "left" } },
+                  "innerBlocks": [
+                    {
+                      "blockName": "core/button",
+                      "attrs": {
+                        "style": {
+                          "color": { "background": "{{accent_color}}", "text": "#ffffff" },
+                          "typography": { "fontSize": "16px", "fontWeight": "600" },
+                          "border": { "radius": "100px" },
+                          "spacing": { "padding": { "top": "18px", "bottom": "18px", "left": "40px", "right": "40px" } }
+                        }
+                      },
+                      "innerHTML": "{{cta_primary}}"
+                    },
+                    {
+                      "blockName": "core/button",
+                      "attrs": {
+                        "style": {
+                          "color": { "background": "transparent", "text": "{{accent_color}}" },
+                          "typography": { "fontSize": "16px", "fontWeight": "600" },
+                          "border": { "radius": "100px", "width": "2px", "color": "{{accent_color}}" },
+                          "spacing": { "padding": { "top": "18px", "bottom": "18px", "left": "40px", "right": "40px" } }
+                        }
+                      },
+                      "innerHTML": "{{cta_secondary}}"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "attrs": { "width": "45%" },
+              "innerBlocks": [
+                {
+                  "blockName": "core/image",
+                  "attrs": {
+                    "url": "{{image_url}}",
+                    "alt": "Product preview",
+                    "style": {
+                      "border": { "radius": "16px" }
+                    },
+                    "sizeSlug": "full"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

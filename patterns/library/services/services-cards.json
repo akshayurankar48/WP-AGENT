@@ -1,0 +1,250 @@
+{
+  "id": "services-cards",
+  "name": "Service Cards",
+  "category": "services",
+  "description": "Three-column service card grid with emoji icons, service names, descriptions, and learn more links on rounded cards with light backgrounds",
+  "variables": {
+    "heading": "What We Do",
+    "subheading": "We offer a focused set of services designed to help your business grow and thrive online.",
+    "service_1_icon": "\ud83c\udfaf",
+    "service_1_title": "Brand Strategy",
+    "service_1_desc": "We help you define your brand voice, visual identity, and market positioning so every touchpoint tells a cohesive story.",
+    "service_2_icon": "\ud83d\udda5\ufe0f",
+    "service_2_title": "Web Development",
+    "service_2_desc": "Custom websites built for performance, accessibility, and scale. From landing pages to full-featured platforms.",
+    "service_3_icon": "\ud83d\udcc8",
+    "service_3_title": "Growth Marketing",
+    "service_3_desc": "Data-driven campaigns that turn visitors into customers. SEO, paid media, and conversion optimization under one roof.",
+    "bg_color": "{{bg_white}}",
+    "card_bg": "{{bg_light}}",
+    "text_color": "{{text_dark}}",
+    "muted_color": "{{text_muted}}",
+    "accent_color": "{{accent}}"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "{{bg_color}}" },
+          "spacing": { "padding": { "top": "100px", "bottom": "100px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/heading",
+          "attrs": {
+            "textAlign": "center",
+            "level": 2,
+            "style": {
+              "typography": { "fontSize": "42px", "fontWeight": "700", "letterSpacing": "-0.02em" },
+              "color": { "text": "{{text_color}}" },
+              "spacing": { "margin": { "bottom": "16px" } }
+            }
+          },
+          "innerHTML": "{{heading}}"
+        },
+        {
+          "blockName": "core/paragraph",
+          "attrs": {
+            "align": "center",
+            "style": {
+              "typography": { "fontSize": "18px" },
+              "color": { "text": "{{muted_color}}" },
+              "spacing": { "margin": { "bottom": "64px" } }
+            }
+          },
+          "innerHTML": "{{subheading}}"
+        },
+        {
+          "blockName": "core/columns",
+          "attrs": { "style": { "spacing": { "blockGap": { "left": "32px" } } } },
+          "innerBlocks": [
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/group",
+                  "attrs": {
+                    "style": {
+                      "color": { "background": "{{card_bg}}" },
+                      "border": { "radius": "16px" },
+                      "spacing": { "padding": { "top": "36px", "bottom": "36px", "left": "32px", "right": "32px" } }
+                    }
+                  },
+                  "innerBlocks": [
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "48px" },
+                          "spacing": { "margin": { "bottom": "20px" } }
+                        }
+                      },
+                      "innerHTML": "{{service_1_icon}}"
+                    },
+                    {
+                      "blockName": "core/heading",
+                      "attrs": {
+                        "level": 3,
+                        "style": {
+                          "typography": { "fontSize": "22px", "fontWeight": "600" },
+                          "color": { "text": "{{text_color}}" },
+                          "spacing": { "margin": { "bottom": "12px" } }
+                        }
+                      },
+                      "innerHTML": "{{service_1_title}}"
+                    },
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "15px", "lineHeight": "1.7" },
+                          "color": { "text": "{{muted_color}}" },
+                          "spacing": { "margin": { "bottom": "20px" } }
+                        }
+                      },
+                      "innerHTML": "{{service_1_desc}}"
+                    },
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "14px", "fontWeight": "600" },
+                          "color": { "text": "{{accent_color}}" }
+                        }
+                      },
+                      "innerHTML": "Learn More \u2192"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/group",
+                  "attrs": {
+                    "style": {
+                      "color": { "background": "{{card_bg}}" },
+                      "border": { "radius": "16px" },
+                      "spacing": { "padding": { "top": "36px", "bottom": "36px", "left": "32px", "right": "32px" } }
+                    }
+                  },
+                  "innerBlocks": [
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "48px" },
+                          "spacing": { "margin": { "bottom": "20px" } }
+                        }
+                      },
+                      "innerHTML": "{{service_2_icon}}"
+                    },
+                    {
+                      "blockName": "core/heading",
+                      "attrs": {
+                        "level": 3,
+                        "style": {
+                          "typography": { "fontSize": "22px", "fontWeight": "600" },
+                          "color": { "text": "{{text_color}}" },
+                          "spacing": { "margin": { "bottom": "12px" } }
+                        }
+                      },
+                      "innerHTML": "{{service_2_title}}"
+                    },
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "15px", "lineHeight": "1.7" },
+                          "color": { "text": "{{muted_color}}" },
+                          "spacing": { "margin": { "bottom": "20px" } }
+                        }
+                      },
+                      "innerHTML": "{{service_2_desc}}"
+                    },
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "14px", "fontWeight": "600" },
+                          "color": { "text": "{{accent_color}}" }
+                        }
+                      },
+                      "innerHTML": "Learn More \u2192"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/group",
+                  "attrs": {
+                    "style": {
+                      "color": { "background": "{{card_bg}}" },
+                      "border": { "radius": "16px" },
+                      "spacing": { "padding": { "top": "36px", "bottom": "36px", "left": "32px", "right": "32px" } }
+                    }
+                  },
+                  "innerBlocks": [
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "48px" },
+                          "spacing": { "margin": { "bottom": "20px" } }
+                        }
+                      },
+                      "innerHTML": "{{service_3_icon}}"
+                    },
+                    {
+                      "blockName": "core/heading",
+                      "attrs": {
+                        "level": 3,
+                        "style": {
+                          "typography": { "fontSize": "22px", "fontWeight": "600" },
+                          "color": { "text": "{{text_color}}" },
+                          "spacing": { "margin": { "bottom": "12px" } }
+                        }
+                      },
+                      "innerHTML": "{{service_3_title}}"
+                    },
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "15px", "lineHeight": "1.7" },
+                          "color": { "text": "{{muted_color}}" },
+                          "spacing": { "margin": { "bottom": "20px" } }
+                        }
+                      },
+                      "innerHTML": "{{service_3_desc}}"
+                    },
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "14px", "fontWeight": "600" },
+                          "color": { "text": "{{accent_color}}" }
+                        }
+                      },
+                      "innerHTML": "Learn More \u2192"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

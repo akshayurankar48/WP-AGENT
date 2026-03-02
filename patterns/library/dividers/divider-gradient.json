@@ -1,0 +1,33 @@
+{
+  "id": "divider-gradient",
+  "name": "Gradient Divider",
+  "category": "dividers",
+  "description": "Horizontal gradient color band used as a decorative section break between content areas",
+  "variables": {
+    "gradient_start": "{{primary}}",
+    "gradient_end": "{{accent}}"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": {
+            "gradient": "linear-gradient(90deg, {{gradient_start}} 0%, {{gradient_end}} 100%)"
+          },
+          "spacing": { "padding": { "top": "20px", "bottom": "20px", "left": "0px", "right": "0px" }, "margin": { "top": "0px", "bottom": "0px" } },
+          "dimensions": { "minHeight": "40px" }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/spacer",
+          "attrs": { "height": "1px" },
+          "innerHTML": "<div style=\"height:1px\" aria-hidden=\"true\" class=\"wp-block-spacer\"></div>"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "id": "divider-wave",
+  "name": "Wave Divider",
+  "category": "dividers",
+  "description": "Decorative wave-shaped section divider that transitions between two background colors",
+  "variables": {
+    "top_color": "{{bg_white}}",
+    "bottom_color": "{{bg_dark}}",
+    "wave_color": "{{bg_dark}}"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "{{top_color}}" },
+          "spacing": { "padding": { "top": "0px", "bottom": "0px", "left": "0px", "right": "0px" }, "margin": { "top": "0px", "bottom": "0px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/group",
+          "attrs": {
+            "align": "full",
+            "style": {
+              "spacing": { "padding": { "top": "0px", "bottom": "0px" }, "margin": { "top": "0px", "bottom": "0px" } },
+              "color": { "background": "transparent" }
+            }
+          },
+          "innerBlocks": [
+            {
+              "blockName": "core/separator",
+              "attrs": {
+                "align": "full",
+                "style": {
+                  "color": { "background": "{{wave_color}}" },
+                  "spacing": { "margin": { "top": "0px", "bottom": "0px" } }
+                },
+                "className": "is-style-wide"
+              },
+              "innerHTML": "<hr class=\"wp-block-separator has-text-color has-background is-style-wide\"/>"
+            }
+          ]
+        },
+        {
+          "blockName": "core/group",
+          "attrs": {
+            "align": "full",
+            "style": {
+              "color": {
+                "background": "{{bottom_color}}",
+                "gradient": "linear-gradient(180deg, {{top_color}} 0%, {{bottom_color}} 100%)"
+              },
+              "spacing": { "padding": { "top": "60px", "bottom": "20px" }, "margin": { "top": "0px" } }
+            }
+          },
+          "innerBlocks": [
+            {
+              "blockName": "core/spacer",
+              "attrs": { "height": "1px" },
+              "innerHTML": "<div style=\"height:1px\" aria-hidden=\"true\" class=\"wp-block-spacer\"></div>"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

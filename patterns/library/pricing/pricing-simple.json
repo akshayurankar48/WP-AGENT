@@ -1,0 +1,176 @@
+{
+  "id": "pricing-simple",
+  "name": "Simple Single Pricing Card",
+  "category": "pricing",
+  "description": "Centered single pricing card with prominent price, plan name, feature list, and CTA. Clean and minimal for single-product pages.",
+  "variables": {
+    "heading": "One Plan. Everything Included.",
+    "subheading": "No tiers, no confusion. Just one fair price for the complete platform.",
+    "plan_name": "Professional",
+    "price": "$49",
+    "period": "/month",
+    "billed": "Billed annually, or $59 month-to-month",
+    "f1": "Unlimited projects and workspaces",
+    "f2": "50 GB file storage",
+    "f3": "Real-time collaboration",
+    "f4": "Advanced permissions and roles",
+    "f5": "Priority email and chat support",
+    "f6": "Custom integrations via API",
+    "f7": "Weekly automated reports",
+    "cta": "Start Your Free Trial",
+    "cta_note": "No credit card required. Cancel anytime.",
+    "bg_color": "{{bg_light}}",
+    "card_bg": "{{bg_white}}",
+    "accent_color": "{{primary}}",
+    "text_color": "{{text_dark}}",
+    "muted_color": "{{text_muted}}"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "{{bg_color}}" },
+          "spacing": { "padding": { "top": "100px", "bottom": "100px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained", "contentSize": "560px" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/heading",
+          "attrs": {
+            "textAlign": "center",
+            "level": 2,
+            "style": {
+              "typography": { "fontSize": "42px", "fontWeight": "700", "letterSpacing": "-0.02em" },
+              "color": { "text": "{{text_color}}" },
+              "spacing": { "margin": { "bottom": "16px" } }
+            }
+          },
+          "innerHTML": "{{heading}}"
+        },
+        {
+          "blockName": "core/paragraph",
+          "attrs": {
+            "align": "center",
+            "style": {
+              "typography": { "fontSize": "18px" },
+              "color": { "text": "{{muted_color}}" },
+              "spacing": { "margin": { "bottom": "48px" } }
+            }
+          },
+          "innerHTML": "{{subheading}}"
+        },
+        {
+          "blockName": "core/group",
+          "attrs": {
+            "style": {
+              "color": { "background": "{{card_bg}}" },
+              "spacing": { "padding": { "top": "52px", "bottom": "52px", "left": "48px", "right": "48px" } },
+              "border": { "radius": "20px" }
+            }
+          },
+          "innerBlocks": [
+            {
+              "blockName": "core/paragraph",
+              "attrs": {
+                "align": "center",
+                "style": {
+                  "typography": { "fontSize": "14px", "fontWeight": "600", "textTransform": "uppercase", "letterSpacing": "0.08em" },
+                  "color": { "text": "{{accent_color}}" },
+                  "spacing": { "margin": { "bottom": "16px" } }
+                }
+              },
+              "innerHTML": "{{plan_name}}"
+            },
+            {
+              "blockName": "core/heading",
+              "attrs": {
+                "textAlign": "center",
+                "level": 3,
+                "style": {
+                  "typography": { "fontSize": "64px", "fontWeight": "800", "letterSpacing": "-0.03em" },
+                  "color": { "text": "{{text_color}}" },
+                  "spacing": { "margin": { "bottom": "8px" } }
+                }
+              },
+              "innerHTML": "{{price}}<span style=\"font-size:22px;font-weight:400;color:{{muted_color}}\">{{period}}</span>"
+            },
+            {
+              "blockName": "core/paragraph",
+              "attrs": {
+                "align": "center",
+                "style": {
+                  "typography": { "fontSize": "14px" },
+                  "color": { "text": "{{muted_color}}" },
+                  "spacing": { "margin": { "bottom": "36px" } }
+                }
+              },
+              "innerHTML": "{{billed}}"
+            },
+            {
+              "blockName": "core/separator",
+              "attrs": {
+                "style": {
+                  "spacing": { "margin": { "bottom": "32px" } }
+                },
+                "className": "is-style-wide"
+              }
+            },
+            {
+              "blockName": "core/list",
+              "attrs": {
+                "style": {
+                  "typography": { "fontSize": "16px", "lineHeight": "2.2" },
+                  "color": { "text": "{{text_color}}" },
+                  "spacing": { "margin": { "bottom": "40px" } }
+                }
+              },
+              "innerBlocks": [
+                { "blockName": "core/list-item", "innerHTML": "{{f1}}" },
+                { "blockName": "core/list-item", "innerHTML": "{{f2}}" },
+                { "blockName": "core/list-item", "innerHTML": "{{f3}}" },
+                { "blockName": "core/list-item", "innerHTML": "{{f4}}" },
+                { "blockName": "core/list-item", "innerHTML": "{{f5}}" },
+                { "blockName": "core/list-item", "innerHTML": "{{f6}}" },
+                { "blockName": "core/list-item", "innerHTML": "{{f7}}" }
+              ]
+            },
+            {
+              "blockName": "core/buttons",
+              "attrs": { "layout": { "type": "flex", "justifyContent": "center" } },
+              "innerBlocks": [
+                {
+                  "blockName": "core/button",
+                  "attrs": {
+                    "width": 100,
+                    "style": {
+                      "color": { "background": "{{accent_color}}", "text": "#ffffff" },
+                      "typography": { "fontSize": "16px", "fontWeight": "600" },
+                      "border": { "radius": "100px" },
+                      "spacing": { "padding": { "top": "18px", "bottom": "18px" } }
+                    }
+                  },
+                  "innerHTML": "{{cta}}"
+                }
+              ]
+            },
+            {
+              "blockName": "core/paragraph",
+              "attrs": {
+                "align": "center",
+                "style": {
+                  "typography": { "fontSize": "13px" },
+                  "color": { "text": "{{muted_color}}" },
+                  "spacing": { "margin": { "top": "16px" } }
+                }
+              },
+              "innerHTML": "{{cta_note}}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

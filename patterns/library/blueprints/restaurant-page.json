@@ -1,0 +1,6 @@
+{
+  "id": "restaurant-page",
+  "name": "Restaurant Page",
+  "description": "Restaurant landing page: split hero + service cards menu + gallery grid + single testimonial + split contact + dark footer",
+  "sections": ["hero-split", "services-cards", "gallery-grid", "testimonials-single", "contact-split", "footer-dark"]
+}

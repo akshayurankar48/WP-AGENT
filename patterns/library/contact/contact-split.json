@@ -1,0 +1,84 @@
+{
+  "id": "contact-split",
+  "name": "Split Contact Section",
+  "category": "contact",
+  "description": "Two-column 50/50 split contact section with heading, description, and contact details on the left, and a send message CTA group on the right, on a warm light background",
+  "variables": {
+    "heading": "Let's Start a Conversation",
+    "description": "Whether you have a question about our services, pricing, or anything else, our team is ready to answer all your questions.",
+    "email": "hello@example.com",
+    "phone": "+1 (555) 987-6543",
+    "address": "450 Innovation Boulevard, Suite 200, Austin, TX 78701",
+    "cta_heading": "Send Us a Message",
+    "cta_description": "Fill out the form below and we'll get back to you within 24 hours. We're here to help you succeed.",
+    "cta_label": "Get in Touch",
+    "cta_url": "#contact-form",
+    "bg_color": "{{bg_light}}",
+    "text_color": "{{text_dark}}",
+    "muted_color": "{{text_muted}}",
+    "accent_color": "{{primary}}",
+    "card_bg": "{{bg_white}}"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "{{bg_color}}" },
+          "spacing": { "padding": { "top": "100px", "bottom": "100px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/columns",
+          "attrs": { "style": { "spacing": { "blockGap": { "left": "60px" } } } },
+          "innerBlocks": [
+            {
+              "blockName": "core/column",
+              "attrs": { "width": "50%" },
+              "innerBlocks": [
+                { "blockName": "core/heading", "attrs": { "level": 2, "style": { "typography": { "fontSize": "42px", "fontWeight": "700", "letterSpacing": "-0.02em" }, "color": { "text": "{{text_color}}" }, "spacing": { "margin": { "bottom": "20px" } } } }, "innerHTML": "{{heading}}" },
+                { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "17px", "lineHeight": "1.7" }, "color": { "text": "{{muted_color}}" }, "spacing": { "margin": { "bottom": "40px" } } } }, "innerHTML": "{{description}}" },
+                { "blockName": "core/heading", "attrs": { "level": 4, "style": { "typography": { "fontSize": "13px", "textTransform": "uppercase", "letterSpacing": "0.1em", "fontWeight": "600" }, "color": { "text": "{{accent_color}}" }, "spacing": { "margin": { "bottom": "12px" } } } }, "innerHTML": "Email" },
+                { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "17px" }, "color": { "text": "{{text_color}}" }, "spacing": { "margin": { "bottom": "28px" } } } }, "innerHTML": "{{email}}" },
+                { "blockName": "core/heading", "attrs": { "level": 4, "style": { "typography": { "fontSize": "13px", "textTransform": "uppercase", "letterSpacing": "0.1em", "fontWeight": "600" }, "color": { "text": "{{accent_color}}" }, "spacing": { "margin": { "bottom": "12px" } } } }, "innerHTML": "Phone" },
+                { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "17px" }, "color": { "text": "{{text_color}}" }, "spacing": { "margin": { "bottom": "28px" } } } }, "innerHTML": "{{phone}}" },
+                { "blockName": "core/heading", "attrs": { "level": 4, "style": { "typography": { "fontSize": "13px", "textTransform": "uppercase", "letterSpacing": "0.1em", "fontWeight": "600" }, "color": { "text": "{{accent_color}}" }, "spacing": { "margin": { "bottom": "12px" } } } }, "innerHTML": "Address" },
+                { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "17px", "lineHeight": "1.6" }, "color": { "text": "{{text_color}}" } } }, "innerHTML": "{{address}}" }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "attrs": { "width": "50%" },
+              "innerBlocks": [
+                {
+                  "blockName": "core/group",
+                  "attrs": {
+                    "style": {
+                      "color": { "background": "{{card_bg}}" },
+                      "spacing": { "padding": { "top": "48px", "bottom": "48px", "left": "40px", "right": "40px" } },
+                      "border": { "radius": "16px" }
+                    },
+                    "layout": { "type": "constrained" }
+                  },
+                  "innerBlocks": [
+                    { "blockName": "core/heading", "attrs": { "level": 3, "style": { "typography": { "fontSize": "28px", "fontWeight": "700", "letterSpacing": "-0.01em" }, "color": { "text": "{{text_color}}" }, "spacing": { "margin": { "bottom": "16px" } } } }, "innerHTML": "{{cta_heading}}" },
+                    { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "16px", "lineHeight": "1.7" }, "color": { "text": "{{muted_color}}" }, "spacing": { "margin": { "bottom": "32px" } } } }, "innerHTML": "{{cta_description}}" },
+                    {
+                      "blockName": "core/buttons",
+                      "innerBlocks": [
+                        { "blockName": "core/button", "attrs": { "url": "{{cta_url}}", "width": 100, "style": { "color": { "background": "{{accent_color}}", "text": "#ffffff" }, "typography": { "fontSize": "16px", "fontWeight": "600" }, "spacing": { "padding": { "top": "18px", "bottom": "18px", "left": "40px", "right": "40px" } }, "border": { "radius": "12px" } } }, "innerHTML": "{{cta_label}}" }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

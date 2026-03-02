@@ -1,0 +1,133 @@
+{
+  "id": "team-carousel",
+  "name": "Team Carousel Layout",
+  "category": "team",
+  "description": "Four-column compact team layout with circular images, names, and roles, designed for larger teams with minimal info per person on a light background",
+  "variables": {
+    "heading": "Our Growing Team",
+    "subheading": "Meet the talented people who bring our ideas to life every day.",
+    "member_1_image": "https://placehold.co/200x200/e5e7eb/6b7280?text=Photo",
+    "member_1_name": "Alex Turner",
+    "member_1_role": "Software Engineer",
+    "member_2_image": "https://placehold.co/200x200/e5e7eb/6b7280?text=Photo",
+    "member_2_name": "Maria Santos",
+    "member_2_role": "Product Manager",
+    "member_3_image": "https://placehold.co/200x200/e5e7eb/6b7280?text=Photo",
+    "member_3_name": "David Kim",
+    "member_3_role": "UX Designer",
+    "member_4_image": "https://placehold.co/200x200/e5e7eb/6b7280?text=Photo",
+    "member_4_name": "Sophie Laurent",
+    "member_4_role": "Data Scientist",
+    "bg_color": "{{bg_light}}",
+    "text_color": "{{text_dark}}",
+    "muted_color": "{{text_muted}}",
+    "accent_color": "{{primary}}"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "{{bg_color}}" },
+          "spacing": { "padding": { "top": "80px", "bottom": "80px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        { "blockName": "core/heading", "attrs": { "textAlign": "center", "level": 2, "style": { "typography": { "fontSize": "36px", "fontWeight": "700", "letterSpacing": "-0.02em" }, "color": { "text": "{{text_color}}" }, "spacing": { "margin": { "bottom": "12px" } } } }, "innerHTML": "{{heading}}" },
+        { "blockName": "core/paragraph", "attrs": { "align": "center", "style": { "typography": { "fontSize": "17px" }, "color": { "text": "{{muted_color}}" }, "spacing": { "margin": { "bottom": "56px" } } } }, "innerHTML": "{{subheading}}" },
+        {
+          "blockName": "core/columns",
+          "attrs": { "style": { "spacing": { "blockGap": { "left": "32px" } } } },
+          "innerBlocks": [
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/group",
+                  "attrs": {
+                    "style": {
+                      "spacing": { "padding": { "top": "0px", "bottom": "0px" } },
+                      "border": { "radius": "9999px" },
+                      "dimensions": { "minHeight": "0" }
+                    },
+                    "layout": { "type": "constrained" }
+                  },
+                  "innerBlocks": [
+                    { "blockName": "core/image", "attrs": { "url": "{{member_1_image}}", "alt": "{{member_1_name}}", "align": "center", "width": 140, "height": 140, "style": { "border": { "radius": "9999px" } } } }
+                  ]
+                },
+                { "blockName": "core/heading", "attrs": { "textAlign": "center", "level": 3, "style": { "typography": { "fontSize": "18px", "fontWeight": "600" }, "color": { "text": "{{text_color}}" }, "spacing": { "margin": { "top": "16px", "bottom": "4px" } } } }, "innerHTML": "{{member_1_name}}" },
+                { "blockName": "core/paragraph", "attrs": { "align": "center", "style": { "typography": { "fontSize": "14px", "fontWeight": "500" }, "color": { "text": "{{accent_color}}" } } }, "innerHTML": "{{member_1_role}}" }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/group",
+                  "attrs": {
+                    "style": {
+                      "spacing": { "padding": { "top": "0px", "bottom": "0px" } },
+                      "border": { "radius": "9999px" },
+                      "dimensions": { "minHeight": "0" }
+                    },
+                    "layout": { "type": "constrained" }
+                  },
+                  "innerBlocks": [
+                    { "blockName": "core/image", "attrs": { "url": "{{member_2_image}}", "alt": "{{member_2_name}}", "align": "center", "width": 140, "height": 140, "style": { "border": { "radius": "9999px" } } } }
+                  ]
+                },
+                { "blockName": "core/heading", "attrs": { "textAlign": "center", "level": 3, "style": { "typography": { "fontSize": "18px", "fontWeight": "600" }, "color": { "text": "{{text_color}}" }, "spacing": { "margin": { "top": "16px", "bottom": "4px" } } } }, "innerHTML": "{{member_2_name}}" },
+                { "blockName": "core/paragraph", "attrs": { "align": "center", "style": { "typography": { "fontSize": "14px", "fontWeight": "500" }, "color": { "text": "{{accent_color}}" } } }, "innerHTML": "{{member_2_role}}" }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/group",
+                  "attrs": {
+                    "style": {
+                      "spacing": { "padding": { "top": "0px", "bottom": "0px" } },
+                      "border": { "radius": "9999px" },
+                      "dimensions": { "minHeight": "0" }
+                    },
+                    "layout": { "type": "constrained" }
+                  },
+                  "innerBlocks": [
+                    { "blockName": "core/image", "attrs": { "url": "{{member_3_image}}", "alt": "{{member_3_name}}", "align": "center", "width": 140, "height": 140, "style": { "border": { "radius": "9999px" } } } }
+                  ]
+                },
+                { "blockName": "core/heading", "attrs": { "textAlign": "center", "level": 3, "style": { "typography": { "fontSize": "18px", "fontWeight": "600" }, "color": { "text": "{{text_color}}" }, "spacing": { "margin": { "top": "16px", "bottom": "4px" } } } }, "innerHTML": "{{member_3_name}}" },
+                { "blockName": "core/paragraph", "attrs": { "align": "center", "style": { "typography": { "fontSize": "14px", "fontWeight": "500" }, "color": { "text": "{{accent_color}}" } } }, "innerHTML": "{{member_3_role}}" }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/group",
+                  "attrs": {
+                    "style": {
+                      "spacing": { "padding": { "top": "0px", "bottom": "0px" } },
+                      "border": { "radius": "9999px" },
+                      "dimensions": { "minHeight": "0" }
+                    },
+                    "layout": { "type": "constrained" }
+                  },
+                  "innerBlocks": [
+                    { "blockName": "core/image", "attrs": { "url": "{{member_4_image}}", "alt": "{{member_4_name}}", "align": "center", "width": 140, "height": 140, "style": { "border": { "radius": "9999px" } } } }
+                  ]
+                },
+                { "blockName": "core/heading", "attrs": { "textAlign": "center", "level": 3, "style": { "typography": { "fontSize": "18px", "fontWeight": "600" }, "color": { "text": "{{text_color}}" }, "spacing": { "margin": { "top": "16px", "bottom": "4px" } } } }, "innerHTML": "{{member_4_name}}" },
+                { "blockName": "core/paragraph", "attrs": { "align": "center", "style": { "typography": { "fontSize": "14px", "fontWeight": "500" }, "color": { "text": "{{accent_color}}" } } }, "innerHTML": "{{member_4_role}}" }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

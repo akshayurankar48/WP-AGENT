@@ -1,0 +1,237 @@
+{
+  "id": "testimonials-slider",
+  "name": "Testimonial Slider Cards",
+  "category": "testimonials",
+  "description": "Three-column testimonial cards styled as a slider, each with avatar placeholder, quote, and author attribution",
+  "variables": {
+    "heading": "Loved by Teams Everywhere",
+    "avatar_1": "https://placehold.co/80x80/e2e8f0/64748b?text=JW",
+    "quote_1": "We cut our onboarding time in half. New team members are productive from day one now.",
+    "author_1": "Jessica Wang",
+    "role_1": "VP of Engineering at Codestream",
+    "avatar_2": "https://placehold.co/80x80/e2e8f0/64748b?text=DM",
+    "quote_2": "The analytics alone paid for the entire subscription. We finally see what moves the needle.",
+    "author_2": "Daniel Martinez",
+    "role_2": "Growth Lead at Launchpad",
+    "avatar_3": "https://placehold.co/80x80/e2e8f0/64748b?text=RP",
+    "quote_3": "Switching was the best decision we made this quarter. Support is incredibly fast and helpful.",
+    "author_3": "Rachel Park",
+    "role_3": "Operations Director at NovaBridge",
+    "bg_color": "{{bg_light}}",
+    "card_bg": "{{bg_white}}",
+    "text_color": "{{text_dark}}",
+    "muted_color": "{{text_muted}}",
+    "border_color": "{{border_light}}"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "{{bg_color}}" },
+          "spacing": { "padding": { "top": "100px", "bottom": "100px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/heading",
+          "attrs": {
+            "textAlign": "center",
+            "level": 2,
+            "style": {
+              "typography": { "fontSize": "42px", "fontWeight": "700", "letterSpacing": "-0.02em" },
+              "color": { "text": "{{text_color}}" },
+              "spacing": { "margin": { "bottom": "64px" } }
+            }
+          },
+          "innerHTML": "{{heading}}"
+        },
+        {
+          "blockName": "core/columns",
+          "attrs": { "style": { "spacing": { "blockGap": { "left": "28px" } } } },
+          "innerBlocks": [
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/group",
+                  "attrs": {
+                    "style": {
+                      "color": { "background": "{{card_bg}}" },
+                      "spacing": { "padding": { "top": "36px", "bottom": "36px", "left": "32px", "right": "32px" } },
+                      "border": { "radius": "16px", "width": "1px", "color": "{{border_color}}" }
+                    }
+                  },
+                  "innerBlocks": [
+                    {
+                      "blockName": "core/image",
+                      "attrs": {
+                        "url": "{{avatar_1}}",
+                        "alt": "{{author_1}}",
+                        "width": "56px",
+                        "height": "56px",
+                        "style": { "border": { "radius": "100px" } }
+                      }
+                    },
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "16px", "lineHeight": "1.7", "fontStyle": "italic" },
+                          "color": { "text": "{{text_color}}" },
+                          "spacing": { "margin": { "top": "20px", "bottom": "24px" } }
+                        }
+                      },
+                      "innerHTML": "\"{{quote_1}}\""
+                    },
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "15px", "fontWeight": "600" },
+                          "color": { "text": "{{text_color}}" },
+                          "spacing": { "margin": { "bottom": "2px" } }
+                        }
+                      },
+                      "innerHTML": "{{author_1}}"
+                    },
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "13px" },
+                          "color": { "text": "{{muted_color}}" }
+                        }
+                      },
+                      "innerHTML": "{{role_1}}"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/group",
+                  "attrs": {
+                    "style": {
+                      "color": { "background": "{{card_bg}}" },
+                      "spacing": { "padding": { "top": "36px", "bottom": "36px", "left": "32px", "right": "32px" } },
+                      "border": { "radius": "16px", "width": "1px", "color": "{{border_color}}" }
+                    }
+                  },
+                  "innerBlocks": [
+                    {
+                      "blockName": "core/image",
+                      "attrs": {
+                        "url": "{{avatar_2}}",
+                        "alt": "{{author_2}}",
+                        "width": "56px",
+                        "height": "56px",
+                        "style": { "border": { "radius": "100px" } }
+                      }
+                    },
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "16px", "lineHeight": "1.7", "fontStyle": "italic" },
+                          "color": { "text": "{{text_color}}" },
+                          "spacing": { "margin": { "top": "20px", "bottom": "24px" } }
+                        }
+                      },
+                      "innerHTML": "\"{{quote_2}}\""
+                    },
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "15px", "fontWeight": "600" },
+                          "color": { "text": "{{text_color}}" },
+                          "spacing": { "margin": { "bottom": "2px" } }
+                        }
+                      },
+                      "innerHTML": "{{author_2}}"
+                    },
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "13px" },
+                          "color": { "text": "{{muted_color}}" }
+                        }
+                      },
+                      "innerHTML": "{{role_2}}"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/group",
+                  "attrs": {
+                    "style": {
+                      "color": { "background": "{{card_bg}}" },
+                      "spacing": { "padding": { "top": "36px", "bottom": "36px", "left": "32px", "right": "32px" } },
+                      "border": { "radius": "16px", "width": "1px", "color": "{{border_color}}" }
+                    }
+                  },
+                  "innerBlocks": [
+                    {
+                      "blockName": "core/image",
+                      "attrs": {
+                        "url": "{{avatar_3}}",
+                        "alt": "{{author_3}}",
+                        "width": "56px",
+                        "height": "56px",
+                        "style": { "border": { "radius": "100px" } }
+                      }
+                    },
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "16px", "lineHeight": "1.7", "fontStyle": "italic" },
+                          "color": { "text": "{{text_color}}" },
+                          "spacing": { "margin": { "top": "20px", "bottom": "24px" } }
+                        }
+                      },
+                      "innerHTML": "\"{{quote_3}}\""
+                    },
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "15px", "fontWeight": "600" },
+                          "color": { "text": "{{text_color}}" },
+                          "spacing": { "margin": { "bottom": "2px" } }
+                        }
+                      },
+                      "innerHTML": "{{author_3}}"
+                    },
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "13px" },
+                          "color": { "text": "{{muted_color}}" }
+                        }
+                      },
+                      "innerHTML": "{{role_3}}"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

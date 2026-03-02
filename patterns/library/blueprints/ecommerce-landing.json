@@ -1,0 +1,6 @@
+{
+  "id": "ecommerce-landing",
+  "name": "E-Commerce Landing",
+  "description": "E-commerce landing page: gradient hero + icon features + toggle pricing + testimonial wall + gradient CTA + multi-column footer",
+  "sections": ["hero-gradient", "features-icons", "pricing-toggle", "testimonials-wall", "cta-gradient", "footer-columns"]
+}

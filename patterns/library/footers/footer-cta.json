@@ -1,0 +1,121 @@
+{
+  "id": "footer-cta",
+  "name": "Footer with CTA",
+  "category": "footers",
+  "description": "Two-part footer with a call-to-action section on accent background and standard footer columns on dark background below",
+  "variables": {
+    "cta_heading": "Ready to Get Started?",
+    "cta_description": "Join thousands of teams already using our platform. Start your free 14-day trial today — no credit card required.",
+    "cta_button": "Start Free Trial",
+    "company": "Acme Inc.",
+    "tagline": "Building tools that help teams move faster.",
+    "col2_heading": "Product",
+    "col2_links": "Features\nPricing\nIntegrations\nChangelog",
+    "col3_heading": "Resources",
+    "col3_links": "Documentation\nAPI Reference\nCommunity\nBlog",
+    "col4_heading": "Company",
+    "col4_links": "About\nCareers\nContact\nPress",
+    "copyright": "2024 Acme Inc. All rights reserved.",
+    "accent_color": "{{primary}}",
+    "accent_dark": "{{primary_dark}}",
+    "bg_dark": "{{bg_dark}}",
+    "text_color": "{{text_light}}"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "spacing": { "padding": { "top": "0px", "bottom": "0px", "left": "0px", "right": "0px" } }
+        },
+        "layout": { "type": "default" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/group",
+          "attrs": {
+            "align": "full",
+            "style": {
+              "color": { "background": "{{accent_color}}", "text": "#ffffff" },
+              "spacing": { "padding": { "top": "80px", "bottom": "80px", "left": "40px", "right": "40px" } }
+            },
+            "layout": { "type": "constrained" }
+          },
+          "innerBlocks": [
+            {
+              "blockName": "core/heading",
+              "attrs": { "textAlign": "center", "level": 2, "style": { "typography": { "fontSize": "38px", "fontWeight": "700", "letterSpacing": "-0.02em" }, "spacing": { "margin": { "bottom": "16px" } } } },
+              "innerHTML": "{{cta_heading}}"
+            },
+            {
+              "blockName": "core/paragraph",
+              "attrs": { "align": "center", "style": { "typography": { "fontSize": "18px", "lineHeight": "1.6" }, "color": { "text": "rgba(255,255,255,0.85)" }, "spacing": { "margin": { "bottom": "32px" } } } },
+              "innerHTML": "{{cta_description}}"
+            },
+            {
+              "blockName": "core/buttons",
+              "attrs": { "layout": { "type": "flex", "justifyContent": "center" } },
+              "innerBlocks": [
+                { "blockName": "core/button", "attrs": { "style": { "color": { "background": "#ffffff", "text": "{{accent_color}}" }, "typography": { "fontSize": "16px", "fontWeight": "600" }, "border": { "radius": "100px" }, "spacing": { "padding": { "top": "18px", "bottom": "18px", "left": "48px", "right": "48px" } } } }, "innerHTML": "{{cta_button}}" }
+              ]
+            }
+          ]
+        },
+        {
+          "blockName": "core/group",
+          "attrs": {
+            "align": "full",
+            "style": {
+              "color": { "background": "{{bg_dark}}", "text": "{{text_color}}" },
+              "spacing": { "padding": { "top": "64px", "bottom": "48px", "left": "40px", "right": "40px" } }
+            },
+            "layout": { "type": "constrained" }
+          },
+          "innerBlocks": [
+            {
+              "blockName": "core/columns",
+              "attrs": { "style": { "spacing": { "blockGap": { "left": "40px" } } } },
+              "innerBlocks": [
+                {
+                  "blockName": "core/column",
+                  "attrs": { "width": "40%" },
+                  "innerBlocks": [
+                    { "blockName": "core/heading", "attrs": { "level": 3, "style": { "typography": { "fontSize": "22px", "fontWeight": "700" }, "color": { "text": "#ffffff" }, "spacing": { "margin": { "bottom": "12px" } } } }, "innerHTML": "{{company}}" },
+                    { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "15px", "lineHeight": "1.7" }, "color": { "text": "rgba(255,255,255,0.6)" } } }, "innerHTML": "{{tagline}}" }
+                  ]
+                },
+                {
+                  "blockName": "core/column",
+                  "attrs": { "width": "20%" },
+                  "innerBlocks": [
+                    { "blockName": "core/heading", "attrs": { "level": 4, "style": { "typography": { "fontSize": "14px", "fontWeight": "600", "textTransform": "uppercase", "letterSpacing": "0.05em" }, "color": { "text": "#ffffff" }, "spacing": { "margin": { "bottom": "16px" } } } }, "innerHTML": "{{col2_heading}}" },
+                    { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "15px", "lineHeight": "2.2" }, "color": { "text": "rgba(255,255,255,0.6)" } } }, "innerHTML": "{{col2_links}}" }
+                  ]
+                },
+                {
+                  "blockName": "core/column",
+                  "attrs": { "width": "20%" },
+                  "innerBlocks": [
+                    { "blockName": "core/heading", "attrs": { "level": 4, "style": { "typography": { "fontSize": "14px", "fontWeight": "600", "textTransform": "uppercase", "letterSpacing": "0.05em" }, "color": { "text": "#ffffff" }, "spacing": { "margin": { "bottom": "16px" } } } }, "innerHTML": "{{col3_heading}}" },
+                    { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "15px", "lineHeight": "2.2" }, "color": { "text": "rgba(255,255,255,0.6)" } } }, "innerHTML": "{{col3_links}}" }
+                  ]
+                },
+                {
+                  "blockName": "core/column",
+                  "attrs": { "width": "20%" },
+                  "innerBlocks": [
+                    { "blockName": "core/heading", "attrs": { "level": 4, "style": { "typography": { "fontSize": "14px", "fontWeight": "600", "textTransform": "uppercase", "letterSpacing": "0.05em" }, "color": { "text": "#ffffff" }, "spacing": { "margin": { "bottom": "16px" } } } }, "innerHTML": "{{col4_heading}}" },
+                    { "blockName": "core/paragraph", "attrs": { "style": { "typography": { "fontSize": "15px", "lineHeight": "2.2" }, "color": { "text": "rgba(255,255,255,0.6)" } } }, "innerHTML": "{{col4_links}}" }
+                  ]
+                }
+              ]
+            },
+            { "blockName": "core/separator", "attrs": { "style": { "color": { "background": "rgba(255,255,255,0.1)" }, "spacing": { "margin": { "top": "48px", "bottom": "24px" } } } } },
+            { "blockName": "core/paragraph", "attrs": { "align": "center", "style": { "typography": { "fontSize": "14px" }, "color": { "text": "rgba(255,255,255,0.4)" } } }, "innerHTML": "{{copyright}}" }
+          ]
+        }
+      ]
+    }
+  ]
+}

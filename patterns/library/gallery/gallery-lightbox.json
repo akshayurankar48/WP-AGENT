@@ -1,0 +1,179 @@
+{
+  "id": "gallery-lightbox",
+  "name": "Gallery with Captions",
+  "category": "gallery",
+  "description": "Clean museum-style 2x2 image grid with captions below each image on a white background",
+  "variables": {
+    "heading": "Selected Works",
+    "subheading": "Each piece tells a story of craftsmanship and creative vision.",
+    "image_1": "https://placehold.co/600x400/e5e7eb/6b7280?text=Artwork+1",
+    "caption_1": "Coastal Serenity — Mixed media on canvas, capturing the tranquil intersection of land and sea.",
+    "image_2": "https://placehold.co/600x400/e5e7eb/6b7280?text=Artwork+2",
+    "caption_2": "Urban Rhythm — A photographic study of movement and architecture in the modern city.",
+    "image_3": "https://placehold.co/600x400/e5e7eb/6b7280?text=Artwork+3",
+    "caption_3": "Garden of Light — Exploring natural patterns through long-exposure photography.",
+    "image_4": "https://placehold.co/600x400/e5e7eb/6b7280?text=Artwork+4",
+    "caption_4": "Silent Conversation — Charcoal on paper, an intimate portrait of contemplation.",
+    "bg_color": "{{bg_white}}",
+    "text_color": "{{text_dark}}",
+    "muted_color": "{{text_muted}}"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "{{bg_color}}" },
+          "spacing": { "padding": { "top": "100px", "bottom": "100px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/heading",
+          "attrs": {
+            "textAlign": "center",
+            "level": 2,
+            "style": {
+              "typography": { "fontSize": "42px", "fontWeight": "700", "letterSpacing": "-0.02em" },
+              "color": { "text": "{{text_color}}" },
+              "spacing": { "margin": { "bottom": "16px" } }
+            }
+          },
+          "innerHTML": "{{heading}}"
+        },
+        {
+          "blockName": "core/paragraph",
+          "attrs": {
+            "align": "center",
+            "style": {
+              "typography": { "fontSize": "18px" },
+              "color": { "text": "{{muted_color}}" },
+              "spacing": { "margin": { "bottom": "64px" } }
+            }
+          },
+          "innerHTML": "{{subheading}}"
+        },
+        {
+          "blockName": "core/columns",
+          "attrs": { "style": { "spacing": { "blockGap": { "left": "40px" } } } },
+          "innerBlocks": [
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/group",
+                  "attrs": { "style": { "spacing": { "margin": { "bottom": "40px" } } } },
+                  "innerBlocks": [
+                    {
+                      "blockName": "core/image",
+                      "attrs": {
+                        "url": "{{image_1}}",
+                        "alt": "Selected work 1",
+                        "style": { "border": { "radius": "8px" } },
+                        "sizeSlug": "full"
+                      }
+                    },
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "14px", "lineHeight": "1.6", "fontStyle": "italic" },
+                          "color": { "text": "{{muted_color}}" },
+                          "spacing": { "margin": { "top": "12px" } }
+                        }
+                      },
+                      "innerHTML": "{{caption_1}}"
+                    }
+                  ]
+                },
+                {
+                  "blockName": "core/group",
+                  "innerBlocks": [
+                    {
+                      "blockName": "core/image",
+                      "attrs": {
+                        "url": "{{image_3}}",
+                        "alt": "Selected work 3",
+                        "style": { "border": { "radius": "8px" } },
+                        "sizeSlug": "full"
+                      }
+                    },
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "14px", "lineHeight": "1.6", "fontStyle": "italic" },
+                          "color": { "text": "{{muted_color}}" },
+                          "spacing": { "margin": { "top": "12px" } }
+                        }
+                      },
+                      "innerHTML": "{{caption_3}}"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/group",
+                  "attrs": { "style": { "spacing": { "margin": { "bottom": "40px" } } } },
+                  "innerBlocks": [
+                    {
+                      "blockName": "core/image",
+                      "attrs": {
+                        "url": "{{image_2}}",
+                        "alt": "Selected work 2",
+                        "style": { "border": { "radius": "8px" } },
+                        "sizeSlug": "full"
+                      }
+                    },
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "14px", "lineHeight": "1.6", "fontStyle": "italic" },
+                          "color": { "text": "{{muted_color}}" },
+                          "spacing": { "margin": { "top": "12px" } }
+                        }
+                      },
+                      "innerHTML": "{{caption_2}}"
+                    }
+                  ]
+                },
+                {
+                  "blockName": "core/group",
+                  "innerBlocks": [
+                    {
+                      "blockName": "core/image",
+                      "attrs": {
+                        "url": "{{image_4}}",
+                        "alt": "Selected work 4",
+                        "style": { "border": { "radius": "8px" } },
+                        "sizeSlug": "full"
+                      }
+                    },
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "14px", "lineHeight": "1.6", "fontStyle": "italic" },
+                          "color": { "text": "{{muted_color}}" },
+                          "spacing": { "margin": { "top": "12px" } }
+                        }
+                      },
+                      "innerHTML": "{{caption_4}}"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

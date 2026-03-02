@@ -1,0 +1,246 @@
+{
+  "id": "portfolio-masonry",
+  "name": "Masonry Portfolio",
+  "category": "portfolio",
+  "description": "Three-column masonry-style portfolio layout with varied image heights and title overlays",
+  "variables": {
+    "heading": "Selected Projects",
+    "subheading": "Explore our diverse portfolio of creative work across industries.",
+    "project_1_title": "Artisan Coffee Branding",
+    "project_2_title": "Fitness App Interface",
+    "project_3_title": "Luxury Hotel Website",
+    "project_4_title": "Tech Startup Identity",
+    "project_5_title": "Restaurant Menu Design",
+    "project_6_title": "Fashion Lookbook",
+    "bg_color": "{{bg_light}}",
+    "text_color": "{{text_dark}}",
+    "muted_color": "{{text_muted}}",
+    "overlay_bg": "rgba(0,0,0,0.7)"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "{{bg_color}}" },
+          "spacing": { "padding": { "top": "100px", "bottom": "100px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/heading",
+          "attrs": {
+            "textAlign": "center",
+            "level": 2,
+            "style": {
+              "typography": { "fontSize": "42px", "fontWeight": "700", "letterSpacing": "-0.02em" },
+              "color": { "text": "{{text_color}}" },
+              "spacing": { "margin": { "bottom": "16px" } }
+            }
+          },
+          "innerHTML": "{{heading}}"
+        },
+        {
+          "blockName": "core/paragraph",
+          "attrs": {
+            "align": "center",
+            "style": {
+              "typography": { "fontSize": "18px", "lineHeight": "1.6" },
+              "color": { "text": "{{muted_color}}" },
+              "spacing": { "margin": { "bottom": "64px" } }
+            }
+          },
+          "innerHTML": "{{subheading}}"
+        },
+        {
+          "blockName": "core/columns",
+          "attrs": { "style": { "spacing": { "blockGap": { "left": "24px", "top": "24px" } } } },
+          "innerBlocks": [
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/group",
+                  "attrs": {
+                    "style": {
+                      "spacing": { "margin": { "bottom": "24px" } }
+                    }
+                  },
+                  "innerBlocks": [
+                    {
+                      "blockName": "core/image",
+                      "attrs": {
+                        "url": "https://placehold.co/600x500/e8e4df/555555?text=Artisan+Coffee",
+                        "alt": "Artisan Coffee Branding",
+                        "style": { "border": { "radius": "8px" } }
+                      },
+                      "innerHTML": "<figure class=\"wp-block-image\"><img src=\"https://placehold.co/600x500/e8e4df/555555?text=Artisan+Coffee\" alt=\"Artisan Coffee Branding\"/></figure>"
+                    },
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "18px", "fontWeight": "600" },
+                          "color": { "text": "{{text_color}}" },
+                          "spacing": { "margin": { "top": "12px" } }
+                        }
+                      },
+                      "innerHTML": "{{project_1_title}}"
+                    }
+                  ]
+                },
+                {
+                  "blockName": "core/group",
+                  "innerBlocks": [
+                    {
+                      "blockName": "core/image",
+                      "attrs": {
+                        "url": "https://placehold.co/600x350/d4e0ed/555555?text=Tech+Startup",
+                        "alt": "Tech Startup Identity",
+                        "style": { "border": { "radius": "8px" } }
+                      },
+                      "innerHTML": "<figure class=\"wp-block-image\"><img src=\"https://placehold.co/600x350/d4e0ed/555555?text=Tech+Startup\" alt=\"Tech Startup Identity\"/></figure>"
+                    },
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "18px", "fontWeight": "600" },
+                          "color": { "text": "{{text_color}}" },
+                          "spacing": { "margin": { "top": "12px" } }
+                        }
+                      },
+                      "innerHTML": "{{project_4_title}}"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/group",
+                  "attrs": {
+                    "style": {
+                      "spacing": { "margin": { "bottom": "24px" } }
+                    }
+                  },
+                  "innerBlocks": [
+                    {
+                      "blockName": "core/image",
+                      "attrs": {
+                        "url": "https://placehold.co/600x350/dce8d4/555555?text=Fitness+App",
+                        "alt": "Fitness App Interface",
+                        "style": { "border": { "radius": "8px" } }
+                      },
+                      "innerHTML": "<figure class=\"wp-block-image\"><img src=\"https://placehold.co/600x350/dce8d4/555555?text=Fitness+App\" alt=\"Fitness App Interface\"/></figure>"
+                    },
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "18px", "fontWeight": "600" },
+                          "color": { "text": "{{text_color}}" },
+                          "spacing": { "margin": { "top": "12px" } }
+                        }
+                      },
+                      "innerHTML": "{{project_2_title}}"
+                    }
+                  ]
+                },
+                {
+                  "blockName": "core/group",
+                  "innerBlocks": [
+                    {
+                      "blockName": "core/image",
+                      "attrs": {
+                        "url": "https://placehold.co/600x500/ede4d4/555555?text=Restaurant+Menu",
+                        "alt": "Restaurant Menu Design",
+                        "style": { "border": { "radius": "8px" } }
+                      },
+                      "innerHTML": "<figure class=\"wp-block-image\"><img src=\"https://placehold.co/600x500/ede4d4/555555?text=Restaurant+Menu\" alt=\"Restaurant Menu Design\"/></figure>"
+                    },
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "18px", "fontWeight": "600" },
+                          "color": { "text": "{{text_color}}" },
+                          "spacing": { "margin": { "top": "12px" } }
+                        }
+                      },
+                      "innerHTML": "{{project_5_title}}"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/group",
+                  "attrs": {
+                    "style": {
+                      "spacing": { "margin": { "bottom": "24px" } }
+                    }
+                  },
+                  "innerBlocks": [
+                    {
+                      "blockName": "core/image",
+                      "attrs": {
+                        "url": "https://placehold.co/600x450/d4d8ed/555555?text=Luxury+Hotel",
+                        "alt": "Luxury Hotel Website",
+                        "style": { "border": { "radius": "8px" } }
+                      },
+                      "innerHTML": "<figure class=\"wp-block-image\"><img src=\"https://placehold.co/600x450/d4d8ed/555555?text=Luxury+Hotel\" alt=\"Luxury Hotel Website\"/></figure>"
+                    },
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "18px", "fontWeight": "600" },
+                          "color": { "text": "{{text_color}}" },
+                          "spacing": { "margin": { "top": "12px" } }
+                        }
+                      },
+                      "innerHTML": "{{project_3_title}}"
+                    }
+                  ]
+                },
+                {
+                  "blockName": "core/group",
+                  "innerBlocks": [
+                    {
+                      "blockName": "core/image",
+                      "attrs": {
+                        "url": "https://placehold.co/600x400/edd4e4/555555?text=Fashion+Lookbook",
+                        "alt": "Fashion Lookbook",
+                        "style": { "border": { "radius": "8px" } }
+                      },
+                      "innerHTML": "<figure class=\"wp-block-image\"><img src=\"https://placehold.co/600x400/edd4e4/555555?text=Fashion+Lookbook\" alt=\"Fashion Lookbook\"/></figure>"
+                    },
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "18px", "fontWeight": "600" },
+                          "color": { "text": "{{text_color}}" },
+                          "spacing": { "margin": { "top": "12px" } }
+                        }
+                      },
+                      "innerHTML": "{{project_6_title}}"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

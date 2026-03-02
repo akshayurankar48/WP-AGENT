@@ -1,0 +1,301 @@
+{
+  "id": "blog-grid",
+  "name": "Blog Post Grid",
+  "category": "blog",
+  "description": "Three-column blog card grid with images, category tags, titles, excerpts, and read more links on a light background",
+  "variables": {
+    "heading": "From the Blog",
+    "subheading": "Insights, updates, and stories from our team to help you stay ahead.",
+    "post_1_image": "https://placehold.co/600x340/e5e7eb/6b7280?text=Blog+Post",
+    "post_1_category": "Product Updates",
+    "post_1_title": "Introducing Our New Dashboard Experience",
+    "post_1_excerpt": "We completely reimagined how you interact with your data. The new dashboard is faster, cleaner, and built around the workflows you use most.",
+    "post_2_image": "https://placehold.co/600x340/e5e7eb/6b7280?text=Blog+Post",
+    "post_2_category": "Engineering",
+    "post_2_title": "How We Reduced Load Times by 60%",
+    "post_2_excerpt": "A deep dive into the architectural decisions and performance optimizations that made our platform significantly faster for every user.",
+    "post_3_image": "https://placehold.co/600x340/e5e7eb/6b7280?text=Blog+Post",
+    "post_3_category": "Company News",
+    "post_3_title": "Growing Our Team Across Three Continents",
+    "post_3_excerpt": "As we expand globally, we are building a remote-first culture that keeps collaboration strong while embracing the richness of diverse perspectives.",
+    "bg_color": "{{bg_light}}",
+    "card_bg": "{{bg_white}}",
+    "text_color": "{{text_dark}}",
+    "muted_color": "{{text_muted}}",
+    "accent_color": "{{accent}}"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "{{bg_color}}" },
+          "spacing": { "padding": { "top": "100px", "bottom": "100px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/heading",
+          "attrs": {
+            "textAlign": "center",
+            "level": 2,
+            "style": {
+              "typography": { "fontSize": "42px", "fontWeight": "700", "letterSpacing": "-0.02em" },
+              "color": { "text": "{{text_color}}" },
+              "spacing": { "margin": { "bottom": "16px" } }
+            }
+          },
+          "innerHTML": "{{heading}}"
+        },
+        {
+          "blockName": "core/paragraph",
+          "attrs": {
+            "align": "center",
+            "style": {
+              "typography": { "fontSize": "18px" },
+              "color": { "text": "{{muted_color}}" },
+              "spacing": { "margin": { "bottom": "64px" } }
+            }
+          },
+          "innerHTML": "{{subheading}}"
+        },
+        {
+          "blockName": "core/columns",
+          "attrs": { "style": { "spacing": { "blockGap": { "left": "32px" } } } },
+          "innerBlocks": [
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/group",
+                  "attrs": {
+                    "style": {
+                      "color": { "background": "{{card_bg}}" },
+                      "border": { "radius": "16px" },
+                      "spacing": { "padding": { "bottom": "32px" } }
+                    }
+                  },
+                  "innerBlocks": [
+                    {
+                      "blockName": "core/image",
+                      "attrs": {
+                        "url": "{{post_1_image}}",
+                        "alt": "{{post_1_title}}",
+                        "style": { "border": { "radius": "16px 16px 0px 0px" } },
+                        "sizeSlug": "full"
+                      }
+                    },
+                    {
+                      "blockName": "core/group",
+                      "attrs": { "style": { "spacing": { "padding": { "left": "24px", "right": "24px" } } } },
+                      "innerBlocks": [
+                        {
+                          "blockName": "core/paragraph",
+                          "attrs": {
+                            "style": {
+                              "typography": { "fontSize": "12px", "fontWeight": "600", "textTransform": "uppercase", "letterSpacing": "0.05em" },
+                              "color": { "text": "{{accent_color}}" },
+                              "spacing": { "margin": { "top": "20px", "bottom": "12px" } }
+                            }
+                          },
+                          "innerHTML": "{{post_1_category}}"
+                        },
+                        {
+                          "blockName": "core/heading",
+                          "attrs": {
+                            "level": 3,
+                            "style": {
+                              "typography": { "fontSize": "20px", "fontWeight": "600", "lineHeight": "1.4" },
+                              "color": { "text": "{{text_color}}" },
+                              "spacing": { "margin": { "bottom": "12px" } }
+                            }
+                          },
+                          "innerHTML": "{{post_1_title}}"
+                        },
+                        {
+                          "blockName": "core/paragraph",
+                          "attrs": {
+                            "style": {
+                              "typography": { "fontSize": "15px", "lineHeight": "1.7" },
+                              "color": { "text": "{{muted_color}}" },
+                              "spacing": { "margin": { "bottom": "20px" } }
+                            }
+                          },
+                          "innerHTML": "{{post_1_excerpt}}"
+                        },
+                        {
+                          "blockName": "core/paragraph",
+                          "attrs": {
+                            "style": {
+                              "typography": { "fontSize": "14px", "fontWeight": "600" },
+                              "color": { "text": "{{accent_color}}" }
+                            }
+                          },
+                          "innerHTML": "Read More \u2192"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/group",
+                  "attrs": {
+                    "style": {
+                      "color": { "background": "{{card_bg}}" },
+                      "border": { "radius": "16px" },
+                      "spacing": { "padding": { "bottom": "32px" } }
+                    }
+                  },
+                  "innerBlocks": [
+                    {
+                      "blockName": "core/image",
+                      "attrs": {
+                        "url": "{{post_2_image}}",
+                        "alt": "{{post_2_title}}",
+                        "style": { "border": { "radius": "16px 16px 0px 0px" } },
+                        "sizeSlug": "full"
+                      }
+                    },
+                    {
+                      "blockName": "core/group",
+                      "attrs": { "style": { "spacing": { "padding": { "left": "24px", "right": "24px" } } } },
+                      "innerBlocks": [
+                        {
+                          "blockName": "core/paragraph",
+                          "attrs": {
+                            "style": {
+                              "typography": { "fontSize": "12px", "fontWeight": "600", "textTransform": "uppercase", "letterSpacing": "0.05em" },
+                              "color": { "text": "{{accent_color}}" },
+                              "spacing": { "margin": { "top": "20px", "bottom": "12px" } }
+                            }
+                          },
+                          "innerHTML": "{{post_2_category}}"
+                        },
+                        {
+                          "blockName": "core/heading",
+                          "attrs": {
+                            "level": 3,
+                            "style": {
+                              "typography": { "fontSize": "20px", "fontWeight": "600", "lineHeight": "1.4" },
+                              "color": { "text": "{{text_color}}" },
+                              "spacing": { "margin": { "bottom": "12px" } }
+                            }
+                          },
+                          "innerHTML": "{{post_2_title}}"
+                        },
+                        {
+                          "blockName": "core/paragraph",
+                          "attrs": {
+                            "style": {
+                              "typography": { "fontSize": "15px", "lineHeight": "1.7" },
+                              "color": { "text": "{{muted_color}}" },
+                              "spacing": { "margin": { "bottom": "20px" } }
+                            }
+                          },
+                          "innerHTML": "{{post_2_excerpt}}"
+                        },
+                        {
+                          "blockName": "core/paragraph",
+                          "attrs": {
+                            "style": {
+                              "typography": { "fontSize": "14px", "fontWeight": "600" },
+                              "color": { "text": "{{accent_color}}" }
+                            }
+                          },
+                          "innerHTML": "Read More \u2192"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/group",
+                  "attrs": {
+                    "style": {
+                      "color": { "background": "{{card_bg}}" },
+                      "border": { "radius": "16px" },
+                      "spacing": { "padding": { "bottom": "32px" } }
+                    }
+                  },
+                  "innerBlocks": [
+                    {
+                      "blockName": "core/image",
+                      "attrs": {
+                        "url": "{{post_3_image}}",
+                        "alt": "{{post_3_title}}",
+                        "style": { "border": { "radius": "16px 16px 0px 0px" } },
+                        "sizeSlug": "full"
+                      }
+                    },
+                    {
+                      "blockName": "core/group",
+                      "attrs": { "style": { "spacing": { "padding": { "left": "24px", "right": "24px" } } } },
+                      "innerBlocks": [
+                        {
+                          "blockName": "core/paragraph",
+                          "attrs": {
+                            "style": {
+                              "typography": { "fontSize": "12px", "fontWeight": "600", "textTransform": "uppercase", "letterSpacing": "0.05em" },
+                              "color": { "text": "{{accent_color}}" },
+                              "spacing": { "margin": { "top": "20px", "bottom": "12px" } }
+                            }
+                          },
+                          "innerHTML": "{{post_3_category}}"
+                        },
+                        {
+                          "blockName": "core/heading",
+                          "attrs": {
+                            "level": 3,
+                            "style": {
+                              "typography": { "fontSize": "20px", "fontWeight": "600", "lineHeight": "1.4" },
+                              "color": { "text": "{{text_color}}" },
+                              "spacing": { "margin": { "bottom": "12px" } }
+                            }
+                          },
+                          "innerHTML": "{{post_3_title}}"
+                        },
+                        {
+                          "blockName": "core/paragraph",
+                          "attrs": {
+                            "style": {
+                              "typography": { "fontSize": "15px", "lineHeight": "1.7" },
+                              "color": { "text": "{{muted_color}}" },
+                              "spacing": { "margin": { "bottom": "20px" } }
+                            }
+                          },
+                          "innerHTML": "{{post_3_excerpt}}"
+                        },
+                        {
+                          "blockName": "core/paragraph",
+                          "attrs": {
+                            "style": {
+                              "typography": { "fontSize": "14px", "fontWeight": "600" },
+                              "color": { "text": "{{accent_color}}" }
+                            }
+                          },
+                          "innerHTML": "Read More \u2192"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

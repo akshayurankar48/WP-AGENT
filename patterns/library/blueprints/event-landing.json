@@ -1,0 +1,6 @@
+{
+  "id": "event-landing",
+  "name": "Event Landing Page",
+  "description": "Event landing page: aurora hero + 4-column features + simple pricing + two-column FAQ + split CTA + minimal footer",
+  "sections": ["hero-aurora", "features-4col", "pricing-simple", "faq-two-col", "cta-split", "footer-minimal"]
+}

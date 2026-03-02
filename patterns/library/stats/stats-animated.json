@@ -1,0 +1,62 @@
+{
+  "id": "stats-animated",
+  "name": "Animated Stats Section",
+  "category": "stats",
+  "description": "Three-column animated stats section with large white numbers on a dark accent gradient background, using wpa-fade-in-up animation class for scroll-triggered entrance",
+  "variables": {
+    "stat_1": "2.5M+",
+    "label_1": "Active Users Worldwide",
+    "stat_2": "98.7%",
+    "label_2": "Customer Satisfaction",
+    "stat_3": "$4.2B",
+    "label_3": "Transactions Processed",
+    "bg_color": "{{primary_dark}}",
+    "gradient_start": "{{primary_dark}}",
+    "gradient_end": "{{primary}}",
+    "number_color": "#ffffff",
+    "label_color": "rgba(255,255,255,0.7)"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "className": "wpa-fade-in-up",
+        "style": {
+          "color": { "background": "{{bg_color}}", "text": "#ffffff" },
+          "spacing": { "padding": { "top": "100px", "bottom": "100px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/columns",
+          "attrs": { "style": { "spacing": { "blockGap": { "left": "48px" } } } },
+          "innerBlocks": [
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                { "blockName": "core/heading", "attrs": { "textAlign": "center", "level": 2, "style": { "typography": { "fontSize": "56px", "fontWeight": "800", "letterSpacing": "-0.03em" }, "color": { "text": "{{number_color}}" }, "spacing": { "margin": { "bottom": "12px" } } } }, "innerHTML": "{{stat_1}}" },
+                { "blockName": "core/paragraph", "attrs": { "align": "center", "style": { "typography": { "fontSize": "15px", "fontWeight": "500", "textTransform": "uppercase", "letterSpacing": "0.08em" }, "color": { "text": "{{label_color}}" } } }, "innerHTML": "{{label_1}}" }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                { "blockName": "core/heading", "attrs": { "textAlign": "center", "level": 2, "style": { "typography": { "fontSize": "56px", "fontWeight": "800", "letterSpacing": "-0.03em" }, "color": { "text": "{{number_color}}" }, "spacing": { "margin": { "bottom": "12px" } } } }, "innerHTML": "{{stat_2}}" },
+                { "blockName": "core/paragraph", "attrs": { "align": "center", "style": { "typography": { "fontSize": "15px", "fontWeight": "500", "textTransform": "uppercase", "letterSpacing": "0.08em" }, "color": { "text": "{{label_color}}" } } }, "innerHTML": "{{label_2}}" }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                { "blockName": "core/heading", "attrs": { "textAlign": "center", "level": 2, "style": { "typography": { "fontSize": "56px", "fontWeight": "800", "letterSpacing": "-0.03em" }, "color": { "text": "{{number_color}}" }, "spacing": { "margin": { "bottom": "12px" } } } }, "innerHTML": "{{stat_3}}" },
+                { "blockName": "core/paragraph", "attrs": { "align": "center", "style": { "typography": { "fontSize": "15px", "fontWeight": "500", "textTransform": "uppercase", "letterSpacing": "0.08em" }, "color": { "text": "{{label_color}}" } } }, "innerHTML": "{{label_3}}" }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

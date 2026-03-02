@@ -1,0 +1,6 @@
+{
+  "id": "fitness-gym",
+  "name": "Fitness & Gym",
+  "description": "Fitness gym page: video background hero + bento features + 3-tier pricing + modern testimonials + image gallery grid + aurora CTA + dark footer",
+  "sections": ["hero-video-bg", "features-bento", "pricing-3tier", "testimonials-modern", "gallery-grid", "cta-aurora", "footer-dark"]
+}

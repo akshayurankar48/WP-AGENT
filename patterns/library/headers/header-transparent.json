@@ -1,0 +1,44 @@
+{
+  "id": "header-transparent",
+  "name": "Dark Section Header",
+  "category": "headers",
+  "description": "Section header on dark background with eyebrow text, heading, and subtitle in white — ideal for introducing dark-themed sections",
+  "variables": {
+    "eyebrow": "WHAT WE OFFER",
+    "heading": "Everything You Need to Succeed",
+    "subheading": "A comprehensive suite of tools designed to streamline your workflow and accelerate growth.",
+    "bg_color": "{{bg_dark}}",
+    "eyebrow_color": "{{accent}}",
+    "muted_color": "rgba(255,255,255,0.6)"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "{{bg_color}}", "text": "#ffffff" },
+          "spacing": { "padding": { "top": "100px", "bottom": "40px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/paragraph",
+          "attrs": { "align": "center", "style": { "typography": { "fontSize": "14px", "fontWeight": "700", "textTransform": "uppercase", "letterSpacing": "0.1em" }, "color": { "text": "{{eyebrow_color}}" }, "spacing": { "margin": { "bottom": "20px" } } } },
+          "innerHTML": "{{eyebrow}}"
+        },
+        {
+          "blockName": "core/heading",
+          "attrs": { "textAlign": "center", "level": 2, "style": { "typography": { "fontSize": "42px", "fontWeight": "700", "letterSpacing": "-0.02em" }, "color": { "text": "#ffffff" }, "spacing": { "margin": { "bottom": "16px" } } } },
+          "innerHTML": "{{heading}}"
+        },
+        {
+          "blockName": "core/paragraph",
+          "attrs": { "align": "center", "style": { "typography": { "fontSize": "18px", "lineHeight": "1.6" }, "color": { "text": "{{muted_color}}" } } },
+          "innerHTML": "{{subheading}}"
+        }
+      ]
+    }
+  ]
+}

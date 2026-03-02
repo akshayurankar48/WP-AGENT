@@ -1,0 +1,56 @@
+{
+  "id": "banner-announcement",
+  "name": "Announcement Banner",
+  "category": "banner",
+  "description": "Compact full-width announcement strip with accent background, message text, and inline link",
+  "variables": {
+    "announcement_text": "We just raised $12M in Series A funding to accelerate product development.",
+    "link_text": "Learn More \u2192",
+    "bg_color": "{{primary}}",
+    "text_color": "#ffffff"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "{{bg_color}}" },
+          "spacing": { "padding": { "top": "16px", "bottom": "16px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/group",
+          "attrs": {
+            "layout": { "type": "flex", "justifyContent": "center", "flexWrap": "nowrap" },
+            "style": { "spacing": { "blockGap": "12px" } }
+          },
+          "innerBlocks": [
+            {
+              "blockName": "core/paragraph",
+              "attrs": {
+                "style": {
+                  "typography": { "fontSize": "15px", "fontWeight": "500" },
+                  "color": { "text": "{{text_color}}" }
+                }
+              },
+              "innerHTML": "{{announcement_text}}"
+            },
+            {
+              "blockName": "core/paragraph",
+              "attrs": {
+                "style": {
+                  "typography": { "fontSize": "15px", "fontWeight": "700", "textDecoration": "underline" },
+                  "color": { "text": "{{text_color}}" }
+                }
+              },
+              "innerHTML": "{{link_text}}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

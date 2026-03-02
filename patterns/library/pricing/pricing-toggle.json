@@ -1,0 +1,290 @@
+{
+  "id": "pricing-toggle",
+  "name": "Pricing with Toggle Tiers",
+  "category": "pricing",
+  "description": "Two-tier pricing layout with Basic and Pro plans, Pro card highlighted with accent background. Includes toggle concept header for Monthly/Annual.",
+  "variables": {
+    "heading": "Choose Your Plan",
+    "subheading": "Start free, upgrade when you're ready. All plans include a 14-day trial.",
+    "toggle_label": "Monthly / Annual (Save 20%)",
+    "t1_name": "Basic",
+    "t1_price": "$29",
+    "t1_period": "/month",
+    "t1_desc": "Everything you need to get started and grow your project.",
+    "t1_f1": "Up to 10 team members",
+    "t1_f2": "20 GB cloud storage",
+    "t1_f3": "Basic integrations",
+    "t1_f4": "Email support",
+    "t1_f5": "Standard analytics",
+    "t1_cta": "Get Started",
+    "t2_name": "Pro",
+    "t2_badge": "Most Popular",
+    "t2_price": "$79",
+    "t2_period": "/month",
+    "t2_desc": "Advanced features for scaling teams and ambitious goals.",
+    "t2_f1": "Unlimited team members",
+    "t2_f2": "200 GB cloud storage",
+    "t2_f3": "Premium integrations",
+    "t2_f4": "Priority support",
+    "t2_f5": "Advanced analytics",
+    "t2_f6": "Custom workflows",
+    "t2_f7": "API access",
+    "t2_cta": "Start Free Trial",
+    "bg_color": "{{bg_white}}",
+    "card_bg": "{{bg_light}}",
+    "accent_color": "{{primary}}",
+    "text_color": "{{text_dark}}",
+    "muted_color": "{{text_muted}}"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "{{bg_color}}" },
+          "spacing": { "padding": { "top": "100px", "bottom": "100px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/heading",
+          "attrs": {
+            "textAlign": "center",
+            "level": 2,
+            "style": {
+              "typography": { "fontSize": "42px", "fontWeight": "700", "letterSpacing": "-0.02em" },
+              "color": { "text": "{{text_color}}" },
+              "spacing": { "margin": { "bottom": "16px" } }
+            }
+          },
+          "innerHTML": "{{heading}}"
+        },
+        {
+          "blockName": "core/paragraph",
+          "attrs": {
+            "align": "center",
+            "style": {
+              "typography": { "fontSize": "18px" },
+              "color": { "text": "{{muted_color}}" },
+              "spacing": { "margin": { "bottom": "16px" } }
+            }
+          },
+          "innerHTML": "{{subheading}}"
+        },
+        {
+          "blockName": "core/paragraph",
+          "attrs": {
+            "align": "center",
+            "style": {
+              "typography": { "fontSize": "14px", "fontWeight": "600" },
+              "color": { "text": "{{accent_color}}" },
+              "spacing": { "margin": { "bottom": "56px" } }
+            }
+          },
+          "innerHTML": "{{toggle_label}}"
+        },
+        {
+          "blockName": "core/columns",
+          "attrs": {
+            "style": { "spacing": { "blockGap": { "left": "28px" } } },
+            "verticalAlignment": "top"
+          },
+          "innerBlocks": [
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/group",
+                  "attrs": {
+                    "style": {
+                      "color": { "background": "{{card_bg}}" },
+                      "spacing": { "padding": { "top": "44px", "bottom": "44px", "left": "36px", "right": "36px" } },
+                      "border": { "radius": "16px" }
+                    }
+                  },
+                  "innerBlocks": [
+                    {
+                      "blockName": "core/heading",
+                      "attrs": {
+                        "level": 3,
+                        "style": {
+                          "typography": { "fontSize": "22px", "fontWeight": "600" },
+                          "color": { "text": "{{text_color}}" },
+                          "spacing": { "margin": { "bottom": "8px" } }
+                        }
+                      },
+                      "innerHTML": "{{t1_name}}"
+                    },
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "15px" },
+                          "color": { "text": "{{muted_color}}" },
+                          "spacing": { "margin": { "bottom": "28px" } }
+                        }
+                      },
+                      "innerHTML": "{{t1_desc}}"
+                    },
+                    {
+                      "blockName": "core/heading",
+                      "attrs": {
+                        "level": 4,
+                        "style": {
+                          "typography": { "fontSize": "48px", "fontWeight": "800" },
+                          "color": { "text": "{{text_color}}" },
+                          "spacing": { "margin": { "bottom": "32px" } }
+                        }
+                      },
+                      "innerHTML": "{{t1_price}}<span style=\"font-size:18px;font-weight:400;color:{{muted_color}}\">{{t1_period}}</span>"
+                    },
+                    {
+                      "blockName": "core/list",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "15px", "lineHeight": "2.2" },
+                          "color": { "text": "{{text_color}}" },
+                          "spacing": { "margin": { "bottom": "36px" } }
+                        }
+                      },
+                      "innerBlocks": [
+                        { "blockName": "core/list-item", "innerHTML": "{{t1_f1}}" },
+                        { "blockName": "core/list-item", "innerHTML": "{{t1_f2}}" },
+                        { "blockName": "core/list-item", "innerHTML": "{{t1_f3}}" },
+                        { "blockName": "core/list-item", "innerHTML": "{{t1_f4}}" },
+                        { "blockName": "core/list-item", "innerHTML": "{{t1_f5}}" }
+                      ]
+                    },
+                    {
+                      "blockName": "core/buttons",
+                      "innerBlocks": [
+                        {
+                          "blockName": "core/button",
+                          "attrs": {
+                            "width": 100,
+                            "style": {
+                              "color": { "background": "transparent", "text": "{{accent_color}}" },
+                              "typography": { "fontSize": "15px", "fontWeight": "600" },
+                              "border": { "radius": "100px", "width": "2px", "color": "{{accent_color}}" },
+                              "spacing": { "padding": { "top": "16px", "bottom": "16px" } }
+                            }
+                          },
+                          "innerHTML": "{{t1_cta}}"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/group",
+                  "attrs": {
+                    "style": {
+                      "color": { "background": "{{accent_color}}", "text": "#ffffff" },
+                      "spacing": { "padding": { "top": "44px", "bottom": "44px", "left": "36px", "right": "36px" } },
+                      "border": { "radius": "16px" }
+                    }
+                  },
+                  "innerBlocks": [
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "12px", "fontWeight": "700", "textTransform": "uppercase", "letterSpacing": "0.1em" },
+                          "color": { "text": "rgba(255,255,255,0.8)" },
+                          "spacing": { "margin": { "bottom": "12px" } },
+                          "color": { "background": "rgba(255,255,255,0.15)", "text": "rgba(255,255,255,0.9)" },
+                          "border": { "radius": "100px" },
+                          "spacing": { "padding": { "top": "4px", "bottom": "4px", "left": "14px", "right": "14px" }, "margin": { "bottom": "12px" } }
+                        }
+                      },
+                      "innerHTML": "{{t2_badge}}"
+                    },
+                    {
+                      "blockName": "core/heading",
+                      "attrs": {
+                        "level": 3,
+                        "style": {
+                          "typography": { "fontSize": "22px", "fontWeight": "600" },
+                          "color": { "text": "#ffffff" },
+                          "spacing": { "margin": { "bottom": "8px" } }
+                        }
+                      },
+                      "innerHTML": "{{t2_name}}"
+                    },
+                    {
+                      "blockName": "core/paragraph",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "15px" },
+                          "color": { "text": "rgba(255,255,255,0.8)" },
+                          "spacing": { "margin": { "bottom": "28px" } }
+                        }
+                      },
+                      "innerHTML": "{{t2_desc}}"
+                    },
+                    {
+                      "blockName": "core/heading",
+                      "attrs": {
+                        "level": 4,
+                        "style": {
+                          "typography": { "fontSize": "48px", "fontWeight": "800" },
+                          "color": { "text": "#ffffff" },
+                          "spacing": { "margin": { "bottom": "32px" } }
+                        }
+                      },
+                      "innerHTML": "{{t2_price}}<span style=\"font-size:18px;font-weight:400;opacity:0.7\">{{t2_period}}</span>"
+                    },
+                    {
+                      "blockName": "core/list",
+                      "attrs": {
+                        "style": {
+                          "typography": { "fontSize": "15px", "lineHeight": "2.2" },
+                          "color": { "text": "rgba(255,255,255,0.9)" },
+                          "spacing": { "margin": { "bottom": "36px" } }
+                        }
+                      },
+                      "innerBlocks": [
+                        { "blockName": "core/list-item", "innerHTML": "{{t2_f1}}" },
+                        { "blockName": "core/list-item", "innerHTML": "{{t2_f2}}" },
+                        { "blockName": "core/list-item", "innerHTML": "{{t2_f3}}" },
+                        { "blockName": "core/list-item", "innerHTML": "{{t2_f4}}" },
+                        { "blockName": "core/list-item", "innerHTML": "{{t2_f5}}" },
+                        { "blockName": "core/list-item", "innerHTML": "{{t2_f6}}" },
+                        { "blockName": "core/list-item", "innerHTML": "{{t2_f7}}" }
+                      ]
+                    },
+                    {
+                      "blockName": "core/buttons",
+                      "innerBlocks": [
+                        {
+                          "blockName": "core/button",
+                          "attrs": {
+                            "width": 100,
+                            "style": {
+                              "color": { "background": "#ffffff", "text": "{{accent_color}}" },
+                              "typography": { "fontSize": "15px", "fontWeight": "700" },
+                              "border": { "radius": "100px" },
+                              "spacing": { "padding": { "top": "16px", "bottom": "16px" } }
+                            }
+                          },
+                          "innerHTML": "{{t2_cta}}"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

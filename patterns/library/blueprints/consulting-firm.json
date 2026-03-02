@@ -1,0 +1,6 @@
+{
+  "id": "consulting-firm",
+  "name": "Consulting Firm",
+  "description": "Consulting firm page: dark hero + service cards + feature comparison + testimonial cards + featured blog post + banner CTA + multi-column footer",
+  "sections": ["hero-dark", "services-cards", "comparison-features", "testimonials-cards", "blog-featured", "cta-banner", "footer-columns"]
+}

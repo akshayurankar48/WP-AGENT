@@ -1,0 +1,155 @@
+{
+  "id": "gallery-grid",
+  "name": "Image Grid Gallery",
+  "category": "gallery",
+  "description": "Three-column image grid with heading, subtitle, and six images across two rows with rounded corners on a light background",
+  "variables": {
+    "heading": "Our Work",
+    "subheading": "A curated collection of our most impactful projects from the past year.",
+    "image_1": "https://placehold.co/600x400/e5e7eb/6b7280?text=Project+1",
+    "image_2": "https://placehold.co/600x400/e5e7eb/6b7280?text=Project+2",
+    "image_3": "https://placehold.co/600x400/e5e7eb/6b7280?text=Project+3",
+    "image_4": "https://placehold.co/600x400/e5e7eb/6b7280?text=Project+4",
+    "image_5": "https://placehold.co/600x400/e5e7eb/6b7280?text=Project+5",
+    "image_6": "https://placehold.co/600x400/e5e7eb/6b7280?text=Project+6",
+    "bg_color": "{{bg_light}}",
+    "text_color": "{{text_dark}}",
+    "muted_color": "{{text_muted}}"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "{{bg_color}}" },
+          "spacing": { "padding": { "top": "100px", "bottom": "100px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/heading",
+          "attrs": {
+            "textAlign": "center",
+            "level": 2,
+            "style": {
+              "typography": { "fontSize": "42px", "fontWeight": "700", "letterSpacing": "-0.02em" },
+              "color": { "text": "{{text_color}}" },
+              "spacing": { "margin": { "bottom": "16px" } }
+            }
+          },
+          "innerHTML": "{{heading}}"
+        },
+        {
+          "blockName": "core/paragraph",
+          "attrs": {
+            "align": "center",
+            "style": {
+              "typography": { "fontSize": "18px" },
+              "color": { "text": "{{muted_color}}" },
+              "spacing": { "margin": { "bottom": "64px" } }
+            }
+          },
+          "innerHTML": "{{subheading}}"
+        },
+        {
+          "blockName": "core/columns",
+          "attrs": { "style": { "spacing": { "blockGap": { "left": "24px" } } } },
+          "innerBlocks": [
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/image",
+                  "attrs": {
+                    "url": "{{image_1}}",
+                    "alt": "Project showcase 1",
+                    "style": { "border": { "radius": "12px" } },
+                    "sizeSlug": "full"
+                  }
+                }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/image",
+                  "attrs": {
+                    "url": "{{image_2}}",
+                    "alt": "Project showcase 2",
+                    "style": { "border": { "radius": "12px" } },
+                    "sizeSlug": "full"
+                  }
+                }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/image",
+                  "attrs": {
+                    "url": "{{image_3}}",
+                    "alt": "Project showcase 3",
+                    "style": { "border": { "radius": "12px" } },
+                    "sizeSlug": "full"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "blockName": "core/columns",
+          "attrs": { "style": { "spacing": { "blockGap": { "left": "24px" }, "margin": { "top": "24px" } } } },
+          "innerBlocks": [
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/image",
+                  "attrs": {
+                    "url": "{{image_4}}",
+                    "alt": "Project showcase 4",
+                    "style": { "border": { "radius": "12px" } },
+                    "sizeSlug": "full"
+                  }
+                }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/image",
+                  "attrs": {
+                    "url": "{{image_5}}",
+                    "alt": "Project showcase 5",
+                    "style": { "border": { "radius": "12px" } },
+                    "sizeSlug": "full"
+                  }
+                }
+              ]
+            },
+            {
+              "blockName": "core/column",
+              "innerBlocks": [
+                {
+                  "blockName": "core/image",
+                  "attrs": {
+                    "url": "{{image_6}}",
+                    "alt": "Project showcase 6",
+                    "style": { "border": { "radius": "12px" } },
+                    "sizeSlug": "full"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

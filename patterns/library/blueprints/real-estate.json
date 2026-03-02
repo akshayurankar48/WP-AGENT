@@ -1,0 +1,6 @@
+{
+  "id": "real-estate",
+  "name": "Real Estate",
+  "description": "Real estate page: cover hero + 3-column features + masonry gallery + stat counters + testimonial cards + banner CTA + multi-column footer",
+  "sections": ["hero-cover", "features-3col", "gallery-masonry", "stats-counters", "testimonials-cards", "cta-banner", "footer-columns"]
+}

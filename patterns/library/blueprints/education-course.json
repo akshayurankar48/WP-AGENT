@@ -1,0 +1,6 @@
+{
+  "id": "education-course",
+  "name": "Education Course",
+  "description": "Online course page: gradient hero + icon features + toggle pricing + quote testimonial + FAQ accordion + gradient CTA + multi-column footer",
+  "sections": ["hero-gradient", "features-icons", "pricing-toggle", "testimonials-quote", "faq-accordion", "cta-gradient", "footer-columns"]
+}

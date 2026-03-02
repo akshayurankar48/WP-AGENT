@@ -1,0 +1,72 @@
+{
+  "id": "banner-ribbon",
+  "name": "Ribbon Banner",
+  "category": "banner",
+  "description": "Centered decorative ribbon banner with accent background, heading, and subtitle",
+  "variables": {
+    "heading": "Trusted by 10,000+ Teams Worldwide",
+    "subtitle": "Join the community of forward-thinking companies building the future.",
+    "bg_color": "{{accent}}",
+    "text_color": "#ffffff",
+    "muted_color": "rgba(255,255,255,0.8)"
+  },
+  "blocks": [
+    {
+      "blockName": "core/group",
+      "attrs": {
+        "align": "full",
+        "style": {
+          "color": { "background": "{{bg_color}}" },
+          "spacing": { "padding": { "top": "48px", "bottom": "48px", "left": "40px", "right": "40px" } }
+        },
+        "layout": { "type": "constrained" }
+      },
+      "innerBlocks": [
+        {
+          "blockName": "core/separator",
+          "attrs": {
+            "style": {
+              "color": { "background": "rgba(255,255,255,0.2)" },
+              "spacing": { "margin": { "bottom": "28px" } }
+            }
+          },
+          "innerHTML": "<hr class=\"wp-block-separator\"/>"
+        },
+        {
+          "blockName": "core/heading",
+          "attrs": {
+            "textAlign": "center",
+            "level": 3,
+            "style": {
+              "typography": { "fontSize": "24px", "fontWeight": "700", "letterSpacing": "-0.01em" },
+              "color": { "text": "{{text_color}}" },
+              "spacing": { "margin": { "bottom": "12px" } }
+            }
+          },
+          "innerHTML": "{{heading}}"
+        },
+        {
+          "blockName": "core/paragraph",
+          "attrs": {
+            "align": "center",
+            "style": {
+              "typography": { "fontSize": "16px", "lineHeight": "1.5" },
+              "color": { "text": "{{muted_color}}" },
+              "spacing": { "margin": { "bottom": "28px" } }
+            }
+          },
+          "innerHTML": "{{subtitle}}"
+        },
+        {
+          "blockName": "core/separator",
+          "attrs": {
+            "style": {
+              "color": { "background": "rgba(255,255,255,0.2)" }
+            }
+          },
+          "innerHTML": "<hr class=\"wp-block-separator\"/>"
+        }
+      ]
+    }
+  ]
+}
