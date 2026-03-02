@@ -506,6 +506,7 @@ class Prompt_Builder {
 			. "- Always apply consistent spacing — never leave blocks without padding/margin styling.\n\n"
 
 			. "COLOR PALETTES (choose ONE based on site type, or derive from reference URL):\n"
+			. "- Modern Dark (DEFAULT for SaaS/tech): primary #6366f1, accent #06b6d4, dark #0c0c14, surface #141420, light #f8fafc\n"
 			. "- SaaS/Tech: primary #6366f1, accent #06b6d4, dark #0f172a, light #f8fafc\n"
 			. "- Corporate: primary #2563eb, accent #f59e0b, dark #111827, light #ffffff\n"
 			. "- Creative: primary #ec4899, accent #8b5cf6, dark #1e1b4b, light #fdf4ff\n"
@@ -517,10 +518,11 @@ class Prompt_Builder {
 			. "When theme colors are available, prefer those over presets.\n\n"
 
 			. "SECTION COMPOSITION (pair sections for maximum impact):\n"
+			. "- Modern SaaS (use blueprint modern-saas): hero-aurora > logo-bar-glass > features-bento > stats-gradient > testimonials-modern > pricing-glass > faq-modern > cta-aurora\n"
+			. "- Agency Portfolio (use blueprint agency-portfolio): hero-glass > features-glass > content-glass-cards > testimonials-modern > process-modern > cta-aurora\n"
+			. "- Product Launch (use blueprint product-launch): hero-aurora > logo-bar-glass > features-glass > stats-gradient > pricing-glass > faq-modern > cta-aurora\n"
 			. "- Landing page: hero > features > social-proof > benefits > pricing > FAQ > CTA\n"
-			. "- SaaS: hero > logo-bar > features > stats > testimonials > pricing > FAQ > CTA\n"
 			. "- About/Story: hero > mission > team/media-text > timeline > values > CTA\n"
-			. "- Portfolio: hero > project-grid > process > testimonials > CTA\n"
 			. "RULES: Never put two similar sections back-to-back (e.g. two feature grids). "
 			. "Alternate background colors: dark > light > dark > light. Every page ends with a strong CTA section.\n\n"
 
@@ -566,13 +568,14 @@ class Prompt_Builder {
 			. "[{ blockName: \"core/heading\", innerHTML: \"Title\" }, { blockName: \"core/paragraph\", innerHTML: \"Text.\" }]\n"
 			. "This produces ugly unstyled content. ALWAYS wrap content in a styled core/group with background color, padding, and typography.\n"
 			. "</example>\n\n"
-			. "<example name=\"Styled section pattern\">\n"
-			. "Every section follows this structure: core/group (align:\"full\", background, padding 80-120px vertical) > constrained layout > heading + content + optional CTA.\n"
-			. "Dark sections: background #0a0a0a-#1a1a2e, text #ffffff, muted text #9ca3af.\n"
-			. "Light sections: background #f8fafc-#ffffff, text #111827, muted text #6b7280.\n"
-			. "Buttons: pill shape (radius 100px), generous padding (18px 48px), uppercase 600 weight.\n"
-			. "Use core/cover for image heroes, core/media-text for side-by-side, core/details for FAQ, core/columns for grids.\n"
-			. "PREFER patterns via get_pattern for standard sections — only build raw blocks for unique/custom layouts.\n"
+			. "<example name=\"Modern glassmorphic section\">\n"
+			. "Premium dark section with glass card, gradient text, and glow button:\n"
+			. "core/group (align:\"full\", className:\"wpa-aurora wpa-noise\", bg:#0c0c14, padding 120px) > constrained layout >\n"
+			. "  core/heading (className:\"wpa-gradient-text\", 72px, weight 800, -0.04em tracking) +\n"
+			. "  core/paragraph (18px, color #a1a1aa, 1.6 line-height) +\n"
+			. "  core/buttons > core/button (className:\"wpa-glow\", bg:#6366f1, radius 100px, padding 18px 48px)\n"
+			. "Feature cards: core/columns (className:\"wpa-stagger-children\") > core/column > core/group (className:\"wpa-glass wpa-lift\", padding 32px)\n"
+			. "PREFER patterns: hero-aurora, features-glass, pricing-glass, cta-aurora, etc. for standard sections.\n"
 			. "</example>\n"
 			. "</examples>\n\n";
 	}
@@ -688,8 +691,8 @@ class Prompt_Builder {
 	 */
 	private function get_pattern_library_section() {
 		return "<pattern_library>\n"
-			. "You have access to a curated library of 30+ professionally designed patterns across 15 categories, "
-			. "plus 4 full-page blueprints (landing-page, saas-landing, startup-page, about-page).\n\n"
+			. "You have access to a curated library of 42+ professionally designed patterns across 15 categories, "
+			. "plus 7 full-page blueprints (landing-page, saas-landing, startup-page, about-page, modern-saas, agency-portfolio, product-launch).\n\n"
 			. "PATTERN-FIRST RULE: For standard page sections, ALWAYS use get_pattern instead of building raw blocks. "
 			. "Patterns are pre-designed, responsive, and visually polished. Use them for:\n"
 			. "- Heroes, features, testimonials, pricing, CTAs, stats, FAQ, footers, headers, content sections.\n\n"
@@ -772,30 +775,58 @@ class Prompt_Builder {
 	 * @return string
 	 */
 	private function get_animations_section() {
-		return "<animations>\n"
-			. "You have scroll-triggered animations available. Apply them via the className attribute on any block. "
-			. "The animations fire once as the element scrolls into view.\n\n"
-			. "ANIMATION CLASSES (set in attrs.className):\n"
+		return "<animations_and_effects>\n"
+			. "You have a powerful visual effects library. Apply effects via the className attribute on any block.\n\n"
+
+			. "SCROLL ANIMATIONS (fire once on scroll into view):\n"
 			. "- wpa-fade-up: Fades in while sliding up (best for most sections).\n"
 			. "- wpa-fade-down: Fades in while sliding down (headers, top elements).\n"
 			. "- wpa-slide-left: Slides in from the left (left-side content, images).\n"
 			. "- wpa-slide-right: Slides in from the right (right-side content, images).\n"
 			. "- wpa-zoom-in: Scales up from 92% (cards, images, CTA blocks).\n"
 			. "- wpa-stagger-children: Animates child elements one by one (feature grids, card rows).\n\n"
-			. "MODIFIERS (combine with an animation class):\n"
+
+			. "VISUAL EFFECTS (always active, no scroll trigger):\n"
+			. "- wpa-glass: Glassmorphic card — frosted glass with blur, subtle border. Use on dark backgrounds for premium cards.\n"
+			. "- wpa-glass-light: Light glassmorphic — white frosted glass for light backgrounds.\n"
+			. "- wpa-glow: Indigo glow on hover. Apply to primary CTA buttons for attention.\n"
+			. "- wpa-glow-accent: Glow using the element's current text color.\n"
+			. "- wpa-border-glow: Persistent glowing border — great for highlighted pricing tiers or featured cards.\n"
+			. "- wpa-gradient-text: Gradient text (indigo to violet). Apply to hero H1 headings for premium feel.\n"
+			. "- wpa-gradient-border: Gradient border (indigo to cyan). Use on numbered circles, featured elements.\n\n"
+
+			. "BACKGROUND EFFECTS (apply to section-level groups):\n"
+			. "- wpa-aurora: Animated aurora gradient (purple/cyan/violet blobs). Perfect for hero and CTA sections.\n"
+			. "- wpa-noise: Grain texture overlay (5% opacity). Adds depth to dark sections. Requires position:relative on parent.\n"
+			. "- wpa-blur-bg: Decorative blur orb. Use as absolute-positioned child element for ambient glow.\n\n"
+
+			. "INTERACTIVE EFFECTS (hover/motion):\n"
+			. "- wpa-lift: Lifts element 8px on hover with enhanced shadow. Use on interactive cards (pricing, features).\n"
+			. "- wpa-tilt: 3D tilt on hover. Use on standalone cards or images for depth.\n"
+			. "- wpa-float: Gentle floating animation (continuous). Use on decorative elements, icons.\n"
+			. "- wpa-shine: Shimmer sweep across element. Use on featured pricing or highlight cards.\n\n"
+
+			. "LAYOUT:\n"
+			. "- wpa-bento-grid: CSS Grid bento layout (8/4/6/6/4/8 column spans). Use for bento feature grids.\n\n"
+
+			. "MODIFIERS (combine with any class):\n"
 			. "- Delay: wpa-delay-100, wpa-delay-200, wpa-delay-300, wpa-delay-400, wpa-delay-500\n"
 			. "- Duration: wpa-duration-300 (fast), wpa-duration-500, wpa-duration-700, wpa-duration-1000 (slow)\n\n"
-			. "USAGE RULES:\n"
-			. "- Apply animations to section-level groups, NOT individual paragraphs or headings inside a section.\n"
-			. "- Use wpa-stagger-children on core/columns to animate each column sequentially.\n"
-			. "- Use wpa-fade-up for most sections — it's the safest default.\n"
-			. "- Use wpa-slide-left / wpa-slide-right on core/media-text for directional entrance.\n"
-			. "- Combine: className: \"wpa-fade-up wpa-delay-200\" for delayed entrance.\n"
-			. "- Do NOT animate hero sections (they're above the fold and visible immediately).\n"
-			. "- Apply to 3-5 sections max per page. Overuse feels chaotic.\n\n"
-			. "Example: {\"blockName\":\"core/group\",\"attrs\":{\"className\":\"wpa-fade-up\",\"align\":\"full\",...},\"innerBlocks\":[...]}\n"
-			. "Example stagger: {\"blockName\":\"core/columns\",\"attrs\":{\"className\":\"wpa-stagger-children\",...},\"innerBlocks\":[...]}\n"
-			. "</animations>\n\n";
+
+			. "MODERN DESIGN RULES (2026-GRADE):\n"
+			. "- For SaaS/tech pages: DEFAULT to dark backgrounds (#0c0c14) with glassmorphic cards and aurora effects.\n"
+			. "- Apply wpa-gradient-text to hero H1 headings for premium feel.\n"
+			. "- Use wpa-glass cards instead of plain colored cards when building on dark backgrounds.\n"
+			. "- Apply wpa-glow to the primary CTA button and wpa-border-glow to featured pricing tiers.\n"
+			. "- Apply wpa-lift to interactive cards (pricing, features) for hover feedback.\n"
+			. "- Use wpa-aurora + wpa-noise on hero and CTA sections for depth.\n"
+			. "- Combine effects: className: \"wpa-glass wpa-lift wpa-border-glow\" for a premium featured card.\n"
+			. "- Do NOT apply scroll animations to hero sections (above the fold).\n"
+			. "- Apply scroll animations to 3-5 below-fold sections. Use wpa-stagger-children on card grids.\n\n"
+
+			. "Example glass card: {\"blockName\":\"core/group\",\"attrs\":{\"className\":\"wpa-glass wpa-lift\",\"style\":{\"spacing\":{\"padding\":{\"top\":\"32px\",\"bottom\":\"32px\",\"left\":\"28px\",\"right\":\"28px\"}}}},\"innerBlocks\":[...]}\n"
+			. "Example aurora hero: {\"blockName\":\"core/group\",\"attrs\":{\"className\":\"wpa-aurora wpa-noise\",\"align\":\"full\",\"style\":{\"color\":{\"background\":\"#0c0c14\"}}},\"innerBlocks\":[...]}\n"
+			. "</animations_and_effects>\n\n";
 	}
 
 	/**
