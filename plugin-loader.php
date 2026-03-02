@@ -199,6 +199,8 @@ class Plugin_Loader {
 		$registry->register( new Actions\Manage_Seo() );
 
 		// Site appearance actions.
+		$registry->register( new Actions\Install_Theme() );
+		$registry->register( new Actions\Search_Theme() );
 		$registry->register( new Actions\Manage_Theme() );
 		$registry->register( new Actions\Edit_Template_Parts() );
 

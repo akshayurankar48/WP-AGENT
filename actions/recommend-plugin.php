@@ -46,8 +46,9 @@ class Recommend_Plugin implements Action_Interface {
 	 */
 	public function get_description(): string {
 		return 'Search and recommend WordPress plugins from the official repository. Operations: "search" finds plugins '
-			. 'by keyword, "recommend" suggests best-fit plugins for a use case. Returns name, rating, active installs, '
-			. 'last updated date, tested WP version, and description.';
+			. 'by keyword, "recommend" suggests best-fit plugins for a use case. Returns name, slug, rating, active installs, '
+			. 'last updated date, tested WP version, and description. Use this to find the correct slug before calling '
+			. 'install_plugin, or install_plugin can search automatically.';
 	}
 
 	/**
@@ -262,8 +263,10 @@ class Recommend_Plugin implements Action_Interface {
 
 		// Sort by a score combining rating and active installs.
 		usort( $raw_plugins, function ( $a, $b ) {
-			$score_a = ( $a->rating ?? 0 ) * 0.4 + min( ( $a->active_installs ?? 0 ) / 100000, 100 ) * 0.6;
-			$score_b = ( $b->rating ?? 0 ) * 0.4 + min( ( $b->active_installs ?? 0 ) / 100000, 100 ) * 0.6;
+			$a = (array) $a;
+			$b = (array) $b;
+			$score_a = ( $a['rating'] ?? 0 ) * 0.4 + min( ( $a['active_installs'] ?? 0 ) / 100000, 100 ) * 0.6;
+			$score_b = ( $b['rating'] ?? 0 ) * 0.4 + min( ( $b['active_installs'] ?? 0 ) / 100000, 100 ) * 0.6;
 			return $score_b <=> $score_a;
 		} );
 
@@ -298,15 +301,18 @@ class Recommend_Plugin implements Action_Interface {
 		$plugins = [];
 
 		foreach ( $raw_plugins as $plugin ) {
+			// Results may be arrays or objects depending on WP version.
+			$p = (array) $plugin;
+
 			$plugins[] = [
-				'name'              => sanitize_text_field( $plugin->name ?? '' ),
-				'slug'              => sanitize_key( $plugin->slug ?? '' ),
-				'rating'            => round( ( $plugin->rating ?? 0 ) / 20, 1 ), // Convert to 5-star scale.
-				'num_ratings'       => (int) ( $plugin->num_ratings ?? 0 ),
-				'active_installs'   => (int) ( $plugin->active_installs ?? 0 ),
-				'last_updated'      => sanitize_text_field( $plugin->last_updated ?? '' ),
-				'tested'            => sanitize_text_field( $plugin->tested ?? '' ),
-				'short_description' => wp_trim_words( sanitize_text_field( $plugin->short_description ?? '' ), 30 ),
+				'name'              => sanitize_text_field( $p['name'] ?? '' ),
+				'slug'              => sanitize_key( $p['slug'] ?? '' ),
+				'rating'            => round( ( $p['rating'] ?? 0 ) / 20, 1 ), // Convert to 5-star scale.
+				'num_ratings'       => (int) ( $p['num_ratings'] ?? 0 ),
+				'active_installs'   => (int) ( $p['active_installs'] ?? 0 ),
+				'last_updated'      => sanitize_text_field( $p['last_updated'] ?? '' ),
+				'tested'            => sanitize_text_field( $p['tested'] ?? '' ),
+				'short_description' => wp_trim_words( sanitize_text_field( $p['short_description'] ?? '' ), 30 ),
 			];
 		}
 

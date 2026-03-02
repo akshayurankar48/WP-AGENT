@@ -37,9 +37,10 @@ class Manage_Theme implements Action_Interface {
 	 * @return string
 	 */
 	public function get_description(): string {
-		return 'Manage WordPress themes. Operations: "list" shows all installed themes, '
+		return 'Manage installed WordPress themes. Operations: "list" shows all installed themes, '
 			. '"get_active" returns details about the current theme, '
-			. '"switch" activates a different theme (requires confirmation).';
+			. '"switch" activates a different installed theme. '
+			. 'To install a new theme from WordPress.org, use install_theme first.';
 	}
 
 	/**
