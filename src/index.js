@@ -6,6 +6,8 @@ import History from './pages/History';
 import Schedules from './pages/Schedules';
 import Capabilities from './pages/Capabilities';
 import Help from './pages/Help';
+import AppChatDrawer from './components/AppChatDrawer';
+import './store';
 import './style.css';
 
 const pages = [
@@ -25,4 +27,10 @@ domReady( () => {
 			break;
 		}
 	}
+
+	// Mount the JARVIS chat drawer on all WP Agent admin pages.
+	const drawerRoot = document.createElement( 'div' );
+	drawerRoot.id = 'wp-agent-app-drawer';
+	document.body.appendChild( drawerRoot );
+	createRoot( drawerRoot ).render( <AppChatDrawer /> );
 } );

@@ -1,8 +1,8 @@
 /**
  * Single chat message bubble.
  *
- * Supports lightweight markdown: **bold**, `code`, ## headings,
- * bullet lists, numbered lists, and [links](url).
+ * Supports lightweight markdown: **bold**, `code`, ```code blocks```,
+ * ## headings, bullet lists, numbered lists, [links](url), and --- rules.
  *
  * @package
  * @since 1.0.0
@@ -67,15 +67,20 @@ const bubbleBase = css`
 	line-height: 1.55;
 	letter-spacing: -0.005em;
 	word-break: break-word;
-	white-space: pre-wrap;
+	white-space: normal;
 
 	strong {
 		font-weight: 600;
+	}
+
+	ul, ol {
+		white-space: normal;
 	}
 `;
 
 const bubbleUser = css`
 	${ bubbleBase };
+	white-space: pre-wrap;
 	background: ${ colors.userBubbleGradient };
 	color: ${ colors.textInverse };
 	border-radius: ${ radii.lg } ${ radii.sm } ${ radii.lg } ${ radii.lg };
@@ -173,6 +178,26 @@ const markdownLink = css`
 	}
 `;
 
+const markdownCodeBlock = css`
+	display: block;
+	margin: 6px 0;
+	padding: ${ spacing.sm } ${ spacing.md };
+	font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', monospace;
+	font-size: 0.85em;
+	line-height: 1.5;
+	white-space: pre-wrap;
+	background: ${ colors.bgSubtle };
+	border: 1px solid ${ colors.borderLight };
+	border-radius: ${ radii.sm };
+	overflow-x: auto;
+`;
+
+const markdownHr = css`
+	border: none;
+	border-top: 1px solid ${ colors.borderLight };
+	margin: 8px 0;
+`;
+
 /* ── Helpers ────────────────────────────────────────────────────── */
 
 /**
@@ -235,9 +260,11 @@ const parseInline = ( text, keyPrefix = '' ) => {
  *
  * Supports:
  * - **bold**, `inline code`, [links](url)
+ * - ```code blocks```
  * - ## and ### headings
  * - Bullet lists (- item or * item)
  * - Numbered lists (1. item)
+ * - Horizontal rules (--- or ***)
  *
  * @param {string} text
  */
@@ -252,6 +279,32 @@ const parseMarkdown = ( text ) => {
 
 	while ( i < lines.length ) {
 		const line = lines[ i ];
+
+		// Fenced code block (``` ... ```).
+		if ( /^```/.test( line ) ) {
+			const codeLines = [];
+			i++; // skip opening fence
+			while ( i < lines.length && ! /^```/.test( lines[ i ] ) ) {
+				codeLines.push( lines[ i ] );
+				i++;
+			}
+			if ( i < lines.length ) {
+				i++; // skip closing fence
+			}
+			elements.push(
+				<pre key={ `code${ i }` } className={ markdownCodeBlock }>
+					<code>{ codeLines.join( '\n' ) }</code>
+				</pre>
+			);
+			continue;
+		}
+
+		// Horizontal rule (--- or ***).
+		if ( /^(-{3,}|\*{3,})$/.test( line.trim() ) ) {
+			elements.push( <hr key={ `hr${ i }` } className={ markdownHr } /> );
+			i++;
+			continue;
+		}
 
 		// Heading (## or ###).
 		const headingMatch = line.match( /^(#{2,3})\s+(.+)$/ );
@@ -304,9 +357,16 @@ const parseMarkdown = ( text ) => {
 			continue;
 		}
 
+		// Empty line — paragraph break.
+		if ( line.trim() === '' ) {
+			elements.push( <br key={ `br${ i }` } /> );
+			i++;
+			continue;
+		}
+
 		// Regular line with inline formatting.
 		elements.push(
-			<span key={ i }>
+			<span key={ i } style={ { display: 'inline' } }>
 				{ parseInline( line, `l${ i }-` ) }
 				{ i < lines.length - 1 ? '\n' : '' }
 			</span>

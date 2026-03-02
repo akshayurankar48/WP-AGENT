@@ -1,24 +1,18 @@
 /**
- * Chat bridge hook.
+ * Admin chat hook — editor-free version of useChat.
  *
- * Connects React components to the wp-agent/chat store
- * and syncs the current editor post ID.
+ * Used by the global admin drawer so it never imports
+ * @wordpress/editor or @wordpress/block-editor.
  *
  * @package
  * @since 1.0.0
  */
 
 import { useSelect, useDispatch } from '@wordpress/data';
-import { useEffect, useCallback } from '@wordpress/element';
-import { store as editorStore } from '@wordpress/editor';
+import { useCallback } from '@wordpress/element';
 import { STORE_NAME } from '../store/constants';
 
-/**
- * Hook that provides chat state and actions to components.
- *
- * @return {Object} Chat state and dispatch functions.
- */
-export function useChat() {
+export function useChatAdmin() {
 	const {
 		conversationId,
 		messages,
@@ -44,37 +38,12 @@ export function useChat() {
 		};
 	}, [] );
 
-	const postId = useSelect( ( select ) => {
-		try {
-			return select( editorStore ).getCurrentPostId();
-		} catch {
-			return null;
-		}
-	}, [] );
-
 	const {
 		sendMessage,
 		stopStreaming,
 		startNewConversation,
-		loadConversation,
-		restoreConversation,
-		setPostId,
 		setError,
 	} = useDispatch( STORE_NAME );
-
-	// Sync editor post ID into the store.
-	useEffect( () => {
-		if ( postId ) {
-			setPostId( postId );
-		}
-	}, [ postId, setPostId ] );
-
-	// Auto-restore the most recent conversation for this post on mount.
-	useEffect( () => {
-		if ( postId && ! conversationId && ! isLoading && ! isStreaming ) {
-			restoreConversation( postId );
-		}
-	}, [ postId ] ); // eslint-disable-line react-hooks/exhaustive-deps -- Only on mount/postId change.
 
 	return {
 		conversationId,
@@ -86,11 +55,9 @@ export function useChat() {
 		hasApiKey,
 		actionProgress,
 		completedSteps,
-		postId,
 		sendMessage,
 		stopStreaming,
 		startNewConversation,
-		loadConversation,
 		clearError: useCallback( () => setError( null ), [ setError ] ),
 	};
 }

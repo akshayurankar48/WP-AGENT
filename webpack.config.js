@@ -6,6 +6,7 @@ module.exports = {
 	entry: {
 		main: path.resolve( __dirname, 'src/index.js' ),
 		editor: path.resolve( __dirname, 'src/editor.js' ),
+		drawer: path.resolve( __dirname, 'src/drawer.js' ),
 	},
 	output: {
 		...defaultConfig.output,

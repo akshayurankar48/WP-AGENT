@@ -44,6 +44,26 @@ class Orchestrator {
 	const MAX_TOOL_ITERATIONS = 25;
 
 	/**
+	 * Maximum retries for transient API errors within a single iteration.
+	 *
+	 * @var int
+	 */
+	const MAX_RETRIES = 2;
+
+	/**
+	 * Transient error codes that are safe to retry.
+	 *
+	 * @var string[]
+	 */
+	const RETRYABLE_ERRORS = [
+		'http_request_failed',
+		'api_timeout',
+		'rate_limited',
+		'server_error',
+		'connection_reset',
+	];
+
+	/**
 	 * Maximum number of history messages to load.
 	 *
 	 * @var int
@@ -159,19 +179,14 @@ class Orchestrator {
 			// and multi-iteration tool loops would exceed PHP's max_execution_time.
 			set_time_limit( 120 );
 
-			$response = $client->chat( $messages, $model, $tools, $temperature, $max_tokens );
-
-			// Fallback on API error.
-			if ( is_wp_error( $response ) && 0 === $iteration ) {
-				$fallback_model = Model_Router::get_instance()->get_fallback( $model );
-				if ( ! empty( $fallback_model ) ) {
-					$response = $client->chat( $messages, $fallback_model, $tools, $temperature, $max_tokens );
-					if ( ! is_wp_error( $response ) ) {
-						$model      = $fallback_model;
-						$used_model = $fallback_model;
-					}
-				}
-			}
+			$response = $this->retry_api_call(
+				function ( $m ) use ( $client, $messages, $tools, $temperature, $max_tokens ) {
+					return $client->chat( $messages, $m, $tools, $temperature, $max_tokens );
+				},
+				$iteration,
+				$model,
+				$used_model
+			);
 
 			if ( is_wp_error( $response ) ) {
 				return $response;
@@ -372,21 +387,23 @@ class Orchestrator {
 				}
 			};
 
-			$result = $client->stream( $messages, $model, $tools, $stream_callback, $temperature, $max_tokens );
-
-			// Fallback on API error (first iteration only).
-			if ( is_wp_error( $result ) && 0 === $iteration ) {
-				$fallback_model = Model_Router::get_instance()->get_fallback( $model );
-				if ( ! empty( $fallback_model ) ) {
-					$result = $client->stream( $messages, $fallback_model, $tools, $stream_callback, $temperature, $max_tokens );
-					if ( ! is_wp_error( $result ) ) {
-						$model      = $fallback_model;
-						$used_model = $fallback_model;
-					}
-				}
-			}
+			$result = $this->retry_api_call(
+				function ( $m ) use ( $client, $messages, $tools, $stream_callback, $temperature, $max_tokens ) {
+					return $client->stream( $messages, $m, $tools, $stream_callback, $temperature, $max_tokens );
+				},
+				$iteration,
+				$model,
+				$used_model
+			);
 
 			if ( is_wp_error( $result ) ) {
+				// Emit error to client before returning.
+				if ( $callback ) {
+					call_user_func( $callback, [
+						'type'    => 'error',
+						'message' => $result->get_error_message(),
+					] );
+				}
 				return $result;
 			}
 
@@ -568,20 +585,32 @@ class Orchestrator {
 				] );
 			}
 
-			$result = Action_Registry::get_instance()->dispatch( $fn_name, $params );
+			try {
+				$result = Action_Registry::get_instance()->dispatch( $fn_name, $params );
 
-			if ( is_wp_error( $result ) ) {
-				$error_message = $result->get_error_message();
-				$error_code    = $result->get_error_code();
+				if ( is_wp_error( $result ) ) {
+					$error_message = $result->get_error_message();
+					$error_code    = $result->get_error_code();
 
+					$tool_result = [
+						'success'    => false,
+						'message'    => $error_message,
+						'error_code' => $error_code,
+						'recovery'   => $this->get_recovery_hint( $fn_name, $error_code, $error_message ),
+					];
+				} else {
+					$tool_result = $result;
+				}
+			} catch ( \Throwable $e ) {
+				if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+					error_log( sprintf( 'WP Agent: Action "%s" threw exception: %s', $fn_name, $e->getMessage() ) ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
+				}
 				$tool_result = [
 					'success'    => false,
-					'message'    => $error_message,
-					'error_code' => $error_code,
-					'recovery'   => $this->get_recovery_hint( $fn_name, $error_code, $error_message ),
+					'message'    => 'Action encountered an unexpected error: ' . $e->getMessage(),
+					'error_code' => 'action_exception',
+					'recovery'   => $this->get_recovery_hint( $fn_name, 'action_exception', $e->getMessage() ),
 				];
-			} else {
-				$tool_result = $result;
 			}
 
 			// For creation actions, update entity_id on success or clean up on failure.
@@ -983,6 +1012,79 @@ class Orchestrator {
 		}
 
 		return 'Explain the error to the user in simple terms and suggest an alternative approach.';
+	}
+
+	/**
+	 * Check if a WP_Error is a transient error that can be retried.
+	 *
+	 * @since 1.1.0
+	 *
+	 * @param \WP_Error $error The error to check.
+	 * @return bool True if the error is transient.
+	 */
+	private function is_retryable_error( $error ) {
+		$code = $error->get_error_code();
+
+		// Direct match.
+		if ( in_array( $code, self::RETRYABLE_ERRORS, true ) ) {
+			return true;
+		}
+
+		// Check for common transient patterns in the message.
+		$message = strtolower( $error->get_error_message() );
+		$patterns = [ 'timeout', 'rate limit', '429', '502', '503', '504', 'connection' ];
+
+		foreach ( $patterns as $pattern ) {
+			if ( false !== strpos( $message, $pattern ) ) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * Retry an API call with exponential backoff.
+	 *
+	 * @since 1.1.0
+	 *
+	 * @param callable $api_call Function that returns a response or WP_Error.
+	 * @param int      $iteration Current tool-loop iteration (for fallback on first).
+	 * @param string   &$model Current model (may be changed to fallback).
+	 * @param string   &$used_model Tracking variable for used model.
+	 * @return array|\WP_Error API response or error after exhausting retries.
+	 */
+	private function retry_api_call( callable $api_call, $iteration, &$model, &$used_model ) {
+		$response = $api_call( $model );
+
+		// First try: attempt model fallback.
+		if ( is_wp_error( $response ) && 0 === $iteration ) {
+			$fallback_model = Model_Router::get_instance()->get_fallback( $model );
+			if ( ! empty( $fallback_model ) ) {
+				$response = $api_call( $fallback_model );
+				if ( ! is_wp_error( $response ) ) {
+					$model      = $fallback_model;
+					$used_model = $fallback_model;
+					return $response;
+				}
+			}
+		}
+
+		// Retry transient errors with backoff.
+		if ( is_wp_error( $response ) && $this->is_retryable_error( $response ) ) {
+			for ( $retry = 1; $retry <= self::MAX_RETRIES; $retry++ ) {
+				sleep( $retry ); // 1s, 2s backoff.
+				$response = $api_call( $model );
+				if ( ! is_wp_error( $response ) ) {
+					return $response;
+				}
+				if ( ! $this->is_retryable_error( $response ) ) {
+					break; // Non-retryable error, stop.
+				}
+			}
+		}
+
+		return $response;
 	}
 
 	/**

@@ -51,18 +51,18 @@ function ChecklistItem( { done, label, action } ) {
 }
 
 const STAT_STYLES = [
-	{ bg: 'bg-violet-50', text: 'text-violet-600' },
-	{ bg: 'bg-blue-50', text: 'text-blue-600' },
-	{ bg: 'bg-amber-50', text: 'text-amber-600' },
-	{ bg: 'bg-emerald-50', text: 'text-emerald-600' },
-	{ bg: 'bg-rose-50', text: 'text-rose-600' },
-	{ bg: 'bg-cyan-50', text: 'text-cyan-600' },
+	{ bg: 'bg-violet-50', text: 'text-violet-600', border: 'border-l-violet-500' },
+	{ bg: 'bg-blue-50', text: 'text-blue-600', border: 'border-l-blue-500' },
+	{ bg: 'bg-amber-50', text: 'text-amber-600', border: 'border-l-amber-500' },
+	{ bg: 'bg-emerald-50', text: 'text-emerald-600', border: 'border-l-emerald-500' },
+	{ bg: 'bg-rose-50', text: 'text-rose-600', border: 'border-l-rose-500' },
+	{ bg: 'bg-cyan-50', text: 'text-cyan-600', border: 'border-l-cyan-500' },
 ];
 
 function StatCard( { icon: Icon, label, value, variant = 'neutral', colorIndex = 0 } ) {
 	const style = STAT_STYLES[ colorIndex % STAT_STYLES.length ];
 	return (
-		<div className="bg-background-primary border border-solid border-border-subtle rounded-xl p-4 hover:shadow-md hover:border-border-interactive transition-all duration-200 cursor-default">
+		<div className={ `bg-background-primary border border-solid border-border-subtle border-l-4 ${ style.border } rounded-xl p-4 hover:shadow-md hover:border-border-interactive transition-all duration-200 cursor-default` }>
 			<div className="flex items-center gap-3">
 				<div className={ `flex items-center justify-center size-10 rounded-lg ${ style.bg }` }>
 					<Icon className={ `size-5 ${ style.text }` } />
@@ -87,11 +87,18 @@ function StatCard( { icon: Icon, label, value, variant = 'neutral', colorIndex =
 	);
 }
 
+const ACTION_BORDERS = {
+	FileText: 'border-l-indigo-500',
+	Sliders: 'border-l-amber-500',
+	Sparkles: 'border-l-violet-500',
+};
+
 function QuickActionItem( { icon: Icon, label, description, href } ) {
+	const borderColor = ACTION_BORDERS[ Icon.displayName || Icon.name ] || 'border-l-indigo-500';
 	return (
 		<a
 			href={ href }
-			className="group flex items-center gap-3 rounded-xl border border-solid border-border-subtle p-4 no-underline hover:shadow-md hover:border-border-interactive transition-all duration-200"
+			className={ `group flex items-center gap-3 rounded-xl border border-solid border-border-subtle border-l-4 ${ borderColor } p-4 no-underline hover:shadow-md hover:border-border-interactive transition-all duration-200` }
 		>
 			<div className="flex items-center justify-center size-10 rounded-lg bg-background-secondary shrink-0 group-hover:bg-brand-primary-80 transition-colors duration-200">
 				<Icon className="size-4.5 text-icon-secondary group-hover:text-brand-800 transition-colors duration-200" />
@@ -123,42 +130,45 @@ export default function Dashboard() {
 	return (
 		<PageLayout>
 			{ /* Welcome Hero */ }
-			<div className="relative overflow-hidden bg-gradient-to-br from-background-primary to-background-secondary border border-solid border-border-subtle rounded-2xl shadow-sm p-8 mb-6">
-				<div className="absolute top-0 right-0 w-64 h-64 bg-brand-primary-80 rounded-full -translate-y-1/2 translate-x-1/3 opacity-30 blur-3xl pointer-events-none" />
+			<div className="relative overflow-hidden bg-gradient-to-br from-indigo-600 via-violet-600 to-purple-700 rounded-2xl shadow-lg p-8 mb-6">
+				<div className="absolute top-0 right-0 w-64 h-64 bg-white/20 rounded-full -translate-y-1/2 translate-x-1/3 opacity-30 blur-3xl pointer-events-none" />
+				<div className="absolute bottom-0 left-0 w-48 h-48 bg-white/10 rounded-full translate-y-1/2 -translate-x-1/4 blur-2xl pointer-events-none" />
 				<div className="relative">
 					<div className="flex items-center gap-2 mb-2">
-						<div className="flex items-center justify-center size-8 rounded-lg bg-brand-primary-80">
-							<Zap className="size-4 text-brand-800" />
+						<div className="flex items-center justify-center size-8 rounded-lg bg-white/20">
+							<Zap className="size-4 text-white" />
 						</div>
-						<Badge label="AI-Powered" variant="neutral" size="xs" />
+						<span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-white/20 text-white">AI-Powered</span>
 					</div>
-					<h1 className="text-2xl font-bold text-text-primary mb-1.5">
-						Welcome to JARVIS
+					<h1 className="text-2xl font-bold text-white mb-1.5">
+						Welcome to <span className="bg-gradient-to-r from-yellow-300 to-orange-300 bg-clip-text text-transparent">JARVIS</span>
 					</h1>
-					<p className="text-sm text-text-secondary mb-5 max-w-lg leading-relaxed">
+					<p className="text-sm text-white/80 mb-5 max-w-lg leading-relaxed">
 						Your autonomous WordPress assistant with { stats ? stats.total_actions : '69+' } actions.
 						Build pages, manage content, configure settings — all from natural language.
 					</p>
-					<Button
-						variant="primary"
-						size="md"
-						icon={ <ExternalLink className="size-4" /> }
-						onClick={ () => {
-							window.location.href = editorUrl;
-						} }
-					>
-						Open Editor
-					</Button>
-					<Button
-						variant="outline"
-						size="md"
-						icon={ <Play className="size-4" /> }
-						onClick={ () => {
-							window.location.href = editorUrl + '?wp-agent-demo=saas-landing';
-						} }
-					>
-						Try a Demo
-					</Button>
+					<div className="flex gap-3">
+						<button
+							type="button"
+							className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white text-indigo-700 font-semibold text-sm shadow-md hover:bg-white/90 transition-colors duration-200 border-none cursor-pointer"
+							onClick={ () => {
+								window.location.href = editorUrl;
+							} }
+						>
+							<ExternalLink className="size-4" />
+							Open Editor
+						</button>
+						<button
+							type="button"
+							className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white/15 text-white font-semibold text-sm hover:bg-white/25 transition-colors duration-200 border border-solid border-white/30 cursor-pointer"
+							onClick={ () => {
+								window.location.href = editorUrl + '?wp-agent-demo=saas-landing';
+							} }
+						>
+							<Play className="size-4" />
+							Try a Demo
+						</button>
+					</div>
 				</div>
 			</div>
 

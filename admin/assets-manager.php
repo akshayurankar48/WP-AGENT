@@ -60,6 +60,7 @@ class Assets_Manager {
 	 */
 	public function __construct() {
 		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_assets' ] );
+		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_drawer_assets' ] );
 		add_action( 'enqueue_block_editor_assets', [ $this, 'enqueue_editor_assets' ] );
 		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_frontend_animations' ] );
 		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_ab_testing' ] );
@@ -119,6 +120,71 @@ class Assets_Manager {
 		wp_add_inline_style(
 			'wp-agent-admin',
 			'.wp-agent-wrap ~ .notice, .wp-agent-wrap ~ .updated, .wp-agent-wrap ~ .error, .wp-agent-wrap .notice, div.notice:not(.wp-agent-notice) { display: none !important; } #wpcontent { padding-left: 0; } #wpbody-content { padding-bottom: 0; }'
+		);
+	}
+
+	/**
+	 * Enqueue drawer assets on all admin pages except WP Agent's own pages
+	 * and the block editor (which has its own PluginSidebar).
+	 *
+	 * @param string $hook_suffix The current admin page hook suffix.
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public function enqueue_drawer_assets( $hook_suffix ) {
+		// Skip on WP Agent pages — they already have the full UI.
+		if ( in_array( $hook_suffix, self::PAGE_HOOKS, true ) ) {
+			return;
+		}
+
+		// Skip in the block editor — it has the PluginSidebar.
+		$screen = get_current_screen();
+		if ( $screen && $screen->is_block_editor() ) {
+			return;
+		}
+
+		// Only for admins.
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+
+		$asset_file = WP_AGENT_DIR . 'build/drawer.asset.php';
+
+		if ( ! file_exists( $asset_file ) ) {
+			return;
+		}
+
+		$asset = require $asset_file;
+
+		wp_enqueue_script(
+			'wp-agent-drawer',
+			WP_AGENT_URL . 'build/drawer.js',
+			$asset['dependencies'],
+			$asset['version'],
+			true
+		);
+
+		if ( file_exists( WP_AGENT_DIR . 'build/style-drawer.css' ) ) {
+			wp_enqueue_style(
+				'wp-agent-drawer',
+				WP_AGENT_URL . 'build/style-drawer.css',
+				[],
+				$asset['version']
+			);
+		}
+
+		wp_localize_script(
+			'wp-agent-drawer',
+			'wpAgentData',
+			[
+				'restUrl'   => rest_url( 'wp-agent/v1/' ),
+				'nonce'     => wp_create_nonce( 'wp_rest' ),
+				'hasApiKey' => ! empty( get_option( \WPAgent\AI\Open_Router_Client::API_KEY_OPTION ) ),
+				'userId'    => get_current_user_id(),
+				'userName'  => wp_get_current_user()->display_name,
+				'version'   => WP_AGENT_VER,
+				'adminUrl'  => admin_url(),
+			]
 		);
 	}
 
