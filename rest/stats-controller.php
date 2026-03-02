@@ -68,12 +68,8 @@ class Stats_Controller extends \WP_REST_Controller {
 			return 'active' === ( $t['status'] ?? '' );
 		} ) );
 
-		// Memory entries.
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-		$memory_entries = (int) $wpdb->get_var(
-			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
-			"SELECT COUNT(*) FROM {$tables['memory']}"
-		);
+		// Memory entries (stored in wp_options).
+		$memory_entries = count( get_option( 'wp_agent_memories', [] ) );
 
 		// Total registered actions.
 		$registry = \WPAgent\Actions\Action_Registry::get_instance();

@@ -89,6 +89,7 @@ class Prompt_Builder {
 		}
 
 		$prompt .= $this->get_workflow_templates_section();
+		$prompt .= $this->get_memory_auto_save_section();
 		$prompt .= $this->get_memory_context_section();
 
 		return $prompt;
@@ -919,6 +920,27 @@ class Prompt_Builder {
 	 *
 	 * Injects stored memories about the site and user preferences
 	 * so the AI can maintain context across conversations.
+	 *
+	 * @since 1.1.0
+	 * @return string
+	 */
+	private function get_memory_auto_save_section() {
+		return "<memory_auto_save>\n"
+			. "You have a manage_memory tool. Use it PROACTIVELY to remember important information across conversations.\n\n"
+			. "SAVE memories when you learn:\n"
+			. "- User preferences: favorite colors, writing tone, industry, brand style.\n"
+			. "- Site decisions: chosen theme, brand name, target audience, content strategy.\n"
+			. "- Recurring patterns: preferred page layouts, design choices, frequently requested actions.\n\n"
+			. "RULES:\n"
+			. "- Save 1-2 memories per conversation, not every turn.\n"
+			. "- Only save after completing a significant task (page build, site setup, brand config).\n"
+			. "- Use short, specific memory text: \"User prefers dark SaaS aesthetic with indigo accent\" not \"The user told me they like dark designs.\"\n"
+			. "- Do NOT announce that you're saving a memory. Just do it silently alongside your response.\n"
+			. "</memory_auto_save>\n\n";
+	}
+
+	/**
+	 * Get the memory context section.
 	 *
 	 * @since 1.1.0
 	 * @return string
