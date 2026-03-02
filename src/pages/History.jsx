@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from '@wordpress/element';
+import { useDispatch } from '@wordpress/data';
 import apiFetch from '@wordpress/api-fetch';
 import { Badge, Button, Tooltip } from '@bsf/force-ui';
 import {
@@ -13,8 +14,10 @@ import {
 	Calendar,
 	CircleDot,
 	Sparkles,
+	ArrowRight,
 } from 'lucide-react';
 import PageLayout from '../components/PageLayout';
+import { STORE_NAME } from '../store/constants';
 
 const TOKEN_TIERS = [
 	{ max: 500, label: 'Light', bg: 'bg-emerald-50', text: 'text-emerald-600' },
@@ -27,7 +30,7 @@ function getTokenTier( tokens ) {
 	return TOKEN_TIERS.find( ( t ) => tokens <= t.max ) || TOKEN_TIERS[ TOKEN_TIERS.length - 1 ];
 }
 
-function ConversationRow( { conversation, index } ) {
+function ConversationRow( { conversation, index, onResume } ) {
 	const date = new Date( conversation.created_at );
 	const formatted = date.toLocaleDateString( undefined, {
 		month: 'short',
@@ -41,7 +44,10 @@ function ConversationRow( { conversation, index } ) {
 	const isEven = index % 2 === 0;
 
 	return (
-		<tr className={ `border-b border-solid border-border-subtle last:border-b-0 hover:bg-blue-50/50 transition-colors duration-150 ${ isEven ? '' : 'bg-background-secondary/40' }` }>
+		<tr
+			className={ `border-b border-solid border-border-subtle last:border-b-0 hover:bg-blue-50/50 transition-colors duration-150 cursor-pointer ${ isEven ? '' : 'bg-background-secondary/40' }` }
+			onClick={ () => onResume( conversation.id ) }
+		>
 			<td className="py-3.5 px-5">
 				<div className="flex items-center gap-3">
 					<div className="flex items-center justify-center size-8 rounded-lg bg-violet-50 shrink-0">
@@ -73,6 +79,9 @@ function ConversationRow( { conversation, index } ) {
 			<td className="py-3.5 px-5">
 				<span className="text-xs text-text-tertiary">{ formatted }</span>
 			</td>
+			<td className="py-3.5 px-5">
+				<ArrowRight className="size-4 text-text-tertiary" />
+			</td>
 		</tr>
 	);
 }
@@ -92,6 +101,12 @@ export default function History() {
 	const [ data, setData ] = useState( null );
 	const [ loading, setLoading ] = useState( true );
 	const [ page, setPage ] = useState( 1 );
+	const { loadConversation } = useDispatch( STORE_NAME );
+
+	const handleResume = useCallback( ( id ) => {
+		loadConversation( id );
+		document.dispatchEvent( new CustomEvent( 'jarvis-open-drawer' ) );
+	}, [ loadConversation ] );
 
 	const fetchHistory = useCallback( async ( p ) => {
 		try {
@@ -178,11 +193,12 @@ export default function History() {
 										<TableHeader icon={ Cpu } label="Model" />
 										<TableHeader icon={ Hash } label="Tokens" />
 										<TableHeader icon={ Calendar } label="Date" />
+										<th className="py-3 px-5 w-10"></th>
 									</tr>
 								</thead>
 								<tbody>
 									{ conversations.map( ( conv, i ) => (
-										<ConversationRow key={ conv.id } conversation={ conv } index={ i } />
+										<ConversationRow key={ conv.id } conversation={ conv } index={ i } onResume={ handleResume } />
 									) ) }
 								</tbody>
 							</table>

@@ -63,17 +63,20 @@ class Stats_Controller extends \WP_REST_Controller {
 		);
 
 		// Scheduled tasks.
-		$scheduled = get_option( Manage_Scheduled_Tasks::OPTION_KEY, [] );
-		$active_schedules = count( array_filter( $scheduled, function ( $t ) {
-			return 'active' === ( $t['status'] ?? '' );
-		} ) );
+		$active_schedules = 0;
+		if ( class_exists( Manage_Scheduled_Tasks::class ) ) {
+			$scheduled        = get_option( Manage_Scheduled_Tasks::OPTION_KEY, [] );
+			$active_schedules = count( array_filter( $scheduled, function ( $t ) {
+				return 'active' === ( $t['status'] ?? '' );
+			} ) );
+		}
 
 		// Memory entries (stored in wp_options).
 		$memory_entries = count( get_option( 'wp_agent_memories', [] ) );
 
 		// Total registered actions.
 		$registry = \WPAgent\Actions\Action_Registry::get_instance();
-		$total_actions = count( $registry->get_all_tools() );
+		$total_actions = count( $registry->get_tool_definitions() );
 
 		return rest_ensure_response( [
 			'total_actions'    => $total_actions,

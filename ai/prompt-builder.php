@@ -79,14 +79,14 @@ class Prompt_Builder {
 		$prompt .= $this->get_reasoning_section();
 		$prompt .= $this->get_response_format_section();
 
-		if ( ! empty( $context['current_post'] ) ) {
-			$prompt .= $this->get_block_editor_section( $context );
-			$prompt .= $this->get_pattern_library_section();
-			$prompt .= $this->get_reference_design_section();
-			$prompt .= $this->get_page_building_recipe_section();
-			$prompt .= $this->get_animations_section();
-			$prompt .= $this->get_self_critique_section();
-		}
+		// Page-building knowledge is always included so the AI can build pages
+		// from BOTH the editor (current_post) and the admin drawer (no post).
+		$prompt .= $this->get_block_editor_section( $context );
+		$prompt .= $this->get_pattern_library_section();
+		$prompt .= $this->get_reference_design_section();
+		$prompt .= $this->get_page_building_recipe_section();
+		$prompt .= $this->get_animations_section();
+		$prompt .= $this->get_self_critique_section();
 
 		$prompt .= $this->get_workflow_templates_section();
 		$prompt .= $this->get_memory_auto_save_section();
@@ -437,6 +437,21 @@ class Prompt_Builder {
 	private function get_block_editor_section( array $context ) {
 		$section = "<block_editor>\n";
 
+		// Context-aware build mode instructions.
+		if ( ! empty( $context['current_post'] ) ) {
+			$section .= "CONTEXT: You are inside the block editor editing post #" . absint( $context['current_post']['id'] ) . ". "
+				. "Use insert_blocks directly — the post_id is " . absint( $context['current_post']['id'] ) . ".\n\n";
+		} else {
+			$section .= "CONTEXT: You are in the admin dashboard (not inside the editor). "
+				. "When asked to build a page or landing page:\n"
+				. "1. Call create_post first to create a new page (type: \"page\", status: \"draft\").\n"
+				. "2. Use the post_id returned by create_post for ALL subsequent insert_blocks calls.\n"
+				. "3. Call set_page_template with the post_id to set template to \"blank\".\n"
+				. "4. Build content with insert_blocks using the same post_id (first call: position \"replace\", rest: \"append\").\n"
+				. "5. After building, share the edit link so the user can review.\n"
+				. "IMPORTANT: You MUST create the post first. Never call insert_blocks without a valid post_id.\n\n";
+		}
+
 		// Include theme design tokens when available.
 		if ( ! empty( $context['design_tokens'] ) ) {
 			$section .= $this->format_design_tokens( $context['design_tokens'] );
@@ -459,6 +474,7 @@ class Prompt_Builder {
 		$section .= "EXECUTION RULES:\n"
 			. "- When asked to create/build/design: call the tools IMMEDIATELY. Do NOT describe what you plan to build. Just build it.\n"
 			. "- ALWAYS use insert_blocks (not edit_post) for content. \"replace\" for full pages, \"append\" for additions.\n"
+			. "- insert_blocks REQUIRES a post_id parameter. In the editor, use the current post ID. From admin, use the ID from create_post.\n"
 			. "- CHUNKING (MANDATORY): Split page builds into sequential insert_blocks calls:\n"
 			. "  - 1-3 sections: ONE call, position \"replace\".\n"
 			. "  - 4-6 sections: 2 calls. First \"replace\", second \"append\".\n"
@@ -626,7 +642,9 @@ class Prompt_Builder {
 			. "- manage_comments: List, approve, unapprove, spam, trash, reply to, or bulk-moderate comments.\n\n"
 			. "READ-ONLY TOOLS (respond directly):\n"
 			. "- site_health: Diagnostics. No confirmation needed.\n\n"
-			. "IMPORTANT: When asked to \"build a page\" while in the editor, call insert_blocks with position \"replace\". "
+			. "IMPORTANT: When asked to \"build a page\":\n"
+			. "- In the editor: call insert_blocks directly with the current post_id and position \"replace\".\n"
+			. "- From admin dashboard: call create_post first (type \"page\", status \"draft\"), then insert_blocks with the returned post_id.\n"
 			. "Do NOT call edit_post for content. Do NOT describe what you would build — just build it.\n"
 			. "</tool_usage>\n\n";
 	}
@@ -752,8 +770,9 @@ class Prompt_Builder {
 	private function get_page_building_recipe_section() {
 		return "<page_building_recipe>\n"
 			. "When building a FULL PAGE (3+ sections), follow this recipe:\n"
+			. "0. CREATE (if not in editor): Call create_post to create a new page (type: \"page\", status: \"draft\"). Use the returned post_id for all subsequent steps.\n"
 			. "1. REFERENCE (if URL provided): Call read_url to analyze the reference site. Extract its palette, section flow, and vibe. Use these to guide your build.\n"
-			. "2. TEMPLATE: set_page_template to \"blank\" for a clean canvas.\n"
+			. "2. TEMPLATE: set_page_template to \"blank\" for a clean canvas (pass the post_id).\n"
 			. "3. PALETTE: Pick a color palette — from the reference site, theme tokens, user request, or the presets above. Commit to 4 colors (primary, accent, dark, light) and use them everywhere.\n"
 			. "4. MEDIA: search_media to find real site images.\n"
 			. "5. PLAN: Check if a blueprint matches (list_patterns category \"blueprints\"). "
@@ -823,7 +842,9 @@ class Prompt_Builder {
 			. "- Use wpa-aurora + wpa-noise on hero and CTA sections for depth.\n"
 			. "- Combine effects: className: \"wpa-glass wpa-lift wpa-border-glow\" for a premium featured card.\n"
 			. "- Do NOT apply scroll animations to hero sections (above the fold).\n"
-			. "- Apply scroll animations to 3-5 below-fold sections. Use wpa-stagger-children on card grids.\n\n"
+			. "- Apply scroll animations to 3-5 below-fold sections. Use wpa-stagger-children on card grids.\n"
+			. "CRITICAL: NEVER use add_custom_css to set opacity:0 on .wp-block-* classes. This hides ALL content site-wide with no JavaScript to reveal it. "
+			. "For animations, ONLY use wpa-* className attributes on individual blocks — the IntersectionObserver script handles the rest automatically.\n\n"
 
 			. "Example glass card: {\"blockName\":\"core/group\",\"attrs\":{\"className\":\"wpa-glass wpa-lift\",\"style\":{\"spacing\":{\"padding\":{\"top\":\"32px\",\"bottom\":\"32px\",\"left\":\"28px\",\"right\":\"28px\"}}}},\"innerBlocks\":[...]}\n"
 			. "Example aurora hero: {\"blockName\":\"core/group\",\"attrs\":{\"className\":\"wpa-aurora wpa-noise\",\"align\":\"full\",\"style\":{\"color\":{\"background\":\"#0c0c14\"}}},\"innerBlocks\":[...]}\n"
@@ -864,8 +885,9 @@ class Prompt_Builder {
 	private function get_workflow_templates_section() {
 		return "<workflow_templates>\n"
 			. "MULTI-STEP WORKFLOW RECIPES (execute steps in sequence, one tool call per turn):\n\n"
-			. "BUILD COMPLETE LANDING PAGE (8 steps):\n"
-			. "1. set_page_template \"blank\"\n"
+			. "BUILD COMPLETE LANDING PAGE (from admin: 9 steps, from editor: 8 steps):\n"
+			. "0. (Admin only) create_post type \"page\", status \"draft\" — get the post_id\n"
+			. "1. set_page_template \"blank\" (pass post_id)\n"
 			. "2. search_media for relevant images\n"
 			. "3. list_patterns to find matching sections\n"
 			. "4. get_pattern + insert_blocks for hero (position: replace)\n"

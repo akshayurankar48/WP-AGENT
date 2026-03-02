@@ -44,6 +44,7 @@ export function useChatAdmin() {
 		sendMessage,
 		stopStreaming,
 		startNewConversation,
+		loadConversation,
 		setError,
 		setLastFailedMessage,
 	} = useDispatch( STORE_NAME );
@@ -70,6 +71,7 @@ export function useChatAdmin() {
 		sendMessage,
 		stopStreaming,
 		startNewConversation,
+		loadConversation,
 		clearError: useCallback( () => setError( null ), [ setError ] ),
 		retryLastMessage,
 	};

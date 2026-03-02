@@ -31,6 +31,7 @@ import {
 	Sparkles,
 	Search,
 } from 'lucide-react';
+import RecentConversations from './RecentConversations';
 
 /* ── Animations ────────────────────────────────────────────────── */
 
@@ -341,16 +342,19 @@ export default function DrawerPanel( { onClose } ) {
 					</div>
 					<div className={ headerActions }>
 						{ hasApiKey && (
-							<button
-								type="button"
-								onClick={ startNewConversation }
-								className={ headerBtn }
-								aria-label="Start new chat"
-								disabled={ isStreaming }
-							>
-								<SquarePen size={ 12 } />
-								New
-							</button>
+							<>
+								<button
+									type="button"
+									onClick={ startNewConversation }
+									className={ headerBtn }
+									aria-label="Start new chat"
+									disabled={ isStreaming }
+								>
+									<SquarePen size={ 12 } />
+									New
+								</button>
+								<RecentConversations />
+							</>
 						) }
 						<button
 							type="button"

@@ -162,7 +162,8 @@ class Orchestrator {
 			// Needs headroom for multi-section pages with chunked tool calls.
 			$max_tokens = 32768;
 		} elseif ( $has_tools ) {
-			$max_tokens = 8192;
+			// Admin drawer: needs room for create_post + insert_blocks with full page content.
+			$max_tokens = 16384;
 		} else {
 			$max_tokens = 4096;
 		}
@@ -317,7 +318,8 @@ class Orchestrator {
 			// Needs headroom for multi-section pages with chunked tool calls.
 			$max_tokens = 32768;
 		} elseif ( $has_tools ) {
-			$max_tokens = 8192;
+			// Admin drawer: needs room for create_post + insert_blocks with full page content.
+			$max_tokens = 16384;
 		} else {
 			$max_tokens = 4096;
 		}
