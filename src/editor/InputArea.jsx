@@ -7,7 +7,7 @@
 
 import { useState, useCallback, useRef, useEffect, useMemo } from '@wordpress/element';
 import { css } from '@emotion/css';
-import { Send, Square } from 'lucide-react';
+import { Send, Square, Cpu } from 'lucide-react';
 import { colors, radii, spacing, fontSizes, focusRing, fadeIn } from './styles';
 import VoiceInput from './VoiceInput';
 
@@ -145,13 +145,46 @@ const stopBtn = css`
 	}
 `;
 
-const hint = css`
-	font-size: 10px;
-	color: ${ colors.textMuted };
-	text-align: center;
+const hintRow = css`
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 	margin-top: 6px;
 	user-select: none;
 `;
+
+const hint = css`
+	font-size: 10px;
+	color: ${ colors.textMuted };
+`;
+
+const charCount = css`
+	font-size: 10px;
+	color: ${ colors.textMuted };
+	font-variant-numeric: tabular-nums;
+`;
+
+const charCountWarn = css`
+	font-size: 10px;
+	color: ${ colors.error };
+	font-variant-numeric: tabular-nums;
+`;
+
+const modelPill = css`
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	padding: 2px 8px;
+	font-size: 10px;
+	font-weight: 500;
+	color: ${ colors.textSecondary };
+	background: ${ colors.bgSubtle };
+	border: 1px solid ${ colors.borderLight };
+	border-radius: ${ radii.full };
+	margin-bottom: 6px;
+`;
+
+const MAX_CHARS = 4000;
 
 /* ── Prompt Chip Data ──────────────────────────────────────────── */
 
@@ -201,7 +234,7 @@ function getChipsForContext( context ) {
 
 /* ── Component ──────────────────────────────────────────────────── */
 
-const InputArea = ( { onSend, onStop, isStreaming, disabled, showChips, editorContext } ) => {
+const InputArea = ( { onSend, onStop, isStreaming, disabled, showChips, editorContext, modelName } ) => {
 	const [ value, setValue ] = useState( '' );
 	const textareaRef = useRef( null );
 	const voiceBufferRef = useRef( '' );
@@ -276,8 +309,17 @@ const InputArea = ( { onSend, onStop, isStreaming, disabled, showChips, editorCo
 
 	const shouldShowChips = showChips && ! isStreaming && ! value.trim();
 
+	const len = value.length;
+	const isNearLimit = len > MAX_CHARS * 0.9;
+
 	return (
 		<div className={ wrapper }>
+			{ modelName && (
+				<div className={ modelPill }>
+					<Cpu size={ 10 } />
+					{ modelName }
+				</div>
+			) }
 			{ shouldShowChips && (
 				<div className={ chipsRow }>
 					{ chips.map( ( c ) => (
@@ -303,6 +345,7 @@ const InputArea = ( { onSend, onStop, isStreaming, disabled, showChips, editorCo
 					onKeyDown={ handleKeyDown }
 					rows={ 1 }
 					disabled={ disabled }
+					maxLength={ MAX_CHARS }
 				/>
 				<VoiceInput
 					onTranscript={ handleVoiceTranscript }
@@ -330,9 +373,16 @@ const InputArea = ( { onSend, onStop, isStreaming, disabled, showChips, editorCo
 					</button>
 				) }
 			</div>
-			<p className={ hint }>
-				Enter to send, Shift+Enter for new line
-			</p>
+			<div className={ hintRow }>
+				<span className={ hint }>
+					Enter to send, Shift+Enter for new line
+				</span>
+				{ len > 0 && (
+					<span className={ isNearLimit ? charCountWarn : charCount }>
+						{ len.toLocaleString() } / { MAX_CHARS.toLocaleString() }
+					</span>
+				) }
+			</div>
 		</div>
 	);
 };

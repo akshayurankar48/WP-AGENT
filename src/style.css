@@ -1,3 +1,57 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Remove WordPress default blue focus outlines on all WP Agent admin pages */
+.toplevel_page_wp-agent button:focus,
+.toplevel_page_wp-agent input:focus,
+.toplevel_page_wp-agent select:focus,
+.toplevel_page_wp-agent textarea:focus,
+.toplevel_page_wp-agent a:focus,
+.toplevel_page_wp-agent [type="button"]:focus,
+.toplevel_page_wp-agent [type="submit"]:focus,
+.toplevel_page_wp-agent [role="button"]:focus,
+.wp-agent_page_wp-agent-settings button:focus,
+.wp-agent_page_wp-agent-settings input:focus,
+.wp-agent_page_wp-agent-settings select:focus,
+.wp-agent_page_wp-agent-settings textarea:focus,
+.wp-agent_page_wp-agent-history button:focus,
+.wp-agent_page_wp-agent-history input:focus,
+.wp-agent_page_wp-agent-history textarea:focus,
+.wp-agent_page_wp-agent-capabilities button:focus,
+.wp-agent_page_wp-agent-capabilities input:focus,
+.wp-agent_page_wp-agent-schedules button:focus,
+.wp-agent_page_wp-agent-schedules input:focus,
+.wp-agent_page_wp-agent-help button:focus,
+.wp-agent_page_wp-agent-help input:focus {
+	outline: none !important;
+	box-shadow: none !important;
+	border-color: inherit !important;
+}
+
+/* Restore focus-visible for keyboard accessibility */
+.toplevel_page_wp-agent button:focus-visible,
+.toplevel_page_wp-agent input:focus-visible,
+.toplevel_page_wp-agent select:focus-visible,
+.toplevel_page_wp-agent textarea:focus-visible,
+.toplevel_page_wp-agent a:focus-visible,
+.wp-agent_page_wp-agent-settings button:focus-visible,
+.wp-agent_page_wp-agent-settings input:focus-visible,
+.wp-agent_page_wp-agent-settings select:focus-visible,
+.wp-agent_page_wp-agent-settings textarea:focus-visible,
+.wp-agent_page_wp-agent-history button:focus-visible,
+.wp-agent_page_wp-agent-history input:focus-visible,
+.wp-agent_page_wp-agent-capabilities button:focus-visible,
+.wp-agent_page_wp-agent-schedules button:focus-visible,
+.wp-agent_page_wp-agent-help button:focus-visible {
+	outline: 2px solid #4f46e5 !important;
+	outline-offset: 2px !important;
+	box-shadow: none !important;
+}
+
+/* Kill WP admin default component focus styles globally on our pages */
+[class*="wp-agent"] .components-button:focus:not( :disabled ),
+[class*="wp-agent"] .components-text-control__input:focus {
+	outline: none !important;
+	box-shadow: none !important;
+}

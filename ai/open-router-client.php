@@ -99,6 +99,7 @@ class Open_Router_Client {
 			'model'                => $model,
 			'messages'             => $messages,
 			'stream'               => true,
+			'stream_options'       => [ 'include_usage' => true ],
 			'max_tokens'           => (int) $max_tokens,
 			'temperature'          => (float) $temperature,
 			'parallel_tool_calls'  => false,
@@ -617,6 +618,16 @@ class Open_Router_Client {
 			$chunks[] = [
 				'type'          => 'finish',
 				'finish_reason' => $choice['finish_reason'],
+			];
+		}
+
+		// Usage data (sent in the final chunk when stream_options.include_usage is set).
+		if ( ! empty( $data['usage'] ) ) {
+			$chunks[] = [
+				'type'              => 'usage',
+				'prompt_tokens'     => (int) ( $data['usage']['prompt_tokens'] ?? 0 ),
+				'completion_tokens' => (int) ( $data['usage']['completion_tokens'] ?? 0 ),
+				'total_tokens'      => (int) ( $data['usage']['total_tokens'] ?? 0 ),
 			];
 		}
 

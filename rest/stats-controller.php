@@ -104,6 +104,35 @@ class Stats_Controller extends \WP_REST_Controller {
 			)
 		);
 
+		// Recent activity (last 10 executed actions).
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+		$recent_rows = $wpdb->get_results(
+			$wpdb->prepare(
+				// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+				"SELECT h.action_name, h.status, h.created_at, h.conversation_id,
+				        c.title AS conversation_title
+				 FROM {$tables['history']} h
+				 LEFT JOIN {$tables['conversations']} c ON c.id = h.conversation_id
+				 WHERE h.user_id = %d
+				 ORDER BY h.created_at DESC
+				 LIMIT 10",
+				$user_id
+			)
+		);
+
+		$recent_activity = [];
+		if ( $recent_rows ) {
+			foreach ( $recent_rows as $row ) {
+				$recent_activity[] = [
+					'action'             => $row->action_name,
+					'status'             => $row->status,
+					'created_at'         => $row->created_at,
+					'conversation_id'    => (int) $row->conversation_id,
+					'conversation_title' => $row->conversation_title ?: '',
+				];
+			}
+		}
+
 		return rest_ensure_response( [
 			'total_actions'    => $total_actions,
 			'conversations'    => $conversations,
@@ -112,6 +141,7 @@ class Stats_Controller extends \WP_REST_Controller {
 			'memory_entries'   => $memory_entries,
 			'total_tokens'     => (int) ( $token_stats->total_tokens ?? 0 ),
 			'requests_today'   => $requests_today,
+			'recent_activity'  => $recent_activity,
 		] );
 	}
 }

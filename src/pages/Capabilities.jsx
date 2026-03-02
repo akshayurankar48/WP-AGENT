@@ -205,12 +205,28 @@ const CATEGORIES = [
 	},
 ];
 
-function ActionCard( { name, description } ) {
+function ActionCard( { name, description, slug } ) {
+	const handleTry = ( e ) => {
+		e.stopPropagation();
+		document.dispatchEvent( new CustomEvent( 'jarvis-open-drawer', {
+			detail: { prompt: description },
+		} ) );
+	};
+
 	return (
-		<div className="bg-background-primary border border-solid border-border-subtle rounded-xl p-4 flex flex-col gap-1.5 hover:shadow-md hover:border-border-interactive transition-all duration-200">
-			<h3 className="text-sm font-semibold text-text-primary">
-				{ name }
-			</h3>
+		<div className="group bg-background-primary border border-solid border-border-subtle rounded-xl p-4 flex flex-col gap-1.5 hover:shadow-md hover:border-border-interactive transition-all duration-200">
+			<div className="flex items-center justify-between">
+				<h3 className="text-sm font-semibold text-text-primary">
+					{ name }
+				</h3>
+				<button
+					type="button"
+					onClick={ handleTry }
+					className="opacity-0 group-hover:opacity-100 text-xs font-medium text-brand-800 bg-transparent border-0 cursor-pointer hover:underline transition-opacity px-0"
+				>
+					Try it
+				</button>
+			</div>
 			<p className="text-xs text-text-secondary leading-relaxed">
 				{ description }
 			</p>
@@ -306,6 +322,7 @@ export default function Capabilities() {
 										key={ action.slug }
 										name={ action.name }
 										description={ action.description }
+										slug={ action.slug }
 									/>
 								) ) }
 							</div>

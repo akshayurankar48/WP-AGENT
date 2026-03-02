@@ -6,6 +6,8 @@
  * 2. Has key (blank) -> build/design prompts based on post type.
  * 3. Has key (content) -> improve/extend prompts.
  *
+ * Prompts are categorized for better visual hierarchy.
+ *
  * @package
  * @since 1.0.0
  */
@@ -26,6 +28,7 @@ import {
 	PlusCircle,
 	Rocket,
 	Type,
+	Wrench,
 } from 'lucide-react';
 import { colors, radii, spacing, fontSizes, fadeIn, focusRing } from './styles';
 
@@ -75,7 +78,7 @@ const subtitle = css`
 	font-size: ${ fontSizes.xs };
 	color: ${ colors.textSecondary };
 	line-height: 1.5;
-	margin-bottom: ${ spacing.xxl };
+	margin-bottom: ${ spacing.lg };
 `;
 
 const settingsLink = css`
@@ -94,11 +97,23 @@ const settingsLink = css`
 	}
 `;
 
+const categoryLabel = css`
+	font-size: 10px;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	color: ${ colors.textMuted };
+	margin-bottom: ${ spacing.xs };
+	text-align: left;
+	width: 100%;
+`;
+
 const promptList = css`
 	width: 100%;
 	display: flex;
 	flex-direction: column;
 	gap: ${ spacing.sm };
+	margin-bottom: ${ spacing.md };
 `;
 
 const promptCard = css`
@@ -139,129 +154,153 @@ const promptLabel = css`
 	font-weight: 450;
 `;
 
-/* ── Prompt Sets ───────────────────────────────────────────────── */
+/* ── Prompt Sets (Categorized) ─────────────────────────────────── */
 
 const PROMPTS_BLANK_PAGE = [
 	{
-		icon: Rocket,
-		label: 'Build a landing page',
-		message: 'Build a professional landing page with a hero section, features grid, testimonials, and a call-to-action',
+		category: 'Build',
+		prompts: [
+			{
+				icon: Rocket,
+				label: 'Build a landing page',
+				message: 'Build a professional landing page with a hero section, features grid, testimonials, and a call-to-action',
+			},
+			{
+				icon: LayoutGrid,
+				label: 'Add a hero section',
+				message: 'Add a hero section with a heading, paragraph, and call-to-action button',
+			},
+		],
 	},
 	{
-		icon: FileText,
-		label: 'Draft a blog post',
-		message: 'Help me draft a blog post about',
-	},
-	{
-		icon: LayoutGrid,
-		label: 'Add a hero section',
-		message: 'Add a hero section with a heading, paragraph, and call-to-action button',
-	},
-	{
-		icon: Paintbrush,
-		label: 'Design from a reference',
-		message: 'I want to build a page inspired by a reference site. Let me share the URL.',
+		category: 'Design',
+		prompts: [
+			{
+				icon: Paintbrush,
+				label: 'Design from a reference',
+				message: 'I want to build a page inspired by a reference site. Let me share the URL.',
+			},
+			{
+				icon: FileText,
+				label: 'Draft a blog post',
+				message: 'Help me draft a blog post about',
+			},
+		],
 	},
 ];
 
 const PROMPTS_BLANK_POST = [
 	{
-		icon: FileText,
-		label: 'Draft a blog post',
-		message: 'Help me draft a blog post about',
+		category: 'Write',
+		prompts: [
+			{
+				icon: FileText,
+				label: 'Draft a blog post',
+				message: 'Help me draft a blog post about',
+			},
+			{
+				icon: Image,
+				label: 'Post with featured image',
+				message: 'Create a blog post and set a relevant featured image',
+			},
+		],
 	},
 	{
-		icon: Image,
-		label: 'Post with featured image',
-		message: 'Create a blog post and set a relevant featured image',
-	},
-	{
-		icon: Search,
-		label: 'SEO-optimized article',
-		message: 'Write an SEO-optimized blog post about',
-	},
-	{
-		icon: LayoutGrid,
-		label: 'Add content blocks',
-		message: 'Add a hero section with a heading, paragraph, and call-to-action button',
+		category: 'Optimize',
+		prompts: [
+			{
+				icon: Search,
+				label: 'SEO-optimized article',
+				message: 'Write an SEO-optimized blog post about',
+			},
+			{
+				icon: LayoutGrid,
+				label: 'Add content blocks',
+				message: 'Add a hero section with a heading, paragraph, and call-to-action button',
+			},
+		],
 	},
 ];
 
 const PROMPTS_HAS_CONTENT = [
 	{
-		icon: Sparkles,
-		label: 'Improve this content',
-		message: 'Review and improve the current content — make it more engaging and polished',
+		category: 'Improve',
+		prompts: [
+			{
+				icon: Sparkles,
+				label: 'Improve this content',
+				message: 'Review and improve the current content — make it more engaging and polished',
+			},
+			{
+				icon: Pencil,
+				label: 'Rewrite in a different tone',
+				message: 'Rewrite the current content in a more professional and engaging tone',
+			},
+		],
 	},
 	{
-		icon: PlusCircle,
-		label: 'Add a new section',
-		message: 'Add a new section to this page. What would work well with the existing content?',
-	},
-	{
-		icon: Pencil,
-		label: 'Rewrite in a different tone',
-		message: 'Rewrite the current content in a more professional and engaging tone',
-	},
-	{
-		icon: Search,
-		label: 'Optimize for SEO',
-		message: 'Analyze and optimize this content for search engines',
+		category: 'Extend',
+		prompts: [
+			{
+				icon: PlusCircle,
+				label: 'Add a new section',
+				message: 'Add a new section to this page. What would work well with the existing content?',
+			},
+			{
+				icon: Search,
+				label: 'Optimize for SEO',
+				message: 'Analyze and optimize this content for search engines',
+			},
+		],
 	},
 ];
 
 const PROMPTS_PUBLISHED = [
 	{
-		icon: Sparkles,
-		label: 'Refresh this content',
-		message: 'This is a published post — review it and suggest updates to keep it fresh and relevant',
+		category: 'Refresh',
+		prompts: [
+			{
+				icon: Sparkles,
+				label: 'Refresh this content',
+				message: 'This is a published post — review it and suggest updates to keep it fresh and relevant',
+			},
+			{
+				icon: PlusCircle,
+				label: 'Extend with new sections',
+				message: 'Add new sections to expand this published content',
+			},
+		],
 	},
 	{
-		icon: PlusCircle,
-		label: 'Extend with new sections',
-		message: 'Add new sections to expand this published content',
-	},
-	{
-		icon: Type,
-		label: 'Improve readability',
-		message: 'Improve the readability and flow of this content while keeping the key message',
-	},
-	{
-		icon: Globe,
-		label: 'Optimize for SEO',
-		message: 'Audit this published content for SEO and make improvements',
+		category: 'Optimize',
+		prompts: [
+			{
+				icon: Type,
+				label: 'Improve readability',
+				message: 'Improve the readability and flow of this content while keeping the key message',
+			},
+			{
+				icon: Globe,
+				label: 'Optimize for SEO',
+				message: 'Audit this published content for SEO and make improvements',
+			},
+		],
 	},
 ];
 
-/**
- * Pick the right prompt set based on editor context.
- *
- * @param {Object} context - From useEditorContext().
- * @return {Array} Prompt objects.
- */
 function getPromptsForContext( context ) {
 	if ( context.type === 'published' ) {
 		return PROMPTS_PUBLISHED;
 	}
-
 	if ( context.type === 'has-content' ) {
 		return PROMPTS_HAS_CONTENT;
 	}
-
-	// Blank — differentiate by post type.
 	if ( context.postType === 'page' ) {
 		return PROMPTS_BLANK_PAGE;
 	}
-
 	return PROMPTS_BLANK_POST;
 }
 
-/**
- * Get a contextual greeting subtitle.
- *
- * @param {Object} context - From useEditorContext().
- * @return {string} Subtitle text.
- */
 function getSubtitle( context ) {
 	if ( context.type === 'published' ) {
 		return 'I can help refresh and improve your published content.';
@@ -277,10 +316,6 @@ function getSubtitle( context ) {
 
 /* ── Helpers ────────────────────────────────────────────────────── */
 
-/**
- * Build a safe settings URL. Validates that adminUrl from
- * wpAgentData is same-origin; falls back to a relative path.
- */
 const getSafeSettingsUrl = () => {
 	const { adminUrl } = window.wpAgentData || {};
 	const fallback = '/wp-admin/admin.php?page=wp-agent-settings';
@@ -304,7 +339,7 @@ const getSafeSettingsUrl = () => {
 /* ── Component ──────────────────────────────────────────────────── */
 
 const WelcomeScreen = ( { hasApiKey, onSendMessage, editorContext } ) => {
-	const prompts = useMemo(
+	const categories = useMemo(
 		() => getPromptsForContext( editorContext ),
 		[ editorContext.type, editorContext.postType ]
 	);
@@ -344,19 +379,24 @@ const WelcomeScreen = ( { hasApiKey, onSendMessage, editorContext } ) => {
 			</div>
 			<h3 className={ title }>Hi! I&apos;m JARVIS.</h3>
 			<p className={ subtitle }>{ subtitleText }</p>
-			<div className={ promptList }>
-				{ prompts.map( ( prompt ) => (
-					<button
-						key={ prompt.label }
-						type="button"
-						onClick={ () => onSendMessage( prompt.message ) }
-						className={ promptCard }
-					>
-						<prompt.icon size={ 16 } className={ promptIcon } />
-						<span className={ promptLabel }>{ prompt.label }</span>
-					</button>
-				) ) }
-			</div>
+			{ categories.map( ( cat ) => (
+				<div key={ cat.category } style={ { width: '100%' } }>
+					<p className={ categoryLabel }>{ cat.category }</p>
+					<div className={ promptList }>
+						{ cat.prompts.map( ( prompt ) => (
+							<button
+								key={ prompt.label }
+								type="button"
+								onClick={ () => onSendMessage( prompt.message ) }
+								className={ promptCard }
+							>
+								<prompt.icon size={ 16 } className={ promptIcon } />
+								<span className={ promptLabel }>{ prompt.label }</span>
+							</button>
+						) ) }
+					</div>
+				</div>
+			) ) }
 		</div>
 	);
 };

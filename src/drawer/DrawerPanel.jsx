@@ -7,6 +7,7 @@
  * @since 1.0.0
  */
 
+import { useEffect, useRef } from '@wordpress/element';
 import { css, keyframes } from '@emotion/css';
 import { useChatAdmin } from '../hooks/use-chat-admin';
 import MessageList from '../editor/MessageList';
@@ -30,6 +31,7 @@ import {
 	Sliders,
 	Sparkles,
 	Search,
+	Cpu,
 } from 'lucide-react';
 import RecentConversations from './RecentConversations';
 
@@ -107,6 +109,18 @@ const headerTitle = css`
 	font-weight: 700;
 	color: #ffffff;
 	letter-spacing: -0.02em;
+`;
+
+const headerModelPill = css`
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	padding: 2px 8px;
+	border-radius: ${ radii.full };
+	background: rgba(255, 255, 255, 0.15);
+	font-size: 10px;
+	font-weight: 500;
+	color: rgba(255, 255, 255, 0.8);
 `;
 
 const headerActions = css`
@@ -322,7 +336,32 @@ export default function DrawerPanel( { onClose } ) {
 		retryLastMessage,
 	} = useChatAdmin();
 
+	const pendingPromptRef = useRef( null );
+
+	// Listen for jarvis-open-drawer events with a prompt payload.
+	useEffect( () => {
+		const handler = ( e ) => {
+			const prompt = e.detail?.prompt;
+			if ( prompt && hasApiKey && ! isStreaming ) {
+				// Small delay to allow panel to render.
+				pendingPromptRef.current = prompt;
+				setTimeout( () => {
+					if ( pendingPromptRef.current ) {
+						sendMessage( pendingPromptRef.current );
+						pendingPromptRef.current = null;
+					}
+				}, 300 );
+			}
+		};
+		document.addEventListener( 'jarvis-open-drawer', handler );
+		return () => document.removeEventListener( 'jarvis-open-drawer', handler );
+	}, [ hasApiKey, isStreaming, sendMessage ] );
+
 	const hasMessages = messages.length > 0;
+
+	// Get model name from wpAgentData.
+	const modelName = window.wpAgentData?.defaultModel || '';
+	const shortModel = modelName ? modelName.split( '/' ).pop() : '';
 
 	return (
 		<>
@@ -339,6 +378,12 @@ export default function DrawerPanel( { onClose } ) {
 							<Bot size={ 14 } />
 						</div>
 						<h2 className={ headerTitle }>JARVIS</h2>
+						{ shortModel && (
+							<div className={ headerModelPill }>
+								<Cpu size={ 10 } />
+								{ shortModel }
+							</div>
+						) }
 					</div>
 					<div className={ headerActions }>
 						{ hasApiKey && (
@@ -442,6 +487,7 @@ export default function DrawerPanel( { onClose } ) {
 						disabled={ isLoading }
 						showChips={ ! hasMessages }
 						editorContext={ null }
+						modelName={ shortModel }
 					/>
 				) }
 			</div>

@@ -1,17 +1,45 @@
 /**
  * Loading state indicators for the chat sidebar.
  *
- * - ThinkingIndicator  — pulsing dots while AI is processing.
+ * - ThinkingIndicator  — pulsing dots while AI is processing, with elapsed time.
  * - ActionIndicator    — shown during tool-call execution (e.g. "Inserting blocks...").
+ * - StepperIndicator   — multi-step progress with completed steps.
  * - SkeletonMessages   — placeholder shapes while conversation history loads.
  *
  * @package
  * @since 1.0.0
  */
 
+import { useState, useEffect, useRef } from '@wordpress/element';
 import { css } from '@emotion/css';
-import { Bot, Blocks, Check, AlertCircle } from 'lucide-react';
+import { Bot, Blocks, Check, AlertCircle, Brain } from 'lucide-react';
 import { colors, radii, spacing, fontSizes, fadeIn, pulse, shimmer } from './styles';
+
+/* ── Elapsed Time Hook ──────────────────────────────────────────── */
+
+function useElapsedTime() {
+	const [ elapsed, setElapsed ] = useState( 0 );
+	const startRef = useRef( Date.now() );
+
+	useEffect( () => {
+		startRef.current = Date.now();
+		setElapsed( 0 );
+		const interval = setInterval( () => {
+			setElapsed( Math.floor( ( Date.now() - startRef.current ) / 1000 ) );
+		}, 1000 );
+		return () => clearInterval( interval );
+	}, [] );
+
+	if ( elapsed < 3 ) {
+		return '';
+	}
+	if ( elapsed < 60 ) {
+		return `${ elapsed }s`;
+	}
+	const m = Math.floor( elapsed / 60 );
+	const s = elapsed % 60;
+	return `${ m }:${ String( s ).padStart( 2, '0' ) }`;
+}
 
 /* ── ThinkingIndicator ──────────────────────────────────────────── */
 
@@ -53,6 +81,18 @@ const thinkingLabel = css`
 	font-weight: 500;
 `;
 
+const elapsedLabel = css`
+	font-size: 10px;
+	color: ${ colors.textMuted };
+	font-weight: 400;
+	font-variant-numeric: tabular-nums;
+`;
+
+const brainPulse = css`
+	color: ${ colors.primary };
+	animation: ${ pulse } 1.4s ease-in-out infinite;
+`;
+
 const dotRow = css`
 	display: flex;
 	align-items: center;
@@ -72,21 +112,26 @@ const thinkingDot0 = thinkingDotBase( 0 );
 const thinkingDot1 = thinkingDotBase( 0.2 );
 const thinkingDot2 = thinkingDotBase( 0.4 );
 
-export const ThinkingIndicator = () => (
-	<div className={ thinkingWrap }>
-		<div className={ thinkingAvatar }>
-			<Bot size={ 14 } />
-		</div>
-		<div className={ thinkingBubble }>
-			<span className={ thinkingLabel }>Thinking</span>
-			<div className={ dotRow }>
-				<span className={ thinkingDot0 } />
-				<span className={ thinkingDot1 } />
-				<span className={ thinkingDot2 } />
+export const ThinkingIndicator = () => {
+	const time = useElapsedTime();
+
+	return (
+		<div className={ thinkingWrap }>
+			<div className={ thinkingAvatar }>
+				<Brain size={ 14 } className={ brainPulse } />
+			</div>
+			<div className={ thinkingBubble }>
+				<span className={ thinkingLabel }>Thinking</span>
+				<div className={ dotRow }>
+					<span className={ thinkingDot0 } />
+					<span className={ thinkingDot1 } />
+					<span className={ thinkingDot2 } />
+				</div>
+				{ time && <span className={ elapsedLabel }>{ time }</span> }
 			</div>
 		</div>
-	</div>
-);
+	);
+};
 
 /* ── ActionIndicator ────────────────────────────────────────────── */
 
@@ -136,17 +181,22 @@ const spinnerIcon = css`
 	}
 `;
 
-export const ActionIndicator = ( { label = 'Working on it...' } ) => (
-	<div className={ actionWrap }>
-		<div className={ actionAvatar }>
-			<Bot size={ 14 } />
+export const ActionIndicator = ( { label = 'Working on it...' } ) => {
+	const time = useElapsedTime();
+
+	return (
+		<div className={ actionWrap }>
+			<div className={ actionAvatar }>
+				<Bot size={ 14 } />
+			</div>
+			<div className={ actionBubble }>
+				<Blocks size={ 14 } className={ spinnerIcon } />
+				<span className={ actionLabel }>{ label }</span>
+				{ time && <span className={ elapsedLabel }>{ time }</span> }
+			</div>
 		</div>
-		<div className={ actionBubble }>
-			<Blocks size={ 14 } className={ spinnerIcon } />
-			<span className={ actionLabel }>{ label }</span>
-		</div>
-	</div>
-);
+	);
+};
 
 /* ── StepperIndicator ──────────────────────────────────────────── */
 
@@ -210,28 +260,33 @@ const stepCurrent = css`
 	font-weight: 600;
 `;
 
-export const StepperIndicator = ( { completedSteps = [], currentLabel = 'Working on it...' } ) => (
-	<div className={ stepperWrap }>
-		<div className={ stepperAvatar }>
-			<Bot size={ 14 } />
-		</div>
-		<div className={ stepperBody }>
-			{ completedSteps.map( ( step, i ) => (
-				<div key={ i } className={ stepRow }>
-					{ step.success
-						? <Check size={ 13 } className={ stepDone } />
-						: <AlertCircle size={ 13 } className={ stepError } />
-					}
-					<span className={ stepLabel }>{ step.label }</span>
+export const StepperIndicator = ( { completedSteps = [], currentLabel = 'Working on it...' } ) => {
+	const time = useElapsedTime();
+
+	return (
+		<div className={ stepperWrap }>
+			<div className={ stepperAvatar }>
+				<Bot size={ 14 } />
+			</div>
+			<div className={ stepperBody }>
+				{ completedSteps.map( ( step, i ) => (
+					<div key={ i } className={ stepRow }>
+						{ step.success
+							? <Check size={ 13 } className={ stepDone } />
+							: <AlertCircle size={ 13 } className={ stepError } />
+						}
+						<span className={ stepLabel }>{ step.label }</span>
+					</div>
+				) ) }
+				<div className={ stepRow }>
+					<Blocks size={ 13 } className={ spinnerIcon } />
+					<span className={ stepCurrent }>{ currentLabel }</span>
+					{ time && <span className={ elapsedLabel }>{ time }</span> }
 				</div>
-			) ) }
-			<div className={ stepRow }>
-				<Blocks size={ 13 } className={ spinnerIcon } />
-				<span className={ stepCurrent }>{ currentLabel }</span>
 			</div>
 		</div>
-	</div>
-);
+	);
+};
 
 /* ── SkeletonMessages ───────────────────────────────────────────── */
 

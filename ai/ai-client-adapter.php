@@ -582,6 +582,21 @@ class AI_Client_Adapter {
 		}
 
 		switch ( $event_type ) {
+			case 'message_start':
+				// Anthropic sends input token count at message start.
+				$usage = $data['message']['usage'] ?? [];
+				if ( ! empty( $usage ) ) {
+					$input  = (int) ( $usage['input_tokens'] ?? 0 );
+					$output = (int) ( $usage['output_tokens'] ?? 0 );
+					call_user_func( $callback, [
+						'type'              => 'usage',
+						'prompt_tokens'     => $input,
+						'completion_tokens' => $output,
+						'total_tokens'      => $input + $output,
+					] );
+				}
+				break;
+
 			case 'content_block_start':
 				$index = $data['index'] ?? 0;
 				$block = $data['content_block'] ?? [];
@@ -633,6 +648,17 @@ class AI_Client_Adapter {
 					call_user_func( $callback, [
 						'type'          => 'finish',
 						'finish_reason' => $finish_reason,
+					] );
+				}
+
+				// Anthropic sends output token count at message end.
+				$usage = $data['usage'] ?? [];
+				if ( ! empty( $usage ) ) {
+					call_user_func( $callback, [
+						'type'              => 'usage',
+						'prompt_tokens'     => 0,
+						'completion_tokens' => (int) ( $usage['output_tokens'] ?? 0 ),
+						'total_tokens'      => (int) ( $usage['output_tokens'] ?? 0 ),
 					] );
 				}
 				break;
@@ -717,6 +743,7 @@ class AI_Client_Adapter {
 			'model'               => $native_model,
 			'messages'            => $messages,
 			'stream'              => true,
+			'stream_options'      => [ 'include_usage' => true ],
 			'max_tokens'          => (int) $max_tokens,
 			'temperature'         => (float) $temperature,
 			'parallel_tool_calls' => false,
@@ -842,6 +869,16 @@ class AI_Client_Adapter {
 
 		if ( ! empty( $choice['finish_reason'] ) ) {
 			call_user_func( $callback, [ 'type' => 'finish', 'finish_reason' => $choice['finish_reason'] ] );
+		}
+
+		// Usage data (sent in the final chunk when stream_options.include_usage is set).
+		if ( ! empty( $data['usage'] ) ) {
+			call_user_func( $callback, [
+				'type'              => 'usage',
+				'prompt_tokens'     => (int) ( $data['usage']['prompt_tokens'] ?? 0 ),
+				'completion_tokens' => (int) ( $data['usage']['completion_tokens'] ?? 0 ),
+				'total_tokens'      => (int) ( $data['usage']['total_tokens'] ?? 0 ),
+			] );
 		}
 	}
 
@@ -1082,6 +1119,22 @@ class AI_Client_Adapter {
 		if ( ! empty( $finish_reason ) ) {
 			$mapped = 'STOP' === $finish_reason ? 'stop' : strtolower( $finish_reason );
 			call_user_func( $callback, [ 'type' => 'finish', 'finish_reason' => $mapped ] );
+		}
+
+		// Google sends usageMetadata with token counts.
+		$usage = $data['usageMetadata'] ?? [];
+		if ( ! empty( $usage ) ) {
+			$prompt     = (int) ( $usage['promptTokenCount'] ?? 0 );
+			$completion = (int) ( $usage['candidatesTokenCount'] ?? 0 );
+			call_user_func( $callback, [
+				'type'              => 'usage',
+				'prompt_tokens'     => $prompt,
+				'completion_tokens' => $completion,
+				'total_tokens'      => (int) ( $usage['totalTokenCount'] ?? ( $prompt + $completion ) ),
+			] );
+		}
+
+		if ( ! empty( $finish_reason ) ) {
 			call_user_func( $callback, [ 'type' => 'done' ] );
 		}
 	}

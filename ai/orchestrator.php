@@ -243,6 +243,9 @@ class Orchestrator {
 		// 10. Save final assistant message.
 		$this->save_message( $conversation_id, 'assistant', $final_content, $used_model );
 
+		// 11. Auto-title from first user message if untitled.
+		$this->auto_title_conversation( $conversation_id, $user_message );
+
 		// 12. Update conversation.
 		$this->update_conversation( $conversation_id, $used_model, $total_usage['total_tokens'] );
 
@@ -325,8 +328,9 @@ class Orchestrator {
 		}
 
 		// 8. Stream loop.
-		$client     = $this->get_ai_client();
-		$used_model = $model;
+		$client      = $this->get_ai_client();
+		$used_model  = $model;
+		$total_usage = [ 'prompt_tokens' => 0, 'completion_tokens' => 0, 'total_tokens' => 0 ];
 
 		for ( $iteration = 0; $iteration < self::MAX_TOOL_ITERATIONS; $iteration++ ) {
 			// Reset execution timer — each AI call can take 30+ seconds,
@@ -337,7 +341,14 @@ class Orchestrator {
 			$tool_call_buffer    = [];
 			$finish_reason       = '';
 
-			$stream_callback = function ( $chunk ) use ( $callback, &$accumulated_content, &$tool_call_buffer, &$finish_reason ) {
+			// Per-iteration usage tracking. Uses max() because providers vary:
+			// - Google sends running totals on every chunk (would over-count with +=)
+			// - Anthropic sends input at start, output at end (separate chunks)
+			// - OpenAI sends usage once in the final chunk
+			$iter_prompt     = 0;
+			$iter_completion = 0;
+
+			$stream_callback = function ( $chunk ) use ( $callback, &$accumulated_content, &$tool_call_buffer, &$finish_reason, &$iter_prompt, &$iter_completion ) {
 				switch ( $chunk['type'] ) {
 					case 'content':
 						$accumulated_content .= $chunk['content'];
@@ -373,6 +384,13 @@ class Orchestrator {
 						}
 						break;
 
+					case 'usage':
+						// Track highest values seen — handles both cumulative (Google)
+						// and split (Anthropic: input at start, output at end) patterns.
+						$iter_prompt     = max( $iter_prompt, (int) ( $chunk['prompt_tokens'] ?? 0 ) );
+						$iter_completion = max( $iter_completion, (int) ( $chunk['completion_tokens'] ?? 0 ) );
+						break;
+
 					case 'finish':
 						$finish_reason = $chunk['finish_reason'];
 						break;
@@ -397,6 +415,11 @@ class Orchestrator {
 				$model,
 				$used_model
 			);
+
+			// Add this iteration's usage to the running total.
+			$total_usage['prompt_tokens']     += $iter_prompt;
+			$total_usage['completion_tokens'] += $iter_completion;
+			$total_usage['total_tokens']      += $iter_prompt + $iter_completion;
 
 			if ( is_wp_error( $result ) ) {
 				// Emit error to client before returning.
@@ -471,7 +494,8 @@ class Orchestrator {
 
 			// Save final assistant message and finish.
 			$this->save_message( $conversation_id, 'assistant', $accumulated_content, $used_model );
-			$this->update_conversation( $conversation_id, $used_model, 0 );
+			$this->auto_title_conversation( $conversation_id, $user_message );
+			$this->update_conversation( $conversation_id, $used_model, $total_usage['total_tokens'] );
 
 			// Signal done to caller.
 			if ( $callback ) {
@@ -941,6 +965,59 @@ class Orchestrator {
 				current_time( 'mysql', true ),
 				(int) $conversation_id
 			)
+		);
+	}
+
+	/**
+	 * Auto-title a conversation from the user's first message.
+	 *
+	 * Only applies if the conversation has no title yet (empty).
+	 * Truncates the first user message to create a concise title.
+	 *
+	 * @since 1.1.0
+	 *
+	 * @param int    $conversation_id Conversation ID.
+	 * @param string $user_message    The user's first message.
+	 * @return void
+	 */
+	private function auto_title_conversation( $conversation_id, $user_message ) {
+		global $wpdb;
+
+		$tables = Database::get_table_names();
+
+		// Only title if currently untitled.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+		$current_title = $wpdb->get_var(
+			$wpdb->prepare(
+				// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+				"SELECT title FROM {$tables['conversations']} WHERE id = %d LIMIT 1",
+				(int) $conversation_id
+			)
+		);
+
+		if ( ! empty( $current_title ) ) {
+			return;
+		}
+
+		// Generate title: first line of user message, truncated to 50 chars.
+		$title = strtok( trim( $user_message ), "\n" );
+		if ( function_exists( 'mb_substr' ) ) {
+			$title = mb_strlen( $title, 'UTF-8' ) > 50
+				? mb_substr( $title, 0, 47, 'UTF-8' ) . '...'
+				: $title;
+		} else {
+			$title = strlen( $title ) > 50
+				? substr( $title, 0, 47 ) . '...'
+				: $title;
+		}
+
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+		$wpdb->update(
+			$tables['conversations'],
+			[ 'title' => sanitize_text_field( $title ) ],
+			[ 'id' => (int) $conversation_id ],
+			[ '%s' ],
+			[ '%d' ]
 		);
 	}
 

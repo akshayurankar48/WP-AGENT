@@ -144,6 +144,24 @@ const copiedBtn = css`
 	color: ${ colors.primary };
 `;
 
+const timestampStyle = css`
+	font-size: 10px;
+	color: ${ colors.textMuted };
+	margin-top: 4px;
+	user-select: none;
+`;
+
+const timestampUser = css`
+	${ timestampStyle };
+	text-align: right;
+`;
+
+const timestampAssistant = css`
+	${ timestampStyle };
+	text-align: left;
+	margin-left: 36px;
+`;
+
 const markdownH2 = css`
 	font-size: 14px;
 	font-weight: 600;
@@ -178,18 +196,61 @@ const markdownLink = css`
 	}
 `;
 
-const markdownCodeBlock = css`
-	display: block;
+const codeBlockWrap = css`
+	position: relative;
 	margin: 6px 0;
+	border-radius: ${ radii.sm };
+	overflow: hidden;
+	border: 1px solid ${ colors.borderLight };
+`;
+
+const codeBlockHeader = css`
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 4px ${ spacing.md };
+	background: ${ colors.borderLight };
+	border-bottom: 1px solid ${ colors.borderLight };
+`;
+
+const codeBlockLang = css`
+	font-size: 10px;
+	font-weight: 600;
+	text-transform: uppercase;
+	color: ${ colors.textSecondary };
+	letter-spacing: 0.5px;
+`;
+
+const codeBlockCopyBtn = css`
+	${ focusRing };
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	background: none;
+	border: none;
+	padding: 2px 6px;
+	font-size: 10px;
+	font-weight: 500;
+	color: ${ colors.textMuted };
+	cursor: pointer;
+	border-radius: ${ radii.sm };
+	transition: color 0.15s ease;
+
+	&:hover {
+		color: ${ colors.text };
+	}
+`;
+
+const codeBlockBody = css`
+	display: block;
 	padding: ${ spacing.sm } ${ spacing.md };
 	font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', monospace;
 	font-size: 0.85em;
 	line-height: 1.5;
 	white-space: pre-wrap;
 	background: ${ colors.bgSubtle };
-	border: 1px solid ${ colors.borderLight };
-	border-radius: ${ radii.sm };
 	overflow-x: auto;
+	margin: 0;
 `;
 
 const markdownHr = css`
@@ -255,18 +316,53 @@ const parseInline = ( text, keyPrefix = '' ) => {
 	return parts;
 };
 
+/* ── CodeBlock with copy ───────────────────────────────────────── */
+
+const CodeBlock = ( { language, code } ) => {
+	const [ copied, setCopied ] = useState( false );
+	const timerRef = useRef( null );
+
+	useEffect( () => {
+		return () => {
+			if ( timerRef.current ) {
+				clearTimeout( timerRef.current );
+			}
+		};
+	}, [] );
+
+	const handleCopy = useCallback( () => {
+		if ( ! navigator?.clipboard?.writeText ) {
+			return;
+		}
+		navigator.clipboard.writeText( code ).then( () => {
+			setCopied( true );
+			timerRef.current = setTimeout( () => setCopied( false ), 2000 );
+		} ).catch( () => {} );
+	}, [ code ] );
+
+	return (
+		<div className={ codeBlockWrap }>
+			<div className={ codeBlockHeader }>
+				<span className={ codeBlockLang }>{ language || 'code' }</span>
+				<button
+					type="button"
+					onClick={ handleCopy }
+					className={ codeBlockCopyBtn }
+				>
+					{ copied ? <Check size={ 10 } /> : <Copy size={ 10 } /> }
+					{ copied ? 'Copied' : 'Copy' }
+				</button>
+			</div>
+			<pre className={ codeBlockBody }>
+				<code>{ code }</code>
+			</pre>
+		</div>
+	);
+};
+
 /**
  * Parse lightweight markdown into React elements.
- *
- * Supports:
- * - **bold**, `inline code`, [links](url)
- * - ```code blocks```
- * - ## and ### headings
- * - Bullet lists (- item or * item)
- * - Numbered lists (1. item)
- * - Horizontal rules (--- or ***)
- *
- * @param {string} text
+ * @param text
  */
 const parseMarkdown = ( text ) => {
 	if ( ! text ) {
@@ -282,6 +378,7 @@ const parseMarkdown = ( text ) => {
 
 		// Fenced code block (``` ... ```).
 		if ( /^```/.test( line ) ) {
+			const lang = line.replace( /^```/, '' ).trim();
 			const codeLines = [];
 			i++; // skip opening fence
 			while ( i < lines.length && ! /^```/.test( lines[ i ] ) ) {
@@ -292,9 +389,11 @@ const parseMarkdown = ( text ) => {
 				i++; // skip closing fence
 			}
 			elements.push(
-				<pre key={ `code${ i }` } className={ markdownCodeBlock }>
-					<code>{ codeLines.join( '\n' ) }</code>
-				</pre>
+				<CodeBlock
+					key={ `code${ i }` }
+					language={ lang }
+					code={ codeLines.join( '\n' ) }
+				/>
 			);
 			continue;
 		}
@@ -377,9 +476,41 @@ const parseMarkdown = ( text ) => {
 	return elements;
 };
 
+/* ── Relative Timestamp ────────────────────────────────────────── */
+
+function formatRelativeTime( ts ) {
+	if ( ! ts ) {
+		return '';
+	}
+	const now = Date.now();
+	const then = typeof ts === 'number' ? ts : new Date( ts ).getTime();
+	if ( isNaN( then ) ) {
+		return '';
+	}
+	const seconds = Math.floor( ( now - then ) / 1000 );
+	if ( seconds < 10 ) {
+		return 'just now';
+	}
+	if ( seconds < 60 ) {
+		return `${ seconds }s ago`;
+	}
+	const minutes = Math.floor( seconds / 60 );
+	if ( minutes < 60 ) {
+		return `${ minutes }m ago`;
+	}
+	const hours = Math.floor( minutes / 60 );
+	if ( hours < 24 ) {
+		return `${ hours }h ago`;
+	}
+	return new Date( then ).toLocaleTimeString( undefined, {
+		hour: '2-digit',
+		minute: '2-digit',
+	} );
+}
+
 /* ── Component ──────────────────────────────────────────────────── */
 
-const MessageBubble = ( { role, content } ) => {
+const MessageBubble = ( { role, content, timestamp } ) => {
 	const [ copied, setCopied ] = useState( false );
 	const timerRef = useRef( null );
 	const isUser = role === 'user';
@@ -405,30 +536,39 @@ const MessageBubble = ( { role, content } ) => {
 		} );
 	}, [ content ] );
 
+	const timeLabel = formatRelativeTime( timestamp );
+
 	return (
-		<div className={ isUser ? rowUser : rowAssistant }>
-			<div className={ isUser ? avatarUser : avatarAssistant }>
-				{ isUser ? <User size={ 14 } /> : <Bot size={ 14 } /> }
+		<div>
+			<div className={ isUser ? rowUser : rowAssistant }>
+				<div className={ isUser ? avatarUser : avatarAssistant }>
+					{ isUser ? <User size={ 14 } /> : <Bot size={ 14 } /> }
+				</div>
+				<div className={ isUser ? bubbleUser : bubbleAssistant }>
+					{ isUser ? content : parseMarkdown( content ) }
+					{ ! isUser && content && (
+						<div className={ copyWrap }>
+							<button
+								type="button"
+								onClick={ handleCopy }
+								className={ cx( copyBtn, copied && copiedBtn ) }
+								aria-label="Copy message"
+							>
+								{ copied ? (
+									<Check size={ 12 } />
+								) : (
+									<Copy size={ 12 } />
+								) }
+							</button>
+						</div>
+					) }
+				</div>
 			</div>
-			<div className={ isUser ? bubbleUser : bubbleAssistant }>
-				{ isUser ? content : parseMarkdown( content ) }
-				{ ! isUser && content && (
-					<div className={ copyWrap }>
-						<button
-							type="button"
-							onClick={ handleCopy }
-							className={ cx( copyBtn, copied && copiedBtn ) }
-							aria-label="Copy message"
-						>
-							{ copied ? (
-								<Check size={ 12 } />
-							) : (
-								<Copy size={ 12 } />
-							) }
-						</button>
-					</div>
-				) }
-			</div>
+			{ timeLabel && (
+				<div className={ isUser ? timestampUser : timestampAssistant }>
+					{ timeLabel }
+				</div>
+			) }
 		</div>
 	);
 };

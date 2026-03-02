@@ -86,6 +86,39 @@ class History_Controller {
 				],
 			]
 		);
+
+		// POST /history/<id>/rename — rename a conversation.
+		register_rest_route(
+			self::NAMESPACE,
+			self::ROUTE . '/(?P<id>\d+)/rename',
+			[
+				'methods'             => \WP_REST_Server::CREATABLE,
+				'callback'            => [ $this, 'rename_conversation' ],
+				'permission_callback' => [ $this, 'check_permissions' ],
+				'args'                => [
+					'id'    => [
+						'required'          => true,
+						'type'              => 'integer',
+						'sanitize_callback' => 'absint',
+					],
+					'title' => [
+						'required'          => true,
+						'type'              => 'string',
+						'sanitize_callback' => 'sanitize_text_field',
+						'validate_callback' => function ( $value ) {
+							if ( empty( trim( $value ) ) ) {
+								return new \WP_Error(
+									'empty_title',
+									__( 'Title cannot be empty.', 'wp-agent' ),
+									[ 'status' => 400 ]
+								);
+							}
+							return true;
+						},
+					],
+				],
+			]
+		);
 	}
 
 	/**
@@ -270,6 +303,72 @@ class History_Controller {
 		return rest_ensure_response( [
 			'conversation' => $conversation,
 			'messages'     => $messages,
+		] );
+	}
+
+	/**
+	 * POST /wp-agent/v1/history/<id>/rename
+	 *
+	 * Renames a conversation. Verifies ownership.
+	 *
+	 * @since 1.1.0
+	 *
+	 * @param \WP_REST_Request $request The request.
+	 * @return \WP_REST_Response|\WP_Error
+	 */
+	public function rename_conversation( $request ) {
+		global $wpdb;
+
+		$tables          = Database::get_table_names();
+		$conversation_id = (int) $request->get_param( 'id' );
+		$user_id         = get_current_user_id();
+		$title           = $request->get_param( 'title' );
+
+		// Verify ownership.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+		$owner_id = $wpdb->get_var(
+			$wpdb->prepare(
+				// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+				"SELECT user_id FROM {$tables['conversations']} WHERE id = %d LIMIT 1",
+				$conversation_id
+			)
+		);
+
+		if ( null === $owner_id ) {
+			return new \WP_Error(
+				'not_found',
+				__( 'Conversation not found.', 'wp-agent' ),
+				[ 'status' => 404 ]
+			);
+		}
+
+		if ( (int) $owner_id !== $user_id ) {
+			return new \WP_Error(
+				'forbidden',
+				__( 'You do not have access to this conversation.', 'wp-agent' ),
+				[ 'status' => 403 ]
+			);
+		}
+
+		// Truncate to 255 chars (column limit).
+		if ( function_exists( 'mb_substr' ) ) {
+			$title = mb_substr( $title, 0, 255, 'UTF-8' );
+		} else {
+			$title = substr( $title, 0, 255 );
+		}
+
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+		$wpdb->update(
+			$tables['conversations'],
+			[ 'title' => $title ],
+			[ 'id' => $conversation_id ],
+			[ '%s' ],
+			[ '%d' ]
+		);
+
+		return rest_ensure_response( [
+			'id'    => $conversation_id,
+			'title' => $title,
 		] );
 	}
 

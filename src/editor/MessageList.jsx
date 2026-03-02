@@ -100,6 +100,7 @@ const MessageList = ( { messages, isStreaming, streamingContent, isLoading, acti
 					key={ msg.id }
 					role={ msg.role }
 					content={ msg.content }
+					timestamp={ msg.timestamp }
 				/>
 			) ) }
 
