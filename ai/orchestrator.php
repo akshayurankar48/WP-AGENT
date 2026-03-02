@@ -169,7 +169,7 @@ class Orchestrator {
 		}
 
 		// 8. AI call with tool loop.
-		$client        = Open_Router_Client::get_instance();
+		$client        = $this->get_ai_client();
 		$actions_taken = [];
 		$total_usage   = [ 'prompt_tokens' => 0, 'completion_tokens' => 0, 'total_tokens' => 0 ];
 		$final_content = '';
@@ -325,7 +325,7 @@ class Orchestrator {
 		}
 
 		// 8. Stream loop.
-		$client     = Open_Router_Client::get_instance();
+		$client     = $this->get_ai_client();
 		$used_model = $model;
 
 		for ( $iteration = 0; $iteration < self::MAX_TOOL_ITERATIONS; $iteration++ ) {
@@ -956,6 +956,31 @@ class Orchestrator {
 	 * @param array  $history      Conversation history.
 	 * @return string OpenRouter model ID.
 	 */
+	/**
+	 * Get the appropriate AI client based on backend setting.
+	 *
+	 * Returns AI_Client_Adapter when providers are configured,
+	 * otherwise falls back to Open_Router_Client (default).
+	 *
+	 * @since 1.0.0
+	 * @return Open_Router_Client|AI_Client_Adapter
+	 */
+	private function get_ai_client() {
+		$backend = get_option( 'wp_agent_ai_backend', 'openrouter' );
+
+		if ( 'providers' === $backend ) {
+			$adapter    = AI_Client_Adapter::get_instance();
+			$configured = $adapter->get_configured_providers();
+
+			// At least one provider must have a key.
+			if ( in_array( true, $configured, true ) ) {
+				return $adapter;
+			}
+		}
+
+		return Open_Router_Client::get_instance();
+	}
+
 	private function resolve_model( array $options, $user_message, array $history ) {
 		if ( ! empty( $options['model'] ) ) {
 			$router = Model_Router::get_instance();
