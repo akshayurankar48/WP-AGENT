@@ -111,6 +111,7 @@ class Set_Featured_Image implements Action_Interface {
 			return array(
 				'success' => false,
 				'data'    => null,
+				/* translators: %d: post ID */
 				'message' => sprintf( __( 'Post #%d not found.', 'wp-agent' ), $post_id ),
 			);
 		}
@@ -129,6 +130,7 @@ class Set_Featured_Image implements Action_Interface {
 			return array(
 				'success' => false,
 				'data'    => null,
+				/* translators: %d: attachment ID */
 				'message' => sprintf( __( 'Attachment #%d not found.', 'wp-agent' ), $attachment_id ),
 			);
 		}
@@ -146,6 +148,7 @@ class Set_Featured_Image implements Action_Interface {
 			return array(
 				'success' => false,
 				'data'    => null,
+				/* translators: %s: post type name */
 				'message' => sprintf(
 					__( 'Post type "%s" does not support featured images.', 'wp-agent' ),
 					$post->post_type
@@ -172,6 +175,7 @@ class Set_Featured_Image implements Action_Interface {
 				'attachment_id' => $attachment_id,
 				'image_url'     => esc_url( $image_url ),
 			),
+			/* translators: 1: post title, 2: post ID */
 			'message' => sprintf(
 				__( 'Featured image set for "%1$s" (Post #%2$d).', 'wp-agent' ),
 				sanitize_text_field( $post->post_title ),

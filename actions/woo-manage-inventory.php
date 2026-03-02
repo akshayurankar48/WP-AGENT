@@ -165,6 +165,7 @@ class Woo_Manage_Inventory implements Action_Interface {
 				'stock_status'   => $product->get_stock_status(),
 				'backorders'     => $product->get_backorders(),
 			),
+			/* translators: 1: product name, 2: stock status, 3: stock quantity */
 			'message' => sprintf( __( '%1$s: %2$s (qty: %3$s).', 'wp-agent' ), $product->get_name(), $product->get_stock_status(), $product->get_stock_quantity() ?? 'N/A' ),
 		);
 	}
@@ -210,6 +211,7 @@ class Woo_Manage_Inventory implements Action_Interface {
 				'old_quantity' => $old_qty,
 				'new_quantity' => $quantity,
 			),
+			/* translators: 1: product name, 2: old stock quantity, 3: new stock quantity */
 			'message' => sprintf( __( '%1$s stock: %2$s -> %3$d.', 'wp-agent' ), $product->get_name(), $old_qty ?? 'N/A', $quantity ),
 		);
 	}
@@ -256,6 +258,7 @@ class Woo_Manage_Inventory implements Action_Interface {
 				'threshold' => $threshold,
 				'products'  => $low,
 			),
+			/* translators: 1: number of low-stock products, 2: stock threshold */
 			'message' => sprintf( __( '%1$d product(s) with stock <= %2$d.', 'wp-agent' ), count( $low ), $threshold ),
 		);
 	}

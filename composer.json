@@ -9,7 +9,9 @@
 		"phpstan/phpstan": "^1.9",
 		"szepeviktor/phpstan-wordpress": "^1.1",
 		"php-stubs/wordpress-stubs": "^6.1",
-		"php-stubs/generator": "^0.8.2"
+		"php-stubs/generator": "^0.8.2",
+		"phpunit/phpunit": "^9.6",
+		"yoast/phpunit-polyfills": "^2.0"
 	},
 	"scripts": {
 		"format": "vendor/bin/phpcbf",

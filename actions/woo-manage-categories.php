@@ -155,6 +155,7 @@ class Woo_Manage_Categories implements Action_Interface {
 				return array(
 					'success' => true,
 					'data'    => array( 'category_id' => $result['term_id'] ),
+					/* translators: %s: category name */
 					'message' => sprintf( __( 'Category "%s" created.', 'wp-agent' ), $name ),
 				);
 
@@ -188,6 +189,7 @@ class Woo_Manage_Categories implements Action_Interface {
 				return array(
 					'success' => true,
 					'data'    => array( 'category_id' => $id ),
+					/* translators: %d: category ID */
 					'message' => sprintf( __( 'Category #%d updated.', 'wp-agent' ), $id ),
 				);
 
@@ -211,6 +213,7 @@ class Woo_Manage_Categories implements Action_Interface {
 				return array(
 					'success' => true,
 					'data'    => array( 'category_id' => $id ),
+					/* translators: %d: category ID */
 					'message' => sprintf( __( 'Category #%d deleted.', 'wp-agent' ), $id ),
 				);
 

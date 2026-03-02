@@ -141,6 +141,7 @@ class Manage_Taxonomies implements Action_Interface {
 			return array(
 				'success' => false,
 				'data'    => null,
+				/* translators: %s: invalid operation name */
 				'message' => sprintf(
 					__( 'Invalid operation "%s". Allowed: list, create, assign, remove.', 'wp-agent' ),
 					$operation
@@ -153,6 +154,7 @@ class Manage_Taxonomies implements Action_Interface {
 			return array(
 				'success' => false,
 				'data'    => null,
+				/* translators: %s: taxonomy slug */
 				'message' => sprintf(
 					__( 'Taxonomy "%s" does not exist.', 'wp-agent' ),
 					$taxonomy
@@ -215,7 +217,9 @@ class Manage_Taxonomies implements Action_Interface {
 
 		if ( empty( $terms ) ) {
 			$message = $search
+				/* translators: 1: taxonomy slug, 2: search query */
 				? sprintf( __( 'No terms found in "%1$s" matching "%2$s".', 'wp-agent' ), $taxonomy, $search )
+				/* translators: %s: taxonomy slug */
 				: sprintf( __( 'No terms found in "%s".', 'wp-agent' ), $taxonomy );
 
 			return array(
@@ -247,6 +251,7 @@ class Manage_Taxonomies implements Action_Interface {
 				'taxonomy' => $taxonomy,
 				'terms'    => $results,
 			),
+			/* translators: 1: number of terms found, 2: taxonomy slug */
 			'message' => sprintf(
 				__( 'Found %1$d term(s) in "%2$s".', 'wp-agent' ),
 				count( $results ),
@@ -288,6 +293,7 @@ class Manage_Taxonomies implements Action_Interface {
 				return array(
 					'success' => false,
 					'data'    => null,
+					/* translators: 1: parent term ID, 2: taxonomy slug */
 					'message' => sprintf(
 						__( 'Parent term #%1$d does not exist in "%2$s".', 'wp-agent' ),
 						$parent_id,
@@ -316,6 +322,7 @@ class Manage_Taxonomies implements Action_Interface {
 						'existing_term_id' => $existing_id,
 						'existing_slug'    => $existing instanceof \WP_Term ? sanitize_title( $existing->slug ) : '',
 					),
+					/* translators: 1: term name, 2: taxonomy slug, 3: existing term ID */
 					'message' => sprintf(
 						__( 'Term "%1$s" already exists in "%2$s" (ID: %3$d).', 'wp-agent' ),
 						$term_name,
@@ -345,6 +352,7 @@ class Manage_Taxonomies implements Action_Interface {
 				'parent'      => absint( $new_term->parent ),
 				'description' => sanitize_text_field( $new_term->description ),
 			),
+			/* translators: 1: term name, 2: term ID, 3: taxonomy slug */
 			'message' => sprintf(
 				__( 'Created term "%1$s" (ID: %2$d) in "%3$s".', 'wp-agent' ),
 				sanitize_text_field( $new_term->name ),
@@ -389,6 +397,7 @@ class Manage_Taxonomies implements Action_Interface {
 			return array(
 				'success' => false,
 				'data'    => null,
+				/* translators: %d: post ID */
 				'message' => sprintf( __( 'Post #%d not found.', 'wp-agent' ), $post_id ),
 			);
 		}
@@ -413,6 +422,7 @@ class Manage_Taxonomies implements Action_Interface {
 			return array(
 				'success' => false,
 				'data'    => array( 'invalid_term_ids' => $invalid_ids ),
+				/* translators: 1: taxonomy slug, 2: comma-separated list of invalid term IDs */
 				'message' => sprintf(
 					__( 'Term ID(s) not found in "%1$s": %2$s', 'wp-agent' ),
 					$taxonomy,
@@ -452,6 +462,7 @@ class Manage_Taxonomies implements Action_Interface {
 				'taxonomy'       => $taxonomy,
 				'assigned_terms' => $assigned_data,
 			),
+			/* translators: 1: number of terms assigned, 2: post title, 3: post ID, 4: taxonomy slug */
 			'message' => sprintf(
 				__( 'Assigned %1$d term(s) to "%2$s" (Post #%3$d) in "%4$s".', 'wp-agent' ),
 				count( $term_ids ),
@@ -497,6 +508,7 @@ class Manage_Taxonomies implements Action_Interface {
 			return array(
 				'success' => false,
 				'data'    => null,
+				/* translators: %d: post ID */
 				'message' => sprintf( __( 'Post #%d not found.', 'wp-agent' ), $post_id ),
 			);
 		}
@@ -548,6 +560,7 @@ class Manage_Taxonomies implements Action_Interface {
 				'removed_count'   => count( $term_ids ),
 				'remaining_terms' => $remaining_data,
 			),
+			/* translators: 1: number of terms removed, 2: post title, 3: post ID, 4: taxonomy slug */
 			'message' => sprintf(
 				__( 'Removed %1$d term assignment(s) from "%2$s" (Post #%3$d) in "%4$s".', 'wp-agent' ),
 				count( $term_ids ),

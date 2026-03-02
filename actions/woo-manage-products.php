@@ -199,6 +199,7 @@ class Woo_Manage_Products implements Action_Interface {
 				'products' => $list,
 				'page'     => $page,
 			),
+			/* translators: %d: number of products found */
 			'message' => sprintf( __( '%d product(s) found.', 'wp-agent' ), count( $list ) ),
 		);
 	}
@@ -257,6 +258,7 @@ class Woo_Manage_Products implements Action_Interface {
 				'product_id' => $product_id,
 				'name'       => $name,
 			),
+			/* translators: 1: product name, 2: product ID */
 			'message' => sprintf( __( 'Product "%1$s" created (ID: %2$d).', 'wp-agent' ), $name, $product_id ),
 		);
 	}
@@ -320,6 +322,7 @@ class Woo_Manage_Products implements Action_Interface {
 				'product_id' => $product_id,
 				'updated'    => $updated,
 			),
+			/* translators: 1: product ID, 2: comma-separated list of updated fields */
 			'message' => sprintf( __( 'Product #%1$d updated (%2$s).', 'wp-agent' ), $product_id, implode( ', ', $updated ) ),
 		);
 	}
@@ -357,6 +360,7 @@ class Woo_Manage_Products implements Action_Interface {
 		return array(
 			'success' => true,
 			'data'    => array( 'product_id' => $product_id ),
+			/* translators: 1: product name, 2: product ID */
 			'message' => sprintf( __( 'Product "%1$s" (#%2$d) deleted.', 'wp-agent' ), $name, $product_id ),
 		);
 	}
