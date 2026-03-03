@@ -112,10 +112,10 @@ function CommandCard( { icon: Icon, label, description, prompt, href, onDispatch
 		<button
 			type="button"
 			onClick={ handleClick }
-			className="group flex items-start gap-3 rounded-lg border border-solid border-border-subtle p-3 no-underline hover:shadow-sm hover:bg-background-secondary/40 transition-all duration-200 cursor-pointer bg-background-primary text-left w-full"
+			className="group flex items-start gap-3 rounded-lg border border-solid border-border-subtle p-3 no-underline hover:shadow-sm hover:border-border-interactive transition-all duration-200 cursor-pointer bg-background-primary text-left w-full"
 		>
-			<div className="flex items-center justify-center size-9 rounded-lg bg-background-secondary shrink-0">
-				<Icon className="size-4 text-icon-secondary" />
+			<div className="flex items-center justify-center size-9 rounded-lg bg-indigo-50 shrink-0">
+				<Icon className="size-4 text-indigo-600" />
 			</div>
 			<div className="flex-1 min-w-0">
 				<p className="text-sm font-medium text-text-primary">
@@ -249,7 +249,7 @@ export default function Dashboard() {
 							type="button"
 							onClick={ handleQuickSend }
 							disabled={ ! quickInput.trim() }
-							className="flex items-center justify-center size-9 rounded-lg bg-text-primary text-background-primary border-none cursor-pointer hover:opacity-90 transition-opacity duration-200 disabled:opacity-30 disabled:cursor-not-allowed focus:outline-none focus-visible:ring-2 focus-visible:ring-border-interactive focus-visible:ring-offset-2 shrink-0"
+							className="flex items-center justify-center size-9 rounded-lg bg-indigo-600 text-white border-none cursor-pointer hover:bg-indigo-700 transition-colors duration-200 disabled:opacity-30 disabled:cursor-not-allowed focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 shrink-0"
 						>
 							<Send className="size-4" />
 						</button>
@@ -258,34 +258,39 @@ export default function Dashboard() {
 			</CardShell>
 
 			{ /* Stats Row */ }
-			<div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mb-6">
+			<div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mb-6 overflow-hidden">
 				<StatCard
 					icon={ Zap }
 					label="Actions"
 					value={ stats ? stats.total_actions : '-' }
+					accent="indigo"
 				/>
 				<StatCard
 					icon={ MessageSquare }
 					label="Chats"
 					value={ stats ? stats.conversations : '-' }
 					href={ historyUrl }
+					accent="blue"
 				/>
 				<StatCard
 					icon={ History }
 					label="Executed"
 					value={ stats ? stats.actions_executed : '-' }
 					href={ usageUrl }
+					accent="amber"
 				/>
 				<StatCard
 					icon={ CalendarClock }
 					label="Schedules"
 					value={ stats ? stats.schedules_active : '-' }
 					href={ schedulesUrl }
+					accent="emerald"
 				/>
 				<StatCard
 					icon={ Brain }
 					label="Memories"
 					value={ stats ? stats.memory_entries : '-' }
+					accent="violet"
 				/>
 				<StatCard
 					icon={ Wifi }
@@ -293,6 +298,7 @@ export default function Dashboard() {
 					value={ hasApiKey ? 'Connected' : 'Not set' }
 					variant={ hasApiKey ? 'green' : 'yellow' }
 					href={ settingsUrl }
+					accent="cyan"
 				/>
 			</div>
 
