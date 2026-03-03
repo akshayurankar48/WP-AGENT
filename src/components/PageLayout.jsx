@@ -16,7 +16,7 @@ const NAV_ITEMS = [
 export default function PageLayout( { children } ) {
 	return (
 		<div className="bg-background-secondary min-h-screen">
-			<Toaster position="top-right" />
+			<Toaster position="top-right" className="!z-[9999]" />
 
 			<Topbar className="sticky top-0 z-50 border-b border-solid border-border-subtle bg-background-primary/95 backdrop-blur-sm px-4">
 				<Topbar.Left gap="sm">

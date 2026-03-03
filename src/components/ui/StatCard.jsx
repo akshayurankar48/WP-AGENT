@@ -56,26 +56,24 @@ export default function StatCard( { icon: Icon, label, value, variant = 'neutral
 	const displayValue = ! isNaN( numericValue ) ? String( animatedValue ) : value;
 
 	const content = (
-		<div className="rounded-lg border border-solid border-border-subtle bg-background-primary p-4 hover:shadow-sm transition-shadow duration-200">
-			<div className="flex items-center gap-3">
+		<div className="rounded-lg border border-solid border-border-subtle bg-background-primary p-4 hover:shadow-sm transition-shadow duration-200 h-full">
+			<div className="flex items-start gap-3">
 				<div className={ `flex items-center justify-center size-9 rounded-lg ${ color.bg } shrink-0` }>
 					<Icon className={ `size-4 ${ color.text }` } />
 				</div>
-				<div className="min-w-0">
+				<div className="min-w-0 flex-1">
 					<p className="text-xs font-medium text-text-tertiary uppercase tracking-wide">{ label }</p>
-					<div className="flex items-center gap-2 mt-0.5">
-						<span className="text-lg font-semibold text-text-primary tabular-nums">
-							{ displayValue }
-						</span>
-						{ variant !== 'neutral' && (
-							<Badge
-								label={ variant === 'green' ? 'Active' : 'Pending' }
-								variant={ variant }
-								size="xs"
-							/>
-						) }
-					</div>
+					<p className="text-lg font-semibold text-text-primary tabular-nums mt-0.5 truncate">
+						{ displayValue }
+					</p>
 				</div>
+				{ variant !== 'neutral' && (
+					<Badge
+						label={ variant === 'green' ? 'Active' : 'Pending' }
+						variant={ variant }
+						size="xs"
+					/>
+				) }
 			</div>
 			{ href && (
 				<div className="flex items-center gap-1 mt-2.5 text-xs text-text-tertiary">
@@ -88,7 +86,7 @@ export default function StatCard( { icon: Icon, label, value, variant = 'neutral
 
 	if ( href ) {
 		return (
-			<a href={ href } className="no-underline block">
+			<a href={ href } className="no-underline block h-full">
 				{ content }
 			</a>
 		);

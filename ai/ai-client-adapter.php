@@ -1493,7 +1493,7 @@ class AI_Client_Adapter {
 				),
 				'body'    => wp_json_encode(
 					array(
-						'model'      => 'claude-sonnet-4-20250514',
+						'model'      => 'claude-haiku-4-5-20251001',
 						'max_tokens' => 1,
 						'messages'   => array(
 							array(
@@ -1512,6 +1512,7 @@ class AI_Client_Adapter {
 		}
 
 		$code = wp_remote_retrieve_response_code( $response );
+		$body = json_decode( wp_remote_retrieve_body( $response ), true );
 
 		if ( 401 === $code || 403 === $code ) {
 			return new \WP_Error( 'invalid_api_key', __( 'The Anthropic API key is invalid or has been revoked.', 'jarvis-ai' ) );
@@ -1522,9 +1523,11 @@ class AI_Client_Adapter {
 			return true;
 		}
 
+		$msg = $body['error']['message'] ?? sprintf( 'HTTP %d', $code );
 		return new \WP_Error(
 			'api_error',
-			sprintf( __( 'Anthropic API returned HTTP %d during validation.', 'jarvis-ai' ), $code )
+			/* translators: %s: API error detail */
+			sprintf( __( 'Anthropic API validation failed: %s', 'jarvis-ai' ), $msg )
 		);
 	}
 

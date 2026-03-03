@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from '@wordpress/element';
+import { useState, useEffect, useCallback, useRef } from '@wordpress/element';
 import { useDispatch } from '@wordpress/data';
 import apiFetch from '@wordpress/api-fetch';
 import {
@@ -19,6 +19,8 @@ import {
 	Send,
 	Activity,
 	Rocket,
+	ChevronLeft,
+	ChevronRight,
 } from 'lucide-react';
 import PageLayout from '../components/PageLayout';
 import AIPulse from '../components/AIPulse';
@@ -217,89 +219,170 @@ export default function Dashboard() {
 		document.dispatchEvent( new CustomEvent( 'jarvis-open-drawer' ) );
 	}, [ loadConversation ] );
 
+	/* ── Stats slider scroll ────────────────────────────────────── */
+	const statsRef = useRef( null );
+	const [ canScrollLeft, setCanScrollLeft ] = useState( false );
+	const [ canScrollRight, setCanScrollRight ] = useState( false );
+
+	const updateScrollState = useCallback( () => {
+		const el = statsRef.current;
+		if ( ! el ) {
+			return;
+		}
+		setCanScrollLeft( el.scrollLeft > 0 );
+		setCanScrollRight( el.scrollLeft + el.clientWidth < el.scrollWidth - 1 );
+	}, [] );
+
+	useEffect( () => {
+		const el = statsRef.current;
+		if ( ! el ) {
+			return;
+		}
+		updateScrollState();
+		el.addEventListener( 'scroll', updateScrollState, { passive: true } );
+		window.addEventListener( 'resize', updateScrollState );
+		return () => {
+			el.removeEventListener( 'scroll', updateScrollState );
+			window.removeEventListener( 'resize', updateScrollState );
+		};
+	}, [ updateScrollState ] );
+
+	const scrollStats = useCallback( ( direction ) => {
+		if ( ! statsRef.current ) {
+			return;
+		}
+		const card = statsRef.current.firstElementChild;
+		const amount = card ? card.offsetWidth + 12 : 200;
+		statsRef.current.scrollBy( {
+			left: direction === 'left' ? -amount : amount,
+			behavior: 'smooth',
+		} );
+	}, [] );
+
 	const recentActivity = stats?.recent_activity || [];
 	const userName = window.jarvisAiData?.userName || '';
 
 	return (
 		<PageLayout>
 			{ /* Welcome Bar */ }
-			<CardShell className="p-5 mb-6" hover={ false }>
+			<div className="rounded-xl bg-gradient-to-br from-indigo-600 via-indigo-500 to-violet-600 p-6 mb-6 shadow-sm">
 				<div className="flex items-center justify-between gap-4 flex-wrap">
 					<div>
-						<h1 className="text-xl font-semibold text-text-primary">
+						<h1 className="text-xl font-semibold text-white">
 							{ getGreeting() }{ userName ? `, ${ userName }` : '' }
 						</h1>
-						<p className="text-sm text-text-tertiary mt-0.5">
+						<p className="text-sm text-indigo-100 mt-0.5">
 							{ stats ? `${ stats.total_actions } actions ready` : 'Loading...' }
 						</p>
 					</div>
 					<div className="flex items-center gap-2 w-full sm:w-auto sm:min-w-[320px]">
-						<div className="flex-1 flex items-center gap-2 border border-solid border-border-subtle rounded-lg px-3 py-2 bg-background-primary focus-within:border-border-interactive focus-within:ring-1 focus-within:ring-border-interactive transition-all duration-200">
-							<MessageSquare className="size-4 text-icon-secondary shrink-0" />
+						<div className="flex-1 flex items-center gap-2 border border-solid border-white/20 rounded-lg px-3 py-2 bg-white/10 backdrop-blur-sm focus-within:border-white/40 focus-within:ring-1 focus-within:ring-white/30 transition-all duration-200">
+							<MessageSquare className="size-4 text-indigo-200 shrink-0" />
 							<input
 								type="text"
 								placeholder="Ask JARVIS anything..."
 								value={ quickInput }
 								onChange={ ( e ) => setQuickInput( e.target.value ) }
 								onKeyDown={ handleQuickKeyDown }
-								className="flex-1 bg-transparent border-none outline-none text-sm text-text-primary placeholder:text-text-tertiary"
+								className="flex-1 bg-transparent border-none outline-none text-sm text-white placeholder:text-indigo-200"
 							/>
 						</div>
 						<button
 							type="button"
 							onClick={ handleQuickSend }
 							disabled={ ! quickInput.trim() }
-							className="flex items-center justify-center size-9 rounded-lg bg-indigo-600 text-white border-none cursor-pointer hover:bg-indigo-700 transition-colors duration-200 disabled:opacity-30 disabled:cursor-not-allowed focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 shrink-0"
+							className="flex items-center justify-center size-9 rounded-lg bg-white text-indigo-600 border-none cursor-pointer hover:bg-indigo-50 transition-colors duration-200 disabled:opacity-30 disabled:cursor-not-allowed focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-indigo-600 shrink-0"
 						>
 							<Send className="size-4" />
 						</button>
 					</div>
 				</div>
-			</CardShell>
+			</div>
 
-			{ /* Stats Row */ }
-			<div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mb-6 overflow-hidden">
-				<StatCard
-					icon={ Zap }
-					label="Actions"
-					value={ stats ? stats.total_actions : '-' }
-					accent="indigo"
-				/>
-				<StatCard
-					icon={ MessageSquare }
-					label="Chats"
-					value={ stats ? stats.conversations : '-' }
-					href={ historyUrl }
-					accent="blue"
-				/>
-				<StatCard
-					icon={ History }
-					label="Executed"
-					value={ stats ? stats.actions_executed : '-' }
-					href={ usageUrl }
-					accent="amber"
-				/>
-				<StatCard
-					icon={ CalendarClock }
-					label="Schedules"
-					value={ stats ? stats.schedules_active : '-' }
-					href={ schedulesUrl }
-					accent="emerald"
-				/>
-				<StatCard
-					icon={ Brain }
-					label="Memories"
-					value={ stats ? stats.memory_entries : '-' }
-					accent="violet"
-				/>
-				<StatCard
-					icon={ Wifi }
-					label="API"
-					value={ hasApiKey ? 'Connected' : 'Not set' }
-					variant={ hasApiKey ? 'green' : 'yellow' }
-					href={ settingsUrl }
-					accent="cyan"
-				/>
+			{ /* Stats Row — horizontal slider */ }
+			<div className="relative mb-6 group/stats">
+				{ /* eslint-disable-next-line no-restricted-syntax */ }
+				<style>{ `.jarvis-stats-slider::-webkit-scrollbar{display:none}` }</style>
+
+				{ canScrollLeft && (
+					<button
+						type="button"
+						onClick={ () => scrollStats( 'left' ) }
+						className="absolute left-2 top-1/2 -translate-y-1/2 z-10 flex items-center justify-center size-8 rounded-full bg-background-primary border border-solid border-border-subtle shadow-lg cursor-pointer hover:bg-background-secondary hover:shadow-xl transition-all duration-200"
+					>
+						<ChevronLeft className="size-4 text-icon-secondary" />
+					</button>
+				) }
+
+				<div
+					ref={ statsRef }
+					className="jarvis-stats-slider flex items-stretch gap-4 overflow-x-auto scroll-smooth snap-x snap-mandatory px-1 py-1"
+					style={ { scrollbarWidth: 'none' } }
+				>
+					<div className="snap-start shrink-0 w-52 self-stretch">
+						<StatCard
+							icon={ Zap }
+							label="Actions"
+							value={ stats ? stats.total_actions : '-' }
+							accent="indigo"
+						/>
+					</div>
+					<div className="snap-start shrink-0 w-52 self-stretch">
+						<StatCard
+							icon={ MessageSquare }
+							label="Chats"
+							value={ stats ? stats.conversations : '-' }
+							href={ historyUrl }
+							accent="blue"
+						/>
+					</div>
+					<div className="snap-start shrink-0 w-52 self-stretch">
+						<StatCard
+							icon={ History }
+							label="Executed"
+							value={ stats ? stats.actions_executed : '-' }
+							href={ usageUrl }
+							accent="amber"
+						/>
+					</div>
+					<div className="snap-start shrink-0 w-52 self-stretch">
+						<StatCard
+							icon={ CalendarClock }
+							label="Schedules"
+							value={ stats ? stats.schedules_active : '-' }
+							href={ schedulesUrl }
+							accent="emerald"
+						/>
+					</div>
+					<div className="snap-start shrink-0 w-52 self-stretch">
+						<StatCard
+							icon={ Brain }
+							label="Memories"
+							value={ stats ? stats.memory_entries : '-' }
+							accent="violet"
+						/>
+					</div>
+					<div className="snap-start shrink-0 w-52 self-stretch">
+						<StatCard
+							icon={ Wifi }
+							label="API"
+							value={ hasApiKey ? 'Connected' : 'Not set' }
+							variant={ hasApiKey ? 'green' : 'yellow' }
+							href={ settingsUrl }
+							accent="cyan"
+						/>
+					</div>
+				</div>
+
+				{ canScrollRight && (
+					<button
+						type="button"
+						onClick={ () => scrollStats( 'right' ) }
+						className="absolute right-2 top-1/2 -translate-y-1/2 z-10 flex items-center justify-center size-8 rounded-full bg-background-primary border border-solid border-border-subtle shadow-lg cursor-pointer hover:bg-background-secondary hover:shadow-xl transition-all duration-200"
+					>
+						<ChevronRight className="size-4 text-icon-secondary" />
+					</button>
+				) }
 			</div>
 
 			{ /* Two-column grid: Quick Actions + Recent Activity */ }
