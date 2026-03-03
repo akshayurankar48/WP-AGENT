@@ -2,6 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Scroll-snap slider utilities */
+.scroll-snap-x {
+	scroll-snap-type: x mandatory;
+	-webkit-overflow-scrolling: touch;
+}
+
+.snap-start {
+	scroll-snap-align: start;
+}
+
+/* Hide scrollbar across browsers */
+.scrollbar-none {
+	scrollbar-width: none; /* Firefox */
+	-ms-overflow-style: none; /* IE/Edge */
+}
+.scrollbar-none::-webkit-scrollbar {
+	display: none; /* Chrome/Safari/Opera */
+}
+
 /* Remove WordPress default blue focus outlines on ALL JARVIS AI admin pages */
 .toplevel_page_jarvis-ai button:focus,
 .toplevel_page_jarvis-ai input:focus,

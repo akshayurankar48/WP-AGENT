@@ -1,4 +1,4 @@
-import { useState } from '@wordpress/element';
+import { useState, useEffect } from '@wordpress/element';
 import { Badge } from '@bsf/force-ui';
 import {
 	FileText,
@@ -21,8 +21,10 @@ import {
 	Undo2,
 	ShoppingCart,
 	Search,
+	ChevronDown,
 } from 'lucide-react';
 import PageLayout from '../components/PageLayout';
+import PageHeader from '../components/ui/PageHeader';
 
 const CATEGORIES = [
 	{
@@ -205,37 +207,77 @@ const CATEGORIES = [
 	},
 ];
 
-function ActionCard( { name, description, slug } ) {
-	const handleTry = ( e ) => {
-		e.stopPropagation();
+function ActionCard( { name, description } ) {
+	const handleClick = () => {
 		document.dispatchEvent( new CustomEvent( 'jarvis-open-drawer', {
 			detail: { prompt: description },
 		} ) );
 	};
 
 	return (
-		<div className="group bg-background-primary border border-solid border-border-subtle rounded-xl p-4 flex flex-col gap-1.5 hover:shadow-md hover:border-border-interactive transition-all duration-200">
-			<div className="flex items-center justify-between">
-				<h3 className="text-sm font-semibold text-text-primary">
-					{ name }
-				</h3>
-				<button
-					type="button"
-					onClick={ handleTry }
-					className="opacity-0 group-hover:opacity-100 text-xs font-medium text-brand-800 bg-transparent border-0 cursor-pointer hover:underline transition-opacity px-0"
-				>
-					Try it
-				</button>
-			</div>
-			<p className="text-xs text-text-secondary leading-relaxed">
+		<button
+			type="button"
+			onClick={ handleClick }
+			className="flex flex-col gap-1 p-3 rounded-lg text-left cursor-pointer bg-transparent border-0 hover:bg-background-secondary/50 transition-colors duration-150 w-full"
+		>
+			<span className="text-sm font-medium text-text-primary">
+				{ name }
+			</span>
+			<span className="text-xs text-text-tertiary leading-relaxed">
 				{ description }
-			</p>
+			</span>
+		</button>
+	);
+}
+
+function CategoryAccordion( { category, isOpen, onToggle } ) {
+	const Icon = category.icon;
+
+	return (
+		<div className="rounded-lg border border-solid border-border-subtle bg-background-primary overflow-hidden">
+			<button
+				type="button"
+				onClick={ onToggle }
+				className="flex items-center gap-3 w-full px-4 py-3.5 text-left bg-transparent border-0 cursor-pointer hover:bg-background-secondary/30 transition-colors duration-150"
+			>
+				<Icon className="size-4 text-icon-secondary shrink-0" />
+				<span className="text-sm font-medium text-text-primary flex-1">
+					{ category.title }
+				</span>
+				{ category.badge && (
+					<Badge
+						label={ category.badge }
+						variant="yellow"
+						size="xs"
+					/>
+				) }
+				<Badge
+					label={ String( category.actions.length ) }
+					variant="neutral"
+					size="xs"
+				/>
+				<ChevronDown className={ `size-4 text-icon-secondary transition-transform duration-200 ${ isOpen ? 'rotate-180' : '' }` } />
+			</button>
+			{ isOpen && (
+				<div className="border-t border-solid border-border-subtle px-2 py-2">
+					<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-0.5">
+						{ category.actions.map( ( action ) => (
+							<ActionCard
+								key={ action.slug }
+								name={ action.name }
+								description={ action.description }
+							/>
+						) ) }
+					</div>
+				</div>
+			) }
 		</div>
 	);
 }
 
 export default function Capabilities() {
 	const [ filter, setFilter ] = useState( '' );
+	const [ openSections, setOpenSections ] = useState( new Set() );
 	const lowerFilter = filter.toLowerCase();
 
 	const filtered = filter
@@ -260,75 +302,58 @@ export default function Capabilities() {
 		0
 	);
 
+	// Auto-expand matching categories when searching.
+	useEffect( () => {
+		if ( filter ) {
+			setOpenSections( new Set( filtered.map( ( cat ) => cat.title ) ) );
+		} else {
+			setOpenSections( new Set() );
+		}
+	}, [ filter ] ); // eslint-disable-line react-hooks/exhaustive-deps
+
+	const toggleSection = ( title ) => {
+		setOpenSections( ( prev ) => {
+			const next = new Set( prev );
+			if ( next.has( title ) ) {
+				next.delete( title );
+			} else {
+				next.add( title );
+			}
+			return next;
+		} );
+	};
+
 	return (
 		<PageLayout>
-			{ /* Header */ }
-			<div className="flex items-center justify-between mb-6">
-				<div className="flex items-center gap-3">
-					<h1 className="text-xl font-semibold text-text-primary">
-						Capabilities
-					</h1>
-					<Badge
-						label={ `${ totalActions } actions` }
-						variant="neutral"
-						size="xs"
-					/>
-				</div>
-				<div className="relative">
-					<Search size={ 14 } className="absolute left-3 top-1/2 -translate-y-1/2 text-icon-secondary pointer-events-none" />
-					<input
-						type="text"
-						placeholder="Filter actions..."
-						value={ filter }
-						onChange={ ( e ) => setFilter( e.target.value ) }
-						className="pl-8 pr-3 py-1.5 text-sm border border-solid border-border-subtle rounded-lg bg-background-primary text-text-primary placeholder:text-text-tertiary outline-none focus:border-border-interactive focus:ring-1 focus:ring-border-interactive w-56"
-					/>
-				</div>
-			</div>
+			<PageHeader
+				title="Capabilities"
+				description={ filter
+					? `Showing ${ visibleActions } of ${ totalActions } actions`
+					: `${ totalActions } actions available`
+				}
+				actions={
+					<div className="relative">
+						<Search size={ 14 } className="absolute left-3 top-1/2 -translate-y-1/2 text-icon-secondary pointer-events-none" />
+						<input
+							type="text"
+							placeholder="Filter actions..."
+							value={ filter }
+							onChange={ ( e ) => setFilter( e.target.value ) }
+							className="pl-8 pr-3 py-1.5 text-sm border border-solid border-border-subtle rounded-lg bg-background-primary text-text-primary placeholder:text-text-tertiary outline-none focus:border-border-interactive focus:ring-1 focus:ring-border-interactive w-56"
+						/>
+					</div>
+				}
+			/>
 
-			{ filter && (
-				<p className="text-xs text-text-tertiary mb-4">
-					Showing { visibleActions } of { totalActions } actions
-				</p>
-			) }
-
-			{ /* Category sections */ }
-			<div className="flex flex-col gap-8">
-				{ filtered.map( ( category ) => {
-					const Icon = category.icon;
-					return (
-						<section key={ category.title }>
-							<div className="flex items-center gap-2 mb-3">
-								<Icon size={ 16 } className="text-icon-secondary" />
-								<h2 className="text-base font-semibold text-text-primary">
-									{ category.title }
-								</h2>
-								<Badge
-									label={ String( category.actions.length ) }
-									variant="neutral"
-									size="xs"
-								/>
-								{ category.badge && (
-									<Badge
-										label={ category.badge }
-										variant="yellow"
-										size="xs"
-									/>
-								) }
-							</div>
-							<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
-								{ category.actions.map( ( action ) => (
-									<ActionCard
-										key={ action.slug }
-										name={ action.name }
-										description={ action.description }
-										slug={ action.slug }
-									/>
-								) ) }
-							</div>
-						</section>
-					);
-				} ) }
+			<div className="flex flex-col gap-2">
+				{ filtered.map( ( category ) => (
+					<CategoryAccordion
+						key={ category.title }
+						category={ category }
+						isOpen={ openSections.has( category.title ) }
+						onToggle={ () => toggleSection( category.title ) }
+					/>
+				) ) }
 			</div>
 		</PageLayout>
 	);

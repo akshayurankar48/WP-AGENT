@@ -18,7 +18,7 @@ export default function PageLayout( { children } ) {
 		<div className="bg-background-secondary min-h-screen">
 			<Toaster position="top-right" />
 
-			<Topbar className="border-b border-solid border-border-subtle bg-background-primary px-4">
+			<Topbar className="sticky top-0 z-50 border-b border-solid border-border-subtle bg-background-primary/95 backdrop-blur-sm px-4">
 				<Topbar.Left gap="sm">
 					<div className="flex items-center gap-2">
 						<Bot className="size-5 text-brand-800" />
@@ -39,13 +39,16 @@ export default function PageLayout( { children } ) {
 									key={ item.slug }
 									href={ href }
 									className={ cn(
-										'px-3 py-2 text-sm font-medium rounded-md no-underline transition-colors',
+										'relative px-3 py-2 text-sm font-medium no-underline transition-colors',
 										isActive
-											? 'text-text-primary bg-background-secondary'
-											: 'text-text-secondary hover:text-text-primary hover:bg-background-secondary'
+											? 'text-text-primary'
+											: 'text-text-tertiary hover:text-text-primary'
 									) }
 								>
 									{ item.label }
+									{ isActive && (
+										<span className="absolute bottom-0 left-3 right-3 h-0.5 bg-text-primary rounded-full" />
+									) }
 								</a>
 							);
 						} ) }
@@ -63,8 +66,10 @@ export default function PageLayout( { children } ) {
 				</Topbar.Right>
 			</Topbar>
 
-			<div className="p-5 sm:p-6 xl:p-8">
-				{ children }
+			<div className="p-6 lg:p-8">
+				<div className="max-w-6xl mx-auto">
+					{ children }
+				</div>
 			</div>
 		</div>
 	);

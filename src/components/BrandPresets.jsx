@@ -46,8 +46,8 @@ function ColorField( { label, value, onChange, placeholder = '#000000' } ) {
 function SectionHeader( { icon: Icon, title, description, color } ) {
 	return (
 		<div className="flex items-center gap-3">
-			<div className={ `flex items-center justify-center size-9 rounded-lg ${ color.bg } shrink-0` }>
-				<Icon className={ `size-4 ${ color.text }` } />
+			<div className="flex items-center justify-center size-9 rounded-lg bg-background-secondary shrink-0">
+				<Icon className="size-4 text-icon-secondary" />
 			</div>
 			<div>
 				<h3 className="text-sm font-semibold text-text-primary">

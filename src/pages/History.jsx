@@ -1,11 +1,9 @@
 import { useState, useEffect, useCallback, useRef } from '@wordpress/element';
 import { useDispatch } from '@wordpress/data';
 import apiFetch from '@wordpress/api-fetch';
-import { Badge, Button, Tooltip } from '@bsf/force-ui';
+import { Badge, Button, Skeleton } from '@bsf/force-ui';
 import {
-	Clock,
 	RefreshCw,
-	Loader2,
 	MessageSquare,
 	ChevronLeft,
 	ChevronRight,
@@ -13,7 +11,6 @@ import {
 	Cpu,
 	Calendar,
 	CircleDot,
-	Sparkles,
 	ArrowRight,
 	Pencil,
 	Check,
@@ -22,20 +19,11 @@ import {
 	Search,
 } from 'lucide-react';
 import PageLayout from '../components/PageLayout';
+import PageHeader from '../components/ui/PageHeader';
+import EmptyState from '../components/ui/EmptyState';
 import { STORE_NAME } from '../store/constants';
 
-const TOKEN_TIERS = [
-	{ max: 500, label: 'Light', bg: 'bg-emerald-50', text: 'text-emerald-600' },
-	{ max: 2000, label: 'Normal', bg: 'bg-blue-50', text: 'text-blue-600' },
-	{ max: 5000, label: 'Heavy', bg: 'bg-amber-50', text: 'text-amber-600' },
-	{ max: Infinity, label: 'Ultra', bg: 'bg-rose-50', text: 'text-rose-600' },
-];
-
-function getTokenTier( tokens ) {
-	return TOKEN_TIERS.find( ( t ) => tokens <= t.max ) || TOKEN_TIERS[ TOKEN_TIERS.length - 1 ];
-}
-
-function ConversationRow( { conversation, index, onResume, onRename, onDelete } ) {
+function ConversationRow( { conversation, onResume, onRename, onDelete } ) {
 	const [ editing, setEditing ] = useState( false );
 	const [ editTitle, setEditTitle ] = useState( '' );
 	const [ saving, setSaving ] = useState( false );
@@ -50,8 +38,6 @@ function ConversationRow( { conversation, index, onResume, onRename, onDelete } 
 	} );
 
 	const tokens = conversation.tokens_used || 0;
-	const tier = getTokenTier( tokens );
-	const isEven = index % 2 === 0;
 
 	const startEditing = ( e ) => {
 		e.stopPropagation();
@@ -91,13 +77,13 @@ function ConversationRow( { conversation, index, onResume, onRename, onDelete } 
 
 	return (
 		<tr
-			className={ `group border-b border-solid border-border-subtle last:border-b-0 hover:bg-blue-50/50 transition-colors duration-150 cursor-pointer ${ isEven ? '' : 'bg-background-secondary/40' }` }
+			className="group border-b border-solid border-border-subtle last:border-b-0 hover:bg-background-secondary/40 transition-colors duration-150 cursor-pointer"
 			onClick={ () => ! editing && onResume( conversation.id ) }
 		>
-			<td className="py-3.5 px-5">
+			<td className="py-3 px-4">
 				<div className="flex items-center gap-3">
-					<div className="flex items-center justify-center size-8 rounded-lg bg-violet-50 shrink-0">
-						<MessageSquare className="size-3.5 text-violet-600" />
+					<div className="flex items-center justify-center size-8 rounded-lg bg-background-secondary shrink-0">
+						<MessageSquare className="size-3.5 text-icon-secondary" />
 					</div>
 					{ editing ? (
 						<div className="flex items-center gap-1.5 flex-1 min-w-0" onClick={ ( e ) => e.stopPropagation() }>
@@ -114,14 +100,14 @@ function ConversationRow( { conversation, index, onResume, onRename, onDelete } 
 							<button
 								onClick={ saveTitle }
 								disabled={ saving }
-								className="p-1 rounded hover:bg-emerald-50 text-emerald-600 shrink-0"
+								className="p-1 rounded hover:bg-background-secondary text-support-success shrink-0"
 							>
 								<Check className="size-3.5" />
 							</button>
 							<button
 								onClick={ cancelEditing }
 								disabled={ saving }
-								className="p-1 rounded hover:bg-red-50 text-red-500 shrink-0"
+								className="p-1 rounded hover:bg-background-secondary text-support-error shrink-0"
 							>
 								<X className="size-3.5" />
 							</button>
@@ -141,7 +127,7 @@ function ConversationRow( { conversation, index, onResume, onRename, onDelete } 
 					) }
 				</div>
 			</td>
-			<td className="py-3.5 px-5">
+			<td className="py-3 px-4">
 				<Badge
 					label={ conversation.status }
 					variant={ conversation.status === 'active' ? 'green' : 'neutral' }
@@ -149,27 +135,27 @@ function ConversationRow( { conversation, index, onResume, onRename, onDelete } 
 					className="capitalize"
 				/>
 			</td>
-			<td className="py-3.5 px-5">
+			<td className="py-3 px-4">
 				<span className="text-xs font-medium text-text-secondary bg-background-secondary px-2 py-0.5 rounded-md">
 					{ conversation.model || '-' }
 				</span>
 			</td>
-			<td className="py-3.5 px-5">
-				<span className={ `inline-flex items-center gap-1 text-xs font-semibold px-2 py-0.5 rounded-md ${ tier.bg } ${ tier.text }` }>
+			<td className="py-3 px-4">
+				<span className="text-xs font-medium text-text-secondary tabular-nums">
 					{ tokens.toLocaleString() }
 				</span>
 			</td>
-			<td className="py-3.5 px-5">
+			<td className="py-3 px-4">
 				<span className="text-xs text-text-tertiary">{ formatted }</span>
 			</td>
-			<td className="py-3.5 px-5">
+			<td className="py-3 px-4">
 				<div className="flex items-center gap-1">
 					<button
 						onClick={ ( e ) => {
 							e.stopPropagation();
 							onDelete( conversation.id );
 						} }
-						className="p-1.5 rounded-md hover:bg-red-50 text-text-tertiary hover:text-red-500 transition-colors opacity-0 group-hover:opacity-100 shrink-0"
+						className="p-1.5 rounded-md hover:bg-background-secondary text-text-tertiary hover:text-support-error transition-colors opacity-0 group-hover:opacity-100 shrink-0"
 						title="Delete conversation"
 					>
 						<Trash2 className="size-3.5" />
@@ -183,12 +169,30 @@ function ConversationRow( { conversation, index, onResume, onRename, onDelete } 
 
 function TableHeader( { icon: Icon, label } ) {
 	return (
-		<th className="py-3 px-5 text-xs font-semibold text-text-secondary uppercase tracking-wider">
+		<th className="py-3 px-4 text-xs font-medium text-text-tertiary uppercase tracking-wider">
 			<div className="flex items-center gap-1.5">
 				<Icon className="size-3 text-icon-secondary" />
 				{ label }
 			</div>
 		</th>
+	);
+}
+
+function TableSkeleton() {
+	return (
+		<div className="rounded-lg border border-solid border-border-subtle bg-background-primary overflow-hidden">
+			<div className="p-4 space-y-4">
+				{ [ 1, 2, 3, 4, 5 ].map( ( i ) => (
+					<div key={ i } className="flex items-center gap-4">
+						<Skeleton className="h-8 w-8 rounded-lg" />
+						<Skeleton className="h-4 flex-1 rounded" />
+						<Skeleton className="h-4 w-16 rounded" />
+						<Skeleton className="h-4 w-20 rounded" />
+						<Skeleton className="h-4 w-12 rounded" />
+					</div>
+				) ) }
+			</div>
+		</div>
 	);
 }
 
@@ -235,7 +239,6 @@ export default function History() {
 				method: 'POST',
 				data: { title },
 			} );
-			// Update local state to reflect new title.
 			setData( ( prev ) => {
 				if ( ! prev ) {
 					return prev;
@@ -282,86 +285,66 @@ export default function History() {
 
 	return (
 		<PageLayout>
-			{ /* Header */ }
-			<div className="flex items-center justify-between mb-6">
-				<div className="flex items-center gap-3">
-					<div className="flex items-center justify-center size-9 rounded-xl bg-blue-50">
-						<Clock className="size-4.5 text-blue-600" />
-					</div>
-					<div>
-						<h1 className="text-xl font-bold text-text-primary">
-							History
-						</h1>
-						<p className="text-xs text-text-tertiary mt-0.5">
-							{ data
-								? `${ data.total } conversation${ data.total !== 1 ? 's' : '' } recorded`
-								: 'Loading conversations...'
-							}
-						</p>
-					</div>
-				</div>
-				<div className="flex items-center gap-3">
-					<div className="relative">
-						<Search size={ 14 } className="absolute left-3 top-1/2 -translate-y-1/2 text-icon-secondary pointer-events-none" />
-						<input
-							type="text"
-							placeholder="Search conversations..."
-							value={ search }
-							onChange={ ( e ) => setSearch( e.target.value ) }
-							className="pl-8 pr-3 py-1.5 text-sm border border-solid border-border-subtle rounded-lg bg-background-primary text-text-primary placeholder:text-text-tertiary outline-none focus:border-border-interactive focus:ring-1 focus:ring-border-interactive w-52"
-						/>
-					</div>
-					<Button
-						variant="outline"
-						size="xs"
-						icon={ <RefreshCw size={ 14 } className={ loading ? 'animate-spin' : '' } /> }
-						onClick={ () => fetchHistory( page ) }
-						disabled={ loading }
-					>
-						Refresh
-					</Button>
-				</div>
-			</div>
+			<PageHeader
+				title="History"
+				description={
+					data
+						? `${ data.total } conversation${ data.total !== 1 ? 's' : '' } recorded`
+						: 'Loading conversations...'
+				}
+				actions={
+					<>
+						<div className="relative">
+							<Search size={ 14 } className="absolute left-3 top-1/2 -translate-y-1/2 text-icon-secondary pointer-events-none" />
+							<input
+								type="text"
+								placeholder="Search conversations..."
+								value={ search }
+								onChange={ ( e ) => setSearch( e.target.value ) }
+								className="pl-8 pr-3 py-1.5 text-sm border border-solid border-border-subtle rounded-lg bg-background-primary text-text-primary placeholder:text-text-tertiary outline-none focus:border-border-interactive focus:ring-1 focus:ring-border-interactive w-52"
+							/>
+						</div>
+						<Button
+							variant="outline"
+							size="xs"
+							icon={ <RefreshCw size={ 14 } className={ loading ? 'animate-spin' : '' } /> }
+							onClick={ () => fetchHistory( page ) }
+							disabled={ loading }
+						>
+							Refresh
+						</Button>
+					</>
+				}
+			/>
 
 			{ loading ? (
-				<div className="flex flex-col items-center justify-center py-20">
-					<Loader2 size={ 28 } className="animate-spin text-brand-800 mb-3" />
-					<p className="text-sm text-text-secondary">Loading conversations...</p>
-				</div>
+				<TableSkeleton />
 			) : conversations.length === 0 ? (
-				<div className="relative overflow-hidden flex flex-col items-center justify-center rounded-2xl border border-solid border-border-subtle bg-background-primary p-16 shadow-sm text-center">
-					<div className="absolute top-0 right-0 w-48 h-48 bg-blue-100 rounded-full -translate-y-1/2 translate-x-1/3 opacity-40 blur-3xl pointer-events-none" />
-					<div className="relative">
-						<div className="flex items-center justify-center size-16 rounded-2xl bg-gradient-to-br from-blue-50 to-violet-50 mb-5 mx-auto">
-							<MessageSquare size={ 28 } className="text-blue-600" />
-						</div>
-						<h2 className="text-lg font-bold text-text-primary mb-2">
-							No conversations yet
-						</h2>
-						<p className="text-sm text-text-secondary max-w-sm leading-relaxed">
-							Open the editor and start chatting with JARVIS.
-							Your conversation history will appear here.
-						</p>
-					</div>
+				<div className="rounded-lg border border-solid border-border-subtle bg-background-primary">
+					<EmptyState
+						icon={ MessageSquare }
+						title="No conversations yet"
+						description="Open the editor and start chatting with JARVIS. Your conversation history will appear here."
+					/>
 				</div>
 			) : (
 				<>
-					<div className="rounded-2xl border border-solid border-border-subtle bg-background-primary shadow-sm overflow-hidden">
+					<div className="rounded-lg border border-solid border-border-subtle bg-background-primary overflow-hidden">
 						<div className="overflow-x-auto">
 							<table className="w-full text-left border-collapse">
 								<thead>
-									<tr className="border-b border-solid border-border-subtle bg-gradient-to-r from-background-secondary to-background-primary">
+									<tr className="border-b border-solid border-border-subtle bg-background-secondary">
 										<TableHeader icon={ MessageSquare } label="Conversation" />
 										<TableHeader icon={ CircleDot } label="Status" />
 										<TableHeader icon={ Cpu } label="Model" />
 										<TableHeader icon={ Hash } label="Tokens" />
 										<TableHeader icon={ Calendar } label="Date" />
-										<th className="py-3 px-5 w-10"></th>
+										<th className="py-3 px-4 w-10"></th>
 									</tr>
 								</thead>
 								<tbody>
-									{ conversations.map( ( conv, i ) => (
-										<ConversationRow key={ conv.id } conversation={ conv } index={ i } onResume={ handleResume } onRename={ handleRename } onDelete={ handleDelete } />
+									{ conversations.map( ( conv ) => (
+										<ConversationRow key={ conv.id } conversation={ conv } onResume={ handleResume } onRename={ handleRename } onDelete={ handleDelete } />
 									) ) }
 								</tbody>
 							</table>

@@ -57,8 +57,8 @@ export default function ApiKeyForm( {
 			{ /* OpenRouter API Key */ }
 			<div className="flex flex-col gap-4">
 				<div className="flex items-center gap-3">
-					<div className="flex items-center justify-center size-9 rounded-lg bg-violet-50 shrink-0">
-						<KeyRound className="size-4 text-violet-600" />
+					<div className="flex items-center justify-center size-9 rounded-lg bg-background-secondary shrink-0">
+						<KeyRound className="size-4 text-icon-secondary" />
 					</div>
 					<div>
 						<h3 className="text-sm font-semibold text-text-primary">
@@ -114,8 +114,8 @@ export default function ApiKeyForm( {
 			{ /* Tavily API Key */ }
 			<div className="flex flex-col gap-4">
 				<div className="flex items-center gap-3">
-					<div className="flex items-center justify-center size-9 rounded-lg bg-blue-50 shrink-0">
-						<Search className="size-4 text-blue-600" />
+					<div className="flex items-center justify-center size-9 rounded-lg bg-background-secondary shrink-0">
+						<Search className="size-4 text-icon-secondary" />
 					</div>
 					<div>
 						<h3 className="text-sm font-semibold text-text-primary">

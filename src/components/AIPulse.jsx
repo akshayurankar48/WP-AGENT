@@ -2,7 +2,7 @@
  * AI Pulse — AI News & Learning Hub.
  *
  * Fetches curated AI news from RSS feeds via the REST API
- * and displays them in a card grid with source filters.
+ * and displays them in a horizontal slider with source filters.
  *
  * @package
  * @since 1.2.0
@@ -10,6 +10,7 @@
 
 import { useState, useEffect, useCallback } from '@wordpress/element';
 import apiFetch from '@wordpress/api-fetch';
+import { Badge, Skeleton } from '@bsf/force-ui';
 import {
 	Rss,
 	ExternalLink,
@@ -19,16 +20,20 @@ import {
 	Sparkles,
 	Play,
 } from 'lucide-react';
+import CardShell from './ui/CardShell';
+import SectionHeader from './ui/SectionHeader';
+import HorizontalSlider from './ui/HorizontalSlider';
+import EmptyState from './ui/EmptyState';
 
-/* ── Source icon colors ─────────────────────────────────────────── */
+/* ── Source labels ─────────────────────────────────────────────── */
 
-const SOURCE_STYLES = {
-	openai: { bg: 'bg-emerald-50', text: 'text-emerald-600', label: 'OpenAI' },
-	anthropic: { bg: 'bg-orange-50', text: 'text-orange-600', label: 'Anthropic' },
-	verge: { bg: 'bg-violet-50', text: 'text-violet-600', label: 'The Verge' },
-	techcrunch: { bg: 'bg-green-50', text: 'text-green-600', label: 'TechCrunch' },
-	wordpress: { bg: 'bg-blue-50', text: 'text-blue-600', label: 'WordPress' },
-	youtube: { bg: 'bg-red-50', text: 'text-red-600', label: 'YouTube' },
+const SOURCE_LABELS = {
+	openai: 'OpenAI',
+	anthropic: 'Anthropic',
+	verge: 'The Verge',
+	techcrunch: 'TechCrunch',
+	wordpress: 'WordPress',
+	youtube: 'YouTube',
 };
 
 const TABS = [
@@ -69,7 +74,7 @@ function timeAgo( dateStr ) {
 /* ── Feed Item Card ────────────────────────────────────────────── */
 
 function FeedCard( { item } ) {
-	const style = SOURCE_STYLES[ item.icon ] || SOURCE_STYLES.openai;
+	const sourceLabel = SOURCE_LABELS[ item.icon ] || item.icon;
 	const isVideo = item.type === 'video';
 
 	return (
@@ -77,37 +82,37 @@ function FeedCard( { item } ) {
 			href={ item.link }
 			target="_blank"
 			rel="noopener noreferrer"
-			className="group flex flex-col gap-2 p-4 rounded-xl border border-solid border-border-subtle bg-background-primary hover:shadow-md hover:border-border-interactive transition-all duration-200 no-underline"
+			className="group flex flex-col gap-2 p-4 rounded-lg border border-solid border-border-subtle bg-background-primary hover:shadow-sm hover:border-border-interactive transition-all duration-200 no-underline w-[280px] shrink-0 snap-start"
 		>
 			{ /* Video thumbnail */ }
 			{ isVideo && item.thumbnail && (
-				<div className="relative rounded-lg overflow-hidden -mx-1 -mt-1 mb-0.5">
+				<div className="relative rounded-md overflow-hidden -mx-1 -mt-1 mb-0.5">
 					<img
 						src={ item.thumbnail }
 						alt=""
-						className="w-full h-auto aspect-video object-cover"
+						className="w-full h-20 object-cover"
 						loading="lazy"
 					/>
 					<div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/30 transition-colors duration-200">
-						<div className="flex items-center justify-center size-9 rounded-full bg-red-600 shadow-lg">
-							<Play className="size-4 text-white fill-white ml-0.5" />
+						<div className="flex items-center justify-center size-7 rounded-full bg-red-600 shadow-md">
+							<Play className="size-3 text-white fill-white ml-px" />
 						</div>
 					</div>
 				</div>
 			) }
 			<div className="flex items-center justify-between gap-2">
-				<span className={ `inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold ${ style.bg } ${ style.text }` }>
-					{ style.label }
+				<span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-background-secondary text-text-secondary">
+					{ sourceLabel }
 				</span>
 				<span className="text-[10px] text-text-tertiary shrink-0">
 					{ timeAgo( item.published ) }
 				</span>
 			</div>
-			<h3 className="text-sm font-semibold text-text-primary leading-snug line-clamp-2 group-hover:text-brand-800 transition-colors duration-150">
+			<h3 className="text-sm font-medium text-text-primary leading-snug line-clamp-2 group-hover:text-text-primary transition-colors duration-150">
 				{ item.title }
 			</h3>
 			{ item.summary && ! isVideo && (
-				<p className="text-xs text-text-secondary leading-relaxed line-clamp-2">
+				<p className="text-xs text-text-tertiary leading-relaxed line-clamp-2">
 					{ item.summary }
 				</p>
 			) }
@@ -153,27 +158,23 @@ export default function AIPulse() {
 		: items.filter( ( item ) => item.type === activeTab );
 
 	return (
-		<div className="bg-background-primary border border-solid border-border-subtle rounded-2xl shadow-sm p-6">
-			<div className="flex items-center justify-between mb-4">
-				<div className="flex items-center gap-2">
-					<Rss className="size-4 text-text-secondary" />
-					<h2 className="text-base font-bold text-text-primary">
-						AI Pulse
-					</h2>
-					<span className="inline-flex items-center px-1.5 py-0.5 rounded-full text-[9px] font-bold bg-gradient-to-r from-indigo-500 to-violet-500 text-white uppercase tracking-wider">
-						Live
-					</span>
-				</div>
-				<button
-					type="button"
-					onClick={ () => fetchFeed( true ) }
-					disabled={ isRefreshing }
-					className="flex items-center gap-1 text-xs font-medium text-text-tertiary hover:text-brand-800 transition-colors duration-200 bg-transparent border-none cursor-pointer disabled:opacity-40"
-				>
-					<RefreshCw className={ `size-3 ${ isRefreshing ? 'animate-spin' : '' }` } />
-					Refresh
-				</button>
-			</div>
+		<CardShell className="p-5" hover={ false }>
+			<SectionHeader
+				icon={ Rss }
+				title="AI Pulse"
+				badge="Live"
+				actions={
+					<button
+						type="button"
+						onClick={ () => fetchFeed( true ) }
+						disabled={ isRefreshing }
+						className="flex items-center gap-1 text-xs font-medium text-text-tertiary hover:text-text-primary transition-colors duration-200 bg-transparent border-none cursor-pointer disabled:opacity-40"
+					>
+						<RefreshCw className={ `size-3 ${ isRefreshing ? 'animate-spin' : '' }` } />
+						Refresh
+					</button>
+				}
+			/>
 
 			{ /* Tab filters */ }
 			<div className="flex items-center gap-1 mb-4 p-0.5 bg-background-secondary rounded-lg w-fit">
@@ -196,26 +197,27 @@ export default function AIPulse() {
 
 			{ /* Content */ }
 			{ isLoading ? (
-				<div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+				<div className="flex gap-4">
 					{ [ 1, 2, 3, 4 ].map( ( i ) => (
-						<div key={ i } className="h-28 rounded-xl bg-background-secondary animate-pulse" />
+						<div key={ i } className="w-[280px] shrink-0">
+							<Skeleton className="h-32 rounded-lg" />
+						</div>
 					) ) }
 				</div>
 			) : filtered.length > 0 ? (
-				<div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-[420px] overflow-y-auto pr-1">
+				<HorizontalSlider>
 					{ filtered.map( ( item, i ) => (
 						<FeedCard key={ i } item={ item } />
 					) ) }
-				</div>
+				</HorizontalSlider>
 			) : (
-				<div className="flex flex-col items-center justify-center py-8 text-center">
-					<div className="flex items-center justify-center size-12 rounded-full bg-background-secondary mb-3">
-						<Rss className="size-5 text-text-tertiary" />
-					</div>
-					<p className="text-sm text-text-secondary font-medium mb-1">No articles found</p>
-					<p className="text-xs text-text-tertiary">Try refreshing or check back later</p>
-				</div>
+				<EmptyState
+					icon={ Rss }
+					title="No articles found"
+					description="Try refreshing or check back later"
+					className="py-8"
+				/>
 			) }
-		</div>
+		</CardShell>
 	);
 }

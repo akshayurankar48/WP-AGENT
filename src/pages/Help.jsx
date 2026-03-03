@@ -14,40 +14,34 @@ import {
 	Rocket,
 } from 'lucide-react';
 import PageLayout from '../components/PageLayout';
+import PageHeader from '../components/ui/PageHeader';
+import CardShell from '../components/ui/CardShell';
 
 const { adminUrl } = window.jarvisAiData || {};
 
 const STEPS = [
 	{
-		number: '1',
 		icon: Zap,
 		title: 'Install the plugin',
 		description: 'You\'re here, so this step is already done. JARVIS AI is installed and active.',
-		color: { bg: 'bg-violet-50', text: 'text-violet-600', ring: 'ring-violet-200' },
 		done: true,
 	},
 	{
-		number: '2',
 		icon: Key,
 		title: 'Configure your API key',
 		description: 'Go to Settings and enter your OpenRouter API key. This connects JARVIS to AI models.',
-		color: { bg: 'bg-blue-50', text: 'text-blue-600', ring: 'ring-blue-200' },
 		href: `${ adminUrl }admin.php?page=jarvis-ai-settings`,
 	},
 	{
-		number: '3',
 		icon: Cpu,
 		title: 'Choose a model',
 		description: 'Select your preferred AI model in Settings. Start with GPT-4o Mini for a good balance of speed and quality.',
-		color: { bg: 'bg-amber-50', text: 'text-amber-600', ring: 'ring-amber-200' },
 		href: `${ adminUrl }admin.php?page=jarvis-ai-settings`,
 	},
 	{
-		number: '4',
 		icon: MessageSquareText,
 		title: 'Open the editor and chat',
 		description: 'Create or edit any post. The JARVIS sidebar will appear — type a command and watch it work.',
-		color: { bg: 'bg-emerald-50', text: 'text-emerald-600', ring: 'ring-emerald-200' },
 		href: `${ adminUrl }post-new.php`,
 	},
 ];
@@ -89,28 +83,17 @@ const EXAMPLE_PROMPTS = [
 export default function Help() {
 	return (
 		<PageLayout>
-			{ /* Header */ }
-			<div className="flex items-center gap-3 mb-6">
-				<div className="flex items-center justify-center size-9 rounded-xl bg-amber-50">
-					<HelpCircle className="size-4.5 text-amber-600" />
-				</div>
-				<div>
-					<h1 className="text-xl font-bold text-text-primary">
-						Help
-					</h1>
-					<p className="text-xs text-text-tertiary mt-0.5">
-						Get started with JARVIS and find resources
-					</p>
-				</div>
-			</div>
+			<PageHeader
+				title="Help"
+				description="Get started with JARVIS and find resources"
+			/>
 
-			{ /* Getting Started — Hero Card */ }
-			<div className="relative overflow-hidden bg-gradient-to-br from-background-primary to-background-secondary border border-solid border-border-subtle rounded-2xl shadow-sm p-8 mb-6">
-				<div className="absolute top-0 right-0 w-64 h-64 bg-amber-100 rounded-full -translate-y-1/2 translate-x-1/3 opacity-30 blur-3xl pointer-events-none" />
-				<div className="relative">
+			{ /* Getting Started */ }
+			<CardShell className="p-6 mb-6" hover={ false }>
+				<div>
 					<div className="flex items-center gap-2 mb-4">
-						<Rocket className="size-5 text-amber-600" />
-						<h2 className="text-base font-bold text-text-primary">
+						<Rocket className="size-4 text-icon-secondary" />
+						<h2 className="text-sm font-medium uppercase tracking-wider text-text-tertiary">
 							Getting Started
 						</h2>
 						<Badge label="4 steps" variant="neutral" size="xs" />
@@ -123,8 +106,8 @@ export default function Help() {
 									key={ step.number }
 									className="flex items-start gap-4 group"
 								>
-									<div className={ `flex items-center justify-center size-10 rounded-xl ${ step.color.bg } ring-1 ${ step.color.ring } shrink-0 transition-transform duration-200 group-hover:scale-105` }>
-										<Icon className={ `size-4.5 ${ step.color.text }` } />
+									<div className="flex items-center justify-center size-9 rounded-lg bg-background-secondary shrink-0">
+										<Icon className="size-4 text-icon-secondary" />
 									</div>
 									<div className="flex-1 pt-1">
 										<div className="flex items-center gap-2">
@@ -152,12 +135,12 @@ export default function Help() {
 						} ) }
 					</div>
 				</div>
-			</div>
+			</CardShell>
 
 			{ /* Three-column grid */ }
-			<div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+			<div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
 				{ /* Resources */ }
-				<div className="bg-background-primary border border-solid border-border-subtle rounded-2xl shadow-sm p-6 hover:shadow-md transition-shadow duration-200">
+				<CardShell className="p-5">
 					<h2 className="text-base font-bold text-text-primary mb-4">
 						Resources
 					</h2>
@@ -174,10 +157,10 @@ export default function Help() {
 											target: '_blank',
 											rel: 'noopener noreferrer',
 										  } ) }
-									className="group flex items-center gap-3 rounded-xl border border-solid border-border-subtle p-3.5 no-underline hover:shadow-sm hover:border-border-interactive transition-all duration-200"
+									className="group flex items-center gap-3 rounded-lg border border-solid border-border-subtle p-3 no-underline hover:shadow-sm hover:border-border-interactive transition-all duration-200"
 								>
-									<div className={ `flex items-center justify-center size-9 rounded-lg ${ resource.color.bg } shrink-0` }>
-										<Icon className={ `size-4 ${ resource.color.text }` } />
+									<div className="flex items-center justify-center size-9 rounded-lg bg-background-secondary shrink-0">
+										<Icon className="size-4 text-icon-secondary" />
 									</div>
 									<div className="flex-1 min-w-0">
 										<p className="text-sm font-semibold text-text-primary">
@@ -194,10 +177,10 @@ export default function Help() {
 							);
 						} ) }
 					</div>
-				</div>
+				</CardShell>
 
 				{ /* Example Prompts */ }
-				<div className="bg-background-primary border border-solid border-border-subtle rounded-2xl shadow-sm p-6 hover:shadow-md transition-shadow duration-200">
+				<CardShell className="p-5">
 					<div className="flex items-center gap-2 mb-4">
 						<Lightbulb className="size-4 text-amber-500" />
 						<h2 className="text-base font-bold text-text-primary">
@@ -217,10 +200,10 @@ export default function Help() {
 							</div>
 						) ) }
 					</div>
-				</div>
+				</CardShell>
 
 				{ /* Need Help? */ }
-				<div className="bg-background-primary border border-solid border-border-subtle rounded-2xl shadow-sm p-6 hover:shadow-md transition-shadow duration-200">
+				<CardShell className="p-5">
 					<h2 className="text-base font-bold text-text-primary mb-2">
 						Need Help?
 					</h2>
@@ -265,7 +248,7 @@ export default function Help() {
 							</li>
 						</ul>
 					</div>
-				</div>
+				</CardShell>
 			</div>
 		</PageLayout>
 	);

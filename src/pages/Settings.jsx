@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from '@wordpress/element';
-import { Button, Sidebar, toast } from '@bsf/force-ui';
+import { Button, Sidebar, Skeleton, toast } from '@bsf/force-ui';
 import {
 	Save,
 	Loader2,
@@ -9,7 +9,6 @@ import {
 	Cpu,
 	Shield,
 	Zap,
-	Settings as SettingsIcon,
 } from 'lucide-react';
 import ApiKeyForm from '../components/ApiKeyForm';
 import ProviderKeys from '../components/ProviderKeys';
@@ -17,6 +16,7 @@ import ModelSelector from '../components/ModelSelector';
 import RolePermissions from '../components/RolePermissions';
 import BrandPresets from '../components/BrandPresets';
 import PageLayout from '../components/PageLayout';
+import PageHeader from '../components/ui/PageHeader';
 
 const { restUrl, nonce } = window.jarvisAiData || {};
 
@@ -177,11 +177,13 @@ export default function Settings() {
 	if ( isLoading ) {
 		return (
 			<PageLayout>
-				<div className="flex flex-col items-center justify-center min-h-[60vh]">
-					<Loader2 className="size-7 animate-spin text-brand-800 mb-3" />
-					<p className="text-sm text-text-secondary">
-						Loading settings...
-					</p>
+				<PageHeader title="Settings" description="Configure your JARVIS AI preferences" />
+				<div className="rounded-lg border border-solid border-border-subtle bg-background-primary p-8 space-y-6">
+					<Skeleton className="h-6 w-48 rounded" />
+					<Skeleton className="h-10 w-full rounded" />
+					<Skeleton className="h-10 w-full rounded" />
+					<Skeleton className="h-6 w-32 rounded" />
+					<Skeleton className="h-10 w-full rounded" />
 				</div>
 			</PageLayout>
 		);
@@ -189,34 +191,24 @@ export default function Settings() {
 
 	return (
 		<PageLayout>
-			{ /* Header */ }
-			<div className="flex items-center justify-between mb-6">
-				<div className="flex items-center gap-3">
-					<div className="flex items-center justify-center size-9 rounded-xl bg-violet-50">
-						<SettingsIcon className="size-4.5 text-violet-600" />
-					</div>
-					<div>
-						<h1 className="text-xl font-bold text-text-primary">
-							Settings
-						</h1>
-						<p className="text-xs text-text-tertiary mt-0.5">
-							Configure your JARVIS AI preferences
-						</p>
-					</div>
-				</div>
-				<Button
-					variant="primary"
-					size="md"
-					icon={ saveButtonProps[ saveState ].icon }
-					onClick={ handleSave }
-					disabled={ saveState !== 'idle' }
-				>
-					{ saveButtonProps[ saveState ].children }
-				</Button>
-			</div>
+			<PageHeader
+				title="Settings"
+				description="Configure your JARVIS AI preferences"
+				actions={
+					<Button
+						variant="primary"
+						size="md"
+						icon={ saveButtonProps[ saveState ].icon }
+						onClick={ handleSave }
+						disabled={ saveState !== 'idle' }
+					>
+						{ saveButtonProps[ saveState ].children }
+					</Button>
+				}
+			/>
 
 			{ /* Settings Layout: Sidebar + Content */ }
-			<div className="flex rounded-2xl border border-solid border-border-subtle bg-background-primary shadow-sm overflow-hidden min-h-[480px]">
+			<div className="flex rounded-lg border border-solid border-border-subtle bg-background-primary overflow-hidden min-h-[480px]">
 				<Sidebar
 					collapsible={ false }
 					borderOn={ true }

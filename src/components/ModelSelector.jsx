@@ -35,8 +35,8 @@ export default function ModelSelector( { model = '', onModelChange } ) {
 	return (
 		<div className="flex flex-col gap-6">
 			<div className="flex items-center gap-3">
-				<div className="flex items-center justify-center size-9 rounded-lg bg-emerald-50 shrink-0">
-					<Cpu className="size-4 text-emerald-600" />
+				<div className="flex items-center justify-center size-9 rounded-lg bg-background-secondary shrink-0">
+					<Cpu className="size-4 text-icon-secondary" />
 				</div>
 				<div>
 					<h3 className="text-sm font-semibold text-text-primary">
